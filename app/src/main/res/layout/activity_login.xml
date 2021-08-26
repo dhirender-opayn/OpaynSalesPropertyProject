@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginSignUpFragment.LoginActivity">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_16sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/loginTitle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="@string/login"
+                style="@style/login_signup_heading"/>
+            <EditText
+                android:id="@+id/login_email"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:hint="@string/email_hints"
+                style="@style/login_signup_field"
+                app:layout_constraintTop_toBottomOf="@+id/loginTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+              />
+            <EditText
+                android:id="@+id/login_password"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:hint="@string/password_hints"
+                style="@style/login_signup_field"
+                app:layout_constraintTop_toBottomOf="@+id/login_email"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_remember_forget_container"
+                app:layout_constraintTop_toBottomOf="@+id/login_password"
+                >
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/login_check_box"
+                    android:layout_weight="1"
+                    android:text="@string/remember_me"
+                    android:textColor="@color/sky_blue_700"
+                    app:layout_constraintTop_toBottomOf="@+id/login_password"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/forget_password"
+                    android:text="Forget Password?"
+                    style="@style/segoe_ui"
+                    android:layout_weight="9"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintTop_toTopOf="@+id/remember_me"
+                    app:layout_constraintBottom_toBottomOf="@+id/remember_me"
+                    android:textColor="@color/red"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login_button"
+                android:paddingVertical="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/login_remember_forget_container"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="@string/login"
+                style="@style/login_signup_submit_btn" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_by_gmail_label"
+                android:text="Sign In with"
+                style="@style/segoe_ui"
+                app:layout_constraintTop_toBottomOf="@+id/login_button"
+                android:textColor="@color/sky_blue_700"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingTop="@dimen/_16sdp"
+                />
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:id="@+id/google_gmail_icon"
+                android:src="@drawable/google_gmail_icon"
+                app:layout_constraintTop_toBottomOf="@+id/login_by_gmail_label"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/create_account_label"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/create_account_label"
+                android:text="@string/don_t_have_an_account"
+                style="@style/segoe_ui_bold"
+                android:textColor="@color/sky_blue_700"
+                android:paddingTop="@dimen/_16sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/create_account_btn_login"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/create_account_btn_login"
+                android:text="@string/create_account"
+                android:textColor="@color/red"
+                style="@style/segoe_ui_bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

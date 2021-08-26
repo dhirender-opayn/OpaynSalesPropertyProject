@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="segoe_ui">
+        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="segoe_ui_bold">
+        <item name="android:fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="CustomCheckbox02" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+
+
+    //BACK ARROW
+    <style name="back_arrow_button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/ic_baseline_arrow_back_ios_24</item>
+        <item name="android:layout_margin">@dimen/_16sdp</item>
+
+    </style>
+    //LOGIN-SignUp SCREEN
+    <style name="login_signup_heading">
+         <item name="android:textSize">@dimen/_24sdp</item>
+        <item name="android:textColor">@color/sky_blue_700</item>
+        <item name="fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:paddingBottom">@dimen/_16sdp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+    <style name="login_signup_field">
+        <item name="android:drawablePadding">@dimen/_4sdp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+    </style>
+    <style name="login_signup_submit_btn">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="cornerRadius">@dimen/_150sdp</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:fontFamily">@font/segoe_ui_bold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+
+</resources>
