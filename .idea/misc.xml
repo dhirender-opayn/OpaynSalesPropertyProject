@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/border.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/checkbox_selector.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_radio_button_unchecked_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_email_round_color.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_google.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/rectangel_border.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/toolbar_back_arrow.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_forget_password.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_otp_verify.xml" value="0.33" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_reset_password.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_seller_buyer_profile_set.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_sign_up.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_logln.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/progresslayout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/toolbar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/toolbar2_back_arrow.xml" value="0.19895833333333332" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
