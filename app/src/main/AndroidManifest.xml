@@ -13,25 +13,25 @@
         android:theme="@style/Theme.OpaynPropertyProject"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HomeActivity.HomeActivity"
+            android:name=".home_activity.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginSignUpFragment.SellerBuyerProfileSetActivity"
+            android:name=".login_signup_fragment.SellerBuyerProfileSetActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".LoginSignUpFragment.OtpVerifyActivity"
+            android:name=".login_signup_fragment.OtpVerifyActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginSignUpFragment.ResetPasswordActivity"
+            android:name=".login_signup_fragment.ResetPasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginSignUpFragment.ForgetPasswordActivity"
+            android:name=".login_signup_fragment.ForgetPasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginSignUpFragment.SignUpActivity"
+            android:name=".login_signup_fragment.SignUpActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginSignUpFragment.LoginActivity"
+            android:name=".login_signup_fragment.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

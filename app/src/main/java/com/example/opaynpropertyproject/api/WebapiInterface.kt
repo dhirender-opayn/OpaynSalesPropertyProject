@@ -1,7 +1,7 @@
 
 import android.content.Context
 import android.util.Log
-import com.example.opaynpropertyproject.Api.Keys
+import com.example.opaynpropertyproject.api.Keys
 import okhttp3.Interceptor
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient

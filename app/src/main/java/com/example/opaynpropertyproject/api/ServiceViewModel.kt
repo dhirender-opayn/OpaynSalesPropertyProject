@@ -1,7 +1,13 @@
 
 import android.content.Context
 import android.util.Log
-import com.example.opaynpropertyproject.Api.Keys
+import com.example.opaynpropertyproject.api.ApiResponse
+import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.SignupModel
+import com.example.opaynpropertyproject.comman.Utils
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -14,8 +20,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class
-ServiceViewModel : Observable()
+class ServiceViewModel : Observable()
 {
     var  reuestCode:Int=0
 
@@ -75,9 +80,16 @@ ServiceViewModel : Observable()
                         }
                         Keys.BACKENDERROR->{
 //                            ProgressDialogs.showToast(context,response.message())
+
                             var  jsonObject= JSONObject(response.errorBody()!!.string().toString())
+                            reuestCode = Keys.BACKENDERROR
+                            setChanged()
+                            notifyObservers()
+
 //
-                            ProgressDialogs.showToast(context,jsonObject.getString("message"))
+                         //   ProgressDialogs.showToast(context,jsonObject.getString("message"))
+
+//                            val message = jsonObject.getString("message")
 
                         }
                     }
@@ -166,7 +178,7 @@ ServiceViewModel : Observable()
     }
 
 
-    fun postservice(url:String,context: Context,map:HashMap<String,Any>, reuestcode:Int, isheader: Boolean,token:String,isprogress:Boolean)
+    fun postservice(url:String,context: Context,map:HashMap<String,Any>, reuestcode:Int, isheader: Boolean,token:String,isprogress:Boolean,responselistner:ApiResponse)
     {
         val apiService = WebapiInterface.create(context,isheader,token)
         val response  = apiService.commonpost(Keys.BASEURL+url,map)
@@ -181,10 +193,8 @@ ServiceViewModel : Observable()
                 ProgressDialogs.showToast(context,t?.message.toString())
                 ProgressDialogs.dismissProgressDialog( )
             }
-
             override  fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>?)
             {
-
                 if (response!=null)
                 {
                     ProgressDialogs.dismissProgressDialog( )
@@ -194,43 +204,42 @@ ServiceViewModel : Observable()
                         {
                             if (response.body()!=null)
                             {
-                                var  jsonObject= JSONObject(response.body()!!.string().toString())
+                                val jsonObject= JSONObject(response.body()!!.string().toString())
                                 responsestring=jsonObject.toString()
                                 reuestCode=reuestcode
-                                setChanged()
-                                notifyObservers()
+                                responselistner.onResponse(reuestcode,responsestring)
 
+                                Log.e("signup","Signup successfully")
                             }
 
                         }
-                        Keys.UNAUTHRISECODE->{
+                        Keys.UNAUTHRISECODE->
+                        {
                              ProgressDialogs.showToast(context,response.message())
-
                         }
-                        Keys.SERVERERROR->{
+                        Keys.SERVERERROR->
+                        {
                             reuestCode= Keys.SERVERERROR
-//                            setChanged()
-//                            notifyObservers()
+                            setChanged()
+                            notifyObservers()
                             ProgressDialogs.showToast(context,response.message())
-
-
                         }
-                        Keys.BACKENDERROR->{
+                        Keys.BACKENDERROR->
+                        {
                             ProgressDialogs.showToast(context,response.message())
-                            // ProgressDialogs.showToast(context,"Internal server Error")
+                            val jsonObject= JSONObject(response.errorBody()!!.string().toString())
+                            responsestring=jsonObject.toString()
+                            responselistner.onResponse(reuestcode,responsestring)
 
+                            // ProgressDialogs.showToast(context,"Internal server Error")
                         }
                     }
-
-
                 }
-                else{
-
-
+                else
+                {
                     ProgressDialogs.dismissProgressDialog( )
                 }
             }
-
         })
 
     }

@@ -1,4 +1,4 @@
-package com.example.opaynpropertyproject.LoginSignUpFragment
+package com.example.opaynpropertyproject.login_signup_fragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

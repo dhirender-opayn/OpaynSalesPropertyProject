@@ -23,5 +23,10 @@
     <string name="want_to_buy_property">Want to Buy Property</string>
     <string name="want_to_sell_property">Want to sell Property</string>
     <string name="create_account">Create Account</string>
+    <string name="name_required">You Must Fill Name</string>
+    <string name="email_required">You Must Fill Email</string>
+    <string name="password_required">Password Must be fill</string>
+    <string name="email_pattern">Email should be like abc@gmail.com</string>
+    <string name="required_terms_and_condtion">You must agree terms and conditions</string>
 
 </resources>

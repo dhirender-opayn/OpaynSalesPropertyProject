@@ -1,4 +1,4 @@
-package com.example.opaynpropertyproject.HomeActivity
+package com.example.opaynpropertyproject.home_activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
