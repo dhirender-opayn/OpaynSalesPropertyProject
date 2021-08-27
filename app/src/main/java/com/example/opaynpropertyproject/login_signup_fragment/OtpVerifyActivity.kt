@@ -1,13 +1,17 @@
 package com.example.opaynpropertyproject.login_signup_fragment
 
+import `in`.aabhasjindal.otptextview.OTPListener
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.api.Keys
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_otp_verify.*
+import kotlinx.android.synthetic.main.activity_otp_verify.view.*
 
 class OtpVerifyActivity : AppCompatActivity(),View.OnClickListener {
 
@@ -19,6 +23,17 @@ class OtpVerifyActivity : AppCompatActivity(),View.OnClickListener {
         otp_continue_btn.setOnClickListener(this)
         resend_otp_again_btn.setOnClickListener(this)
 
+        otp_view.otpListener = object :OTPListener{
+            override fun onInteractionListener() {
+
+            }
+            override fun onOTPComplete(otp: String) {
+                Log.e("otp", otp.toString())
+
+            }
+
+        }
+
 
     }
 
@@ -28,6 +43,8 @@ class OtpVerifyActivity : AppCompatActivity(),View.OnClickListener {
                 onBackPressed()
             }
             R.id.otp_continue_btn->{
+
+
                 val intent = Intent(this,ResetPasswordActivity::class.java)
                 startActivity(intent)
             }

@@ -7,7 +7,9 @@
     tools:context=".login_signup_fragment.SignUpActivity">
 <include
     android:id="@+id/signup_back_btn"
-    layout="@layout/toolbar2_back_arrow"/>
+    layout="@layout/toolbar2_back_arrow"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,6 +30,7 @@
                 android:id="@+id/signup_name"
                 android:drawableLeft="@drawable/ic_baseline_person_24"
                 android:hint="@string/name"
+                android:maxLength="20"
                 app:layout_constraintTop_toBottomOf="@+id/signup_Title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -46,6 +49,7 @@
                 android:id="@+id/signup_password"
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:hint="@string/password_hints"
+                android:inputType="textPassword"
                 app:layout_constraintTop_toBottomOf="@+id/signup_email"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

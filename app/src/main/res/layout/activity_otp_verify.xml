@@ -55,43 +55,31 @@
             android:gravity="center"
             android:padding="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@+id/otp_verify_password_msg_label">
-
-          <EditText
+            <in.aabhasjindal.otptextview.OtpTextView
+                android:id="@+id/otp_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_16sdp"
-                android:id="@+id/otp_verify_enter1"
-                android:hint="0"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:textAlignment="center"
-                android:background="@drawable/rectangel_border" />
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_16sdp"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:id="@+id/otp_verify_enter2"
-                android:hint="0"
-
-                android:background="@drawable/rectangel_border" />
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_16sdp"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:id="@+id/otp_verify_enter3"
-                android:hint="0"
-                android:background="@drawable/rectangel_border" />
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_16sdp"
-                android:id="@+id/otp_verify_enter4"
-                android:hint="0"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:background="@drawable/rectangel_border" />
-
-
+                app:bar_active_color="@color/sky_blue_500"
+                app:bar_enabled="true"
+                android:textColor="@color/black"
+                app:bar_error_color="@color/red"
+                app:bar_height="1.5dp"
+                app:bar_inactive_color="@color/black"
+                app:bar_margin_bottom="0dp"
+                app:bar_margin_left="2dp"
+                app:bar_margin_right="2dp"
+                app:bar_success_color="@color/sky_blue_700"
+                app:box_margin="0dp"
+                app:height="40dp"
+                app:hide_otp="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:length="4"
+                app:otp=""
+                app:otp_text_size="20dp"
+                app:width="40dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"

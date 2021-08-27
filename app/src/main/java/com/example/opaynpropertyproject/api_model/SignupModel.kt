@@ -2,7 +2,8 @@ package com.example.opaynpropertyproject.api_model
 
 data class SignupModel(
     val message: List<String>,
-    val messages: Messages
+    val messages: Messages,
+
 ) {
     data class Messages(
         val agree: List<String>,
@@ -10,4 +11,5 @@ data class SignupModel(
         val name: List<String>,
         val password: List<String>
     )
+
 }
