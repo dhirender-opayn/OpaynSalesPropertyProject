@@ -1,10 +1,12 @@
 package com.example.opaynpropertyproject.comman
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.opaynpropertyproject.R
 import com.google.android.material.snackbar.Snackbar
@@ -15,9 +17,6 @@ import kotlin.reflect.KClass
 open class BaseActivity : AppCompatActivity(){
     //snakeBar
     val gson = Gson()
-    open fun customSnakebar(view:View,error_name:String){
-        Snackbar.make(view,error_name, Snackbar.LENGTH_LONG).show()
-    }
 
 
     //intent
@@ -25,6 +24,11 @@ open class BaseActivity : AppCompatActivity(){
         val intent = Intent(this, kClass.java)
         intent.putExtras(bundle ?: Bundle())
         startActivity(intent)
+
+
+
+
+
 /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())

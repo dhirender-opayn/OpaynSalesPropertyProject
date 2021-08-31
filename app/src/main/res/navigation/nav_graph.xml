@@ -3,16 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loglnFragment">
-
+    app:startDestination="@id/sellerAdsFragment">
     <fragment
-        android:id="@+id/loglnFragment"
-        android:name="com.example.opaynpropertyproject.LoglnFragment"
-        android:label="fragment_logln"
-        tools:layout="@layout/fragment_logln" />
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.example.opaynpropertyproject.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        android:id="@+id/sellerAdsFragment"
+        android:name="com.example.opaynpropertyproject.SellerAdsFragment"
+        android:label="fragment_seller_ads"
+        tools:layout="@layout/fragment_seller_ads" />
 </navigation>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_signup_fragment.SignUpActivity">
+    android:id="@+id/signup_container"
+    tools:context=".login_signup_activity.SignUpActivity">
 <include
     android:id="@+id/signup_back_btn"
     layout="@layout/toolbar2_back_arrow"

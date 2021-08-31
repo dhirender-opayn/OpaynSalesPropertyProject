@@ -14,7 +14,7 @@
 
   <fragment
       android:id="@+id/nav_container"
-      android:name="com.example.opaynpropertyproject.login_signup_fragment.LoglnFragment"
+      android:name="com.example.opaynpropertyproject.login_signup_activity.LoglnFragment"
       android:layout_height="0dp"
       android:layout_width="match_parent"
       app:layout_constraintBottom_toBottomOf="parent"

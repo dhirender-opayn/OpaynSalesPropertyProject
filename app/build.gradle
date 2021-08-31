@@ -48,8 +48,6 @@ dependencies {
     //font size setting dp and sp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
-
-
 //Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_signup_fragment.SellerBuyerProfileSetActivity">
+    tools:context=".login_signup_activity.SellerBuyerProfileSetActivity">
 
     <include
         android:id="@+id/profile_set_password_back_btn"

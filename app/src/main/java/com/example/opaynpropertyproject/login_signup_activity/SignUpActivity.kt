@@ -1,9 +1,7 @@
-package com.example.opaynpropertyproject.login_signup_fragment
+package com.example.opaynpropertyproject.login_signup_activity
 
 import ServiceViewModel
-import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -13,24 +11,20 @@ import android.view.View
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.api.ApiResponse
-import com.example.opaynpropertyproject.api_model.SignupModel
+import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.api_model.SuccessSignupModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.Utils
-import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import org.json.JSONObject
-import java.util.*
+import kotlinx.android.synthetic.main.activity_sign_up.signup_email
 import kotlin.collections.HashMap
-import kotlin.collections.LinkedHashMap
-import kotlin.math.log
 
 class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var hashlist_map: HashMap<String, Any>
-   lateinit var bundle:Bundle
+    lateinit var bundle: Bundle
     lateinit var serviceViewModel: ServiceViewModel
+    var model: SuccessSignupModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -43,6 +37,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         signup_back_btn.setOnClickListener(this)
         login_account_btn_Signup.setOnClickListener(this)
         signup_button.setOnClickListener(this)
+        signup_container.setOnClickListener(this)
         val spannable = SpannableString("Agree to the Term & Conditions")
         spannable.setSpan(
             ForegroundColorSpan(Color.RED), 13, 30, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -54,17 +49,16 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
     fun userValue(): HashMap<String, Any> {
         val email = signup_email.text.toString().trim()
-
         if (signup_name.text.trim().isEmpty()) {
-            customSnakebar(signup_name, getString(R.string.name_required))
+            Utils.customSnakebar(signup_name, getString(R.string.name_required))
         } else if (email.trim().isEmpty()) {
-            customSnakebar(signup_email, getString(R.string.email_required))
+            Utils.customSnakebar(signup_email, getString(R.string.email_required))
         } else if (!Utils.isValidEmailId(email)) {
-            customSnakebar(signup_email, getString(R.string.email_pattern))
+            Utils.customSnakebar(signup_email, getString(R.string.email_pattern))
         } else if (signup_password.text.toString().trim().isEmpty()) {
-            customSnakebar(signup_password, getString(R.string.password_required))
+            Utils.customSnakebar(signup_password, getString(R.string.password_required))
         } else if (!signup_checkbox_terms.isChecked) {
-            customSnakebar(signup_checkbox_terms, getString(R.string.required_terms_and_condtion))
+            Utils.customSnakebar(signup_checkbox_terms, getString(R.string.required_terms_and_condtion))
         } else {
             hashlist_map.put(Keys.signup_name, signup_name.text.trim())
             hashlist_map.put(Keys.signup_email, email)
@@ -81,14 +75,16 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             R.id.signup_back_btn -> {
                 onBackPressed()
             }
+            R.id.signup_container->{
+                Utils.hideKeyboard(this)
+            }
             R.id.login_account_btn_Signup -> {
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                openA(LoginActivity::class)
             }
             R.id.signup_button -> {
                 val mapUser = userValue()
                 if (mapUser.isEmpty()) {
-                    Log.e("ddd", "Eddd")
+                    Log.e("ddd", "hashmap is empty")
                 } else {
                     serviceViewModel = ServiceViewModel()
                     serviceViewModel.postservice(
@@ -110,26 +106,26 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     }
 
     override fun onResponse(requestcode: Int, response: String) {
+
         when (requestcode) {
-
             Keys.Req_log -> {
-                var model: SuccessSignupModel? = null
                 model = gson.fromJson(response, SuccessSignupModel::class.java)
-                val user_id = model.data.user.id.toString()
-
-
-                bundle.putString(Keys.USER_ID,user_id)
-
-                openA(SellerBuyerProfileSetActivity::class,bundle)
-
+                bundle.putParcelable(Keys.PRACELABLE_KEY, model)
+                mUserID = (model  as SuccessSignupModel)!!
+                openA(SellerBuyerProfileSetActivity::class, bundle)
             }
 
             Keys.BACKENDERROR -> {
+                val errorModel = gson.fromJson(response,ErrorModel::class.java)
+                Utils.customSnakebar(signup_button,errorModel.message.toString())
                 Log.e("eeee", response.toString())
             }
         }
     }
+    companion object {
+          lateinit var mUserID:SuccessSignupModel
 
+    }
 }
 
 

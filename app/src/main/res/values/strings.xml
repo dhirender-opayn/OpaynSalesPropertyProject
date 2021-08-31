@@ -7,7 +7,7 @@
     <string name="password_hints">Password</string>
     <string name="remember_me">Remember me</string>
     <string name="don_t_have_an_account">Don\'t have an Account</string>
-     <string name="name">Name</string>
+    <string name="name">Name</string>
     <string name="agree_to_the">Agree to the</string>
     <string name="term_amp_conditions"><![CDATA[Term & Conditions]]></string>
     <string name="sign_up">Sign Up</string>
@@ -28,5 +28,9 @@
     <string name="password_required">Password Must be fill</string>
     <string name="email_pattern">Email should be like abc@gmail.com</string>
     <string name="required_terms_and_condtion">You must agree terms and conditions</string>
+    <string name="otp_send_again">OTP Send Again..!!</string>
+    <string name="resend_otp_again_error">Something wrong when resend OTP, Try again</string>
+    <string name="your_ads">Your Ads</string>
+
 
 </resources>

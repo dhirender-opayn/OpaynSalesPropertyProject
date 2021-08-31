@@ -1,23 +1,22 @@
-package com.example.opaynpropertyproject.login_signup_fragment
+package com.example.opaynpropertyproject.login_signup_activity
 
-import ServiceViewModel
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.SuccessSignupModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import kotlinx.android.synthetic.main.activity_seller_buyer_profile_set.*
-import kotlinx.coroutines.Job
-import okhttp3.internal.userAgent
-import java.security.Key
+import ServiceViewModel
+import com.example.opaynpropertyproject.comman.Utils
 
 class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var serviceViewModel: ServiceViewModel
-    var getUserId:Int= 0
+    var getUserId: Int = 0
+    var successSignupModel: SuccessSignupModel? = null
+    lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,15 @@ class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiR
         profile_set_password_back_btn.setOnClickListener(this)
         buyer_btn.setOnClickListener(this)
         seller_btn.setOnClickListener(this)
-        getUserId = intent.extras?.get(Keys.USER_ID).toString().toInt()
+        bundle = Bundle()
+        val bundle = this.intent.extras
+        if (bundle != null) {
+            successSignupModel = bundle.getParcelable(Keys.PRACELABLE_KEY)
+            getUserId = successSignupModel!!.data.user.id
+        }
+
+
+
 
     }
 
@@ -49,13 +56,17 @@ class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiR
     }
 
     fun apiHit(user_type: Int) {
+
         val hashMap = HashMap<String, Any>()
         hashMap.put(Keys.USER_ID, getUserId)
         hashMap.put(Keys.SIGNUP_USER_TYPE, user_type)
+        hashMap.put(Keys.signup_Step, Keys.signup_step_two)
 
-        if (user_type > 0 && Keys.USER_ID.isEmpty()) {
-            customSnakebar(profile_set_container, "HashMap is Empty")
-        } else {
+        if (user_type > 0 && Keys.USER_ID.isEmpty())
+        {
+            Utils.customSnakebar(profile_set_container, "HashMap is Empty")
+        } else
+        {
             serviceViewModel = ServiceViewModel()
             serviceViewModel.postservice(
                 Keys.signupEndPoint,
@@ -67,14 +78,24 @@ class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiR
                 true,
                 this
             )
-            val intent = Intent(this, OtpVerifyActivity::class.java)
-            startActivity(intent)
-        }
 
+
+        }
 
     }
 
-    override fun onResponse(requestcode: Int, response: String) {
+    override fun onResponse(requestcode: Int, response: String)
+    {
+        when (requestcode) {
+
+            Keys.PROFILE_Log -> {
+
+                var model: SuccessSignupModel? = null
+                model = gson.fromJson(response, SuccessSignupModel::class.java)
+                bundle.putParcelable(Keys.PRACELABLE_KEY, model)
+                openA(OtpVerifyActivity::class, bundle)
+            }
+        }
 
     }
 }

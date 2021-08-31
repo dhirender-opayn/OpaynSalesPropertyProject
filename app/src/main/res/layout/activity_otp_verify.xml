@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_signup_fragment.OtpVerifyActivity">
+    tools:context=".login_signup_activity.OtpVerifyActivity"
+    android:id="@+id/otp_main_container">
 
 
     <TextView
@@ -71,7 +72,6 @@
                 app:bar_success_color="@color/sky_blue_700"
                 app:box_margin="0dp"
                 app:height="40dp"
-                app:hide_otp="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,13 +104,13 @@
                 />
         </LinearLayout>
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"
             android:id="@+id/otp_continue_btn"
             android:text="@string/continue_text"
             android:background="@drawable/border"
-            android:textColor="@color/sky_blue_500"
+            android:textColor="@color/white"
             android:textAlignment="center"
             style="@style/segoe_ui"
             android:layout_marginTop="@dimen/_16sdp"
