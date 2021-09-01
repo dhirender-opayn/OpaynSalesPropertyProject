@@ -5,17 +5,36 @@
       <map>
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/border.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/button_background.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/checkbox_selector.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_area.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_baseline_radio_button_unchecked_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_bathroom.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_cancel.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_double_bed.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_edit.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_email_round_color.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_forward_ads.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_google.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_make_it_feature.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_map_pin_point.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_mcancel.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_search.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_share.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_sold_out.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_star.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_star_symbol.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/rectangel_border.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/round_border_fill.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/search_toolbar.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/toolbar_back_arrow.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_add_ads.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_forget_password.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
@@ -24,11 +43,19 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_reset_password.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_seller_buyer_profile_set.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_sign_up.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/button_background.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_add_ads1.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_add_ads_basic.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_logln.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_seller_ads.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_seller_ads.xml" value="0.489469250210615" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/progresslayout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/property_type_view_holder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/search_toolbar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/sell_type_view_holder.xml" value="0.67" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/toolbar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/toolbar2_back_arrow.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/your_ads_list_holder.xml" value="0.25" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
       </map>
     </option>

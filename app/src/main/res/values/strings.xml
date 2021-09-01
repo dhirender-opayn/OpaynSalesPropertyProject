@@ -31,6 +31,8 @@
     <string name="otp_send_again">OTP Send Again..!!</string>
     <string name="resend_otp_again_error">Something wrong when resend OTP, Try again</string>
     <string name="your_ads">Your Ads</string>
+    <string name="search_your_ads">Search Your Ads</string>
+    <string name="sell_type">Sell Type</string>
 
 
 </resources>

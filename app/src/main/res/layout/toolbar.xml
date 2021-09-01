@@ -21,9 +21,10 @@
     android:id="@+id/ads"
     android:text="@string/your_ads"
     style="@style/header"
-    android:visibility="invisible"
+    android:gravity="center"
     app:layout_constraintLeft_toRightOf="@+id/menu_bar"
-    app:layout_constraintRight_toRightOf="parent"
+    android:paddingLeft="@dimen/_16sdp"
+    app:layout_constraintBottom_toBottomOf="@+id/menu_bar"
     app:layout_constraintTop_toTopOf="parent"/>
 
     <LinearLayout

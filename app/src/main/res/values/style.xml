@@ -58,5 +58,25 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    //card holder yours ads
+    <style name="yours_ads_button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_8sdp</item>
+        <item name="android:padding">@dimen/_12sdp</item>
+        <item name="android:background">@drawable/round_border_fill</item>
+
+
+    </style>
+
+    //Add Ads recycler View//
+    <style name="add_ads_rv">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="layoutManager">androidx.recyclerview.widget.GridLayoutManager</item>
+        <item name="spanCount">3</item>
+
+    </style>
+
 
 </resources>

@@ -3,10 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/sellerAdsFragment">
+    app:startDestination="@id/fragment_seller_home_ads">
     <fragment
-        android:id="@+id/sellerAdsFragment"
+        android:id="@+id/fragment_seller_home_ads"
         android:name="com.example.opaynpropertyproject.SellerAdsFragment"
         android:label="fragment_seller_ads"
-        tools:layout="@layout/fragment_seller_ads" />
+        tools:layout="@layout/fragment_seller_ads" >
+        <action
+            android:id="@+id/action_sellerAdsFragment_to_profileFragment"
+            app:destination="@id/fragment_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_profile"
+        android:name="com.example.opaynpropertyproject.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/addAdsBasicFragment"
+        android:name="com.example.opaynpropertyproject.AddAdsBasicFragment"
+        android:label="fragment_add_ads_basic"
+        tools:layout="@layout/fragment_add_ads_basic" />
+    <fragment
+        android:id="@+id/addAdsFragment2"
+        android:name="com.example.opaynpropertyproject.AddAdsFragment2"
+        android:label="fragment_add_ads2"
+        tools:layout="@layout/fragment_add_ads2" />
+    <fragment
+        android:id="@+id/addAdsFragment3"
+        android:name="com.example.opaynpropertyproject.AddAdsFragment3"
+        android:label="fragment_add_ads3"
+        tools:layout="@layout/fragment_add_ads3" />
+    <fragment
+        android:id="@+id/addAdsFragment4"
+        android:name="com.example.opaynpropertyproject.AddAdsFragment4"
+        android:label="fragment_add_ads4"
+        tools:layout="@layout/fragment_add_ads4" />
 </navigation>

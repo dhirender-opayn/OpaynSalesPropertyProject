@@ -7,7 +7,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.util.regex.Pattern
 import android.app.Activity
+import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.opaynpropertyproject.R
 
 
 object Utils {
@@ -39,6 +45,29 @@ object Utils {
             view = View(activity)
         }
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+
+
+    fun addReplaceFragment(
+        mContext: Context,
+        fragment: Fragment,
+        container: Int,
+        addToBackStack: Boolean,
+        isAdd: Boolean,
+        isSlide: Boolean
+    ) {
+        val transaction = (mContext as FragmentActivity).supportFragmentManager.beginTransaction()
+
+//        if (isSlide)
+//            transaction.setCustomAnimations(R.anim.lefttoright, R.anim.righttoleft)
+        if (isAdd)
+            transaction.add(container, fragment)
+        else
+            transaction.replace(container, fragment)
+        if (addToBackStack)
+            transaction.addToBackStack(null)
+        transaction.commitAllowingStateLoss()
     }
 
 

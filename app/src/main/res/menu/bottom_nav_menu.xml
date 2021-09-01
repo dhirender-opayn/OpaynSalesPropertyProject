@@ -6,11 +6,11 @@
         android:title="Notification"
         android:icon="@drawable/ic_notification"/>
     <item
-        android:id="@+id/avatar"
-        android:title="Avatar"
+        android:id="@+id/fragment_profile"
+        android:title="Profile"
         android:icon="@drawable/ic_avatar"/>
     <item
-        android:id="@+id/home"
+        android:id="@+id/fragment_seller_home_ads"
         android:title="Home"
         android:icon="@drawable/ic_homepage"/>
     <item

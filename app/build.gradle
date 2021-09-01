@@ -57,4 +57,12 @@ dependencies {
     //otp
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx' // kotlin
 
+    //Picsso and round image \
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //step progress bar
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
+
 }
