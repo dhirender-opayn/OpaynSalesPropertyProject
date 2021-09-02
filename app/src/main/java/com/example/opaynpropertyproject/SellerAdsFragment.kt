@@ -28,7 +28,7 @@ class SellerAdsFragment : Fragment() {
         val list = ArrayList<String>()
         list.add("abd")
         list.add("ccc")
-        rv_your_ads.adapter =YourAdsRecyclerViewAdapter(list,requireActivity())
+        rv_your_ads.adapter = YourAdsRecyclerViewAdapter(list,requireActivity())
 
     }
 

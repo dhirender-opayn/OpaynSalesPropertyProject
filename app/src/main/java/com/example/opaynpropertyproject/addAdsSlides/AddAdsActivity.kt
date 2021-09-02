@@ -2,16 +2,10 @@ package com.example.opaynpropertyproject.addAdsSlides
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.Utils
-import com.example.opaynpropertyproject.genericClass.AddAds
-import kotlinx.android.synthetic.main.activity_add_ads.*
-import com.kofigyan.stateprogressbar.StateProgressBar
+
 
 
 class AddAdsActivity : BaseActivity(), View.OnClickListener {
@@ -25,7 +19,8 @@ class AddAdsActivity : BaseActivity(), View.OnClickListener {
 
         //button.setOnClickListener(this)
         supportActionBar!!.hide()
-
+        val fragment = AddAdsFragment1()
+        Utils.addReplaceFragment(this,fragment,R.id.nav_container1,true,true,true)
 
 
 

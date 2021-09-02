@@ -33,6 +33,9 @@
     <string name="your_ads">Your Ads</string>
     <string name="search_your_ads">Search Your Ads</string>
     <string name="sell_type">Sell Type</string>
+    <string name="property_type">Property Type</string>
+    <string name="enter_location_manually">Enter Location Manually</string>
+    <string name="get_current_location">Get Current Location</string>
 
 
 </resources>
