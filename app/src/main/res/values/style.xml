@@ -28,10 +28,12 @@
     <style name="ads_header">
         <item name="android:textAlignment">textStart</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="fontFamily">@font/segoe_ui</item>
-        <item name="android:textSize">@dimen/_14sdp</item>
-        <item name="android:paddingBottom">@dimen/_4sdp</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:paddingBottom">@dimen/_10sdp</item>
+        <item name="android:paddingTop">@dimen/_16sdp</item>
+        <item name="android:paddingRight">@dimen/_10sdp</item>
     </style>
     //Ads Edittext Hints
     <style name="ads_edittext_hint">

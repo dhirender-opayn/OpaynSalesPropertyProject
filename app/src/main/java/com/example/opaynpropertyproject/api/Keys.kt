@@ -1,11 +1,25 @@
 package com.example.opaynpropertyproject.api
 
 object Keys {
-    const val BASEURL = "http://3.22.185.42/realestate-api/public/api/"
+    const val BASEURL = "http://044d-180-188-237-46.ngrok.io/"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
     val SERVERERROR = 201
     val BACKENDERROR = 412
+
+    //get STATE
+    var STATEENDPOINT = "realestate-api/public/api/states"
+    var STATE_REQ_CODE = 8
+    //get City
+    var CITY = "realestate-api/public/api/cities/"
+    var CITY_REQ_CODE = 9
+
+    //Get Sell Type - Property Type
+    var SELL_TYPE_END_POINT = "realestate-api/public/api/dealer/property-attributes"
+    var SELL_REQ_CODE = 10
+    var SELL_ID = 1
+
+
 
     //USER TYPE
     var DEALER = 1

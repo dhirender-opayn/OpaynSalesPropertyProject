@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import kotlinx.android.synthetic.main.sell_type_view_holder.view.*
 
-class SellerTypeRecyclerViewAdapter(val list: ArrayList<String>) :
+class SellerTypeRecyclerViewAdapter(val list:
+                                    List<SellPropertyModel.Data.Option>) :
     RecyclerView.Adapter<SellerTypeRecyclerViewAdapter.SellViewHolder>() {
 
 
@@ -21,11 +23,12 @@ class SellerTypeRecyclerViewAdapter(val list: ArrayList<String>) :
     }
 
     override fun onBindViewHolder(holder: SellViewHolder, position: Int) {
+        holder.sell_name.text = list[position].name
 
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return list.size
     }
 
     class SellViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

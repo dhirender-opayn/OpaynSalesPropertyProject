@@ -36,6 +36,11 @@
     <string name="property_type">Property Type</string>
     <string name="enter_location_manually">Enter Location Manually</string>
     <string name="get_current_location">Get Current Location</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="pin_code">Pin Code</string>
+    <string name="next_step">Next Step</string>
+    <string name="do_later">Do Later</string>
 
 
 </resources>

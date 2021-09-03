@@ -53,6 +53,7 @@ class ServiceViewModel {
                                 reuestCode = reuestcode
                                 var jsonObject = JSONObject(response.body()!!.string().toString())
                                 responsestring = jsonObject.toString()
+
                                 ProgressDialogs.checklog("responsestring", responsestring)
 
                             }
@@ -103,7 +104,8 @@ class ServiceViewModel {
         reuestcode: Int,
         isheader: Boolean,
         token: String,
-        isprogress: Boolean
+        isprogress: Boolean,
+        responselistner: ApiResponse
     ) {
 
         val apiService = WebapiInterface.create(context, isheader, token)
@@ -129,6 +131,8 @@ class ServiceViewModel {
                                 reuestCode = reuestcode
                                 var jsonObject = JSONObject(response.body()!!.string().toString())
                                 responsestring = jsonObject.toString()
+                                responselistner.onResponse(reuestcode,responsestring)
+
 
                             }
 
@@ -147,6 +151,7 @@ class ServiceViewModel {
 
                         }
                         Keys.BACKENDERROR -> {
+                            reuestCode = Keys.BACKENDERROR
                             ProgressDialogs.showToast(context, response.message())
                             //   ProgressDialogs.showToast(context,"Internal server Error")
 
