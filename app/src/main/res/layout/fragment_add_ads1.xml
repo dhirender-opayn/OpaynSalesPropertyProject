@@ -46,28 +46,10 @@
                 android:id="@+id/recyclerView_property_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/prperty_type_header"
-                app:spanCount="3"
                 tools:listitem="@layout/property_type_view_holder" />
-
-            <TextView
-                android:id="@+id/location_header_text"
-                style="@style/ads_header"
-                android:text="Location"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView_property_type" />
-
-            <EditText
-                android:id="@+id/loaction_conatiner"
-                style="@style/ads_edittext_hint"
-                android:background="@drawable/rectangel_border"
-                android:drawableEnd="@drawable/ic_location_pin"
-                android:hint="@string/get_current_location"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_header_text" />
 
             <TextView
                 android:id="@+id/location_manually_header_text"
@@ -75,15 +57,17 @@
                 android:text="@string/enter_location_manually"
                 android:textAlignment="textStart"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loaction_conatiner" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView_property_type" />
 
             <EditText
                 android:id="@+id/manually_enter"
                 style="@style/ads_edittext_hint"
                 android:background="@drawable/rectangel_border"
                 android:hint="Enter full Address"
+                android:drawableRight="@drawable/ic_location_pin"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_manually_header_text" />
+
 
             <TextView
                 android:id="@+id/state_head"

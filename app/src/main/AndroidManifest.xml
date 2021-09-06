@@ -13,26 +13,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpaynPropertyProject"
         android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <activity
+            android:name=".map.MapExploreActivity"
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".addAdsSlides.AddAdsActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".home_activity.HomeActivity"
-            android:exported="true">
 
         </activity>
         <activity
-            android:name=".login_signup_activity.SellerBuyerProfileSetActivity"
+            android:name=".home_activity.HomeActivity"
             android:exported="true"></activity>
         <activity
+            android:name=".login_signup_activity.SellerBuyerProfileSetActivity"
+            android:exported="true" />
+        <activity
             android:name=".login_signup_activity.OtpVerifyActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".login_signup_activity.ResetPasswordActivity"
             android:exported="true" />
@@ -44,9 +51,7 @@
             android:exported="true" />
         <activity
             android:name=".login_signup_activity.LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

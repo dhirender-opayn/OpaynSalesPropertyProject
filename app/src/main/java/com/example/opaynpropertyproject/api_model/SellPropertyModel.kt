@@ -16,7 +16,8 @@ data class SellPropertyModel(
             val id: Int,
             val name: String,
             val property_filter_type_id: Int,
-            val updated_at: String
+            val updated_at: String,
+            var flag :Boolean = false
         )
     }
 }

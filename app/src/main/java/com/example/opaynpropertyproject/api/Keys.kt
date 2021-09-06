@@ -1,24 +1,26 @@
 package com.example.opaynpropertyproject.api
 
 object Keys {
-    const val BASEURL = "http://044d-180-188-237-46.ngrok.io/"
+    const val BASEURL = "http://93d3-180-188-237-46.ngrok.io/realestate-api/public/api/"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
     val SERVERERROR = 201
     val BACKENDERROR = 412
 
     //get STATE
-    var STATEENDPOINT = "realestate-api/public/api/states"
+    var STATEENDPOINT = "states"
     var STATE_REQ_CODE = 8
+
     //get City
-    var CITY = "realestate-api/public/api/cities/"
+    var CITY = "cities/"
     var CITY_REQ_CODE = 9
 
     //Get Sell Type - Property Type
-    var SELL_TYPE_END_POINT = "realestate-api/public/api/dealer/property-attributes"
+    var SELL_TYPE_END_POINT = "dealer/property-attributes"
     var SELL_REQ_CODE = 10
-    var SELL_ID = 1
 
+    //Property type
+    var PROPERTY_REQ_CODE = 11
 
 
     //USER TYPE
@@ -55,6 +57,7 @@ object Keys {
     var EMAIL_VERIFY_END_POINT = "email-verify"
     var USER_INPUT_OTP = "code"
     var MAIL_REQ_CODE = 4
+
     //OTP RESEND
     var USER_OTP_RESEND_END_POINT = "resend-code"
     var MAIL_RESEND_REQ_CODE = 5
@@ -66,11 +69,12 @@ object Keys {
     val login_password = "password"
     var login_log = 1
 
-//RESET
+    //RESET
     var RESET_EMAIL = "email"
     var RESET_EMAIL_END_POINT = "forget-password/send-code"
     var RESET_REQ_CODE = 6
-//RESET PASSWORD
+
+    //RESET PASSWORD
     var RESET_MATCH_END_POINT = "forget-password"
     var RESET_MATCH_REQ_Code = 7
     var RESET_PASSWORD = "password"

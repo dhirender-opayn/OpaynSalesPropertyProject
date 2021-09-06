@@ -12,6 +12,7 @@ import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api_model.ErrorModel
+import com.example.opaynpropertyproject.api_model.PropertyFilling
 import com.example.opaynpropertyproject.api_model.SuccessSignupModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.Utils
@@ -124,6 +125,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     }
     companion object {
           lateinit var mUserID:SuccessSignupModel
+            var propertyFilling= PropertyFilling()
 
     }
 }
