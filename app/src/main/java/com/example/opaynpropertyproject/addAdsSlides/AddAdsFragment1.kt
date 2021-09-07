@@ -1,10 +1,5 @@
 package com.example.opaynpropertyproject.addAdsSlides
 
-import ServiceViewModel
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,25 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.adapters.ads_adapters.PropertyTypeRecyclerViewAdapter
 import com.example.opaynpropertyproject.adapters.ads_adapters.SellerTypeRecyclerViewAdapter
+import com.example.opaynpropertyproject.adapters.singleton.SingletonObject
+import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.*
-import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.comman.Utils
-import com.example.opaynpropertyproject.login_signup_activity.SignUpActivity
-import com.example.opaynpropertyproject.map.MapExploreActivity
-import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_seller_buyer_profile_set.*
 import kotlinx.android.synthetic.main.custom_spinner_item.view.*
 import kotlinx.android.synthetic.main.fragment_add_ads1.*
-import java.security.Key
+import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.coroutines.processNextEventInCurrentThread
 
 
 class AddAdsFragment1 : BaseFragment(), ApiResponse {
@@ -45,6 +37,8 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     var propertyType_list = listOf<SellPropertyModel.Data.Option>()
 
     var stateList = ArrayList<String>()
+    var selected_state = ""
+    var selected_city = ""
     var cityList = ArrayList<String>()
     var stateid: String = ""
 
@@ -53,6 +47,8 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     var mainCityList = ArrayList<CityModel.Data>()
     var state_name = ""
     var city_name = ""
+    var ads_model:SellPropertyModel? = null
+    var bundle = Bundle()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,8 +63,14 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        sellTypeAPI(token, this)
-        stateApi()
+
+        if (sell_property_model != null){
+            state_name = propertyFilling.state
+            city_name = propertyFilling.city
+        } else {
+            sellTypeAPI(token, this)
+            stateApi()
+        }
 
 
 //        loaction_conatiner.setOnClickListener { // open map exlpoer
@@ -77,9 +79,12 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 //
 //        }
         next_btn.setOnClickListener {
-            checkValidation()
+                 checkValidation()
 
 
+        }
+        ads1_parent_container.setOnClickListener {
+            Utils.hideKeyboard(requireActivity())
         }
 
 
@@ -98,6 +103,8 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 view: View, position: Int, id: Long
             ) {
 
+               state_name =  mainstateList[position].name
+                propertyFilling.state = state_name
                 stateid = mainstateList[position].id.toString()
                 state_name = mainstateList[position].name
                 serviceViewModel.getservice(
@@ -131,7 +138,8 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                //      city_name = mainCityList[position].name
+                      city_name = cityList[position]
+                        propertyFilling.city = city_name
 //                subcatid = subcategorylist[position].id
             }
 
@@ -144,6 +152,7 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
+
             Keys.STATE_REQ_CODE -> {
                 model = gson.fromJson(response, StateModel::class.java)
                 mainstateList.addAll(model!!.data)
@@ -156,17 +165,14 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 //check index is error or not ???
                 sell_property_model = gson.fromJson(response, SellPropertyModel::class.java)
 
-                    //sell_type_header.text = sell_property_model!!.data[0].name.toString() //To set header by api header
+
+
+
+                //sell_type_header.text = sell_property_model!!.data[0].name.toString() //To set header by api header
                     sellType_list = sell_property_model!!.data[0].options
-                    recyclerView_sell_type.layoutManager =
-                        StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
                         recyclerView_sell_type.adapter = SellerTypeRecyclerViewAdapter(sellType_list)
-
-
                     //proptery type
                     propertyType_list = sell_property_model!!.data[1].options
-                    recyclerView_property_type.layoutManager =
-                        StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
                     recyclerView_property_type.adapter =
                         PropertyTypeRecyclerViewAdapter(propertyType_list, requireContext())
 
@@ -215,20 +221,23 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     }
 
     fun checkValidation() {
-        if (manually_enter.text.toString().isNotEmpty() )
-        {
-            SignUpActivity.propertyFilling.address = manually_enter.text.toString()
-            Log.e("test321", SignUpActivity.propertyFilling.address)
-        }
-         if (city_pinCode.text.toString().isNotEmpty())
-        {
-            SignUpActivity.propertyFilling.pinCode = city_pinCode.text.toString().toInt()
-            Log.e("test123", SignUpActivity.propertyFilling.pinCode.toString())
-        }
-        if (SignUpActivity.propertyFilling.sell_type.length > 1 && SignUpActivity.propertyFilling.property_type.length >1 ){
-            Log.e("test123", "852555555555555")
-              Snackbar.make(next_btn,"Reee",Snackbar.LENGTH_LONG)
+        if (ads_address.text.toString().isEmpty()) {
+            Utils.customSnakebar(next_btn, getString(R.string.address_error))
 
+        } else if (city_pinCode.text.toString().isEmpty()) {
+            Utils.customSnakebar(next_btn, getString(R.string.pin_code_error))
+        } else if (propertyFilling.sell_type.isEmpty() || propertyFilling.property_type.isEmpty()) {
+            Utils.customSnakebar(next_btn, getString(R.string.sell_and_property_error))
+
+        }else{
+            propertyFilling.address = ads_address.text.toString()
+             propertyFilling.pinCode = city_pinCode.text.toString().toInt()
+//            ads_model = gson.fromJson(response, SellPropertyModel::class.java)
+
+            bundle.putParcelable(Keys.ADS_DATA,sell_property_model)
+            val adsFragment2 = AddAdsFragment2()
+            adsFragment2.arguments = bundle
+            Utils.addReplaceFragment(requireContext(),adsFragment2,R.id.nav_container1,true,false,true)
         }
     }
 

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addAdsSlides.AddAdsFragment1">
+    tools:context=".addAdsSlides.AddAdsFragment1"
+    android:background="@color/white"
+    android:id="@+id/ads1_parent_container">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedViewContainer"
@@ -24,11 +26,13 @@
                 android:text="@string/sell_type"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_sell_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="3"
+                android:orientation="vertical"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sell_type_header"
@@ -46,6 +50,9 @@
                 android:id="@+id/recyclerView_property_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="3"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/prperty_type_header"
@@ -60,7 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView_property_type" />
 
             <EditText
-                android:id="@+id/manually_enter"
+                android:id="@+id/ads_address"
                 style="@style/ads_edittext_hint"
                 android:background="@drawable/rectangel_border"
                 android:hint="Enter full Address"
@@ -75,7 +82,7 @@
                 android:text="@string/state"
                 android:textAlignment="textStart"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/manually_enter" />
+                app:layout_constraintTop_toBottomOf="@+id/ads_address" />
 
             <Spinner
                 android:id="@+id/state_list"
@@ -94,7 +101,7 @@
                 android:text="@string/city"
                 android:textAlignment="textStart"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/manually_enter" />
+                app:layout_constraintTop_toBottomOf="@+id/ads_address" />
 
             <Spinner
                 android:id="@+id/city_list"
@@ -121,7 +128,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter Pin Code"
+                android:background="@drawable/rectangel_border"
                 android:inputType="number"
+                android:padding="@dimen/_8sdp"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/pincode_head"
                 app:layout_constraintLeft_toRightOf="@+id/pincode_head"
@@ -144,27 +153,31 @@
        >
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/next_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:text="@string/next_step"
-            app:cornerRadius="@dimen/_5sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/do_later_btn"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/do_later_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/red"
             android:text="@string/do_later"
             app:cornerRadius="@dimen/_5sdp"
-            app:layout_constraintLeft_toRightOf="@+id/next_btn"
+           app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/next_btn"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+       />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:text="@string/next_step"
+            app:cornerRadius="@dimen/_5sdp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/do_later_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

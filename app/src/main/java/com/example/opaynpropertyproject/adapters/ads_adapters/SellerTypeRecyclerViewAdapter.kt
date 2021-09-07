@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
-import com.example.opaynpropertyproject.comman.BaseFragment
-import com.example.opaynpropertyproject.login_signup_activity.SignUpActivity.Companion.propertyFilling
-import kotlinx.android.synthetic.main.sell_type_view_holder.view.*
+  import kotlinx.android.synthetic.main.sell_type_view_holder.view.*
 
 class SellerTypeRecyclerViewAdapter(
     val list:

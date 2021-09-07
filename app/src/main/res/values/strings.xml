@@ -41,7 +41,20 @@
     <string name="pin_code">Pin Code</string>
     <string name="next_step">Next Step</string>
     <string name="do_later">Do Later</string>
-
+    <string name="sell_and_property_error">Please select sell type and Property Type</string>
+    <string name="selected_state_city">Please Enter State and City</string>
+    <string name="possession_status">Possession Status</string>
+    <string name="square_feet">Square Feet</string>
+    <string name="pin_code_error">Enter Pin Code</string>
+    <string name="address_error">Enter Your Property Address</string>
+    <string name="number_of_bathroom">Number of Bathroom</string>
+    <string name="add">Add</string>
+    <string name="area">Area</string>
+    <string name="posted_by">Posted By</string>
+    <string name="amenities">Amenities</string>
+    <string name="age_of_property">Age of Property</string>
+    <string name="entrance_facing">Entrance Facing</string>
+    <string name="prev_step">Prev Step</string>
 
 
 </resources>

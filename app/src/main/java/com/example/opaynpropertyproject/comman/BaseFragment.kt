@@ -13,11 +13,11 @@ import com.google.gson.Gson
 
 open class BaseFragment : Fragment() {
     val serviceViewModel: ServiceViewModel = ServiceViewModel()
+
     val gson = Gson()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
 
     }
 

@@ -11,6 +11,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.login_signup_activity.SignUpActivity
@@ -34,7 +35,7 @@ class PropertyTypeRecyclerViewAdapter(
         if (list[position].flag) {
             holder.property_name.setBackgroundResource(R.drawable.rectangle_border_fill)
             holder.property_name.setTextColor(Color.WHITE)
-            SignUpActivity.propertyFilling.property_type =  list[position].id.toString()
+            propertyFilling.property_type =  list[position].id.toString()
         } else
         {
             holder.property_name.setBackgroundResource(R.drawable.rectangel_border)

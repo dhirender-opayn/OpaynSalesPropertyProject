@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_6sdp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_6sdp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_mProperty_type"
-        android:text="Apartments"
+        android:id="@+id/rv_posted_by_type"
+        android:text="Owner"
         android:paddingVertical="@dimen/_2sdp"
         android:paddingHorizontal="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textAlignment="center"
         android:background="@drawable/rectangel_border"
-         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:padding="@dimen/_4sdp"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
