@@ -3,12 +3,20 @@ package com.example.opaynpropertyproject.api_model
 class PropertyFilling {
     var sell_type: String = ""
     var property_type: String = ""
-    var state:String = ""
-    var city :String = ""
+    var state: String = ""
+    var stateID: Int = 0
+    var statePosition: Int = 0
+    var stateSpinnerList = ArrayList<String>()
+    var stateSpinnerModel = ArrayList<StateModel.Data>()
+
+    var city: String = ""
+    var citySpinnerList = ArrayList<String>()
+    var cityId = 0
+    var cityPosition = 0
     var address: String = ""
-    var pinCode: Int = 0
-    var poessionType:String = ""
-    var area:String = ""
+    var pinCode: String = ""
+    var poessionType: String = ""
+    var area: String = ""
     var postedby = ""
     var amenties = ""
     var age_of_property = ""

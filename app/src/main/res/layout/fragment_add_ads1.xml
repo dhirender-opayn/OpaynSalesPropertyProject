@@ -85,14 +85,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/ads_address" />
 
             <Spinner
-                android:id="@+id/state_list"
+                android:id="@+id/state_spinner"
                 style="@style/spinner_style2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_5sdp"
                 app:layout_constraintHorizontal_weight=".5"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/city_list"
+                app:layout_constraintRight_toLeftOf="@+id/city_spinner"
                 app:layout_constraintTop_toBottomOf="@+id/state_head" />
 
             <TextView
@@ -104,13 +104,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/ads_address" />
 
             <Spinner
-                android:id="@+id/city_list"
+                android:id="@+id/city_spinner"
                 style="@style/spinner_style2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 app:layout_constraintHorizontal_weight=".5"
-                app:layout_constraintLeft_toRightOf="@+id/state_list"
+                app:layout_constraintLeft_toRightOf="@+id/state_spinner"
                 app:layout_constraintRight_toRightOf="@+id/city_head"
                 app:layout_constraintTop_toBottomOf="@+id/city_head" />
 
@@ -121,7 +121,7 @@
                 android:layout_marginTop="16dp"
                 android:textAlignment="textStart"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/city_list" />
+                app:layout_constraintTop_toBottomOf="@+id/city_spinner" />
 
             <EditText
                 android:id="@+id/city_pinCode"

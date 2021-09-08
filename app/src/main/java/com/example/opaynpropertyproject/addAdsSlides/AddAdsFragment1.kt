@@ -40,14 +40,14 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     var selected_state = ""
     var selected_city = ""
     var cityList = ArrayList<String>()
-    var stateid: String = ""
+    var stateid = 0
 
     //sppiner
     var mainstateList = ArrayList<StateModel.Data>()
     var mainCityList = ArrayList<CityModel.Data>()
     var state_name = ""
     var city_name = ""
-    var ads_model:SellPropertyModel? = null
+    var ads_model: SellPropertyModel? = null
     var bundle = Bundle()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +64,31 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        if (sell_property_model != null){
-            state_name = propertyFilling.state
-            city_name = propertyFilling.city
+        //checking API
+
+        if (propertyFilling.sell_type.isNotEmpty()) {
+            ads_address.setText(propertyFilling.address)
+
+            stateList = propertyFilling.stateSpinnerList
+            mainstateList.clear()
+            propertyFilling.stateSpinnerModel?.let { mainstateList.addAll(it) }
+            stateAdapter()
+
+
+//            city_spinner.setSelection(propertyFilling.cityPosition)
+//            cityAdapter()
+
         } else {
             sellTypeAPI(token, this)
             stateApi()
+            next_btn.setOnClickListener {
+                checkValidation()
+
+            }
+            ads1_parent_container.setOnClickListener {
+                Utils.hideKeyboard(requireActivity())
+            }
+
         }
 
 
@@ -78,14 +97,6 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 //            startActivity(intent)
 //
 //        }
-        next_btn.setOnClickListener {
-                 checkValidation()
-
-
-        }
-        ads1_parent_container.setOnClickListener {
-            Utils.hideKeyboard(requireActivity())
-        }
 
 
     }
@@ -95,18 +106,19 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
             requireActivity(),
             R.layout.custom_spinner_item, R.id.text, stateList
         )
-        state_list.adapter = adapter
-        state_list.onItemSelectedListener = object :
+        state_spinner.adapter = adapter
+
+        state_spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
 
-               state_name =  mainstateList[position].name
-                propertyFilling.state = state_name
-                stateid = mainstateList[position].id.toString()
                 state_name = mainstateList[position].name
+                stateid = mainstateList[position].id
+                propertyFilling.state = state_name
+                propertyFilling.statePosition = position
                 serviceViewModel.getservice(
                     Keys.CITY + stateid,
                     requireContext(),
@@ -117,11 +129,17 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                     this@AddAdsFragment1
                 )
 
+                propertyFilling.stateID = mainstateList[position].id
+
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // write code to perform some action
             }
+        }
+        if (!propertyFilling.stateID.equals(0)) {
+            state_spinner.setSelection(propertyFilling.statePosition)
         }
 
     }
@@ -131,21 +149,26 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
             requireActivity(),
             R.layout.custom_spinner_item, R.id.text, cityList
         )
-        city_list.adapter = adapter
-        city_list.onItemSelectedListener = object :
+        city_spinner.adapter = adapter
+        city_spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                      city_name = cityList[position]
-                        propertyFilling.city = city_name
-//                subcatid = subcategorylist[position].id
+                city_name = cityList[position]
+                propertyFilling.city = city_name
+                propertyFilling.cityPosition = position
+//              subcatid = subcategorylist[position].id
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // write code to perform some action
             }
+        }
+        if (!propertyFilling.cityId.equals(0)) { // city checking
+            city_spinner.setSelection(propertyFilling.cityPosition)
+
         }
 
     }
@@ -156,8 +179,10 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
             Keys.STATE_REQ_CODE -> {
                 model = gson.fromJson(response, StateModel::class.java)
                 mainstateList.addAll(model!!.data)
+                propertyFilling.stateSpinnerModel = mainstateList
                 model!!.data.forEach {
                     stateList.add(it.name)
+                    propertyFilling.stateSpinnerList.add(it.name)
                 }
                 stateAdapter()
             }
@@ -166,25 +191,20 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 sell_property_model = gson.fromJson(response, SellPropertyModel::class.java)
 
 
-
-
                 //sell_type_header.text = sell_property_model!!.data[0].name.toString() //To set header by api header
-                    sellType_list = sell_property_model!!.data[0].options
-                        recyclerView_sell_type.adapter = SellerTypeRecyclerViewAdapter(sellType_list)
-                    //proptery type
-                    propertyType_list = sell_property_model!!.data[1].options
-                    recyclerView_property_type.adapter =
-                        PropertyTypeRecyclerViewAdapter(propertyType_list, requireContext())
-
-
-
-
+                sellType_list = sell_property_model!!.data[0].options
+                recyclerView_sell_type.adapter = SellerTypeRecyclerViewAdapter(sellType_list)
+                //proptery type
+                propertyType_list = sell_property_model!!.data[1].options
+                recyclerView_property_type.adapter =
+                    PropertyTypeRecyclerViewAdapter(propertyType_list, requireContext())
             }
             Keys.CITY_REQ_CODE -> {
                 cityList.clear()
                 city_model = gson.fromJson(response, CityModel::class.java)
                 city_model!!.data.forEach {
                     cityList.add(it.name)
+                    propertyFilling.citySpinnerList.add(it.name)
                 }
                 cityAdapter()
             }
@@ -229,16 +249,24 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
         } else if (propertyFilling.sell_type.isEmpty() || propertyFilling.property_type.isEmpty()) {
             Utils.customSnakebar(next_btn, getString(R.string.sell_and_property_error))
 
-        }else{
+        } else {
             propertyFilling.address = ads_address.text.toString()
-             propertyFilling.pinCode = city_pinCode.text.toString().toInt()
+            propertyFilling.pinCode = city_pinCode.text.toString()
 //            ads_model = gson.fromJson(response, SellPropertyModel::class.java)
 
-            bundle.putParcelable(Keys.ADS_DATA,sell_property_model)
+            bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
             val adsFragment2 = AddAdsFragment2()
             adsFragment2.arguments = bundle
-            Utils.addReplaceFragment(requireContext(),adsFragment2,R.id.nav_container1,true,false,true)
+            Utils.addReplaceFragment(
+                requireContext(),
+                adsFragment2,
+                R.id.nav_container1,
+                true,
+                false,
+                true
+            )
         }
+
     }
 
 
