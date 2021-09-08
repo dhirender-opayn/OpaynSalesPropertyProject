@@ -74,7 +74,9 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
             propertyFilling.stateSpinnerModel?.let { mainstateList.addAll(it) }
             stateAdapter()
 
-
+            //set city list when fragemtn one again call
+//            cityList = propertyFilling.citySpinnerList // this or
+//            propertyFilling.citySpinnerModel?.let { mainCityList.addAll(it) }
 //            city_spinner.setSelection(propertyFilling.cityPosition)
 //            cityAdapter()
 
@@ -140,6 +142,7 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
         }
         if (!propertyFilling.stateID.equals(0)) {
             state_spinner.setSelection(propertyFilling.statePosition)
+            // or may be there cityAdapter is called
         }
 
     }
@@ -166,6 +169,7 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 // write code to perform some action
             }
         }
+        //you should call cityAdapter in starting when fragment again create
         if (!propertyFilling.cityId.equals(0)) { // city checking
             city_spinner.setSelection(propertyFilling.cityPosition)
 
@@ -193,7 +197,8 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 
                 //sell_type_header.text = sell_property_model!!.data[0].name.toString() //To set header by api header
                 sellType_list = sell_property_model!!.data[0].options
-                recyclerView_sell_type.adapter = SellerTypeRecyclerViewAdapter(sellType_list)
+                propertyFilling.sell_property_list = sellType_list
+                recyclerView_sell_type.adapter = SellerTypeRecyclerViewAdapter(sellType_list) // HItns pass postion as argument and make null as default and check if null then go on flow if not higlite the item on the behalf of position
                 //proptery type
                 propertyType_list = sell_property_model!!.data[1].options
                 recyclerView_property_type.adapter =

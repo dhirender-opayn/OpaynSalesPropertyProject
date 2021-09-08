@@ -44,6 +44,7 @@ class SellerTypeRecyclerViewAdapter(
                 if (item.equals(position))
                 {
                     list[position].flag = true
+                    propertyFilling.sell_postion = position
 
                 }
                 else

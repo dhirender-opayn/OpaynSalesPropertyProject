@@ -130,6 +130,7 @@
                 android:hint="Enter Pin Code"
                 android:background="@drawable/rectangel_border"
                 android:inputType="number"
+                android:maxLength="6"
                 android:padding="@dimen/_8sdp"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/pincode_head"

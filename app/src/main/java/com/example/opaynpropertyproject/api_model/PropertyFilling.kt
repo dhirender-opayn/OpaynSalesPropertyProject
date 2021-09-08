@@ -2,6 +2,9 @@ package com.example.opaynpropertyproject.api_model
 
 class PropertyFilling {
     var sell_type: String = ""
+    var sell_property_list: List<SellPropertyModel.Data.Option>? = null
+    var sell_postion = 0
+
     var property_type: String = ""
     var state: String = ""
     var stateID: Int = 0
@@ -11,6 +14,7 @@ class PropertyFilling {
 
     var city: String = ""
     var citySpinnerList = ArrayList<String>()
+    var citySpinnerModel = ArrayList<CityModel.Data>()
     var cityId = 0
     var cityPosition = 0
     var address: String = ""

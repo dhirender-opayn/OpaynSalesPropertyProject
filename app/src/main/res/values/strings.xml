@@ -55,6 +55,8 @@
     <string name="age_of_property">Age of Property</string>
     <string name="entrance_facing">Entrance Facing</string>
     <string name="prev_step">Prev Step</string>
+    <string name="price_range">Price Range</string>
+    <string name="description">Description</string>
 
 
 </resources>
