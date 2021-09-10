@@ -3,6 +3,7 @@ package com.example.opaynpropertyproject.addAdsSlides
 import android.os.Bundle
 import android.view.View
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.Utils
 

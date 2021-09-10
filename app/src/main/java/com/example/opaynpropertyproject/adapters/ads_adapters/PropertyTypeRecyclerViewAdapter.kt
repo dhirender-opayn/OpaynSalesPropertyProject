@@ -32,7 +32,10 @@ class PropertyTypeRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
         holder.property_name.text = list[position].name
+
+
         if (list[position].flag) {
+
             holder.property_name.setBackgroundResource(R.drawable.rectangle_border_fill)
             holder.property_name.setTextColor(Color.WHITE)
             propertyFilling.property_type =  list[position].id.toString()

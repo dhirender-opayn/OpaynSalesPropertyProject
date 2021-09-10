@@ -1,7 +1,8 @@
 package com.example.opaynpropertyproject.api
 
 object Keys {
-    const val BASEURL = "http://e12e-180-188-237-46.ngrok.io/realestate-api/public/api/"
+
+    const val BASEURL = "http://ae23-180-188-237-46.ngrok.io/realestate-api/public/api/"
     val ADS_DATA = "AdsData"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
@@ -83,6 +84,9 @@ object Keys {
     var RESET_CODE = "code"
     var RESET_PASS = "reset_password"
     var RESET_PASS_AGAIN = "reset_pass_again"
+
+    //PROPERTY
+    val ADD_PROPERTY_END_POINT = "dealer/property"
 
 
     //convet string to json

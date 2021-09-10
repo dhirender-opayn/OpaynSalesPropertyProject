@@ -5,11 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".addAdsSlides.AddAdsFragment4"
-    android:padding="@dimen/_16sdp">
+    android:padding="@dimen/_16sdp"
+    android:background="@color/white">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent">
+       android:layout_height="match_parent"
+       android:padding="@dimen/_16sdp">
 
 
        <TextView
@@ -21,37 +23,23 @@
            android:text="@string/price_range"
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintLeft_toLeftOf="parent"/>
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/add_price_container"
-           app:layout_constraintLeft_toLeftOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/price_header">
+
 
        <EditText
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:id="@+id/price_input"
-           style="@style/ads_edittext_hint"
+           style="@style/header"
+           android:layout_margin="@dimen/_9sdp"
+           android:padding="@dimen/_10sdp"
            android:hint="10000$"
            android:layout_weight="1"
            android:background="@drawable/rectangel_border"
+           app:layout_constraintLeft_toLeftOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/price_header"
            />
-       <com.google.android.material.button.MaterialButton
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/price_add_btn"
-           android:text="@string/add"
-           android:layout_weight="0.5"
-           />
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/price_show"
-           style="@style/ads_header"
-           android:layout_weight="1"
-            />
-       </LinearLayout>
+
+
 
        <TextView
            android:layout_width="match_parent"
@@ -59,14 +47,16 @@
            android:id="@+id/description_heading"
            style="@style/header"
            android:textAlignment="textStart"
+           android:layout_margin="@dimen/_10sdp"
            android:text="@string/description"
-           app:layout_constraintTop_toBottomOf="@+id/add_price_container"
+           app:layout_constraintTop_toBottomOf="@+id/price_input"
            app:layout_constraintLeft_toLeftOf="parent"/>
        <EditText
            android:layout_width="match_parent"
            android:layout_height="@dimen/_130sdp"
            android:id="@+id/property_description"
            style="@style/ads_edittext_hint"
+           android:layout_margin="@dimen/_4sdp"
            android:hint="Enter Your Property Description "
            android:background="@drawable/rectangel_border"
            app:layout_constraintTop_toBottomOf="@+id/description_heading"
@@ -74,8 +64,12 @@
        <TextView
            android:id="@+id/show_des_count"
            android:background="@drawable/rectangel_border"
-           android:text="100/250"
+           android:text="0/250"
            style="@style/ads_header"
+           android:textAlignment="textStart"
+           android:paddingHorizontal="@dimen/_10sdp"
+           android:paddingVertical="@dimen/_4sdp"
+           android:layout_margin="@dimen/_3sdp"
            app:layout_constraintTop_toBottomOf="@+id/property_description"
            app:layout_constraintRight_toRightOf="parent"/>
    </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,14 +90,14 @@
             android:text="@string/prev_step"
             app:cornerRadius="@dimen/_5sdp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/next_btn_ads2"
+            app:layout_constraintRight_toLeftOf="@+id/finish_btn"
             app:layout_constraintBottom_toBottomOf="parent" />
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/next_btn_ads2"
+            android:id="@+id/finish_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/_10sdp"
-            android:text="@string/next_step"
+            android:text="Finish"
             app:cornerRadius="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -33,6 +33,7 @@ class SellerTypeRecyclerViewAdapter(
             holder.sell_name.setBackgroundResource(R.drawable.rectangle_border_fill)
             holder.sell_name.setTextColor(Color.WHITE)
             propertyFilling.sell_type = list[position].id.toString()
+            propertyFilling.sell_type_position = position
 
         } else {
             holder.sell_name.setBackgroundResource(R.drawable.rectangel_border)

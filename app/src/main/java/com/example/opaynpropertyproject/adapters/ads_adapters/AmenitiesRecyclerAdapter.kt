@@ -2,6 +2,7 @@ package com.example.opaynpropertyproject.adapters.ads_adapters
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,21 +29,40 @@ class AmenitiesRecyclerAdapter(
 
     override fun onBindViewHolder(holder: AmenitiesViewHolder, position: Int) {
         holder.amenities_name.text = amenitiesList[position].name
-        if (amenitiesList[position].flag) {
-            holder.amenities_name.setBackgroundResource(R.drawable.rectangle_border_fill)
-            holder.amenities_name.setTextColor(Color.WHITE)
-            SingletonObject.propertyFilling.amenties = amenitiesList[position].id.toString()
-        } else {
-            holder.amenities_name.setBackgroundResource(R.drawable.rectangel_border)
-            holder.amenities_name.setTextColor(Color.BLACK)
-        }
+
         holder.amenities_name.setOnClickListener {
+            Log.e("r",it.id.toString())
+
+
+//
+//           for (item in amenitiesList.indices){
+//               if (item.equals(position)){
+//                   amenitiesList[position].flag = true
+//                   holder.amenities_name.setBackgroundResource(R.drawable.rectangle_border_fill)
+//                holder.amenities_name.setTextColor(Color.WHITE)
+//                SingletonObject.propertyFilling.amenties = listOf(amenitiesList[position].id.toString())
+//                   Log.e("r1",amenitiesList[item].name)
+//                   Log.e("r2",amenitiesList[position].name)
+//               }
+//
+//
+//           }
+
+
             for (item in amenitiesList.indices) {
                 if (item.equals(position)) {
                     amenitiesList[position].flag = true
                 } else {
                     amenitiesList[item].flag = false
                 }
+            }
+            if (amenitiesList[position].flag) {
+                holder.amenities_name.setBackgroundResource(R.drawable.rectangle_border_fill)
+                holder.amenities_name.setTextColor(Color.WHITE)
+                SingletonObject.propertyFilling.amenties = listOf(amenitiesList[position].id.toString())
+            } else {
+                holder.amenities_name.setBackgroundResource(R.drawable.rectangel_border)
+                holder.amenities_name.setTextColor(Color.BLACK)
             }
             notifyDataSetChanged()
         }

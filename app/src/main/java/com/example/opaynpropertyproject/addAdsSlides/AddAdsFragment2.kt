@@ -10,11 +10,14 @@ import android.view.ViewGroup
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.adapters.ads_adapters.*
 import com.example.opaynpropertyproject.adapters.singleton.SingletonObject
+import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import com.example.opaynpropertyproject.api_model.StateModel
 import com.example.opaynpropertyproject.comman.Utils
+import com.kofigyan.stateprogressbar.StateProgressBar
+import kotlinx.android.synthetic.main.activity_add_ads.*
 import kotlinx.android.synthetic.main.fragment_add_ads1.*
 import kotlinx.android.synthetic.main.fragment_add_ads2.*
 import kotlinx.android.synthetic.main.posted_by_view_holder.*
@@ -26,9 +29,16 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
     var sell_list = listOf<SellPropertyModel.Data.Option>()
     var area_list = listOf<SellPropertyModel.Data.Option>()
     var postedby_list = listOf<SellPropertyModel.Data.Option>()
+    var amenities_list = listOf<SellPropertyModel.Data.Option>()
+    var age_of_property_list = listOf<SellPropertyModel.Data.Option>()
+    var entranceList = listOf<SellPropertyModel.Data.Option>()
+    var furnishList = listOf<SellPropertyModel.Data.Option>()
     var sqft: String = ""
     var number_bed: String = ""
     var number_bathroom: String = ""
+    var addAdsRequiredActivity2 :AddAdsActivity? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,15 +54,14 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        pre_btn.setOnClickListener(this)
-        bundle = requireArguments()
-        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
-        HitAdsApi()
+        addAdsRequiredActivity2 = requireActivity() as AddAdsActivity
 
-        next_btn_ads2.setOnClickListener(this)
-        sqft_btn.setOnClickListener(this)
-        ads_bed_btn.setOnClickListener(this)
-        ads_bathroom_btn.setOnClickListener(this)
+        if (propertyFilling.number_bed_rev!!.isNotEmpty()) { // if user press back button
+            setDataAdsFragement2()
+
+        } else {
+            startingFragment2()
+        }
 
 
     }
@@ -68,30 +77,37 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
         //possession types
         sell_list = sellPropertyBundle!!.data[1].options
         rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
+        propertyFilling.sell_list_rev = sell_list
 
         //Area
         area_list = sellPropertyBundle!!.data[2].options
         rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
+        propertyFilling.area_list_rev = area_list
 
         //posted By
         postedby_list = sellPropertyBundle!!.data[3].options
         rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
+        propertyFilling.postedby_list_rev = postedby_list
 
         //Amenities
-        val amenities_list = sellPropertyBundle!!.data[7].options
+        amenities_list = sellPropertyBundle!!.data[7].options
         rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
+        propertyFilling.amenities_list_rv = amenities_list
 
         //age of property
-        val age_of_property_list = sellPropertyBundle!!.data[4].options
+        age_of_property_list = sellPropertyBundle!!.data[4].options
         rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
+        propertyFilling.age_of_property_rv = age_of_property_list
 
         //Entrance
-        val entranceList = sellPropertyBundle!!.data[5].options
+        entranceList = sellPropertyBundle!!.data[5].options
         rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
+        propertyFilling.entranceList_rev = entranceList
 
         //Furnishing
-        val furnishList = sellPropertyBundle!!.data[6].options
+        furnishList = sellPropertyBundle!!.data[6].options
         rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
+        propertyFilling.furnishList_rev = furnishList
 
     }
 
@@ -107,37 +123,6 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
                     false
                 )
             }
-            R.id.sqft_btn -> {
-                sqft = sqft_input.text.toString()
-                if (sqft.isNotEmpty()) {
-                    sqft_show.text = sqft + " sqft"
-                    SingletonObject.propertyFilling.sqft = sqft_show.text.toString()
-                } else {
-                    Log.e("sqft", "Please Enter SQFT")
-                }
-
-
-            }
-            R.id.ads_bed_btn -> {
-                number_bed = ads_beds.text.toString()
-                if (number_bed.isNotEmpty()) {
-                    bed_show.text = number_bed + " Bed"
-                    SingletonObject.propertyFilling.no_bed = bed_show.text.toString()
-                } else {
-                    Log.e("bed", "Please Enter bed")
-                }
-
-
-            }
-            R.id.ads_bathroom_btn -> {
-                number_bathroom = ads_bathrrom.text.toString()
-                if (number_bathroom.isNotEmpty()) {
-                    bathroom_show.text = number_bathroom + " Bathroom"
-                    SingletonObject.propertyFilling.no_bathroom = bathroom_show.text.toString()
-                } else {
-                    Log.e("Bathroom", "Please Enter Bathroom")
-                }
-            }
             R.id.next_btn_ads2 -> {
                 checkValidationAds2()
 
@@ -147,31 +132,87 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
     }
 
     fun checkValidationAds2() {
-        if (SingletonObject.propertyFilling.poessionType.isEmpty() ) {
+        if (SingletonObject.propertyFilling.poessionType.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "poession is empty")
-        } else if(SingletonObject.propertyFilling.area.isEmpty()) {
+        } else if (SingletonObject.propertyFilling.area.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "area is empty ")
         } else if (SingletonObject.propertyFilling.postedby.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "post by is empty")
-        }else if (SingletonObject.propertyFilling.amenties.isEmpty()) {
+        } else if (SingletonObject.propertyFilling.amenties!!.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "amenties is empty ")
-        }else if (SingletonObject.propertyFilling.age_of_property.isEmpty()){
+        } else if (SingletonObject.propertyFilling.age_of_property.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Age of Property is empty ")
-        } else if (SingletonObject.propertyFilling.entrance.isEmpty()){
+        } else if (SingletonObject.propertyFilling.entrance.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Entrance is empty ")
-        }else if (SingletonObject.propertyFilling.furnish.isEmpty()){
+        } else if (SingletonObject.propertyFilling.furnish.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Furnish is empty ")
-        }else if (SingletonObject.propertyFilling.sqft.isEmpty()){
+        } else if (SingletonObject.propertyFilling.sqft.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "SQFT is empty ")
-        }else if (SingletonObject.propertyFilling.no_bed.isEmpty()){
+        } else if (SingletonObject.propertyFilling.no_bed.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Number of Bed is empty ")
-        }else if(SingletonObject.propertyFilling.no_bathroom.isEmpty()){
+        } else if (SingletonObject.propertyFilling.no_bathroom.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Number of Bathroom is empty ")
         } else {
             SingletonObject.propertyFilling.sqft = sqft
             SingletonObject.propertyFilling.no_bed = number_bed
             SingletonObject.propertyFilling.no_bathroom = number_bathroom
+            Utils.addReplaceFragment(
+                requireContext(),
+                AddAdsFragment3(),
+                R.id.nav_container1,
+                true,
+                true,
+                true
+            )
+            addAdsRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.THREE)
         }
     }
 
+    fun setDataAdsFragement2() {
+        bundle = requireArguments()
+        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+        addAdsRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.TWO)
+
+        //sqft area
+
+        sqft = propertyFilling.sqft
+        number_bed = propertyFilling.number_bed_rev
+        number_bathroom  = propertyFilling.number_bathroom_rev
+
+        //sell list
+        sell_list = propertyFilling.sell_list_rev!!
+        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
+        //area list
+        area_list = propertyFilling.area_list_rev!!
+        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
+        //postedby list
+        postedby_list = propertyFilling.postedby_list_rev!!
+        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
+        //Amenities
+        amenities_list = propertyFilling.amenities_list_rv!!
+        rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
+
+        //age of property
+        age_of_property_list = propertyFilling.age_of_property_rv!!
+        rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
+
+        // Entrance
+        entranceList = propertyFilling.entranceList_rev!!
+        rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
+
+        //Furnishing
+        furnishList = propertyFilling.furnishList_rev!!
+        rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
+    }
+
+    fun startingFragment2() {
+        pre_btn.setOnClickListener(this)
+        bundle = requireArguments()
+        propertyFilling.AdsAdd2Bundle = bundle
+        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+        HitAdsApi()
+
+        next_btn_ads2.setOnClickListener(this)
+
+    }
 }
