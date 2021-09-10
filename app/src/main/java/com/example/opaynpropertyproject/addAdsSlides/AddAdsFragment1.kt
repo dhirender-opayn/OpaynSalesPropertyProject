@@ -196,7 +196,7 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 
         } else {
 
-                setBasicPropertyDetails()
+//                setBasicPropertyDetails()
                 propertyFilling.address = ads_address.text.toString()
                 propertyFilling.pinCode = city_pinCode.text.toString()
 //            ads_model = gson.fromJson(response, SellPropertyModel::class.java)

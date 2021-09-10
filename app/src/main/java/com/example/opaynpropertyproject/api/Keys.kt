@@ -31,6 +31,8 @@ object Keys {
 
     var ADD_PROPERTY_FIRST_REQ_CODE = 12
     var ADD_PROFILE_PROPERTY_RED_CODE = 13
+    var IMG_RED_CODE = 14
+    var IMAGE = "image"
     var STEP = "step"
     var LIST_TYPE = "list_type"
     var PROPERTY_TYPE ="property_type"
@@ -42,6 +44,10 @@ object Keys {
     var PROPERTY_ID: String = "id"
     var PROPERTY_PROFILE_AREA: String = "area"
     var AMENITIES: String = "amenities"
+
+    var IMG_END_POINT = "dealer/property/image"
+    var PROPERTY_IMG_ID = "property_id"
+
 
 
 

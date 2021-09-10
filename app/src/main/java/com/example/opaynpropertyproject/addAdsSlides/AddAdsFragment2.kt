@@ -229,18 +229,30 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
             profileHashMap.put(Keys.PROPERTY_PROFILE_AREA, sqft_input.text.toString().trim())
             profileHashMap.put(Keys.AMENITIES, amenities)
 
-
-            //APi
-            serviceViewModel.postserviceBody(
-                Keys.ADD_PROPERTY_END_POINT,
+            Utils.addReplaceFragment(
                 requireContext(),
-                profileHashMap,
-                Keys.ADD_PROFILE_PROPERTY_RED_CODE,
+                AddAdsFragment3(),
+                R.id.nav_container1,
                 true,
-                token,
                 true,
-                this
+                true
             )
+            addAdsRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(
+                StateProgressBar.StateNumber.THREE
+            )
+
+
+//            //APi
+//            serviceViewModel.postserviceBody(
+//                Keys.ADD_PROPERTY_END_POINT,
+//                requireContext(),
+//                profileHashMap,
+//                Keys.ADD_PROFILE_PROPERTY_RED_CODE,
+//                true,
+//                token,
+//                true,
+//                this
+//            )
 
         }
     }
