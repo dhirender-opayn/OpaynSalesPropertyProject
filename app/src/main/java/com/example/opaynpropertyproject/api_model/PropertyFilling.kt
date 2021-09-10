@@ -5,6 +5,9 @@ import android.os.Bundle
 class PropertyFilling {
 
 
+    var testID: Int = 0
+    var propertyID: Int = 0
+    var property_type_position = 0
     var property_description: String = ""
     var property_price: String = ""
     var sell_type_position: Int = 0
@@ -15,7 +18,7 @@ class PropertyFilling {
     var rv_sell_property_list: List<SellPropertyModel.Data.Option>? = null
     var sell_postion = 0
 
-    var property_type: String = ""
+    var property_type: Int = 0
     var state: String = ""
     var stateID: Int = 0
     var statePosition: Int = 0
@@ -50,7 +53,7 @@ class PropertyFilling {
     var sqft_rev: String = ""
     var number_bed_rev: String = ""
     var number_bathroom_rev: String = ""
-    var amenties :List<String>? = null
+    var amenties =ArrayList<Int>()
     var AdsAdd2Bundle: Bundle? = null
 
 }

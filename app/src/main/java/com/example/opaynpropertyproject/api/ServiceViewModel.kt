@@ -6,11 +6,14 @@ import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.POST
 import java.io.File
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -20,6 +23,8 @@ class ServiceViewModel {
 
     var responsestring = ""
     var user_id = ""
+
+
 
     fun multipartservice(
         url: String,
@@ -186,6 +191,66 @@ class ServiceViewModel {
             ProgressDialogs.showDialog(context)
         }
         response.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable?) {
+                ProgressDialogs.showToast(context, t?.message.toString())
+                ProgressDialogs.dismissProgressDialog()
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>?) {
+                if (response != null) {
+                    ProgressDialogs.dismissProgressDialog()
+                    when (response.code()) {
+
+                        Keys.SUCESSCODE -> {
+                            if (response.body() != null) {
+                                val jsonObject = JSONObject(response.body()!!.string().toString())
+                                responsestring = jsonObject.toString()
+                                reuestCode = reuestcode
+                                responselistner.onResponse(reuestCode, responsestring)
+
+                                Log.e("signup", "Signup successfully")
+                            }
+
+                        }
+                        Keys.UNAUTHRISECODE -> {
+
+
+                            ProgressDialogs.showToast(context, response.message())
+                        }
+                        Keys.SERVERERROR -> {
+                            reuestCode = Keys.SERVERERROR
+
+                            ProgressDialogs.showToast(context, response.message())
+                        }
+                        Keys.BACKENDERROR -> {
+                            reuestCode = Keys.BACKENDERROR
+                            parseError(response, context, responselistner)
+                            // ProgressDialogs.showToast(context,"Internal server Error")
+                        }
+                    }
+                } else {
+                    ProgressDialogs.dismissProgressDialog()
+                }
+            }
+        })
+
+    }
+    fun postserviceBody(
+        url: String,
+        context: Context,
+        map: HashMap<String, Any>,
+        reuestcode: Int,
+        isheader: Boolean,
+        token: String,
+        isprogress: Boolean,
+        responselistner: ApiResponse
+    ) {
+        val apiService = WebapiInterface.create(context, isheader, token)
+        val response = apiService.commonpostRequestBody(Keys.BASEURL + url, RequestBody.create("application/json; charset=utf-8".toMediaTypeOrNull(), JSONObject(map as Map<*, *>).toString()))
+        if (isprogress) {
+            ProgressDialogs.showDialog(context)
+        }
+        response?.enqueue(object : retrofit2.Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable?) {
                 ProgressDialogs.showToast(context, t?.message.toString())
                 ProgressDialogs.dismissProgressDialog()

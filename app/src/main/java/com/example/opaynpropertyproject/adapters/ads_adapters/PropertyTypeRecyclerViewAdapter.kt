@@ -38,7 +38,7 @@ class PropertyTypeRecyclerViewAdapter(
 
             holder.property_name.setBackgroundResource(R.drawable.rectangle_border_fill)
             holder.property_name.setTextColor(Color.WHITE)
-            propertyFilling.property_type =  list[position].id.toString()
+            propertyFilling.property_type =  list[position].id
         } else
         {
             holder.property_name.setBackgroundResource(R.drawable.rectangel_border)
@@ -50,6 +50,7 @@ class PropertyTypeRecyclerViewAdapter(
             {
                 if (item.equals(position)) {
                     list[position].flag = true
+                    propertyFilling.property_type_position = position
 
 
                 }

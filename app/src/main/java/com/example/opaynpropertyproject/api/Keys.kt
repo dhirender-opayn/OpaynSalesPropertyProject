@@ -2,7 +2,9 @@ package com.example.opaynpropertyproject.api
 
 object Keys {
 
-    const val BASEURL = "http://ae23-180-188-237-46.ngrok.io/realestate-api/public/api/"
+
+
+    const val BASEURL = "http://c560-180-188-237-46.ngrok.io/realestate-api/public/api/"
     val ADS_DATA = "AdsData"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
@@ -23,6 +25,26 @@ object Keys {
 
     //Property type
     var PROPERTY_REQ_CODE = 11
+
+
+    //Property Hashmap code
+
+    var ADD_PROPERTY_FIRST_REQ_CODE = 12
+    var ADD_PROFILE_PROPERTY_RED_CODE = 13
+    var STEP = "step"
+    var LIST_TYPE = "list_type"
+    var PROPERTY_TYPE ="property_type"
+    var STATE_ID = "state"
+    var CITY_ID = "city"
+    var ADDRESS = "address"
+    var PINCODE = "pincode"
+
+    var PROPERTY_ID: String = "id"
+    var PROPERTY_PROFILE_AREA: String = "area"
+    var AMENITIES: String = "amenities"
+
+
+
 
 
     //USER TYPE

@@ -1,5 +1,6 @@
 package com.example.opaynpropertyproject.addAdsSlides
 
+import ServiceViewModel
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -31,9 +32,6 @@ import kotlinx.coroutines.processNextEventInCurrentThread
 
 
 class AddAdsFragment1 : BaseFragment(), ApiResponse {
-    val token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTc0M2QxNTQwNGRhMWQ4NjU1MGI1Njk1MjBlMDJhN2U2OTdiNGFiMDY2MjgyZTgwMjc1ODJhMmZjNmEzMDQ4YTI0M2MyNTljZTUyYzAwYTkiLCJpYXQiOjE2MzA5MDY1OTQuNzI0NTY0LCJuYmYiOjE2MzA5MDY1OTQuNzI0NTY1LCJleHAiOjE2NjI0NDI1OTQuNzE5NTc1LCJzdWIiOiIyMyIsInNjb3BlcyI6W119.miTFb8YyDL186NlROqnHHjOVnCdRXEs2lhDOk_V6LLaiImsfhtQ3KBrBiPYC7hrOOXY1xLfzu1pPNCS-y21SSiB_iQ403f1i3lh_LRUSzTe5EGyNc4Ejz3Ixuekw1iuWJq_yFmvqi4j14UL_BI55y4jgtUwhV2Z3MVMgxcHmRoYKem2Tr6UhW6OiVLjzt2HExJc5JsT6SCjbSc4UXSW4IV6V-_46Q3Vv5s8iylm0vmZBF4IJso2xJPwydVd8s7jIOq1y3CPCVj6gWkHyi_SlKTQfAqKMcBDjhg1sFIGGsJP-foORlvtsR33mp2AG7Rp46R2saqH5baMEnj-W6-KFhuYQs83-Fa-nGZC8cuTH7laWD_t-7jOU_whtbHS_Ydf46gN5TSQFAOLEsTBI310qhpgTpEAf1qkinUFDEAPdJ-XuRS_iaVBFLGmwcmrsphpGpAK5_tdqTY52OSUdq63CRqJfY6UkSBdD5dWQpb9wUy-iAvb010qea1duZWqXTnVuZ0bjXRuGx_Zo4_lB8FZCLFcs0D09mlJSx_Iu_72o8vp6lH9pbCYIFMQY9s7bHeZuyyOhP1W_W4qHljT6AXO16joUrArEY3FTGvj9Sxkfzy_KVGRSxb-VerbB54bx2eHM7Zaacx3iHOWZivucINzr96BtessxXZNw1jtdkkCUBf8"
-
 
     var model: StateModel? = null
     var city_model: CityModel? = null
@@ -46,6 +44,7 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     var selected_city = ""
     var cityList = ArrayList<String>()
     var stateid = 0
+    var cityid = 0
 
     //sppiner
     var mainstateList = ArrayList<StateModel.Data>()
@@ -54,7 +53,7 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     var city_name = ""
     var ads_model: SellPropertyModel? = null
     var bundle = Bundle()
-    var addAdsRequriedActivity:AddAdsActivity? = null
+    var addAdsRequriedActivity: AddAdsActivity? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -143,7 +142,8 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
             ) {
                 city_name = cityList[position]
                 propertyFilling.city = city_name
-                propertyFilling.cityId = mainCityList[position].id
+                cityid = mainCityList[position].id
+                propertyFilling.cityId = cityid
                 propertyFilling.cityPosition = position
 
             }
@@ -159,6 +159,141 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 
     }
 
+
+//send in base fragment
+//    fun sellTypeAPI() {
+//        serviceViewModel.getservice(
+//            Keys.SELL_TYPE_END_POINT,
+//            requireContext(),
+//            Keys.SELL_REQ_CODE,
+//            true,
+//            token,
+//            true,
+//            this
+//        )
+//    }
+
+    fun stateApi() {
+        serviceViewModel.getservice(
+            Keys.STATEENDPOINT,
+            requireContext(),
+            Keys.STATE_REQ_CODE,
+            true,
+            token,
+            true,
+            this
+        )
+    }
+
+    fun checkValidation() {
+        if (ads_address.text.toString().trim().isEmpty()) {
+            Utils.customSnakebar(first_next_btn, getString(R.string.address_error))
+
+        } else if (city_pinCode.text.toString().trim().isEmpty()) {
+            Utils.customSnakebar(first_next_btn, getString(R.string.pin_code_error))
+        } else if (propertyFilling.sell_type.isEmpty() || propertyFilling.property_type < 0) {
+            Utils.customSnakebar(first_next_btn, getString(R.string.sell_and_property_error))
+
+        } else {
+
+                setBasicPropertyDetails()
+                propertyFilling.address = ads_address.text.toString()
+                propertyFilling.pinCode = city_pinCode.text.toString()
+//            ads_model = gson.fromJson(response, SellPropertyModel::class.java)
+
+
+                bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
+                addAdsRequriedActivity!!.your_state_progress_bar_id.setCurrentStateNumber(
+                    StateProgressBar.StateNumber.TWO
+                )
+                val adsFragment2 = AddAdsFragment2()
+                adsFragment2.arguments = bundle
+                Utils.addReplaceFragment(
+                    requireContext(),
+                    adsFragment2,
+                    R.id.nav_container1,
+                    true,
+                    false,
+                    true
+                )
+
+        }
+
+    }
+
+    fun setData() {
+        val des_data = addAdsRequriedActivity!!.descriptionData
+        addAdsRequriedActivity!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.ONE)
+        // set address
+        ads_address.setText(propertyFilling.address)
+        // set pin code
+        city_pinCode.setText(propertyFilling.pinCode)
+
+        //set value of state after prev button click
+        sell_property_model = propertyFilling.sell_property_model_update
+        stateList = propertyFilling.stateSpinnerList
+        mainstateList.clear()
+        propertyFilling.stateSpinnerModel?.let { mainstateList.addAll(it) }
+        stateAdapter()
+
+
+        //set value of city after prev button click
+        propertyFilling.citySpinnerModel?.let { mainCityList.addAll(it) }
+        city_spinner.setSelection(propertyFilling.cityPosition)
+        cityAdapter()
+
+
+        //Sell Recycler View
+        sellType_list = propertyFilling.rv_sell_property_list!!
+        recyclerView_sell_type.adapter =
+            SellerTypeRecyclerViewAdapter(sellType_list)
+
+        //Property Recycler View
+        propertyType_list = propertyFilling.rv_property_type_list!!
+        recyclerView_property_type.adapter =
+            PropertyTypeRecyclerViewAdapter(propertyType_list, requireContext())
+
+        //button
+        first_next_btn.setOnClickListener {
+            checkValidation()
+        }
+    }
+
+    fun startingFragement() {
+        sellTypeAPI(token, this)
+        stateApi()
+        first_next_btn.setOnClickListener {
+            checkValidation()
+        }
+        ads1_parent_container.setOnClickListener {
+            Utils.hideKeyboard(requireActivity())
+        }
+
+    }
+
+    fun setBasicPropertyDetails() {
+        var addPropertyHasMap = HashMap<String, Any>()
+
+
+        addPropertyHasMap.put(Keys.STEP, "basic")
+        addPropertyHasMap.put(Keys.LIST_TYPE, 1)
+        addPropertyHasMap.put(Keys.PROPERTY_TYPE, propertyFilling.property_type)
+        addPropertyHasMap.put(Keys.STATE_ID, stateid)
+        addPropertyHasMap.put(Keys.CITY_ID, cityid)
+        addPropertyHasMap.put(Keys.ADDRESS, ads_address.text.toString().trim())
+        addPropertyHasMap.put(Keys.PINCODE, city_pinCode.text.toString().trim())
+        serviceViewModel.postservice(
+            Keys.ADD_PROPERTY_END_POINT,
+            requireContext(),
+            addPropertyHasMap,
+            Keys.ADD_PROPERTY_FIRST_REQ_CODE,
+            true,
+            token,
+            true,
+            this
+        )
+
+    }
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
 
@@ -198,123 +333,28 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 propertyFilling.citySpinnerModel = mainCityList
                 city_model!!.data.forEach {
                     cityList.add(it.name)
+
                     propertyFilling.citySpinnerList.add(it.name)
                 }
                 cityAdapter()
             }
+            Keys.ADD_PROPERTY_FIRST_REQ_CODE -> {
+
+                val basic_property_model = gson.fromJson(response, BasicPropertyModelSuccessfully::class.java)
+                val property_id = basic_property_model.data.id
+                propertyFilling.testID = property_id
+
+               propertyFilling.propertyID = basic_property_model.data.id
+
+                //Utils.customSnakebar(first_next_btn, add_property_model.message.toString())
+
+            }
             Keys.BACKENDERROR -> {
                 val errorModel = gson.fromJson(response, ErrorModel::class.java)
-                Utils.customSnakebar(next_btn, errorModel.message.toString())
-                Log.e("eeee", response.toString())
+//                Utils.customSnakebar(next_btn, errorModel.message.toString())
+//                Log.e("eeee", response.toString())
             }
         }
-    }
-//send in base fragment
-//    fun sellTypeAPI() {
-//        serviceViewModel.getservice(
-//            Keys.SELL_TYPE_END_POINT,
-//            requireContext(),
-//            Keys.SELL_REQ_CODE,
-//            true,
-//            token,
-//            true,
-//            this
-//        )
-//    }
-
-    fun stateApi() {
-        serviceViewModel.getservice(
-            Keys.STATEENDPOINT,
-            requireContext(),
-            Keys.STATE_REQ_CODE,
-            true,
-            token,
-            true,
-            this
-        )
-    }
-
-    fun checkValidation() {
-        if (ads_address.text.toString().isEmpty()) {
-            Utils.customSnakebar(next_btn, getString(R.string.address_error))
-
-        } else if (city_pinCode.text.toString().isEmpty()) {
-            Utils.customSnakebar(next_btn, getString(R.string.pin_code_error))
-        } else if (propertyFilling.sell_type.isEmpty() || propertyFilling.property_type.isEmpty()) {
-            Utils.customSnakebar(next_btn, getString(R.string.sell_and_property_error))
-
-        } else {
-            propertyFilling.address = ads_address.text.toString()
-            propertyFilling.pinCode = city_pinCode.text.toString()
-//            ads_model = gson.fromJson(response, SellPropertyModel::class.java)
-
-            bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
-            addAdsRequriedActivity!!.your_state_progress_bar_id.setCurrentStateNumber(
-                StateProgressBar.StateNumber.TWO
-            )
-            val adsFragment2 = AddAdsFragment2()
-            adsFragment2.arguments = bundle
-            Utils.addReplaceFragment(
-                requireContext(),
-                adsFragment2,
-                R.id.nav_container1,
-                true,
-                false,
-                true
-            )
-        }
-
-    }
-
-    fun setData() {
-        val des_data = addAdsRequriedActivity!!.descriptionData
-        addAdsRequriedActivity!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.ONE)
-        // set address
-        ads_address.setText(propertyFilling.address)
-        // set pin code
-        city_pinCode.setText(propertyFilling.pinCode)
-
-        //set value of state after prev button click
-        sell_property_model = propertyFilling.sell_property_model_update
-        stateList = propertyFilling.stateSpinnerList
-        mainstateList.clear()
-        propertyFilling.stateSpinnerModel?.let { mainstateList.addAll(it) }
-        stateAdapter()
-
-
-        //set value of city after prev button click
-        propertyFilling.citySpinnerModel?.let { mainCityList.addAll(it) }
-        city_spinner.setSelection(propertyFilling.cityPosition)
-        cityAdapter()
-
-
-        //Sell Recycler View
-        sellType_list = propertyFilling.rv_sell_property_list!!
-        recyclerView_sell_type.adapter =
-            SellerTypeRecyclerViewAdapter(sellType_list)
-
-        //Property Recycler View
-        propertyType_list = propertyFilling.rv_property_type_list!!
-        recyclerView_property_type.adapter =
-            PropertyTypeRecyclerViewAdapter(propertyType_list, requireContext())
-
-        //button
-        next_btn.setOnClickListener {
-            checkValidation()
-        }
-    }
-
-    fun startingFragement() {
-        sellTypeAPI(token, this)
-        stateApi()
-        next_btn.setOnClickListener {
-            propertyFilling.step_one = true
-            checkValidation()
-        }
-        ads1_parent_container.setOnClickListener {
-            Utils.hideKeyboard(requireActivity())
-        }
-
     }
 
 

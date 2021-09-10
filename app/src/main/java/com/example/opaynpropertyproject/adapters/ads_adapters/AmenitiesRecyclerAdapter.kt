@@ -1,22 +1,31 @@
 package com.example.opaynpropertyproject.adapters.ads_adapters
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
+import android.util.ArraySet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.adapters.singleton.SingletonObject
+import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import kotlinx.android.synthetic.main.amenities_view_holder.view.*
+import kotlinx.android.synthetic.main.custom_spinner_item.view.*
+import kotlin.math.log
 
 class AmenitiesRecyclerAdapter(
     val amenitiesList: List<SellPropertyModel.Data.Option>,
     val context: Context
 ) :
     RecyclerView.Adapter<AmenitiesRecyclerAdapter.AmenitiesViewHolder>() {
+    var selected_amenities_list = ArrayList<Int>()
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AmenitiesViewHolder {
@@ -27,45 +36,34 @@ class AmenitiesRecyclerAdapter(
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: AmenitiesViewHolder, position: Int) {
         holder.amenities_name.text = amenitiesList[position].name
 
         holder.amenities_name.setOnClickListener {
-            Log.e("r",it.id.toString())
 
+            amenitiesList[position].flag = !amenitiesList[position].flag // if(amenities[position].flag) amenities[position].flag = false else amenities[position].true )
 
-//
-//           for (item in amenitiesList.indices){
-//               if (item.equals(position)){
-//                   amenitiesList[position].flag = true
-//                   holder.amenities_name.setBackgroundResource(R.drawable.rectangle_border_fill)
-//                holder.amenities_name.setTextColor(Color.WHITE)
-//                SingletonObject.propertyFilling.amenties = listOf(amenitiesList[position].id.toString())
-//                   Log.e("r1",amenitiesList[item].name)
-//                   Log.e("r2",amenitiesList[position].name)
-//               }
-//
-//
-//           }
-
-
-            for (item in amenitiesList.indices) {
-                if (item.equals(position)) {
-                    amenitiesList[position].flag = true
-                } else {
-                    amenitiesList[item].flag = false
-                }
-            }
-            if (amenitiesList[position].flag) {
-                holder.amenities_name.setBackgroundResource(R.drawable.rectangle_border_fill)
-                holder.amenities_name.setTextColor(Color.WHITE)
-                SingletonObject.propertyFilling.amenties = listOf(amenitiesList[position].id.toString())
-            } else {
-                holder.amenities_name.setBackgroundResource(R.drawable.rectangel_border)
-                holder.amenities_name.setTextColor(Color.BLACK)
-            }
             notifyDataSetChanged()
         }
+        if (amenitiesList[position].flag) {
+            selected_amenities_list.add(amenitiesList[position].id)
+            propertyFilling.amenties!!.add(amenitiesList[position].id)
+            holder.amenities_name.setBackgroundResource(R.drawable.rectangle_border_fill)
+            holder.amenities_name.setTextColor(Color.WHITE)
+
+
+        } else {
+            holder.amenities_name.setBackgroundResource(R.drawable.rectangel_border)
+            holder.amenities_name.setTextColor(Color.BLACK)
+            propertyFilling.amenties!!.remove(amenitiesList[position].id)
+
+
+        }
+        Log.e("check",amenitiesList[position].toString())
+     //   propertyFilling.amenties = selected_amenities_list
+
+
 
     }
 

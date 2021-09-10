@@ -15,14 +15,20 @@ import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import com.example.opaynpropertyproject.api_model.StateModel
+import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.comman.Utils
 import com.kofigyan.stateprogressbar.StateProgressBar
 import kotlinx.android.synthetic.main.activity_add_ads.*
 import kotlinx.android.synthetic.main.fragment_add_ads1.*
 import kotlinx.android.synthetic.main.fragment_add_ads2.*
 import kotlinx.android.synthetic.main.posted_by_view_holder.*
+import ServiceViewModel
+import android.widget.Toast
+import com.example.opaynpropertyproject.api_model.ErrorModel
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
-class AddAdsFragment2 : Fragment(), View.OnClickListener {
+
+class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
 
     var bundle = Bundle()
     var sellPropertyBundle: SellPropertyModel? = null
@@ -36,7 +42,7 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
     var sqft: String = ""
     var number_bed: String = ""
     var number_bathroom: String = ""
-    var addAdsRequiredActivity2 :AddAdsActivity? = null
+    var addAdsRequiredActivity2: AddAdsActivity? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +71,55 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
 
 
     }
+
+    fun setDataAdsFragement2() {
+        bundle = requireArguments()
+        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+        addAdsRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.TWO)
+
+        //sqft area
+
+        sqft_input.setText(propertyFilling.sqft)
+        ads_beds.setText(propertyFilling.no_bed)
+        ads_bathrrom.setText(propertyFilling.no_bathroom)
+
+        //sell list
+        sell_list = propertyFilling.sell_list_rev!!
+        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
+        //area list
+        area_list = propertyFilling.area_list_rev!!
+        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
+        //postedby list
+        postedby_list = propertyFilling.postedby_list_rev!!
+        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
+        //Amenities
+        amenities_list = propertyFilling.amenities_list_rv!!
+        rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
+
+        //age of property
+        age_of_property_list = propertyFilling.age_of_property_rv!!
+        rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
+
+        // Entrance
+        entranceList = propertyFilling.entranceList_rev!!
+        rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
+
+        //Furnishing
+        furnishList = propertyFilling.furnishList_rev!!
+        rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
+    }
+
+    fun startingFragment2() {
+        pre_btn.setOnClickListener(this)
+        bundle = requireArguments()
+        propertyFilling.AdsAdd2Bundle = bundle
+        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+        HitAdsApi()
+
+        next_btn_ads2.setOnClickListener(this)
+
+    }
+
 
     fun HitAdsApi() {
 
@@ -146,73 +201,71 @@ class AddAdsFragment2 : Fragment(), View.OnClickListener {
             Utils.customSnakebar(next_btn_ads2, "Entrance is empty ")
         } else if (SingletonObject.propertyFilling.furnish.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Furnish is empty ")
-        } else if (SingletonObject.propertyFilling.sqft.isEmpty()) {
+        } else if (sqft_input.text.toString().trim().isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "SQFT is empty ")
-        } else if (SingletonObject.propertyFilling.no_bed.isEmpty()) {
+        } else if (ads_beds.text.toString().trim().isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Number of Bed is empty ")
-        } else if (SingletonObject.propertyFilling.no_bathroom.isEmpty()) {
+        } else if (ads_bathrrom.text.toString().trim().isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Number of Bathroom is empty ")
         } else {
-            SingletonObject.propertyFilling.sqft = sqft
-            SingletonObject.propertyFilling.no_bed = number_bed
-            SingletonObject.propertyFilling.no_bathroom = number_bathroom
-            Utils.addReplaceFragment(
+            SingletonObject.propertyFilling.sqft = sqft_input.text.toString()
+            SingletonObject.propertyFilling.no_bed = ads_beds.text.toString()
+            SingletonObject.propertyFilling.no_bathroom = ads_bathrrom.text.toString()
+
+            Log.e("testtest", propertyFilling.testID.toString())
+
+
+            //Clear Duplicate Values
+            val hashSet = HashSet<Int>()
+            hashSet.addAll(propertyFilling.amenties)
+            propertyFilling.amenties.clear()
+            propertyFilling.amenties.addAll(hashSet)
+            val amenities = propertyFilling.amenties
+
+            Log.e("RR", amenities.toString())
+            val profileHashMap = HashMap<String, Any>()
+            profileHashMap.put(Keys.STEP, "profile")
+            profileHashMap.put(Keys.PROPERTY_ID, propertyFilling.propertyID)
+            profileHashMap.put(Keys.PROPERTY_PROFILE_AREA, sqft_input.text.toString().trim())
+            profileHashMap.put(Keys.AMENITIES, amenities)
+
+
+            //APi
+            serviceViewModel.postserviceBody(
+                Keys.ADD_PROPERTY_END_POINT,
                 requireContext(),
-                AddAdsFragment3(),
-                R.id.nav_container1,
+                profileHashMap,
+                Keys.ADD_PROFILE_PROPERTY_RED_CODE,
                 true,
+                token,
                 true,
-                true
+                this
             )
-            addAdsRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.THREE)
+
         }
     }
 
-    fun setDataAdsFragement2() {
-        bundle = requireArguments()
-        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
-        addAdsRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.TWO)
 
-        //sqft area
-
-        sqft = propertyFilling.sqft
-        number_bed = propertyFilling.number_bed_rev
-        number_bathroom  = propertyFilling.number_bathroom_rev
-
-        //sell list
-        sell_list = propertyFilling.sell_list_rev!!
-        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
-        //area list
-        area_list = propertyFilling.area_list_rev!!
-        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
-        //postedby list
-        postedby_list = propertyFilling.postedby_list_rev!!
-        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
-        //Amenities
-        amenities_list = propertyFilling.amenities_list_rv!!
-        rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
-
-        //age of property
-        age_of_property_list = propertyFilling.age_of_property_rv!!
-        rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
-
-        // Entrance
-        entranceList = propertyFilling.entranceList_rev!!
-        rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
-
-        //Furnishing
-        furnishList = propertyFilling.furnishList_rev!!
-        rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
+    override fun onResponse(requestcode: Int, response: String) {
+        when (requestcode) {
+            Keys.ADD_PROFILE_PROPERTY_RED_CODE -> {
+                Utils.addReplaceFragment(
+                    requireContext(),
+                    AddAdsFragment3(),
+                    R.id.nav_container1,
+                    true,
+                    true,
+                    true
+                )
+                addAdsRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(
+                    StateProgressBar.StateNumber.THREE
+                )
+            }
+            Keys.BACKENDERROR -> {
+                val errorModel = gson.fromJson(response, ErrorModel::class.java)
+                Utils.customSnakebar(next_btn_ads2,errorModel.message.toString())
+        }
     }
+}
 
-    fun startingFragment2() {
-        pre_btn.setOnClickListener(this)
-        bundle = requireArguments()
-        propertyFilling.AdsAdd2Bundle = bundle
-        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
-        HitAdsApi()
-
-        next_btn_ads2.setOnClickListener(this)
-
-    }
 }
