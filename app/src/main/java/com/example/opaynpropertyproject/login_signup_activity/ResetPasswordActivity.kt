@@ -16,7 +16,7 @@ import kotlin.collections.HashMap
 
 class ResetPasswordActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var hashlist_map: HashMap<String, Any>
-    lateinit var serviceViewModel: ServiceViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
@@ -48,7 +48,7 @@ class ResetPasswordActivity : BaseActivity(), View.OnClickListener, ApiResponse 
                 Utils.hideKeyboard(this)
             }
             R.id.reset_password_btn -> {
-                serviceViewModel = ServiceViewModel()
+
                 val otpReset_User_value = resetPassUserValue()
                 serviceViewModel.postservice(
                     Keys.RESET_MATCH_END_POINT,

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var loginHashMap: HashMap<String, Any>
-    lateinit var serviceViewModel: ServiceViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -57,7 +57,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 if (loginHashMap.isEmpty()) {
                     customSnakebar(login_container, "Something Wrong May be fields are empty")
                 } else {
-                    serviceViewModel = ServiceViewModel()
+                    
                     serviceViewModel.postservice(
                         Keys.loginEndPoint,
                         this,

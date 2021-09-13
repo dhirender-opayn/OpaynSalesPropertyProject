@@ -1,10 +1,12 @@
 package com.example.opaynpropertyproject.api_model
 
+import android.net.Uri
 import android.os.Bundle
 
 class PropertyFilling {
 
 
+    var list_of_img: ArrayList<Uri>? = null
     var testID: Int = 0
     var propertyID: Int = 0
     var property_type_position = 0
@@ -38,9 +40,9 @@ class PropertyFilling {
     var age_of_property = ""
     var entrance = ""
     var furnish = ""
-    var sqft = ""
-    var no_bed = ""
-    var no_bathroom = ""
+    var sqft:Float = 0.0f
+        var no_bed = 0.0f
+    var no_bathroom = 0.0f
 
     //ADS 2 SCREEN
     var sell_list_rev: List<SellPropertyModel.Data.Option>? = null

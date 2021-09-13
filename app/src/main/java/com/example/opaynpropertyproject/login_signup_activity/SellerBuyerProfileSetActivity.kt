@@ -13,7 +13,7 @@ import ServiceViewModel
 import com.example.opaynpropertyproject.comman.Utils
 
 class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiResponse {
-    lateinit var serviceViewModel: ServiceViewModel
+
     var getUserId: Int = 0
     var successSignupModel: SuccessSignupModel? = null
     lateinit var bundle: Bundle
@@ -67,7 +67,7 @@ class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiR
             Utils.customSnakebar(profile_set_container, "HashMap is Empty")
         } else
         {
-            serviceViewModel = ServiceViewModel()
+
             serviceViewModel.postservice(
                 Keys.signupEndPoint,
                 this,

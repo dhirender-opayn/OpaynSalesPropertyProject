@@ -23,7 +23,7 @@ import kotlin.collections.HashMap
 class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var hashlist_map: HashMap<String, Any>
     lateinit var bundle: Bundle
-    lateinit var serviceViewModel: ServiceViewModel
+
     var model: SuccessSignupModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +87,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 if (mapUser.isEmpty()) {
                     Log.e("ddd", "hashmap is empty")
                 } else {
-                    serviceViewModel = ServiceViewModel()
+
                     serviceViewModel.postservice(
                         Keys.signupEndPoint,
                         this,

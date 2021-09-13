@@ -111,5 +111,11 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    //Horizontal Slider
+    <style name="slider">
+        <item name="android:layout_width">@dimen/_350sdp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 
 </resources>

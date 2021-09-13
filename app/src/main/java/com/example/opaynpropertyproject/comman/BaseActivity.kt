@@ -1,5 +1,6 @@
 package com.example.opaynpropertyproject.comman
 
+import ServiceViewModel
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -17,6 +18,7 @@ import kotlin.reflect.KClass
 open class BaseActivity : AppCompatActivity(){
     //snakeBar
     val gson = Gson()
+    val serviceViewModel = ServiceViewModel()
 
 
     //intent

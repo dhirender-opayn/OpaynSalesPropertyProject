@@ -73,4 +73,5 @@ dependencies {
     // image picker
     implementation 'com.github.CanHub:Android-Image-Cropper:3.2.2'
 
+
 }

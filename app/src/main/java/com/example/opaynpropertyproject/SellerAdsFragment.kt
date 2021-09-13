@@ -1,15 +1,18 @@
 package com.example.opaynpropertyproject
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.opaynpropertyproject.adapters.YourAdsRecyclerViewAdapter
+import com.example.opaynpropertyproject.api.ApiResponse
+import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.PropertyListingModel
+ import com.example.opaynpropertyproject.comman.BaseFragment
 import kotlinx.android.synthetic.main.fragment_seller_ads.*
 
 
-class SellerAdsFragment : Fragment() {
+class SellerAdsFragment : BaseFragment(),ApiResponse {
+    var property_list = listOf<PropertyListingModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +28,21 @@ class SellerAdsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //serviceViewModel.getservice(Keys.GET_DEALER_ADD_END_POINT,requireContext(),Keys.GET_DEALER_ADD_REQ_CODE,true,token,true,this)
+
         val list = ArrayList<String>()
         list.add("abd")
         list.add("ccc")
         rv_your_ads.adapter = YourAdsRecyclerViewAdapter(list,requireActivity())
+
+    }
+
+    override fun onResponse(requestcode: Int, response: String) {
+        when(requestcode){
+//            Keys.GET_DEALER_ADD_REQ_CODE -> {
+//                property_list = gson.fromJson(response,PropertyListingModel::class.java)
+//            }
+        }
 
     }
 

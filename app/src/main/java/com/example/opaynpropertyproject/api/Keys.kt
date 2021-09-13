@@ -4,7 +4,7 @@ object Keys {
 
 
 
-    const val BASEURL = "http://c560-180-188-237-46.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = "http://50b2-180-188-237-166.ngrok.io/realestate-api/public/api/"
     val ADS_DATA = "AdsData"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
@@ -31,6 +31,8 @@ object Keys {
 
     var ADD_PROPERTY_FIRST_REQ_CODE = 12
     var ADD_PROFILE_PROPERTY_RED_CODE = 13
+    var ADD_PROFILE_PROPERTY_PRICING_CODE = 14
+    val GET_DEALER_ADD_REQ_CODE = 15
     var IMG_RED_CODE = 14
     var IMAGE = "image"
     var STEP = "step"
@@ -115,6 +117,13 @@ object Keys {
 
     //PROPERTY
     val ADD_PROPERTY_END_POINT = "dealer/property"
+    val PROPERTY_PRICE ="price"
+    val DESCRIPTION = "description"
+    val STATUS = "status"
+
+    //Get DEALER ADD
+    val GET_DEALER_ADD_END_POINT = "dealer/properties"
+
 
 
     //convet string to json

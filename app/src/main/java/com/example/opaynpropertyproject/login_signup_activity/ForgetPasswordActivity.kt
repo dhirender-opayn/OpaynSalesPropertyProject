@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_forget_password.*
 
 class ForgetPasswordActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var hashlist_map: HashMap<String, Any>
-    lateinit var serviceViewModel: ServiceViewModel
+
     lateinit var bundle: Bundle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,7 @@ class ForgetPasswordActivity : BaseActivity(), View.OnClickListener, ApiResponse
                 Utils.hideKeyboard(this)
             }
             R.id.forget_password_sendOtp_btn -> {
-                serviceViewModel = ServiceViewModel()
+
                 val reset_values = userValue()
                 if (reset_values.isNotEmpty()) {
                     serviceViewModel.postservice(

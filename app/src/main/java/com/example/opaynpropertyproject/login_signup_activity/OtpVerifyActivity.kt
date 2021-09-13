@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_otp_verify.*
 
 class OtpVerifyActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     var getUserId: Int = 0
-    lateinit var serviceViewModel: ServiceViewModel
+
     var successSignupModel: SuccessSignupModel? = null
     lateinit var hashMap: HashMap<String, Any>
     var mOtp = ""
@@ -34,7 +34,7 @@ class OtpVerifyActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         resend_otp_again_btn.setOnClickListener(this)
         otp_main_container.setOnClickListener(this)
         hashMap = HashMap<String, Any>()
-        serviceViewModel = ServiceViewModel()
+
         bundle = Bundle()
         val bundle = this.intent.extras
             successSignupModel = bundle!!.getParcelable(Keys.PRACELABLE_KEY)

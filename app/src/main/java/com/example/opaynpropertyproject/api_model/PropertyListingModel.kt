@@ -1,22 +1,16 @@
 package com.example.opaynpropertyproject.api_model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-
-data class BasicPropertyModelSuccessfully(
-    val `data`: Data,
+data class PropertyListingModel(
+    val `data`: List<Data>,
     val message: String
-)  {
-
+) {
     data class Data(
         val address: String,
-        val amenities: List<Any>,
         val city: Int,
         val created_at: String,
-        val description: Any,
+        val description: String,
         val id: Int,
-        val images: List<Any>,
+        val image: Any,
         val list_type: String,
         val name: String,
         val pincode: Int,

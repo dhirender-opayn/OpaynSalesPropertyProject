@@ -196,26 +196,13 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
 
         } else {
 
-//                setBasicPropertyDetails()
+                setBasicPropertyDetails()
                 propertyFilling.address = ads_address.text.toString()
                 propertyFilling.pinCode = city_pinCode.text.toString()
 //            ads_model = gson.fromJson(response, SellPropertyModel::class.java)
 
 
-                bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
-                addAdsRequriedActivity!!.your_state_progress_bar_id.setCurrentStateNumber(
-                    StateProgressBar.StateNumber.TWO
-                )
-                val adsFragment2 = AddAdsFragment2()
-                adsFragment2.arguments = bundle
-                Utils.addReplaceFragment(
-                    requireContext(),
-                    adsFragment2,
-                    R.id.nav_container1,
-                    true,
-                    false,
-                    true
-                )
+
 
         }
 
@@ -345,13 +332,27 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 propertyFilling.testID = property_id
 
                propertyFilling.propertyID = basic_property_model.data.id
+                bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
+                addAdsRequriedActivity!!.your_state_progress_bar_id.setCurrentStateNumber(
+                    StateProgressBar.StateNumber.TWO
+                )
+                val adsFragment2 = AddAdsFragment2()
+                adsFragment2.arguments = bundle
+                Utils.addReplaceFragment(
+                    requireContext(),
+                    adsFragment2,
+                    R.id.nav_container1,
+                    true,
+                    false,
+                    true
+                )
 
                 //Utils.customSnakebar(first_next_btn, add_property_model.message.toString())
 
             }
             Keys.BACKENDERROR -> {
                 val errorModel = gson.fromJson(response, ErrorModel::class.java)
-//                Utils.customSnakebar(next_btn, errorModel.message.toString())
+                Utils.customSnakebar(first_next_btn, errorModel.message.toString())
 //                Log.e("eeee", response.toString())
             }
         }
