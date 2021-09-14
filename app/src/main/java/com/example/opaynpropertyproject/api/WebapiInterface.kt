@@ -14,6 +14,16 @@ import retrofit2.http.*
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
+import retrofit2.http.DELETE
+import okhttp3.RequestBody
+
+import retrofit2.http.Multipart
+
+
+
+
+
+
 
 interface WebapiInterface
 {
@@ -33,6 +43,9 @@ interface WebapiInterface
 
     @POST()
     fun commonpostRequestBody(@Url url: String,@Body map: RequestBody): Call<ResponseBody>?
+
+    @HTTP(method = "DELETE" , hasBody = true)
+    fun deleteRequestBody(@Url url: String,@Body map: RequestBody) : Call<ResponseBody>
 
     companion object Factory
     {

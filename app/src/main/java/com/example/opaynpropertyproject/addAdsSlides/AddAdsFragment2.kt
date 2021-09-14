@@ -41,9 +41,6 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
     var age_of_property_list = listOf<SellPropertyModel.Data.Option>()
     var entranceList = listOf<SellPropertyModel.Data.Option>()
     var furnishList = listOf<SellPropertyModel.Data.Option>()
-    var sqft: String = ""
-    var number_bed: String = ""
-    var number_bathroom: String = ""
     var addAdsRequiredActivity2: AddAdsActivity? = null
 
 
@@ -115,29 +112,17 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
     }
 
     fun startingFragment2() {
-
-
-            propertyFilling.AdsAdd2Bundle = bundle
-           bundle = requireArguments()
-            sqftSlider()
-            bedSlider()
-            bathroomSlider()
-            sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
-            HitAdsApi()
-
-
-
+        propertyFilling.AdsAdd2Bundle = bundle
+        bundle = requireArguments()
+        sqftSlider()
+        bedSlider()
+        bathroomSlider()
+        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+        HitAdsApi()
     }
 
 
     fun HitAdsApi() {
-
-//        for (item in 0..bundle.size()){
-//         if (2 == sellPropertyBundle!!.data[item].id  ){
-//             rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
-//         }
-//        }
-
         //possession types
         sell_list = sellPropertyBundle!!.data[1].options
         rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
@@ -210,11 +195,11 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
             Utils.customSnakebar(next_btn_ads2, "Entrance is empty ")
         } else if (propertyFilling.furnish.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Furnish is empty ")
-        }  else if ( show_bed.text.isEmpty()) {
+        } else if (show_bed.text.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Number of Bed is empty ")
         } else if (show_bathroom.text.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Number of Bathroom is empty ")
-        } else if (show_sqft.text.isEmpty()){
+        } else if (show_sqft.text.isEmpty()) {
             Utils.customSnakebar(next_btn_ads2, "Enter Sqft of property")
         } else {
             //Clear Duplicate Values
@@ -236,8 +221,17 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
                 StateProgressBar.StateNumber.THREE
             )
 
-//
-//            //APi
+
+            //for dummy tranfor ===============================================================================check
+            Utils.addReplaceFragment(
+                requireContext(),
+                AddAdsFragment3(),
+                R.id.nav_container1,
+                true,
+                true,
+                true
+            )
+//            APi
             serviceViewModel.postserviceBody(
                 Keys.ADD_PROPERTY_END_POINT,
                 requireContext(),
@@ -270,11 +264,12 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
             }
             Keys.BACKENDERROR -> {
                 val errorModel = gson.fromJson(response, ErrorModel::class.java)
-                Utils.customSnakebar(next_btn_ads2,errorModel.message.toString())
+                Utils.customSnakebar(next_btn_ads2, errorModel.message.toString())
+            }
         }
     }
-}
-    fun sqftSlider(){
+
+    fun sqftSlider() {
         sqft_input.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) {
                 // Responds to when slider's touch event is being started
@@ -286,13 +281,14 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
         })
 
         sqft_input.addOnChangeListener { slider, value, fromUser ->
-            show_sqft.text = value.toString()+"-sqft"
+            show_sqft.text = value.toString() + "-sqft"
             propertyFilling.sqft = value
 
             // Responds to when slider's value is changed
         }
     }
-    fun bedSlider(){
+
+    fun bedSlider() {
         ads_beds.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) {
                 // Responds to when slider's touch event is being started
@@ -304,13 +300,14 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
         })
 
         ads_beds.addOnChangeListener { slider, value, fromUser ->
-            show_bed.text = value.toInt().toString()+"-Bed"
+            show_bed.text = value.toInt().toString() + "-Bed"
             propertyFilling.no_bed = value
 
             // Responds to when slider's value is changed
         }
     }
-    fun bathroomSlider(){
+
+    fun bathroomSlider() {
         ads_bathroom.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) {
                 // Responds to when slider's touch event is being started
@@ -322,7 +319,7 @@ class AddAdsFragment2 : BaseFragment(), View.OnClickListener, ApiResponse {
         })
 
         ads_bathroom.addOnChangeListener { slider, value, fromUser ->
-            show_bathroom.text = value.toInt().toString() +"-Bathroom"
+            show_bathroom.text = value.toInt().toString() + "-Bathroom"
             propertyFilling.no_bathroom = value
 
             // Responds to when slider's value is changed

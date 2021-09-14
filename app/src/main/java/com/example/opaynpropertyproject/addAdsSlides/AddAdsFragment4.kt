@@ -11,19 +11,19 @@ import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.ErrorModel
+import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.comman.Utils
 import com.kofigyan.stateprogressbar.StateProgressBar
 import kotlinx.android.synthetic.main.activity_add_ads.*
 import kotlinx.android.synthetic.main.fragment_add_ads2.*
+import kotlinx.android.synthetic.main.fragment_add_ads3.*
 import kotlinx.android.synthetic.main.fragment_add_ads4.*
 import java.security.Key
 
 
-class AddAdsFragment4 : Fragment(), ApiResponse ,View.OnClickListener{
-    val token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2JlYzA3NGU1M2FkZDM2MzI4MjZiMmM2NzY3ZGQ3ZWQxZDViODk0MGI3MjM3ZmZkYWM3ZGRhNzA1Y2M1MjJjYmYyZTM3NWI2OWUwY2FjY2QiLCJpYXQiOjE2MzE1MjAxMTcuODcxODAxLCJuYmYiOjE2MzE1MjAxMTcuODcxODAyLCJleHAiOjE2NjMwNTYxMTcuODY1MzY5LCJzdWIiOiIyMyIsInNjb3BlcyI6W119.cZEFoaZRxIuOe2dvshC39g9pHYyja5pwk_9uEBfjk8_3o58ikbXt5c1QOwbGmZjjTiMIgRXwJeHy_xCJc3qSeAPTgzwV4Ce9ZmJZybYAKoz7-Xn218P3Bu5qOCTUOTwTxdoLRa1uSyUCe6zsvNrBe8MNSSBV-6T9GcS6Ro3JB6VwSCahlkQ2rhdTaIwqeN-NcTznscyUHQvcK74qVqX4Cz6H8R1OssF0HSdXHKv-TbIaZkISlmd-mJx3JxWf8JqMFd7HB8ZJtgJilpaOGNwntw2z6L-BMvFyeDx1BySpkNaWJtvO8YTA_dLJ2MjNaS47brsf97m1puasHysU0HDdF9Cz8nUM8HvBQcXUcbUksOTyr6CxDXNqi2X5iawfzGcrg8iA_isyHYM_qhZJqjxSnFU530Bm02UoKps_VXLB1W62VdQ634xXnxtpU6dn9NYNWD0AbHXS52giX2YXRFlbjjUf0EWardZI-cBPw6wn2Gj1yncTFiz0D25JyJNfdvk3RhkpbmWTccBqSDF4M1LuPxpUqC6vbhWPrP9aNxFT2DVT1_BYL6gcDbnaDELHfE9pl4ZES664SbjAiaIKdF4y-bdqd7P1awYnzypYNB0LNhDM-B-CgETCl-2q6ZLlXr87nYr0AWIEElzTtfbbgkEyWBkY8vuIOsWCV4kdAKaF8b0"
+class AddAdsFragment4 : BaseFragment(), ApiResponse ,View.OnClickListener{
 
-    lateinit var serviceViewModel: ServiceViewModel
     lateinit var addPropertyHasMap: HashMap<String, Any>
     var price = ""
     var property_des = ""
@@ -45,7 +45,7 @@ class AddAdsFragment4 : Fragment(), ApiResponse ,View.OnClickListener{
 
          addAdsRequiredActivityFinish = requireActivity() as AddAdsActivity
         finish_btn.setOnClickListener(this)
-        serviceViewModel = ServiceViewModel()
+        pre_btn_finish.setOnClickListener(this)
         addPropertyHasMap = HashMap<String, Any>()
         if (propertyFilling.property_description.isNotEmpty()) {
             price_input.setText(propertyFilling.property_price)
@@ -89,6 +89,10 @@ class AddAdsFragment4 : Fragment(), ApiResponse ,View.OnClickListener{
                 Utils.customSnakebar(finish_btn,"Property Setup is Finish !!")
 
             }
+            Keys.BACKENDERROR -> {
+                val errorModel = gson.fromJson(response, ErrorModel::class.java)
+                Utils.customSnakebar(finish_btn, errorModel.message)
+            }
 
         }
 
@@ -98,6 +102,16 @@ class AddAdsFragment4 : Fragment(), ApiResponse ,View.OnClickListener{
        when(v!!.id){
            R.id.finish_btn -> {
                checkValidationPricing()
+           }
+           R.id.pre_btn_finish ->{
+               Utils.addReplaceFragment(
+                   requireContext(),
+                   AddAdsFragment3(),
+                   R.id.nav_container1,
+                   true,
+                   false,
+                   false
+               )
            }
        }
     }

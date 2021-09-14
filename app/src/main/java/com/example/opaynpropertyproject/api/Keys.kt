@@ -4,7 +4,7 @@ object Keys {
 
 
 
-    const val BASEURL = "http://50b2-180-188-237-166.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = "http://60c1-180-188-237-166.ngrok.io/realestate-api/public/api/"
     val ADS_DATA = "AdsData"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
@@ -33,6 +33,7 @@ object Keys {
     var ADD_PROFILE_PROPERTY_RED_CODE = 13
     var ADD_PROFILE_PROPERTY_PRICING_CODE = 14
     val GET_DEALER_ADD_REQ_CODE = 15
+    var IMG_DEL_REQ_CODE = 16
     var IMG_RED_CODE = 14
     var IMAGE = "image"
     var STEP = "step"
@@ -44,11 +45,15 @@ object Keys {
     var PINCODE = "pincode"
 
     var PROPERTY_ID: String = "id"
+    var PHOTO_ID = "id" // they are same because of api has same name like in delete api id is used as photo id
     var PROPERTY_PROFILE_AREA: String = "area"
     var AMENITIES: String = "amenities"
 
     var IMG_END_POINT = "dealer/property/image"
     var PROPERTY_IMG_ID = "property_id"
+    //Delete
+    var IMG_DEL_END_POINT = "dealer/property/image/delete"
+
 
 
 

@@ -40,8 +40,6 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     var propertyType_list = listOf<SellPropertyModel.Data.Option>()
 
     var stateList = ArrayList<String>()
-    var selected_state = ""
-    var selected_city = ""
     var cityList = ArrayList<String>()
     var stateid = 0
     var cityid = 0
@@ -160,18 +158,6 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
     }
 
 
-//send in base fragment
-//    fun sellTypeAPI() {
-//        serviceViewModel.getservice(
-//            Keys.SELL_TYPE_END_POINT,
-//            requireContext(),
-//            Keys.SELL_REQ_CODE,
-//            true,
-//            token,
-//            true,
-//            this
-//        )
-//    }
 
     fun stateApi() {
         serviceViewModel.getservice(
@@ -200,6 +186,19 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 propertyFilling.address = ads_address.text.toString()
                 propertyFilling.pinCode = city_pinCode.text.toString()
 //            ads_model = gson.fromJson(response, SellPropertyModel::class.java)
+
+            val adsFragment2 = AddAdsFragment2()
+            bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
+            adsFragment2.arguments = bundle
+            Utils.addReplaceFragment(
+                requireContext(),
+                adsFragment2,
+                R.id.nav_container1,
+                true,
+                false,
+                true
+            )
+
 
 
 
@@ -332,11 +331,12 @@ class AddAdsFragment1 : BaseFragment(), ApiResponse {
                 propertyFilling.testID = property_id
 
                propertyFilling.propertyID = basic_property_model.data.id
-                bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
+
                 addAdsRequriedActivity!!.your_state_progress_bar_id.setCurrentStateNumber(
                     StateProgressBar.StateNumber.TWO
                 )
                 val adsFragment2 = AddAdsFragment2()
+                bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
                 adsFragment2.arguments = bundle
                 Utils.addReplaceFragment(
                     requireContext(),
