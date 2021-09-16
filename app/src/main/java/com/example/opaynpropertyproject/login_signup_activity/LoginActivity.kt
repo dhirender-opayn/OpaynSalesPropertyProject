@@ -9,8 +9,11 @@ import android.view.View
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api.Keys.TOKEN
 import com.example.opaynpropertyproject.api_model.ErrorModel
+import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseActivity
+import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.comman.Utils.customSnakebar
 import com.example.opaynpropertyproject.home_activity.HomeActivity
@@ -31,43 +34,35 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
     }
 
-    private fun loginUserValue(): HashMap<String, Any> {
+    private fun loginUserValue(): Boolean {
         val mLogin_email = login_email.text.toString().trim()
         if (mLogin_email.isEmpty()) {
             Utils.customSnakebar(login_email, getString(R.string.email_required))
-        } else if (!Utils.isValidEmailId(mLogin_email)) {
-            Utils.customSnakebar(login_email, getString(R.string.email_pattern))
-        } else if (login_password.text.toString().trim().isEmpty()) {
-            Utils.customSnakebar(login_password, getString(R.string.password_required))
-        } else {
-            loginHashMap.put(Keys.login_email, login_email.text.toString().trim())
-            loginHashMap.put(Keys.login_password, login_password.text.toString().trim())
-
-
-            return loginHashMap
+            return false
         }
-        return loginHashMap
+        if (!Utils.isValidEmailId(mLogin_email)) {
+            Utils.customSnakebar(login_email, getString(R.string.email_pattern))
+            return false
+        }
+        if (login_password.text.toString().trim().isEmpty()) {
+            Utils.customSnakebar(login_password, getString(R.string.password_required))
+            return false
+        }
+        return true
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View?)
+    {
         when (v!!.id) {
-            R.id.login_button -> {
+            R.id.login_button ->
+            {
                 Log.e("button", "click")
-                loginUserValue()
-                if (loginHashMap.isEmpty()) {
-                    customSnakebar(login_container, "Something Wrong May be fields are empty")
-                } else {
-                    
-                    serviceViewModel.postservice(
-                        Keys.loginEndPoint,
-                        this,
-                        loginHashMap,
-                        Keys.login_log,
-                        false,
-                        "",
-                        true,
-                        this
-                    )
+                if (loginUserValue())
+                {
+                    loginHashMap.put(Keys.login_email, login_email.text.toString().trim())
+                    loginHashMap.put(Keys.login_password, login_password.text.toString().trim())
+
+                    serviceViewModel.postservice(Keys.loginEndPoint, this, loginHashMap, Keys.login_log, false, "", true, this)
                 }
             }
 
@@ -87,8 +82,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
-            Keys.login_log -> {
-                openA(HomeActivity::class)
+            Keys.login_log ->
+            {
+                val model = gson.fromJson(response, LoginSuccessModel::class.java)
+                if (model?.data!=null)
+                {
+                    SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
+                    openA(HomeActivity::class)
+
+                }
             }
 
             Keys.BACKENDERROR -> {

@@ -57,6 +57,18 @@
     <string name="prev_step">Prev Step</string>
     <string name="price_range">Price Range</string>
     <string name="description">Description</string>
+    <string name="visiter_review">Visiter Review</string>
+    <string name="general_setting">General Setting</string>
+    <string name="notification_settings">Notification Settings</string>
+    <string name="add_property">Add Property</string>
+    <string name="faq">FAQ</string>
+    <string name="about">About</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="messages">Messages</string>
+    <string name="chat">Chat</string>
+    <string name="about_us">About Us</string>
+    <string name="app_version">App Version</string>
 
 
 </resources>

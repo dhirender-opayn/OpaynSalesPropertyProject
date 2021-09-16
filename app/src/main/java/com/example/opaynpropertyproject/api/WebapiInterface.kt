@@ -20,11 +20,6 @@ import okhttp3.RequestBody
 import retrofit2.http.Multipart
 
 
-
-
-
-
-
 interface WebapiInterface
 {
 

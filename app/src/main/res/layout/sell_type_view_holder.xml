@@ -12,11 +12,7 @@
       android:layout_height="wrap_content"
       android:id="@+id/rv_mSell_type"
       android:text="Sell"
-      android:textAlignment="center"
-      android:paddingVertical="@dimen/_2sdp"
-      android:paddingHorizontal="@dimen/_8sdp"
-      android:textColor="@color/black"
-      android:background="@drawable/rectangel_border"
+      style="@style/recycler_view_text"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"/>

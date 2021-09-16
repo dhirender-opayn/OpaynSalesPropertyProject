@@ -6,10 +6,11 @@ import android.os.Bundle
 class PropertyFilling {
 
 
+
     var update_img: Int = 0
     var list_of_img: ArrayList<ImageUploadModelSuccessfully>? = null
-    var testID: Int = 0
     var propertyID: Int = 0
+    var userID: Int = 0
     var property_type_position = 0
     var property_description: String = ""
     var property_price: String = ""

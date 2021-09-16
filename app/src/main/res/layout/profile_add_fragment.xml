@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/_16sdp"
+    tools:context=".addAdsSlides.ProfileAddFragment">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/ads2_nested_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_container_ads2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="37dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/possession_status_heading"
+                style="@style/text_header"
+                android:text="@string/possession_status"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_possession_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/possession_status_heading"
+                app:spanCount="3"
+                tools:listitem="@layout/possession_view_holder" />
+
+            <TextView
+                android:id="@+id/possession_square_ft_heading"
+                style="@style/text_header"
+                android:drawableRight="@drawable/ic_ruler"
+                android:drawablePadding="@dimen/_8sdp"
+                android:text="@string/square_feet"
+                app:layout_constraintBottom_toTopOf="@+id/sqft_input"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_possession_list" />
+
+            <TextView
+                android:id="@+id/show_sqft"
+                style="@style/textview"
+                android:hint="0.0sqft"
+                app:layout_constraintBottom_toTopOf="@+id/sqft_input"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_possession_list" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sqft_input"
+                style="@style/slider"
+                android:stepSize="10.0"
+                android:valueFrom="0.0"
+                android:valueTo="10000.0"
+                app:layout_constraintBottom_toTopOf="@+id/number_of_bed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/possession_square_ft_heading" />
+
+            <TextView
+                android:id="@+id/number_of_bed"
+                style="@style/text_header"
+                android:drawableRight="@drawable/ic_double_bed"
+                android:drawablePadding="@dimen/_8sdp"
+                android:text="Number of bed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sqft_input" />
+
+            <TextView
+                android:id="@+id/show_bed"
+                style="@style/textview"
+                android:hint="0 Bed"
+                app:layout_constraintBottom_toTopOf="@+id/ads_beds"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sqft_input" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/ads_beds"
+                style="@style/slider"
+                android:stepSize="1"
+                android:valueFrom="0"
+                android:valueTo="25"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_bed" />
+
+
+            <TextView
+                android:id="@+id/number_of_bathroom"
+                style="@style/text_header"
+                android:drawableRight="@drawable/ic_shower_curtain"
+                android:drawablePadding="@dimen/_8sdp"
+                android:text="@string/number_of_bathroom"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ads_beds" />
+
+            <TextView
+                android:id="@+id/show_bathroom"
+                style="@style/textview"
+                android:hint="0 Bathroom"
+                app:layout_constraintBottom_toTopOf="@+id/ads_bathroom"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ads_beds" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/ads_bathroom"
+                style="@style/slider"
+                android:stepSize="1"
+                android:valueFrom="0"
+                android:valueTo="25"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/number_of_bathroom" />
+
+
+            <TextView
+                android:id="@+id/area"
+                style="@style/text_header"
+                android:text="@string/area"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ads_bathroom" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/area"
+                app:spanCount="3"
+                tools:listitem="@layout/area_view_holder" />
+
+            <TextView
+                android:id="@+id/posted_by"
+                style="@style/text_header"
+                android:text="@string/posted_by"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_area" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_posted_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/posted_by"
+                app:spanCount="4"
+                tools:listitem="@layout/posted_by_view_holder" />
+
+            <TextView
+                android:id="@+id/amenities_header"
+                style="@style/text_header"
+                android:text="@string/amenities"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_posted_by" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_amenities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/amenities_header"
+                app:spanCount="3"
+                tools:listitem="@layout/amenities_view_holder" />
+
+            <TextView
+                android:id="@+id/age_of_property_header"
+                style="@style/text_header"
+                android:text="@string/age_of_property"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_amenities" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_age_of_property"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age_of_property_header"
+                app:spanCount="3"
+                tools:listitem="@layout/age_of_property_view_holder" />
+
+            <TextView
+                android:id="@+id/entrance_facing_heading"
+                style="@style/text_header"
+                android:text="@string/entrance_facing"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_age_of_property" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_entrance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/entrance_facing_heading"
+                app:spanCount="4"
+                tools:listitem="@layout/entrance_view_holder" />
+
+            <TextView
+                android:id="@+id/furnishing_status_heading"
+                style="@style/text_header"
+                android:text="Furnishing Status"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_entrance" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_furnishing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/furnishing_status_heading"
+                app:spanCount="3"
+                tools:listitem="@layout/furnishing_view_holder" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/button_container_ads2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ads2_nested_container">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pre_btn"
+            android:backgroundTint="@color/red"
+            style="@style/button"
+            android:text="@string/prev_step"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/next_btn_ads2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next_btn_ads2"
+            style="@style/button"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:text="@string/next_step"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/pre_btn"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

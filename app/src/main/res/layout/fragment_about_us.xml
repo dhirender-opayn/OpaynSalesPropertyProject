@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AboutUsFragment">
+
+
+    <include layout="@layout/toolbar2"
+        android:id="@+id/about_us_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+             style="@style/header"
+            android:text="@string/about_us"
+            android:textColor="@color/sky_blue_700"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background= "@drawable/rectangel_border"
+            android:layout_margin="@dimen/_16sdp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/term_amp_conditions"
+                android:id="@+id/terms_condition"
+                style="@style/text_header"
+                 android:padding="@dimen/_10sdp"
+                android:drawableRight="@drawable/ic_forward"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:text="@string/app_version"
+                style="@style/text_header"
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/app_version_text"
+                app:layout_constraintTop_toBottomOf="@+id/terms_condition"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:text="v1.5.0"
+                android:textColor="@color/sky_blue_700"
+                style="@style/text_header"
+                android:id="@+id/app_version"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/terms_condition"
+               app:layout_constraintRight_toRightOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </LinearLayout>
+</FrameLayout>

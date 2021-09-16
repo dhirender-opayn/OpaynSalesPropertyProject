@@ -4,12 +4,15 @@ object Keys {
 
 
 
-    const val BASEURL = "http://60c1-180-188-237-166.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = "http://1683-180-188-237-166.ngrok.io/realestate-api/public/api/"
     val ADS_DATA = "AdsData"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
     val SERVERERROR = 201
     val BACKENDERROR = 412
+
+
+    var TOKEN="token"
 
     //get STATE
     var STATEENDPOINT = "states"
@@ -63,6 +66,7 @@ object Keys {
     //USER TYPE
     var DEALER = 1
     var BUYER = 2
+
     var PROFILE_Log = 2
 
     var USER_ID = "id"

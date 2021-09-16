@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:cardElevation="@dimen/_5sdp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_5sdp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangel_border">
+
+            <ImageView
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:id="@+id/visiter_img"
+                android:scaleType="centerCrop"
+                android:src="@drawable/chat_person"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:id="@+id/visiter_name"
+                style="@style/text_header"
+                android:text="Adele Mark"
+                android:singleLine="true"
+                android:maxLength="25"
+                app:layout_constraintRight_toLeftOf="@+id/timing"
+                app:layout_constraintLeft_toRightOf="@+id/visiter_img"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                style="@style/textview"
+                android:id="@+id/visiter_comments"
+                app:layout_constraintTop_toBottomOf="@+id/visiter_name"
+                app:layout_constraintRight_toLeftOf="@+id/timing"
+                android:text="How do have any properties"
+                android:singleLine="true"
+                android:maxLength="26"
+                app:layout_constraintLeft_toRightOf="@+id/visiter_img"/>
+            <TextView
+                android:id="@+id/timing"
+                android:text="02:20Pm"
+                style="@style/textview"
+                android:layout_marginEnd="@dimen/_6sdp"
+                app:layout_constraintBottom_toTopOf="@+id/chat_count"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+            <TextView
+                android:id="@+id/chat_count"
+                style="@style/textview"
+                android:text="4"
+                android:background="@drawable/rectangel_border"
+               android:paddingVertical="@dimen/_1sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/timing"
+                app:layout_constraintLeft_toLeftOf="@id/timing"
+                app:layout_constraintRight_toRightOf="@id/timing"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

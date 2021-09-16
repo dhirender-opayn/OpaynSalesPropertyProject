@@ -9,13 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rv_age_of_property_type"
+        style="@style/recycler_view_text"
         android:text="New Construction"
-        android:paddingVertical="@dimen/_2sdp"
-        android:paddingHorizontal="@dimen/_8sdp"
-        android:textColor="@color/black"
-        android:textAlignment="center"
         android:background="@drawable/rectangel_border"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="@dimen/_4sdp"
         app:layout_constraintLeft_toLeftOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

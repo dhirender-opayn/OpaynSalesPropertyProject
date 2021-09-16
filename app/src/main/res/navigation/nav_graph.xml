@@ -6,16 +6,16 @@
     app:startDestination="@id/fragment_seller_home_ads">
     <fragment
         android:id="@+id/fragment_seller_home_ads"
-        android:name="com.example.opaynpropertyproject.SellerAdsFragment"
+        android:name="com.example.opaynpropertyproject.home_activity.SellerFragment"
         android:label="fragment_seller_ads"
-        tools:layout="@layout/fragment_seller_ads" >
+        tools:layout="@layout/fragment_seller" >
         <action
             android:id="@+id/action_sellerAdsFragment_to_profileFragment"
             app:destination="@id/fragment_profile" />
     </fragment>
     <fragment
         android:id="@+id/fragment_profile"
-        android:name="com.example.opaynpropertyproject.ProfileFragment"
+        android:name="com.example.opaynpropertyproject.seller_profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
@@ -27,15 +27,15 @@
         android:id="@+id/addAdsFragment2"
         android:name="com.example.opaynpropertyproject.AddAdsFragment2"
         android:label="fragment_add_ads2"
-        tools:layout="@layout/fragment_add_ads2" />
+        tools:layout="@layout/profile_add_fragment" />
     <fragment
         android:id="@+id/addAdsFragment3"
         android:name="com.example.opaynpropertyproject.AddAdsFragment3"
         android:label="fragment_add_ads3"
-        tools:layout="@layout/fragment_add_ads3" />
+        tools:layout="@layout/photoupload_add_fragment" />
     <fragment
         android:id="@+id/addAdsFragment4"
         android:name="com.example.opaynpropertyproject.AddAdsFragment4"
         android:label="fragment_add_ads4"
-        tools:layout="@layout/fragment_add_ads4" />
+        tools:layout="@layout/pricing_add_fragment" />
 </navigation>

@@ -1,6 +1,5 @@
 package com.example.opaynpropertyproject.login_signup_activity
 
-import ServiceViewModel
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -10,7 +9,7 @@ import android.util.Log
 import android.view.View
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.R
-import com.example.opaynpropertyproject.adapters.singleton.SingletonObject.mUserID
+import com.example.opaynpropertyproject.singleton.SingletonObject.mUserID
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.api_model.SuccessSignupModel

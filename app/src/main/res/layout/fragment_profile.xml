@@ -1,14 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".seller_profile.ProfileFragment"
+    android:padding="@dimen/_16sdp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_container"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/_6sdp"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:id="@+id/profile_img"
+                android:scaleType="centerCrop"
+                 android:src="@drawable/chat_person"
+                app:riv_corner_radius="@dimen/_100sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/user_email"/>
+            <TextView
+                style="@style/text_header"
+                android:text="Adele Mark"
+                android:id="@+id/profile_name"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/profile_img"/>
+
+            <TextView
+                style="@style/textview"
+                android:text="+91-987654321"
+                android:textColor="@color/black"
+                android:id="@+id/seller_phone_number"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:paddingTop="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_4sdp"
+                android:drawableLeft="@drawable/ic_mobile"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name"
+                app:layout_constraintLeft_toRightOf="@+id/profile_img"/>
+            <TextView
+                style="@style/textview"
+                android:text="androidde@gmail.com"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_4sdp"
+                android:drawableLeft="@drawable/ic_email_round_color"
+                android:paddingTop="@dimen/_4sdp"
+                android:id="@+id/user_email"
+                app:layout_constraintTop_toBottomOf="@+id/seller_phone_number"
+                app:layout_constraintLeft_toRightOf="@+id/profile_img"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:id="@+id/general_setting_container"
+        android:padding="@dimen/_6sdp"
+        app:layout_constraintTop_toBottomOf="@+id/user_container"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/general_setting"
+            style="@style/text_header"
+            android:text="Account"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+           />
+        <TextView
+            android:id="@+id/general_edit"
+            style="@style/text_header"
+            android:text="Edit"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/account_container"
+            android:padding="@dimen/_6sdp"
+            app:layout_constraintTop_toBottomOf="@+id/general_edit"
+            android:background="@drawable/rectangel_border"
+          >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/account_setting"
+                android:text="Account Setting"
+                style="@style/text_header"
+                android:paddingVertical="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawableRight="@drawable/ic_forward"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_property"
+                android:id="@+id/notification"
+                style="@style/text_header"
+                android:paddingVertical="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawableRight="@drawable/ic_forward"
+                app:layout_constraintTop_toBottomOf="@+id/account_setting"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Property"
+                style="@style/text_header"
+                android:paddingVertical="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawableRight="@drawable/ic_forward"
+                app:layout_constraintTop_toBottomOf="@+id/notification"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contact"
+            android:text="Contact"
+            style="@style/text_header"
+            app:layout_constraintTop_toBottomOf="@+id/account_container"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contact_setting"
+           app:layout_constraintTop_toBottomOf="@+id/contact"
+            android:background="@drawable/rectangel_border"
+            android:padding="@dimen/_6sdp"
+            >
 
-</FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/faq"
+                android:text="@string/faq"
+                style="@style/text_header"
+                android:paddingVertical="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawableRight="@drawable/ic_forward"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about"
+                android:id="@+id/about"
+                style="@style/text_header"
+                android:paddingVertical="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawableRight="@drawable/ic_forward"
+                app:layout_constraintTop_toBottomOf="@+id/faq"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_us"
+                style="@style/text_header"
+                android:paddingVertical="@dimen/_4sdp"
+                android:drawablePadding="@dimen/_16sdp"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawableRight="@drawable/ic_forward"
+                app:layout_constraintTop_toBottomOf="@+id/about"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logout"
+        style="@style/button"
+        android:text="LogOut"
+        android:background="@drawable/border"
+        android:padding="@dimen/_10sdp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
