@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_add_ads.*
 import kotlinx.android.synthetic.main.profile_add_fragment.*
 
 import com.example.opaynpropertyproject.api_model.ErrorModel
-import com.example.opaynpropertyproject.property_setup_adapters.*
+import com.example.opaynpropertyproject.adapter.property_setup_adapters.*
 
 import com.google.android.material.slider.Slider
 

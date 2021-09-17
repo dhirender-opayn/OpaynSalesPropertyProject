@@ -69,6 +69,16 @@
     <string name="chat">Chat</string>
     <string name="about_us">About Us</string>
     <string name="app_version">App Version</string>
+    <string name="apply_filter">Apply Filter</string>
+    <string name="dummy">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using </string>
+    <string name="possession_status2">Possession Status :</string>
+    <string name="area_type">Area Type :</string>
+    <string name="property_age">Property Age</string>
+
+    <string name="furnishing_status">Furnishing Status</string>
+    <string name="view_all">View All</string>
+    <string name="recommended_properties_for_sales">Recommended Properties For Sales</string>
+    <string name="luxury_properties_for_sales">Luxury Properties For Sales</string>
 
 
 </resources>

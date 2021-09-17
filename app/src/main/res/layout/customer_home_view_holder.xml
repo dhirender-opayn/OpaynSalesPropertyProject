@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/_280sdp"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        style="@style/card_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_16sdp"
+            android:background="@drawable/rectangel_border">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/c_home_img_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/c_home_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/properties1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/c_home_forward"
+                    style="@style/widget_button"
+                    android:drawableLeft="@drawable/ic_share"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <TextView
+                    android:id="@+id/c_fav"
+                    style="@style/widget_button"
+                    android:drawableLeft="@drawable/ic_white_heart"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/c_home_forward" />
+
+                <TextView
+                    android:id="@+id/c_home_is_sold"
+                    style="@style/textview"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:background="@drawable/round_border_fill"
+                    android:padding="@dimen/_8sdp"
+                    android:text="Sold Out"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/_18sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/c_home_img_container">
+
+                <TextView
+                    android:id="@+id/c_home_head_address"
+                    style="@style/text_header"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:paddingVertical="@dimen/_4sdp"
+                    android:text="N Candler Street, Appartment"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/c_home_sub__address"
+                    style="@style/textview"
+                    android:drawableLeft="@drawable/ic_map_pin_point"
+                    android:text="DownTown,Castles,GA"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/c_home_head_address" />
+
+                <TextView
+                    android:id="@+id/c_home_price"
+                    style="@style/text_header"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$29,000,00"
+                    android:textColor="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/c_home_sub__address" />
+
+                <TextView
+                    android:id="@+id/c_home_rating_bar"
+                    style="@style/textview"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:background="@drawable/rectangel_border"
+                    android:drawableLeft="@drawable/ic_star"
+                    android:text="4.5"
+                    android:textColor="@color/black"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/c_home_head_address"/>
+                <TextView
+                    android:id="@+id/yours_ads_rating_view"
+                    android:text="(3,0000 Rating)"
+                    style="@style/textview"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/c_home_rating_bar"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/c_home_feature_container"
+                    app:layout_constraintTop_toBottomOf="@+id/yours_ads_rating_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+                    <TextView
+                        android:id="@+id/c_home_bed"
+                        android:drawableLeft="@drawable/ic_double_bed"
+                        android:text="2bed"
+                        style="@style/textview"
+                        android:textSize="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/c_home_bathroom"
+                        android:drawableLeft="@drawable/ic_bathroom"
+                        android:text="2ba"
+                        style="@style/textview"
+                        android:textSize="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:paddingLeft="@dimen/_4sdp"
+                        android:gravity="center"/>
+                    <TextView
+                        android:id="@+id/c_home_area"
+                        android:drawableLeft="@drawable/ic_area"
+                        android:text="10000sqft"
+                        style="@style/textview"
+                        android:textSize="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_4sdp"
+                        android:paddingLeft="@dimen/_4sdp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

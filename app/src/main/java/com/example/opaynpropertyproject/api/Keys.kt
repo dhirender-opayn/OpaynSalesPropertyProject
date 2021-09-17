@@ -4,7 +4,7 @@ object Keys {
 
 
 
-    const val BASEURL = "http://1683-180-188-237-166.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = "http://9787-180-188-237-118.ngrok.io/realestate-api/public/api/"
     val ADS_DATA = "AdsData"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401

@@ -15,7 +15,7 @@ class SelectedPropertyActivity : AppCompatActivity() {
 
 
         //visiter
-        rv_visiter_review.adapter = VisiterPropertiesAdapter(list)
+        rv_visiter_review.adapter = VisiterPropertiesAdapter()
 
         //Facilities
         rv_selected_property_facilities.adapter = FacilitiesRecyclerViewAdapter()

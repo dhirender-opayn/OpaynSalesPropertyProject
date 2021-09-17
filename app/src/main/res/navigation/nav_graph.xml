@@ -3,16 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_seller_home_ads">
+    app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/fragment_seller_home_ads"
         android:name="com.example.opaynpropertyproject.home_activity.SellerFragment"
         android:label="fragment_seller_ads"
-        tools:layout="@layout/fragment_seller" >
-        <action
-            android:id="@+id/action_sellerAdsFragment_to_profileFragment"
-            app:destination="@id/fragment_profile" />
-    </fragment>
+        tools:layout="@layout/fragment_seller" />
     <fragment
         android:id="@+id/fragment_profile"
         android:name="com.example.opaynpropertyproject.seller_profile.ProfileFragment"
@@ -38,4 +34,23 @@
         android:name="com.example.opaynpropertyproject.AddAdsFragment4"
         android:label="fragment_add_ads4"
         tools:layout="@layout/pricing_add_fragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.opaynpropertyproject.home_activity.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_fragment_profile"
+            app:destination="@id/fragment_profile" />
+    </fragment>
+
+    <!--    <fragment-->
+<!--        android:id="@+id/fragment_home"-->
+<!--        android:name="com.example.opaynpropertyproject.home_activity.SellerFragment"-->
+<!--        android:label="fragment_seller_ads"-->
+<!--        tools:layout="@layout/fragment_customer_home" >-->
+<!--        <action-->
+<!--            android:id="@+id/action_sellerAdsFragment_to_profileFragment"-->
+<!--            app:destination="@id/fragment_profile" />-->
+<!--    </fragment>-->
 </navigation>

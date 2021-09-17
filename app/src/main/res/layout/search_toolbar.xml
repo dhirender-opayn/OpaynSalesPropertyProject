@@ -15,7 +15,7 @@
         android:hint="@string/search_your_ads"
         android:drawablePadding="@dimen/_8sdp"
         android:padding="@dimen/_10sdp"
-        android:fontFamily="@font/segoe_ui_bold"
+       style="@style/text_header"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

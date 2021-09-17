@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.opaynpropertyproject.R
-import com.example.opaynpropertyproject.property_setup_adapters.PropertyTypeRecyclerViewAdapter
-import com.example.opaynpropertyproject.property_setup_adapters.SellerTypeRecyclerViewAdapter
+import com.example.opaynpropertyproject.adapter.property_setup_adapters.PropertyTypeRecyclerViewAdapter
+import com.example.opaynpropertyproject.adapter.property_setup_adapters.SellerTypeRecyclerViewAdapter
  import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys

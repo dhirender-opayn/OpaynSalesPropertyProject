@@ -1,4 +1,4 @@
-package com.example.opaynpropertyproject.property_setup_adapters
+package com.example.opaynpropertyproject.adapter.property_setup_adapters
 
 
 import android.content.Context

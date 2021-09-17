@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.visiter_view_holder.view.*
 
-class VisiterPropertiesAdapter(val selectedPropertiesList:ArrayList<String>) :RecyclerView.Adapter<VisiterPropertiesAdapter.SelectedPropertiesViewHolder>() {
+class VisiterPropertiesAdapter () :RecyclerView.Adapter<VisiterPropertiesAdapter.SelectedPropertiesViewHolder>() {
 
 
     override fun onCreateViewHolder(

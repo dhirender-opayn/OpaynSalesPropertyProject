@@ -11,7 +11,7 @@ import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.ImageUploadInterface
-import com.example.opaynpropertyproject.property_setup_adapters.ImageUploadRecyclerAdapter
+import com.example.opaynpropertyproject.adapter.property_setup_adapters.ImageUploadRecyclerAdapter
  import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys

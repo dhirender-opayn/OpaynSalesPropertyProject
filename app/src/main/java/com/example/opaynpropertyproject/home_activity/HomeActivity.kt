@@ -34,13 +34,10 @@ class HomeActivity : BaseActivity(), View.OnClickListener,ApiResponse {
         val navController = Navigation.findNavController(this,R.id.nav_container)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         NavigationUI.setupWithNavController(bottomNavigationView,navController)
-
     }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-
-
         }
     }
 

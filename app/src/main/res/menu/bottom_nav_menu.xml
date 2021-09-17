@@ -10,7 +10,7 @@
         android:title="Profile"
         android:icon="@drawable/ic_avatar"/>
     <item
-        android:id="@+id/fragment_seller_home_ads"
+        android:id="@+id/homeFragment"
         android:title="Home"
         android:icon="@drawable/ic_homepage"/>
     <item
