@@ -16,15 +16,15 @@ class DealerAddActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_ads)
+        overridePendingTransition(0,0)
 
         //button.setOnClickListener(this)
         supportActionBar!!.hide()
         val fragment = BasicAddFragment()
-        Utils.addReplaceFragment(this,fragment,R.id.nav_container1,true,true,true)
-
-
+        Utils.addReplaceFragment(this,fragment,R.id.nav_container1,false,false,false)
 
     }
+
 
 
     override fun onClick(v: View?) {

@@ -15,11 +15,12 @@ import kotlinx.android.synthetic.main.image_upload_view_holder.view.*
 import okhttp3.MultipartBody
 import ServiceViewModel
 import com.example.opaynpropertyproject.`interface`.ImageUploadInterface
+import com.example.opaynpropertyproject.api_model.ImageModel
 import com.example.opaynpropertyproject.comman.Utils
 
 
 class ImageUploadRecyclerAdapter(
-    val listImageUrl: ArrayList<ImageUploadModelSuccessfully.Data>,
+    val listImageUrl: ArrayList<ImageModel>,
     val imageInterface: ImageUploadInterface,
     val context: Context
 ) : RecyclerView.Adapter<ImageUploadViewHolder>() {
@@ -40,12 +41,11 @@ class ImageUploadRecyclerAdapter(
         return view
     }
 
-    override fun onBindViewHolder(holder: ImageUploadViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImageUploadViewHolder, position: Int)
+    {
         if (listImageUrl.isNotEmpty()) {
-            Log.e("Check", listImageUrl[position].image.image)
-            Picasso.get().load(listImageUrl[position].image.image)
+             Picasso.get().load(listImageUrl[position].imageurl)
                 .placeholder(R.drawable.down_arrow).into(holder.imageView)
-
 
             holder.cancel_btn.setOnClickListener {
                 delete_position = holder.adapterPosition

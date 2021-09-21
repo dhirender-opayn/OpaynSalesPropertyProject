@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.opaynpropertyproject.R
-import com.example.opaynpropertyproject.adapter.HomeRecyclerAdapter
-import kotlinx.android.synthetic.main.fragment_customer_home.*
+import com.example.opaynpropertyproject.adapter.HomeRecommendRecyclerAdapter
+import com.example.opaynpropertyproject.adapter.home_adapter.WidgetHomeAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
@@ -24,7 +25,15 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
-        rv_customer_home_widget.adapter  = HomeRecyclerAdapter()   ///CustomerHomeWidgetAdapter()
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        rv_home_widget.adapter = WidgetHomeAdapter()
+
+        rv_recommended_property_home.adapter  = HomeRecommendRecyclerAdapter(requireActivity())   ///CustomerHomeWidgetAdapter()
+
+      //  rv_nearby_property.adapter = HomeRecommendRecyclerAdapter()
     }
 
 

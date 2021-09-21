@@ -15,20 +15,22 @@ import com.example.opaynpropertyproject.adapter.property_setup_adapters.ImageUpl
  import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
-import com.example.opaynpropertyproject.api_model.DeleteSuccessModel
+import com.example.opaynpropertyproject.api_model.DeletePhotoSuccessModel
 import com.example.opaynpropertyproject.api_model.ErrorModel
+import com.example.opaynpropertyproject.api_model.ImageModel
 import com.example.opaynpropertyproject.api_model.ImageUploadModelSuccessfully
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
 import kotlinx.android.synthetic.main.photoupload_add_fragment.*
+import kotlinx.android.synthetic.main.pricing_add_fragment.*
 import okhttp3.MultipartBody
 import java.io.File
 
 
 class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse,ImageUploadInterface {
     val fields = ArrayList<MultipartBody.Part>()
-    var imgList = ArrayList<ImageUploadModelSuccessfully.Data>()
+    var imgList = ArrayList<ImageModel>()
     var isImageUploadCode = 0
     val imgHash_list = HashMap<String,Any>()
     var delete_position = 0
@@ -38,7 +40,6 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
         super.onCreate(savedInstanceState)
 
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +56,19 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
         imageAdapter()
         if (propertyFilling.update_img > 0){
             show_img_count.text = propertyFilling.update_img.toString()
+        }
+        setdata()
+    }
+    private  fun setdata()
+    {
+        if (propertyFilling.edit_flag&&propertyFilling.detailModel?.data!!.size>0)
+        {
+            propertyFilling.detailModel!!.data[0].images.forEach {
+                imgList.add(ImageModel(it.id.toString(),it.image))
+                show_img_count.text = imgList.size.toString() + "/20"
+             }
+            imageUploadRecyclerAdapter?.notifyDataSetChanged()
+
         }
     }
 
@@ -88,7 +102,7 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
                 // what code is here ??? if validation are here so image uploded is not mandantory and and if when respon is success when go next screen so what do here , ???
 
 
-                if (isImageUploadCode == Keys.IMG_RED_CODE) {
+                if (imgList.size>0) {
 //                    for go next fragment
 
                     Utils.addReplaceFragment(
@@ -99,6 +113,9 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
                         true,
                         true
                     )
+                }
+                else{
+                    Utils.customSnakebar(finish_btn, getString(R.string.v_uploadimage))
                 }
 
 
@@ -160,15 +177,10 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
                 val imgModel = gson.fromJson(response, ImageUploadModelSuccessfully::class.java)
                 Utils.customSnakebar(img_upload, imgModel.message)
 
-                imgList.add(imgModel.data)
+                imgList.add(ImageModel(imgModel.data.image.id.toString(),imgModel.data.image.image))
                 show_img_count.text = imgList.size.toString() + "/20"
-
-
-                imageUploadRecyclerAdapter!!.notifyItemChanged(delete_position)
-
-
-
-
+              //  imageUploadRecyclerAdapter!!.notifyItemChanged(delete_position)
+                imageUploadRecyclerAdapter?.notifyDataSetChanged()
 
                 Log.e("E", "done image")
 
@@ -177,7 +189,7 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
             }
             Keys.IMG_DEL_REQ_CODE -> {
                 removeItem(delete_position)
-                val imgModel = gson.fromJson(response, DeleteSuccessModel::class.java)
+                val imgModel = gson.fromJson(response, DeletePhotoSuccessModel::class.java)
                 Log.e("delete", imgModel.message)
             }
             Keys.BACKENDERROR -> {
@@ -189,8 +201,8 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
     }
 
     override fun imageUpload(position: Int) {
-        val imgId = imgList[position].image.id
-        val propertyId = imgList[position].image.property_id
+        val imgId = imgList[position].image_id
+        val propertyId =propertyFilling.propertyID.toString()
         imgHash_list.put(Keys.PROPERTY_ID,imgId)
         imgHash_list.put(Keys.PROPERTY_IMG_ID,propertyId)
         serviceViewModel.deleteserviceBody(Keys.IMG_DEL_END_POINT,requireContext(),imgHash_list,Keys.IMG_DEL_REQ_CODE,true,token,true,this)

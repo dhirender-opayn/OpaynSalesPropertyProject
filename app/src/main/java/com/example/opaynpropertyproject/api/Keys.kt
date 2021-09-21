@@ -2,9 +2,16 @@ package com.example.opaynpropertyproject.api
 
 object Keys {
 
+    const val BASEURL = "http://f0ea-180-188-237-118.ngrok.io/realestate-api/public/api/"
 
-
-    const val BASEURL = "http://9787-180-188-237-118.ngrok.io/realestate-api/public/api/"
+    val FURNISHING: String = "furnishing"
+    val ENTRANCE: String = "entrance"
+    val AGE_OF_PROPERTY: String = "age"
+    val AREA_TYPE: String = "area_type"
+    val POSTED_BY: String = "posted_by"
+    val PROPERTY_BATH_ROOM: String = "bath_rooms"
+    val PROPERTY_NO_BED = "bed_rooms"
+    val POSSESSION_TYPE = "possession"
     val ADS_DATA = "AdsData"
     val SUCESSCODE = 200
     val UNAUTHRISECODE = 401
@@ -13,6 +20,8 @@ object Keys {
 
 
     var TOKEN="token"
+    var USERDATA="userdata"
+    var USERID="user_id"
 
     //get STATE
     var STATEENDPOINT = "states"
@@ -38,6 +47,7 @@ object Keys {
     val GET_DEALER_ADD_REQ_CODE = 15
     var IMG_DEL_REQ_CODE = 16
     var IMG_RED_CODE = 14
+    var REQ_DEALERPEOPERTYDETAIL = 17
     var IMAGE = "image"
     var STEP = "step"
     var LIST_TYPE = "list_type"
@@ -54,14 +64,9 @@ object Keys {
 
     var IMG_END_POINT = "dealer/property/image"
     var PROPERTY_IMG_ID = "property_id"
-    //Delete
+    var DEALERPEOPERTYDETAIL = "dealer/property/"
+     //Delete
     var IMG_DEL_END_POINT = "dealer/property/image/delete"
-
-
-
-
-
-
 
     //USER TYPE
     var DEALER = 1

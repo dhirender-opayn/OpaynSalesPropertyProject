@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.profile_add_fragment.*
 
 import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.adapter.property_setup_adapters.*
+import com.example.opaynpropertyproject.api_model.PropertyProfileModelSuccessfully
+import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
 
 import com.google.android.material.slider.Slider
 
@@ -50,12 +52,18 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        pre_btn.setOnClickListener(this)
-        next_btn_ads2.setOnClickListener(this)
         dealerAddRequiredActivity2 = requireActivity() as DealerAddActivity
+        setClick()
+        sqftSlider()
+        bedSlider()
+        bathroomSlider()
+        dealerAddRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(
+            StateProgressBar.StateNumber.TWO
+        )
 
-
-        if (propertyFilling.no_bed != 0.0f) { // if user press back button
+        if (propertyFilling.edit_flag) {
+            editProfile()
+        } else if (propertyFilling.no_bed != 0.0f) { // if user press back button
             setDataAdsFragement2()
 
         } else {
@@ -64,8 +72,99 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 
     }
 
+
+    //button click //
+    private fun setClick() {
+        pre_btn.setOnClickListener(this)
+        next_btn_ads2.setOnClickListener(this)
+    }
+
+    // Edit property //
+    fun editProfile() {
+
+        propertyFilling.AdsAdd2Bundle = bundle
+        bundle = requireArguments()
+        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+
+
+        for (item in propertyFilling.fullPropertySetUpModel!!.indices) {
+            if (propertyFilling.edit_id == propertyFilling.fullPropertySetUpModel!![item].id) {
+
+
+                if (propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms != null) {
+                    ads_bathroom.value =
+                        propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms.toString()
+                            .toFloat()
+                    show_bathroom.text =
+                        propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms.toString() + "-Bathroom"
+                }
+                if (propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms != null) {
+                    ads_beds.value =
+                        propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms.toFloat()
+                    show_bed.text =
+                        propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms.toString() + "-Bed"
+
+                }
+                if (propertyFilling.fullPropertySetUpModel!![item].profile.area != null) {
+
+                    sqft_input.value =
+                        propertyFilling.fullPropertySetUpModel!![item].profile.area.toFloat()
+                    show_sqft.text =
+                        propertyFilling.fullPropertySetUpModel!![item].profile.area.toString() + "-sqft"
+
+                }
+
+                HitAdsApi()
+
+
+            }
+        }
+
+
+    }
+
+    fun HitAdsApi() {
+        //possession types
+        sell_list = sellPropertyBundle!!.data[1].options
+        possessionAdapter()
+        propertyFilling.sell_list_rev = sell_list
+
+        area_list = sellPropertyBundle!!.data[2].options
+        areaAdapter()
+        propertyFilling.area_list_rev = area_list
+
+
+        //posted By
+        postedby_list = sellPropertyBundle!!.data[3].options
+        postbyAdapter()
+        propertyFilling.postedby_list_rev = postedby_list
+
+        //Amenities
+        amenities_list = sellPropertyBundle!!.data[7].options
+        ammentiesAdapter()
+        propertyFilling.amenities_list_rv = amenities_list
+
+        //age of property
+        age_of_property_list = sellPropertyBundle!!.data[4].options
+        ageofPropertyAdapter()
+        propertyFilling.age_of_property_rv = age_of_property_list
+
+        //Entrance
+        entranceList = sellPropertyBundle!!.data[5].options
+        entranceAdapter()
+        propertyFilling.entranceList_rev = entranceList
+
+        //Furnishing
+        furnishList = sellPropertyBundle!!.data[6].options
+        furnishAdapter()
+        propertyFilling.furnishList_rev = furnishList
+
+    }
+
     fun setDataAdsFragement2() {
-        dealerAddRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(StateProgressBar.StateNumber.TWO)
+        dealerAddRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(
+            StateProgressBar.StateNumber.TWO
+        )
 
         //sqft area
         sqft_input.value = propertyFilling.sqft
@@ -77,15 +176,16 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 
         ads_bathroom.value = propertyFilling.no_bathroom
         show_bathroom.text = propertyFilling.no_bathroom.toInt().toString() + "-Bathroom"
-        //sell list
+
+        //sell list - Poessession
         sell_list = propertyFilling.sell_list_rev!!
-        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
+        possessionAdapter()
         //area list
         area_list = propertyFilling.area_list_rev!!
-        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
+        areaAdapter()
         //postedby list
         postedby_list = propertyFilling.postedby_list_rev!!
-        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
+        postbyAdapter()
         //Amenities
         amenities_list = propertyFilling.amenities_list_rv!!
         rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
@@ -103,54 +203,116 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
         rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
     }
 
+
+    fun possessionAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in sell_list.indices) {
+                if (sell_list[i].id.equals(propertyFilling.editpost?.profile?.possession)) {
+                    sell_list[i].flag = true
+                } else {
+                    sell_list[i].flag = false
+                }
+            }
+        }
+
+        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
+    }
+
+    private fun postbyAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in postedby_list.indices) {
+                if (postedby_list[i].id.equals(propertyFilling.editpost?.profile?.posted_by)) {
+                    postedby_list[i].flag = true
+                } else {
+                    postedby_list[i].flag = false
+                }
+            }
+        }
+        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
+
+    }
+
+    private fun ammentiesAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in amenities_list.indices) {
+                for (j in propertyFilling.detailModel!!.data[0].amenities.indices) {
+                    if (propertyFilling.detailModel!!.data[0].amenities[j].equals(amenities_list[i].id)) {
+                        amenities_list[i].flag = true
+                    }
+                }
+            }
+        }
+        rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
+
+    }
+
+
+    fun areaAdapter() {
+
+        if (propertyFilling.edit_flag) {
+            for (i in area_list.indices) {
+                if (area_list[i].id.equals(propertyFilling.editpost?.profile?.area_type)) {
+                    area_list[i].flag = true
+                } else {
+                    area_list[i].flag = false
+                }
+            }
+        }
+        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
+    }
+
+    fun entranceAdapter() {
+
+        if (propertyFilling.edit_flag) {
+            for (i in entranceList.indices) {
+                if (entranceList[i].id.equals(propertyFilling.editpost?.profile?.entrance)) {
+                    entranceList[i].flag = true
+                } else {
+                    entranceList[i].flag = false
+                }
+            }
+        }
+        rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
+    }
+
+    fun furnishAdapter() {
+
+        if (propertyFilling.edit_flag) {
+            for (i in furnishList.indices) {
+                if (furnishList[i].id.equals(propertyFilling.editpost?.profile?.furnishing)) {
+                    furnishList[i].flag = true
+                } else {
+                    furnishList[i].flag = false
+                }
+            }
+        }
+        rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
+    }
+
+    private fun ageofPropertyAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in age_of_property_list.indices) {
+                if (age_of_property_list[i].id.equals(propertyFilling.editpost?.profile?.age)) {
+                    age_of_property_list[i].flag = true
+                } else {
+                    age_of_property_list[i].flag = false
+                }
+            }
+        }
+        rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
+
+    }
+
+
     fun startingFragment2() {
         propertyFilling.AdsAdd2Bundle = bundle
         bundle = requireArguments()
-        sqftSlider()
-        bedSlider()
-        bathroomSlider()
+
         sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+
         HitAdsApi()
     }
 
-
-    fun HitAdsApi() {
-        //possession types
-        sell_list = sellPropertyBundle!!.data[1].options
-        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
-        propertyFilling.sell_list_rev = sell_list
-
-        //Area
-        area_list = sellPropertyBundle!!.data[2].options
-        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
-        propertyFilling.area_list_rev = area_list
-
-        //posted By
-        postedby_list = sellPropertyBundle!!.data[3].options
-        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
-        propertyFilling.postedby_list_rev = postedby_list
-
-        //Amenities
-        amenities_list = sellPropertyBundle!!.data[7].options
-        rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
-        propertyFilling.amenities_list_rv = amenities_list
-
-        //age of property
-        age_of_property_list = sellPropertyBundle!!.data[4].options
-        rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
-        propertyFilling.age_of_property_rv = age_of_property_list
-
-        //Entrance
-        entranceList = sellPropertyBundle!!.data[5].options
-        rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
-        propertyFilling.entranceList_rev = entranceList
-
-        //Furnishing
-        furnishList = sellPropertyBundle!!.data[6].options
-        rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
-        propertyFilling.furnishList_rev = furnishList
-
-    }
 
     override fun onClick(v: View?) {
         when (v!!.id) {
@@ -204,9 +366,22 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
             Log.e("RR", amenities.toString())
             val profileHashMap = HashMap<String, Any>()
             profileHashMap.put(Keys.STEP, "profile")
+
+            if (propertyFilling.edit_flag) {
+                profileHashMap.put(Keys.PROPERTY_ID, propertyFilling.editpost?.id.toString())
+            }
             profileHashMap.put(Keys.PROPERTY_ID, propertyFilling.propertyID)
+            profileHashMap.put(Keys.POSSESSION_TYPE, propertyFilling.poessionType.toString().trim())
             profileHashMap.put(Keys.PROPERTY_PROFILE_AREA, propertyFilling.sqft.toString().trim())
+            profileHashMap.put(Keys.PROPERTY_NO_BED, propertyFilling.no_bed)
+            profileHashMap.put(Keys.PROPERTY_BATH_ROOM, propertyFilling.no_bathroom)
+            profileHashMap.put(Keys.AREA_TYPE, propertyFilling.area)
+            profileHashMap.put(Keys.POSTED_BY, propertyFilling.postedby.toString().trim())
             profileHashMap.put(Keys.AMENITIES, amenities)
+            profileHashMap.put(Keys.AGE_OF_PROPERTY, propertyFilling.age_of_property.trim())
+            profileHashMap.put(Keys.ENTRANCE, propertyFilling.entrance)
+            profileHashMap.put(Keys.FURNISHING, propertyFilling.furnish)
+
 
 
             dealerAddRequiredActivity2!!.your_state_progress_bar_id.setCurrentStateNumber(
@@ -214,34 +389,40 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
             )
 
 
-            //for dummy tranfor ===============================================================================check
-            Utils.addReplaceFragment(
-                requireContext(),
-                PhotoUploadAddFragment(),
-                R.id.nav_container1,
-                true,
-                true,
-                true
-            )
-//            APi
-//            serviceViewModel.postserviceBody(
-//                Keys.ADD_PROPERTY_END_POINT,
+//            //for dummy tranfor ===============================================================================check
+//            Utils.addReplaceFragment(
 //                requireContext(),
-//                profileHashMap,
-//                Keys.ADD_PROFILE_PROPERTY_RED_CODE,
+//                PhotoUploadAddFragment(),
+//                R.id.nav_container1,
 //                true,
-//                token,
 //                true,
-//                this
+//                true
 //            )
 
+
+//            APi
+            serviceViewModel.postserviceBody(
+                Keys.ADD_PROPERTY_END_POINT,
+                requireContext(),
+                profileHashMap,
+                Keys.ADD_PROFILE_PROPERTY_RED_CODE,
+                true,
+                token,
+                true,
+                this
+            )
         }
     }
 
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
+
             Keys.ADD_PROFILE_PROPERTY_RED_CODE -> {
+
+
+                val propertySuccessModelResponse =
+                    gson.fromJson(response, PropertyProfileModelSuccessfully::class.java)
                 Utils.addReplaceFragment(
                     requireContext(),
                     PhotoUploadAddFragment(),
@@ -254,6 +435,8 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
                     StateProgressBar.StateNumber.THREE
                 )
             }
+
+
             Keys.BACKENDERROR -> {
                 val errorModel = gson.fromJson(response, ErrorModel::class.java)
                 Utils.customSnakebar(next_btn_ads2, errorModel.message.toString())
@@ -273,6 +456,7 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
         })
 
         sqft_input.addOnChangeListener { slider, value, fromUser ->
+
             show_sqft.text = value.toString() + "-sqft"
             propertyFilling.sqft = value
 

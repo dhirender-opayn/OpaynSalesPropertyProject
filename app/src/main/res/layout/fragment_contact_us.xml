@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutUsFragment">
+    tools:context=".AboutUsFragment"
+    android:background="@color/white">
 
 
-    <include layout="@layout/toolbar2"
-        android:id="@+id/contact_toolbar"/>
+<!--    <include layout="@layout/toolbar2"-->
+<!--        android:id="@+id/contact_toolbar"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +46,10 @@
             android:drawablePadding="@dimen/_5sdp"
             android:hint="Adele Mark"
             android:background="@drawable/rectangel_border"/>
+        <com.google.android.material.button.MaterialButton
+            style="@style/button"
+            android:id="@+id/contactUs_btn"
+            android:text="Contact Us"/>
 
 
 

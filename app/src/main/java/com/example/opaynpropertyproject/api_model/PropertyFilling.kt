@@ -2,11 +2,17 @@ package com.example.opaynpropertyproject.api_model
 
 import android.net.Uri
 import android.os.Bundle
+import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
 
 class PropertyFilling {
 
+    var editpost : SellerPropertyListingModel.Data?=null
+    var detailModel : PropertyDetailModel?=null
 
-
+    var selectedEditProperty: List<SellerPropertyListingModel.Data>? = null
+    var edit_id: Int = 0
+    var edit_flag: Boolean = false
+    var fullPropertySetUpModel: List<SellerPropertyListingModel.Data>? = null
     var update_img: Int = 0
     var list_of_img: ArrayList<ImageUploadModelSuccessfully>? = null
     var propertyID: Int = 0
@@ -43,7 +49,7 @@ class PropertyFilling {
     var entrance = ""
     var furnish = ""
     var sqft:Float = 0.0f
-        var no_bed = 0.0f
+      var no_bed = 0.0f
     var no_bathroom = 0.0f
 
     //ADS 2 SCREEN

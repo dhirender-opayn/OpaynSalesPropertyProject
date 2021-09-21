@@ -16,6 +16,7 @@
                 <TextView
                     style="@style/textview"
                     android:text="Apartment"
+                    android:id="@+id/widget_title"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"/>
 

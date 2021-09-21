@@ -19,6 +19,8 @@ class ForgetPasswordActivity : BaseActivity(), View.OnClickListener, ApiResponse
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forget_password)
+
+        overridePendingTransition(0,0)
         supportActionBar!!.hide()
         hashlist_map = HashMap<String,Any>()
         bundle = Bundle()

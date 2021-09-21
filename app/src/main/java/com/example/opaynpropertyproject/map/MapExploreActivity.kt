@@ -25,6 +25,8 @@ class MapExploreActivity : AppCompatActivity(),OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map_explore)
+        overridePendingTransition(0,0)
+
         supportActionBar!!.hide()
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment

@@ -20,6 +20,7 @@ class ResetPasswordActivity : BaseActivity(), View.OnClickListener, ApiResponse 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reset_password)
+        overridePendingTransition(0,0)
         supportActionBar!!.hide()
         hashlist_map = HashMap<String,Any>()
         reset_password_back_btn.setOnClickListener(this)

@@ -28,6 +28,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        overridePendingTransition(0,0)
         supportActionBar!!.hide()
         hashlist_map = HashMap<String, Any>()
         bundle = Bundle()
@@ -111,7 +112,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             Keys.Req_log -> {
                 model = gson.fromJson(response, SuccessSignupModel::class.java)
                 bundle.putParcelable(Keys.PRACELABLE_KEY, model)
-                mUserID = (model  as SuccessSignupModel)!!
+                mUserID = (model  as SuccessSignupModel)
                 openA(SellerBuyerProfileSetActivity::class, bundle)
             }
 

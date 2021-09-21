@@ -61,6 +61,7 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_otp_verify.xml" value="0.33" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_reset_password.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_selected_property.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_seller_added_ads_property.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_seller_buyer_profile_set.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_seller_chat.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/activity_sign_up.xml" value="0.36666666666666664" />
@@ -104,7 +105,9 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_seller.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/fragment_seller_ads.xml" value="0.489469250210615" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/furnishing_view_holder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/home_outer_view_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/image_upload_view_holder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/left_drawer_menu.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/notification_view_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/photoupload_add_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/possession_view_holder.xml" value="0.36666666666666664" />
@@ -113,6 +116,7 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/profile_add_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/progresslayout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/property_type_view_holder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/recommend_inner_home_view_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/saved_property_view_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/search_toolbar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/sell_type_view_holder.xml" value="0.67" />
@@ -124,6 +128,7 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/visiter_view_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/your_ads_list_holder.xml" value="0.25" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/menu/navigation_menu.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/ASUS/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.36666666666666664" />
       </map>
     </option>

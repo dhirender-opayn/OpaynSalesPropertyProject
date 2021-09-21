@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
-  import kotlinx.android.synthetic.main.sell_type_view_holder.view.*
+import kotlinx.android.synthetic.main.sell_type_view_holder.view.*
 
 class SellerTypeRecyclerViewAdapter(
     val list:
@@ -28,6 +28,7 @@ class SellerTypeRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: SellViewHolder, position: Int) {
         holder.sell_name.text = list[position].name
+
         if (list[position].flag) {
             holder.sell_name.setBackgroundResource(R.drawable.rectangle_border_fill)
             holder.sell_name.setTextColor(Color.WHITE)
@@ -39,16 +40,12 @@ class SellerTypeRecyclerViewAdapter(
             holder.sell_name.setTextColor(Color.BLACK)
         }
         holder.sell_name.setOnClickListener {
-            for (item in list.indices)
-            {
-                if (item.equals(position))
-                {
+            for (item in list.indices) {
+                if (item.equals(position)) {
                     list[position].flag = true
                     propertyFilling.sell_postion = position
 
-                }
-                else
-                {
+                } else {
                     list[item].flag = false
                 }
 

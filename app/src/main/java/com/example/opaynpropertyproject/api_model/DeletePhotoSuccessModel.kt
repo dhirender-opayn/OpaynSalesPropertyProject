@@ -1,6 +1,6 @@
 package com.example.opaynpropertyproject.api_model
 
-data class DeleteSuccessModel(
+data class DeletePhotoSuccessModel(
     val `data`: List<Any>,
     val message: String
 )

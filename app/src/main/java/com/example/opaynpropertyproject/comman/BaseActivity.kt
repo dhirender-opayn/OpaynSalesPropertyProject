@@ -21,7 +21,7 @@ open class BaseActivity : AppCompatActivity(){
     val serviceViewModel = ServiceViewModel()
 
 
-    //intent
+
    open fun openA(kClass: KClass<out AppCompatActivity>, bundle: Bundle? = Bundle()) {
         val intent = Intent(this, kClass.java)
         intent.putExtras(bundle ?: Bundle())

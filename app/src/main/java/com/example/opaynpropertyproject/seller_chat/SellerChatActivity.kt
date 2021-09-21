@@ -9,6 +9,8 @@ class SellerChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seller_chat)
+        overridePendingTransition(0,0)
+
 
     }
 }

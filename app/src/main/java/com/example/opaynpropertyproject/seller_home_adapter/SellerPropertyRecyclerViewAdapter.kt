@@ -1,16 +1,21 @@
 package com.example.opaynpropertyproject.seller_home_adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
+import com.example.opaynpropertyproject.singleton.SingletonObject
+import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFilling
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seller_home_list_holder.view.*
+import java.io.Serializable
 
-class SellerHomeRecyclerViewAdapter(val seller_property_list:List<SellerPropertyListingModel.Data>, val context: Context) :RecyclerView.Adapter<SellerHomeRecyclerViewAdapter.YourAdsViewHolder>() {
+class SellerPropertyRecyclerViewAdapter(val seller_property_list:List<SellerPropertyListingModel.Data>, val context: Context) :RecyclerView.Adapter<SellerPropertyRecyclerViewAdapter.YourAdsViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourAdsViewHolder {
@@ -24,12 +29,22 @@ class SellerHomeRecyclerViewAdapter(val seller_property_list:List<SellerProperty
         holder.property_header.text = seller_property_list[position].name
         holder.property_address.text = seller_property_list [position].address
 
-        if (seller_property_list[position].profile.bed_rooms != null){
-            holder.bed.text = seller_property_list[position].profile.bed_rooms.toString()
-        }
+      //  holder.bathroom.text = seller_property_list[position].profile.bath_rooms.toString()
+
+//        if (seller_property_list[position].profile.bed_rooms != null){
+//            holder.bed.text = seller_property_list[position].profile.bed_rooms.toString()
+//        }
         if (seller_property_list[position].image!= null){
             Picasso.get().load(seller_property_list[position].image.image)
                 .placeholder(R.drawable.down_arrow).into(holder.property_image)
+        }
+
+        holder.property_edit_btn.setOnClickListener {
+            propertyFilling.edit_flag = true
+            SingletonObject.propertyFilling.editpost = seller_property_list[position]
+            propertyFilling.edit_id = seller_property_list[position].id
+            val intent = Intent(context,DealerAddActivity::class.java)
+             context.startActivity(intent)
         }
         holder.sold_status.visibility = View.INVISIBLE
 

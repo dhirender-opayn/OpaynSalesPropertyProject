@@ -4,12 +4,15 @@ package com.example.opaynpropertyproject.login_signup_activity
 import ServiceViewModel
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api.Keys.TOKEN
+import com.example.opaynpropertyproject.api.Keys.USERDATA
+import com.example.opaynpropertyproject.api.Keys.USERID
 import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseActivity
@@ -24,9 +27,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(0,0)
         setContentView(R.layout.activity_login)
         supportActionBar!!.hide()
         loginHashMap = HashMap<String, Any>()
+        getuserdata()
         login_container.setOnClickListener(this)
         create_account_btn_login.setOnClickListener(this)
         forget_password.setOnClickListener(this)
@@ -79,7 +84,23 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
              }
         }
     }
+    private  fun getuserdata()
+    {
+        Handler(getMainLooper()).postDelayed({
+            SharedPreferenceManager(this).getString(Keys.USERID).let {
+                if (it==null||it.toString().equals(""))
+                {
 
+                }
+                else{
+                    openA(HomeActivity::class)
+                    finishAffinity()
+                }
+            }
+
+        }, 1000)
+
+    }
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
             Keys.login_log ->
@@ -88,7 +109,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 if (model?.data!=null)
                 {
                     SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
+                    SharedPreferenceManager(this).saveString(USERDATA,response)
+                    SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
                     openA(HomeActivity::class)
+                    finishAffinity()
 
                 }
             }

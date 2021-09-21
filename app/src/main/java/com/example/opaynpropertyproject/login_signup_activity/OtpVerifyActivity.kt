@@ -29,6 +29,8 @@ class OtpVerifyActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otp_verify)
         supportActionBar!!.hide()
+        overridePendingTransition(0,0)
+
         otp_verify_password_back_btn.setOnClickListener(this)
         otp_continue_btn.setOnClickListener(this)
         resend_otp_again_btn.setOnClickListener(this)

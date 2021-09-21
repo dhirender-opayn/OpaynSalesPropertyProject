@@ -1,21 +1,17 @@
-package com.example.opaynpropertyproject.api_model.seller_home_model
+package com.example.opaynpropertyproject.api_model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
-
-
-data class SellerPropertyListingModel(
+data class PropertyDetailModel(
     val `data`: List<Data>,
     val message: String
-) :Serializable {
+) {
     data class Data(
         val address: String,
+        val amenities: List<Int>,
         val city: Int,
         val created_at: String,
         val description: String,
         val id: Int,
-        val image: Image,
+        val images: List<Image>,
         val list_type: String,
         val name: String,
         val pincode: Int,
@@ -26,22 +22,21 @@ data class SellerPropertyListingModel(
         val status: Int,
         val updated_at: String,
         val user_id: Int
-    ):Serializable  {
-
+    ) {
         data class Image(
             val created_at: String,
             val id: Int,
             val image: String,
             val property_id: Int,
             val updated_at: String
-        ):Serializable
+        )
 
         data class Profile(
             val age: Int,
             val area: String,
             val area_type: Int,
             val bath_rooms: Any,
-            var bed_rooms: Int,
+            val bed_rooms: Any,
             val created_at: String,
             val entrance: Int,
             val furnishing: Int,
@@ -52,8 +47,6 @@ data class SellerPropertyListingModel(
             val status: Int,
             val updated_at: String,
             val user_id: Int
-        ):Serializable
+        )
     }
-
-
 }

@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/fragment_seller_home_ads"
-        android:name="com.example.opaynpropertyproject.home_activity.SellerFragment"
+        android:name="com.example.opaynpropertyproject.home_activity.SellerAddFragment"
         android:label="fragment_seller_ads"
         tools:layout="@layout/fragment_seller" />
     <fragment

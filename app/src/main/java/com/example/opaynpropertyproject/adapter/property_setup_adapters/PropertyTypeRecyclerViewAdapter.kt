@@ -12,8 +12,7 @@ import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import kotlinx.android.synthetic.main.property_type_view_holder.view.*
 
 class PropertyTypeRecyclerViewAdapter(
-    val list: List<SellPropertyModel.Data.Option>,
-    context: Context
+    val list: List<SellPropertyModel.Data.Option>
 ) : RecyclerView.Adapter<PropertyTypeRecyclerViewAdapter.PropertyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertyViewHolder {
@@ -27,8 +26,7 @@ class PropertyTypeRecyclerViewAdapter(
     override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
         holder.property_name.text = list[position].name
 
-
-        if (list[position].flag) {
+            if (list[position].flag) {
 
             holder.property_name.setBackgroundResource(R.drawable.rectangle_border_fill)
             holder.property_name.setTextColor(Color.WHITE)

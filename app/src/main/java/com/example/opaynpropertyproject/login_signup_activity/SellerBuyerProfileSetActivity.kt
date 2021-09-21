@@ -21,6 +21,7 @@ class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seller_buyer_profile_set)
+        overridePendingTransition(0,0)
         supportActionBar!!.hide()
         profile_set_password_back_btn.setOnClickListener(this)
         buyer_btn.setOnClickListener(this)
