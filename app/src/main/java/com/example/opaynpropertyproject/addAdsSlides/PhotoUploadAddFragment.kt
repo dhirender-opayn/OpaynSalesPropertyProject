@@ -10,7 +10,7 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
 import com.example.opaynpropertyproject.R
-import com.example.opaynpropertyproject.`interface`.ImageUploadInterface
+import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.adapter.property_setup_adapters.ImageUploadRecyclerAdapter
  import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
@@ -28,7 +28,7 @@ import okhttp3.MultipartBody
 import java.io.File
 
 
-class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse,ImageUploadInterface {
+class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse,GetPositionInterface {
     val fields = ArrayList<MultipartBody.Part>()
     var imgList = ArrayList<ImageModel>()
     var isImageUploadCode = 0
@@ -61,7 +61,7 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
     }
     private  fun setdata()
     {
-        if (propertyFilling.edit_flag&&propertyFilling.detailModel?.data!!.size>0)
+        if (propertyFilling.edit_flag && propertyFilling.detailModel?.data!!.size>0)
         {
             propertyFilling.detailModel!!.data[0].images.forEach {
                 imgList.add(ImageModel(it.id.toString(),it.image))
@@ -200,7 +200,7 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
         }
     }
 
-    override fun imageUpload(position: Int) {
+    override fun getPosition(position: Int) {
         val imgId = imgList[position].image_id
         val propertyId =propertyFilling.propertyID.toString()
         imgHash_list.put(Keys.PROPERTY_ID,imgId)

@@ -49,6 +49,7 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.profile_add_fragment, container, false)
+        return inflater.inflate(R.layout.profile_add_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

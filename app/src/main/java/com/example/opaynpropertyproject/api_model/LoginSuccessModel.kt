@@ -13,7 +13,7 @@ data class LoginSuccessModel(
             val email: String,
             val email_verified_at: String,
             val id: Int,
-            val mobile: Any,
+            val mobile: Long,
             val name: String,
             val profile: Profile,
             val roles: List<Role>,

@@ -19,69 +19,6 @@ object Keys {
     val BACKENDERROR = 412
 
 
-    var TOKEN="token"
-    var USERDATA="userdata"
-    var USERID="user_id"
-
-    //get STATE
-    var STATEENDPOINT = "states"
-    var STATE_REQ_CODE = 8
-
-    //get City
-    var CITY = "cities/"
-    var CITY_REQ_CODE = 9
-
-    //Get Sell Type - Property Type
-    var SELL_TYPE_END_POINT = "dealer/property-attributes"
-    var SELL_REQ_CODE = 10
-
-    //Property type
-    var PROPERTY_REQ_CODE = 11
-
-
-    //Property Hashmap code
-
-    var ADD_PROPERTY_FIRST_REQ_CODE = 12
-    var ADD_PROFILE_PROPERTY_RED_CODE = 13
-    var ADD_PROFILE_PROPERTY_PRICING_CODE = 14
-    val GET_DEALER_ADD_REQ_CODE = 15
-    var IMG_DEL_REQ_CODE = 16
-    var IMG_RED_CODE = 14
-    var REQ_DEALERPEOPERTYDETAIL = 17
-    var IMAGE = "image"
-    var STEP = "step"
-    var LIST_TYPE = "list_type"
-    var PROPERTY_TYPE ="property_type"
-    var STATE_ID = "state"
-    var CITY_ID = "city"
-    var ADDRESS = "address"
-    var PINCODE = "pincode"
-
-    var PROPERTY_ID: String = "id"
-    var PHOTO_ID = "id" // they are same because of api has same name like in delete api id is used as photo id
-    var PROPERTY_PROFILE_AREA: String = "area"
-    var AMENITIES: String = "amenities"
-
-    var IMG_END_POINT = "dealer/property/image"
-    var PROPERTY_IMG_ID = "property_id"
-    var DEALERPEOPERTYDETAIL = "dealer/property/"
-     //Delete
-    var IMG_DEL_END_POINT = "dealer/property/image/delete"
-
-    //USER TYPE
-    var DEALER = 1
-    var BUYER = 2
-
-    var PROFILE_Log = 2
-
-    var USER_ID = "id"
-    var USER_NAME = "user_name"
-    var USER_EMAIL = "email"
-    var USER_PASSWORD = "password"
-    var USER_AGREE = "agree"
-
-    //Parcelable model
-    var PRACELABLE_KEY = "parcelable_key"
 
 
     //signup End point
@@ -104,11 +41,6 @@ object Keys {
     var USER_INPUT_OTP = "code"
     var MAIL_REQ_CODE = 4
 
-    //OTP RESEND
-    var USER_OTP_RESEND_END_POINT = "resend-code"
-    var MAIL_RESEND_REQ_CODE = 5
-
-
     //Login End points
     var loginEndPoint = "login"
     val login_email = "email"
@@ -116,9 +48,10 @@ object Keys {
     var login_log = 1
 
     //RESET
+    var USER_OTP_RESEND_END_POINT = "resend-code"
     var RESET_EMAIL = "email"
-    var RESET_EMAIL_END_POINT = "forget-password/send-code"
     var RESET_REQ_CODE = 6
+
 
     //RESET PASSWORD
     var RESET_MATCH_END_POINT = "forget-password"
@@ -129,14 +62,116 @@ object Keys {
     var RESET_PASS = "reset_password"
     var RESET_PASS_AGAIN = "reset_pass_again"
 
+    //OTP RESEND
+    var RESET_EMAIL_END_POINT = "forget-password/send-code"
+    var MAIL_RESEND_REQ_CODE = 5
+
+
+
+
+
     //PROPERTY
     val ADD_PROPERTY_END_POINT = "dealer/property"
+    val PROPERTY_DELETE_END_POINT = "dealer/property/"
     val PROPERTY_PRICE ="price"
     val DESCRIPTION = "description"
     val STATUS = "status"
 
-    //Get DEALER ADD
+
+
+    //END POINT
+
+    val PROFILE_END_POINT = "/dealer/profile"
+    var STATEENDPOINT = "states"
+    var SELL_TYPE_END_POINT = "dealer/property-attributes"
+    var IMG_END_POINT = "dealer/property/image"
+    var IMG_DEL_END_POINT = "dealer/property/image/delete"
+
     val GET_DEALER_ADD_END_POINT = "dealer/properties"
+
+
+
+    var TOKEN="token"
+    var USERDATA="userdata"
+    var USERID="user_id"
+
+    //get STATE
+
+    var STATE_REQ_CODE = 8
+
+    //get City
+    var CITY = "cities/"
+    var CITY_REQ_CODE = 9
+
+    //Get Sell Type - Property Type
+
+    var SELL_REQ_CODE = 10
+
+    //Property type
+    var PROPERTY_REQ_CODE = 11
+
+
+    //Property Hashmap code
+
+    var ADD_PROPERTY_FIRST_REQ_CODE = 12
+    var ADD_PROFILE_PROPERTY_RED_CODE = 13
+    var ADD_PROFILE_PROPERTY_PRICING_CODE = 14
+    val GET_DEALER_ADD_REQ_CODE = 15
+    var IMG_DEL_REQ_CODE = 16
+    var REQ_DEALERPEOPERTYDETAIL = 17
+    var IMG_RED_CODE = 18
+    val PROFILE_RED_CODE = 19
+    val PROPERTY_DELETE_REQ_CODE = 20
+
+    var IMAGE = "image"
+    var STEP = "step"
+    var LIST_TYPE = "list_type"
+    var PROPERTY_TYPE ="property_type"
+    var STATE_ID = "state"
+    var CITY_ID = "city"
+    var ADDRESS = "address"
+    var PINCODE = "pincode"
+
+    var PROPERTY_ID: String = "id"
+    var PHOTO_ID = "id" // they are same because of api has same name like in delete api id is used as photo id
+    var PROPERTY_PROFILE_AREA: String = "area"
+    var AMENITIES: String = "amenities"
+
+
+    var PROPERTY_IMG_ID = "property_id"
+    var DEALERPEOPERTYDETAIL = "dealer/property/"
+     //Delete
+
+
+    //USER TYPE
+    var DEALER = 1
+    var BUYER = 2
+
+    var PROFILE_Log = 2
+
+    var USER_ID = "id"
+    var USER_NAME = "name"
+    var USER_EMAIL = "email"
+    val USER_MOBILE = "mobile"
+    var USER_PASSWORD = "password"
+    var USER_AGREE = "agree"
+
+    //Parcelable model
+    var PRACELABLE_KEY = "parcelable_key"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

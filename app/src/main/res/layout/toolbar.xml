@@ -29,6 +29,19 @@
     app:layout_constraintBottom_toBottomOf="@+id/menu_bar"
     app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:id="@+id/notification_count"
+        style="@style/text_header"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/rectangel_border"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingVertical="@dimen/_2sdp"
+        android:text="2"
+        android:textColor="@color/red"
+        app:layout_constraintLeft_toRightOf="@+id/ads"
+        app:layout_constraintTop_toTopOf="@+id/ads"
+        app:layout_constraintBottom_toBottomOf="@+id/ads"/>
+
     <LinearLayout
         android:id="@+id/search_bar_container"
         android:layout_width="wrap_content"

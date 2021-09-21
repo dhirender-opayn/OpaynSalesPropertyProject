@@ -43,6 +43,21 @@
             android:id="@+id/action_homeFragment_to_fragment_profile"
             app:destination="@id/fragment_profile" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.opaynpropertyproject.customer.NotificationFragment"
+        android:label="notification_fragment"
+        tools:layout="@layout/fragment_notification" >
+    </fragment>
+    <fragment
+        android:id="@+id/sellerChatFragment"
+        android:name="com.example.opaynpropertyproject.seller_chat.SellerChatFragment"
+        android:label="seller_chat_fragment"
+        tools:layout="@layout/fragment_seller_chat" >
+    </fragment>
+
+
+
 
     <!--    <fragment-->
 <!--        android:id="@+id/fragment_home"-->

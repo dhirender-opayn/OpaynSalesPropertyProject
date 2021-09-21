@@ -4,18 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".seller_chat.SellerChatActivity">
+    tools:context=".seller_chat.SellerChatFragment">
 
 
 
-    <include layout="@layout/toolbar2"
-        android:id="@+id/chat_back_arrow"
-        app:layout_constraintTop_toTopOf="parent"
-         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+
     <include layout="@layout/search_toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/chat_back_arrow"
+       app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/chat_search_bar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
@@ -26,8 +21,5 @@
         app:layout_constraintTop_toBottomOf="@+id/chat_search_bar"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:listitem="@layout/seller_chat_view_holder"/>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

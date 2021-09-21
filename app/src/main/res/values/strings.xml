@@ -84,6 +84,7 @@
     <string name="enter_your_property_description">Enter Your Property Description</string>
     <string name="v_uploadimage">Please upload images</string>
     <string name="home">Home</string>
+    <string name="update_number">Update Number</string>
 
 
 </resources>

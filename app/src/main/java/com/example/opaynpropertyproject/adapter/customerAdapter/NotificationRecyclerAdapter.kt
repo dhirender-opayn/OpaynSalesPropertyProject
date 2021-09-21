@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
-import kotlinx.android.synthetic.main.fragment_notification.view.*
 import kotlinx.android.synthetic.main.notification_view_holder.view.*
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 class NotificationRecyclerAdapter :RecyclerView.Adapter<NotificationRecyclerAdapter.NotificationViewHolder>(){
 

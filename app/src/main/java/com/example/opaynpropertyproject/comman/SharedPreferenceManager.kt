@@ -23,5 +23,6 @@ class SharedPreferenceManager(private val context: Context)
 
     companion object {
         private const val SHARED_PREF_NAME = "com.example.opaynpropertyproject"
+
     }
 }

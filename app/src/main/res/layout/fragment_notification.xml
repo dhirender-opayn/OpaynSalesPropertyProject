@@ -6,43 +6,13 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_10sdp"
     tools:context=".customer.NotificationFragment">
-
-
-    <include
-        android:id="@+id/notification_back"
-        style="@style/toolbar"
-        layout="@layout/toolbar2_back_arrow"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/notification_heading"
-        style="@style/header"
-        android:text="Notification"
-        app:layout_constraintBottom_toBottomOf="@+id/notification_back"
-        app:layout_constraintLeft_toRightOf="@+id/notification_back"
-        app:layout_constraintTop_toTopOf="@+id/notification_back" />
-
-    <TextView
-        android:id="@+id/notification_count"
-        style="@style/text_header"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:background="@drawable/rectangel_border"
-        android:paddingHorizontal="@dimen/_16sdp"
-        android:paddingVertical="@dimen/_2sdp"
-        android:text="2"
-        android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="@+id/notification_heading"
-        app:layout_constraintLeft_toRightOf="@+id/notification_heading"
-        app:layout_constraintTop_toTopOf="@+id/notification_heading" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/notification_heading"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/notification_view_holder" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

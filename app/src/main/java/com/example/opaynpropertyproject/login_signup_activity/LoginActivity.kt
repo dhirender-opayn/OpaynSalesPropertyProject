@@ -13,6 +13,9 @@ import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api.Keys.TOKEN
 import com.example.opaynpropertyproject.api.Keys.USERDATA
 import com.example.opaynpropertyproject.api.Keys.USERID
+import com.example.opaynpropertyproject.api.Keys.USER_EMAIL
+import com.example.opaynpropertyproject.api.Keys.USER_MOBILE
+import com.example.opaynpropertyproject.api.Keys.USER_NAME
 import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseActivity
@@ -111,6 +114,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                     SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
                     SharedPreferenceManager(this).saveString(USERDATA,response)
                     SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
+
+
+
                     openA(HomeActivity::class)
                     finishAffinity()
 

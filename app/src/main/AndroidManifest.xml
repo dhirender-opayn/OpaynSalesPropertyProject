@@ -21,7 +21,7 @@
             android:name=".home_activity.SellerAddedAdsProperty"
             android:exported="true" />
         <activity
-            android:name=".seller_chat.SellerChatActivity"
+            android:name=".seller_chat.SellerChatFragment"
             android:exported="true" />
         <activity
             android:name=".home_activity.SelectedPropertyActivity"

@@ -36,29 +36,29 @@
                 android:id="@+id/rv_recommended_property_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/home_img"
                 tools:listitem="@layout/home_outer_view_holder" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_luxury_property"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/rv_recommended_property_home"
-                tools:listitem="@layout/home_outer_view_holder" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rv_luxury_property"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/rv_recommended_property_home"-->
+<!--                tools:listitem="@layout/home_outer_view_holder" />-->
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_nearby_property"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/rv_luxury_property"
-                tools:listitem="@layout/home_outer_view_holder" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rv_nearby_property"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/rv_luxury_property"-->
+<!--                tools:listitem="@layout/home_outer_view_holder" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

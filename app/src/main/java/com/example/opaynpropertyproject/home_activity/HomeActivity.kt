@@ -29,6 +29,8 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         homeHeader()
         setUpNavigation()
         token = SharedPreferenceManager(this).getString(Keys.TOKEN).toString()
+        saved_user_name = SharedPreferenceManager(this).getString(Keys.USER_NAME).toString()
+        saved_user_email = SharedPreferenceManager(this).getString(Keys.USER_EMAIL).toString()
 
         menu_bar.setOnClickListener(this)
         nav_view.add_property.setOnClickListener(this)
@@ -38,7 +40,7 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
     }
 
-   private fun homeHeader() {
+    private fun homeHeader() {
         supportActionBar!!.hide()
         search_bar_container.visibility = View.INVISIBLE
         ads.setText(getString(R.string.home))
@@ -47,6 +49,9 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
     companion object {
         var token = ""
+        var saved_user_name = ""
+        var saved_user_email = ""
+
     }
 
     private fun setUpNavigation() {

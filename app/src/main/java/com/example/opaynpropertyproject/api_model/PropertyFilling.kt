@@ -6,6 +6,7 @@ import com.example.opaynpropertyproject.api_model.seller_home_model.SellerProper
 
 class PropertyFilling {
 
+    var update_property: Int = 0
     var editpost : SellerPropertyListingModel.Data?=null
     var detailModel : PropertyDetailModel?=null
 
