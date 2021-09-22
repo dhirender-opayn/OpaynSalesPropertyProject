@@ -19,8 +19,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/profile_img"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
             android:scaleType="centerCrop"
             android:src="@drawable/chat_person"
             app:layout_constraintBottom_toBottomOf="@+id/user_email"
@@ -31,27 +31,28 @@
         <TextView
             android:id="@+id/profile_name"
             style="@style/textview"
+            android:layout_marginStart="@dimen/_10sdp"
             android:text="Adele Mark"
             android:textColor="@color/black"
             app:layout_constraintLeft_toRightOf="@+id/profile_img"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/seller_phone_number"
             style="@style/textview"
+            android:layout_marginStart="@dimen/_10sdp"
             android:drawableLeft="@drawable/ic_mobile"
             android:drawablePadding="@dimen/_4sdp"
             android:paddingTop="@dimen/_4sdp"
             android:text="+91-987654321"
             android:textColor="@color/black"
             app:layout_constraintLeft_toRightOf="@+id/profile_img"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
         <TextView
             android:id="@+id/user_email"
             style="@style/textview"
+            android:layout_marginStart="@dimen/_10sdp"
             android:drawableLeft="@drawable/ic_email_round_color"
             android:drawablePadding="@dimen/_4sdp"
             android:paddingTop="@dimen/_4sdp"
@@ -59,7 +60,6 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintLeft_toRightOf="@+id/profile_img"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seller_phone_number" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -68,7 +68,6 @@
         android:id="@+id/general_setting_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_6sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_container">
 
@@ -81,27 +80,19 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/general_edit"
-            style="@style/text_header"
-            android:text="Edit"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/account_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangel_border"
             android:padding="@dimen/_6sdp"
-            app:layout_constraintTop_toBottomOf="@+id/general_edit">
+            app:layout_constraintTop_toBottomOf="@+id/general_setting">
 
             <TextView
                 android:id="@+id/account_setting"
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_avatar"
                 android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
@@ -114,7 +105,6 @@
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_avatar"
                 android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
@@ -127,8 +117,7 @@
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_avatar"
-                android:drawableRight="@drawable/ic_forward"
+                 android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
                 android:text="@string/my_property"
@@ -158,7 +147,6 @@
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_avatar"
                 android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
@@ -171,8 +159,7 @@
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_avatar"
-                android:drawableRight="@drawable/ic_forward"
+                 android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
                 android:text="@string/about"
@@ -184,7 +171,6 @@
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_avatar"
                 android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
@@ -201,7 +187,7 @@
         android:layout_marginBottom="@dimen/_16sdp"
         android:background="@drawable/border"
         android:backgroundTint="@color/red"
-        android:padding="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_16sdp"
         android:text="LogOut"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

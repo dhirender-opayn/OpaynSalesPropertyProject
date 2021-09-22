@@ -1,12 +1,14 @@
 package com.example.opaynpropertyproject
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.opaynpropertyproject.api_model.FAQSuccessModel
 import kotlinx.android.synthetic.main.faq_list_view_holder.view.*
 
-class FaqRecyclerViewAdapter :
+class FaqRecyclerViewAdapter(val faqList :ArrayList<FAQSuccessModel.Data>, val context: Context) :
     RecyclerView.Adapter<FaqRecyclerViewAdapter.FaqViewHolder>() {
 
 
@@ -20,11 +22,13 @@ class FaqRecyclerViewAdapter :
         )
     }
     override fun onBindViewHolder(holder: FaqViewHolder, position: Int) {
+        holder.faq_title.setText(faqList[position].question)
+        holder.faq_des.setText(faqList[position].answer)
 
     }
 
     override fun getItemCount(): Int {
-          return  4
+          return  faqList.size
     }
 
 

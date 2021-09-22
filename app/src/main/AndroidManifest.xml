@@ -18,20 +18,33 @@
         android:theme="@style/Theme.OpaynPropertyProject"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".home_activity.SellerAddedAdsProperty"
+            android:name=".AccountSettingActivity"
             android:exported="true" />
         <activity
-            android:name=".seller_chat.SellerChatFragment"
+            android:name=".ContactUsActivity"
             android:exported="true" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FAQActivity"
+            android:exported="true" />
+        <activity
+            android:name=".home_activity.SellerAddedAdsProperty"
+            android:exported="true" /> <!-- <activity -->
+
+
         <activity
             android:name=".home_activity.SelectedPropertyActivity"
             android:exported="true" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".map.MapExploreActivity"
             android:exported="true" />
@@ -66,4 +79,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

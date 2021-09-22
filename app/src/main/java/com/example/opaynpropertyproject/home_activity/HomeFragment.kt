@@ -5,19 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.adapter.HomeRecommendRecyclerAdapter
 import com.example.opaynpropertyproject.adapter.home_adapter.WidgetHomeAdapter
+import com.example.opaynpropertyproject.comman.BaseFragment
+import kotlinx.android.synthetic.main.activity_account_setting.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,12 @@ class HomeFragment : Fragment() {
         rv_recommended_property_home.adapter  = HomeRecommendRecyclerAdapter(requireActivity())   ///CustomerHomeWidgetAdapter()
 
       //  rv_nearby_property.adapter = HomeRecommendRecyclerAdapter()
+
+
+
     }
+
+
 
 
 }

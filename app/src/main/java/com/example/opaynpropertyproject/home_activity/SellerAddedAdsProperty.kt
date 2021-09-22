@@ -22,17 +22,18 @@ class SellerAddedAdsProperty : AppCompatActivity() ,View.OnClickListener{
         seller_all_property_back_btn.setOnClickListener(this)
         overridePendingTransition(0,0)
 
-        menu_bar.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24)
-        ads.setText(getString(R.string.your_ads))
-        search_bar_container.visibility = View.INVISIBLE
-        header_filer.visibility = View.INVISIBLE
-
-
-
+       sellerAddedAdsHeader()
         Utils.addReplaceFragment(this,SellerAddFragment(),R.id.frameId,false,false ,false)
 
     }
 
+    private fun sellerAddedAdsHeader(){
+        menu_bar.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24)
+        ads.setText(getString(R.string.your_ads))
+        search_bar_container.visibility = View.INVISIBLE
+        header_filer.visibility = View.INVISIBLE
+        notification_count.visibility = View.INVISIBLE
+    }
     override fun onClick(v: View?) {
       when(v!!.id){
           R.id.seller_all_property_back_btn -> {

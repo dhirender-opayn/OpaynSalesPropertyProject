@@ -18,7 +18,7 @@
         android:title="Message"
         android:icon="@drawable/ic_email_round_color"/>
 
-    <item android:id="@+id/search"
+    <item android:id="@+id/searchBarFragment"
         android:title="Search"
         android:icon="@drawable/ic_search"/>
 

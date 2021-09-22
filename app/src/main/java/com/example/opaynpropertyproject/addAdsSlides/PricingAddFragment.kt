@@ -14,11 +14,8 @@ import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.comman.BaseFragment
-import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.example.opaynpropertyproject.comman.Utils
-import com.example.opaynpropertyproject.home_activity.HomeActivity
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
-import com.example.opaynpropertyproject.home_activity.SellerAddFragment
 import com.kofigyan.stateprogressbar.StateProgressBar
 import kotlinx.android.synthetic.main.activity_add_ads.*
 import kotlinx.android.synthetic.main.pricing_add_fragment.*

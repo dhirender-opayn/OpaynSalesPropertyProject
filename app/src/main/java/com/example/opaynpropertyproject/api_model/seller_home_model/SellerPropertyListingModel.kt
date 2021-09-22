@@ -40,7 +40,7 @@ data class SellerPropertyListingModel(
             val age: Int,
             val area: String,
             val area_type: Int,
-            val bath_rooms: Any,
+            val bath_rooms: Int,
             var bed_rooms: Int,
             val created_at: String,
             val entrance: Int,

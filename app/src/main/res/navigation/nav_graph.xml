@@ -55,8 +55,11 @@
         android:label="seller_chat_fragment"
         tools:layout="@layout/fragment_seller_chat" >
     </fragment>
-
-
+    <fragment
+        android:id="@+id/searchBarFragment"
+        android:name="com.example.opaynpropertyproject.SearchBarFragment"
+        android:label="fragment_search_bar"
+        tools:layout="@layout/fragment_search_bar" />
 
 
     <!--    <fragment-->

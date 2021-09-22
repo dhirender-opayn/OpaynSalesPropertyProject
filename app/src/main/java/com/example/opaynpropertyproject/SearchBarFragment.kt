@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_f_a_q.*
+import com.example.opaynpropertyproject.comman.BaseFragment
 
 
-class FAQFragment : Fragment() {
+class SearchBarFragment : BaseFragment(),View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +20,12 @@ class FAQFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_f_a_q, container, false)
+        return inflater.inflate(R.layout.fragment_search_bar, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        rv_faq.adapter = FaqRecyclerViewAdapter()
+    override fun onClick(v: View?) {
+
     }
+
 
 }

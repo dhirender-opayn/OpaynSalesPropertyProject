@@ -69,7 +69,7 @@
                         android:layout_height="1dp"
                         android:background="#4E4E4E" />
                     <TextView
-                        android:id="@+id/profile_setting"
+                        android:id="@+id/profile_setting1"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:gravity="center_vertical"

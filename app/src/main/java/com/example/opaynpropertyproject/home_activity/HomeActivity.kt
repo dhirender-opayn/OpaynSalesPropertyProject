@@ -1,14 +1,14 @@
 package com.example.opaynpropertyproject.home_activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.example.opaynpropertyproject.AboutUsFragment
-import com.example.opaynpropertyproject.ContactUsFragment
-import com.example.opaynpropertyproject.FAQFragment
-import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.AboutUsActivity
+import com.example.opaynpropertyproject.ContactUsActivity
+import com.example.opaynpropertyproject.FAQActivity
 import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
@@ -20,6 +20,11 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import com.example.opaynpropertyproject.R
+import kotlinx.android.synthetic.main.toolbar.ads
+import kotlinx.android.synthetic.main.toolbar.header_filer
+import kotlinx.android.synthetic.main.toolbar.menu_bar
+
 
 class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,27 +42,43 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         my_property.setOnClickListener(this)
         faq.setOnClickListener(this)
         about.setOnClickListener(this)
+//        bottomNavigationClickListener()
 
     }
 
     private fun homeHeader() {
         supportActionBar!!.hide()
-        search_bar_container.visibility = View.INVISIBLE
-        ads.setText(getString(R.string.home))
+        notification_count.visibility = View.INVISIBLE
+        ads.visibility = View.INVISIBLE
         header_filer.visibility = View.INVISIBLE
+
     }
 
     companion object {
         var token = ""
         var saved_user_name = ""
         var saved_user_email = ""
-
     }
 
     private fun setUpNavigation() {
         val navController = Navigation.findNavController(this, R.id.nav_container)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
+    }
+    private  fun bottomNavigationClickListener(){
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            Log.e("inn","inner")
+            when (item.itemId) {
+                R.id.fragment_profile -> {
+                    Log.e("profile","profile")
+                     notification_count.visibility = View.INVISIBLE
+                    ads.setText("Profile")
+                    header_filer.visibility = View.INVISIBLE
+                }
+            }
+            true
+        }
+
     }
 
     override fun onClick(v: View?) {
@@ -77,18 +98,15 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             }
             R.id.faq -> {
                 drawer_layout.closeDrawers()
-                val fragment = FAQFragment()
-                Utils.addReplaceFragment(this, fragment, R.id.nav_container, false, false, false)
+                openA(FAQActivity::class)
             }
             R.id.about -> {
                 drawer_layout.closeDrawers()
-                val fragment = AboutUsFragment()
-                Utils.addReplaceFragment(this, fragment, R.id.nav_container, false, false, false)
+               openA(AboutUsActivity::class)
             }
             R.id.contact_us -> {
                 drawer_layout.closeDrawers()
-                val fragment = ContactUsFragment()
-                Utils.addReplaceFragment(this, fragment, R.id.nav_container, false, false, false)
+               openA(ContactUsActivity::class)
             }
             R.id.account_setting -> {
 //                val fragment =
@@ -97,6 +115,7 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
         }
     }
+
 
     override fun onResponse(requestcode: Int, response: String) {
 

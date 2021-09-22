@@ -3,10 +3,13 @@ package com.example.opaynpropertyproject.seller_home_adapter
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
@@ -17,6 +20,11 @@ import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFillin
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seller_home_list_holder.view.*
 import java.io.Serializable
+
+import com.example.opaynpropertyproject.*
+
+
+
 
 class SellerPropertyRecyclerViewAdapter(
     val seller_property_list: List<SellerPropertyListingModel.Data>,
@@ -35,65 +43,87 @@ class SellerPropertyRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: YourAdsViewHolder, position: Int) {
 
-        holder.property_price.text = seller_property_list[position].price.toString()
-        holder.property_header.text = seller_property_list[position].name
-        holder.property_address.text = seller_property_list[position].address
+        if (seller_property_list[position].profile != null){
 
-        //  holder.bathroom.text = seller_property_list[position].profile.bath_rooms.toString()
+            holder.property_price.text = "$ "+seller_property_list[position].price.toString()
+            holder.property_header.text = seller_property_list[position].name
+            holder.property_address.text = seller_property_list[position].address
+            holder.bed.text  = seller_property_list[position].profile.bed_rooms.toString() +"bed"
+            holder.bathroom.text = seller_property_list[position].profile.bath_rooms.toString() + "ba"
+            holder.sqft.text = seller_property_list[position].profile.area +"sqft"
+
+            //  holder.bathroom.text = seller_property_list[position].profile.bath_rooms.toString()
 
 //        if (seller_property_list[position].profile.bed_rooms != null){
 //            holder.bed.text = seller_property_list[position].profile.bed_rooms.toString()
 //        }
-        if (seller_property_list[position].image != null) {
-            Picasso.get().load(seller_property_list[position].image.image)
-                .placeholder(R.drawable.down_arrow).into(holder.property_image)
-        }
+            if (seller_property_list[position].image != null) {
+                Picasso.get().load(seller_property_list[position].image.image)
+                    .placeholder(R.drawable.down_arrow).into(holder.property_image)
+            }
+            holder.property_edit_btn.setOnClickListener {
+                propertyFilling.edit_flag = true
+                SingletonObject.propertyFilling.editpost = seller_property_list[position]
+                propertyFilling.edit_id = seller_property_list[position].id
+                val intent = Intent(context, DealerAddActivity::class.java)
+                context.startActivity(intent)
+            }
+            holder.your_ads_delete.setOnClickListener {
 
-        holder.property_edit_btn.setOnClickListener {
-            propertyFilling.edit_flag = true
-            SingletonObject.propertyFilling.editpost = seller_property_list[position]
-            propertyFilling.edit_id = seller_property_list[position].id
-            val intent = Intent(context, DealerAddActivity::class.java)
-            context.startActivity(intent)
-        }
-        holder.your_ads_delete.setOnClickListener {
+
+                val builder = AlertDialog.Builder(context)
+                //set title for alert dialog
+                builder.setTitle("Delete Property")
+                //set message for alert dialog
+                builder.setMessage("Are you sure you want to delete property ? ")
+                builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+                //performing positive action
+                builder.setPositiveButton("Yes") { dialogInterface, which ->
+
+                    getDeletePosition.getPosition(holder.adapterPosition)
 
 
-            val builder = AlertDialog.Builder(context)
-            //set title for alert dialog
-            builder.setTitle("Delete Property")
-            //set message for alert dialog
-            builder.setMessage("Are you sure you want to delete property ? ")
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
-
-            //performing positive action
-            builder.setPositiveButton("Yes") { dialogInterface, which ->
-
-                getDeletePosition.getPosition(holder.adapterPosition)
+                }
+                //performing cancel action
+                builder.setNeutralButton("Cancel") { dialogInterface, which ->
+                    Toast.makeText(context, "clicked cancel\n operation cancel", Toast.LENGTH_LONG)
+                        .show()
+                }
+                //performing negative action
+                builder.setNegativeButton("No") { dialogInterface, which ->
+                    Toast.makeText(context, "clicked No", Toast.LENGTH_LONG).show()
+                }
+                // Create the AlertDialog
+                val alertDialog: AlertDialog = builder.create()
+                // Set other dialog properties
+                alertDialog.setCancelable(false)
+                alertDialog.show()
 
 
             }
-            //performing cancel action
-            builder.setNeutralButton("Cancel") { dialogInterface, which ->
-                Toast.makeText(context, "clicked cancel\n operation cancel", Toast.LENGTH_LONG)
-                    .show()
+
+            holder.property_forward_btn.setOnClickListener {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                    type = "text/plain"
+                }
+                val bundle = Bundle()
+                bundle.putString("keys","http://schemas.android.com/apk/res/android")
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(context,shareIntent,bundle)
+
             }
-            //performing negative action
-            builder.setNegativeButton("No") { dialogInterface, which ->
-                Toast.makeText(context, "clicked No", Toast.LENGTH_LONG).show()
-            }
-            // Create the AlertDialog
-            val alertDialog: AlertDialog = builder.create()
-            // Set other dialog properties
-            alertDialog.setCancelable(false)
-            alertDialog.show()
+            holder.sold_status.visibility = View.INVISIBLE
 
 
         }
-        holder.sold_status.visibility = View.INVISIBLE
 
 
     }
+
+
 
     override fun getItemCount(): Int {
         return seller_property_list.size

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountSettingActivity">
+
+
+    <include
+        android:id="@+id/profile_setting_toolbar"
+        layout="@layout/toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_setting_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_10sdp">
+
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/account_setting_img_holder"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:padding="@dimen/_8sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/chat_person"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="@dimen/_40sdp" />
+
+            <ImageView
+                android:id="@+id/pic_edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit_profile"
+                app:layout_constraintBottom_toBottomOf="@+id/account_setting_img_holder"
+                app:layout_constraintRight_toRightOf="@+id/account_setting_img_holder" />
+
+            <TextView
+                android:id="@+id/account_setting_header"
+                style="@style/header"
+                android:text="@string/account_setting"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pic_edit_button" />
+
+            <TextView
+                android:id="@+id/profile_setting_user_name_head"
+                style="@style/text_header"
+                android:layout_width="0dp"
+                android:text="@string/name"
+                app:layout_constraintHorizontal_weight="0.2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/profile_setting_user_name"
+                app:layout_constraintTop_toBottomOf="@+id/account_setting_header" />
+
+            <EditText
+                android:id="@+id/profile_setting_user_name"
+                style="@style/edittext"
+                android:layout_width="0dp"
+                android:hint="Android Dealer"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_setting_user_name_head"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toRightOf="@+id/profile_setting_user_name_head"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profile_setting_user_name_head" />
+
+            <TextView
+                android:id="@+id/profile_setting_user_email_head"
+                style="@style/text_header"
+                android:layout_width="0dp"
+                android:text="@string/email_hints"
+                app:layout_constraintHorizontal_weight="0.2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/profile_setting_email"
+                app:layout_constraintTop_toBottomOf="@+id/profile_setting_user_name_head" />
+
+            <EditText
+                android:id="@+id/profile_setting_email"
+                style="@style/edittext"
+                android:layout_width="0dp"
+                android:hint="androiddealer@gmail.com"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_setting_user_email_head"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toRightOf="@+id/profile_setting_user_email_head"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profile_setting_user_email_head" />
+
+            <TextView
+                android:id="@+id/profile_setting_phone_head"
+                style="@style/text_header"
+                android:layout_width="0dp"
+                android:text="@string/phone"
+                app:layout_constraintHorizontal_weight="0.2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/profile_setting_phone"
+                app:layout_constraintTop_toBottomOf="@+id/profile_setting_user_email_head" />
+
+            <EditText
+                android:id="@+id/profile_setting_phone"
+                style="@style/edittext"
+                android:layout_width="0dp"
+                android:hint="+91-987654321"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_setting_phone_head"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toRightOf="@+id/profile_setting_phone_head"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profile_setting_phone_head" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/profile_save_btn"
+                style="@style/button"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/save"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_setting_phone" />
+
+            <TextView
+                android:id="@+id/notification_setting_header"
+                style="@style/header"
+                android:text="@string/notification_settings"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_save_btn" />
+
+            <TextView
+                android:id="@+id/profile_recv_notification_header"
+                style="@style/text_header"
+                android:layout_width="0dp"
+                android:text="Receive Notification"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/email_notification_switch"
+                app:layout_constraintTop_toBottomOf="@+id/notification_setting_header" />
+
+
+            <Switch
+                android:id="@+id/email_notification_switch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/email_hints"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_recv_notification_header"
+                app:layout_constraintHorizontal_weight="0.4"
+                app:layout_constraintLeft_toRightOf="@+id/profile_recv_notification_header"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profile_recv_notification_header"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/change_password"
+                android:text="Change Password"
+                style="@style/widget_button2"
+                app:layout_constraintTop_toBottomOf="@+id/email_notification_switch"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

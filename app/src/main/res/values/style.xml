@@ -98,8 +98,14 @@
         <item name="android:layout_margin">@dimen/_8sdp</item>
         <item name="android:padding">@dimen/_12sdp</item>
         <item name="android:background">@drawable/round_border_fill</item>
+    </style>
 
-
+    <style name="widget_button2">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_8sdp</item>
+        <item name="android:padding">@dimen/_12sdp</item>
+        <item name="android:background">@drawable/rectangle_border_fill_button</item>
     </style>
 
     //Add Ads recycler View//

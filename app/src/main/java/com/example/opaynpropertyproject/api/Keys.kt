@@ -2,7 +2,9 @@ package com.example.opaynpropertyproject.api
 
 object Keys {
 
-    const val BASEURL = "http://f0ea-180-188-237-118.ngrok.io/realestate-api/public/api/"
+    val QUERY_DES: String ="description"
+    val QUERY_SUB: String = "subject"
+    const val BASEURL = "http://0e37-180-188-237-118.ngrok.io/realestate-api/public/api/"
 
     val FURNISHING: String = "furnishing"
     val ENTRANCE: String = "entrance"
@@ -66,6 +68,10 @@ object Keys {
     var RESET_EMAIL_END_POINT = "forget-password/send-code"
     var MAIL_RESEND_REQ_CODE = 5
 
+    //FAQ
+    val FAQ_END_POINT = "faqs"
+
+
 
 
 
@@ -88,6 +94,8 @@ object Keys {
     var IMG_DEL_END_POINT = "dealer/property/image/delete"
 
     val GET_DEALER_ADD_END_POINT = "dealer/properties"
+    // Contact us
+    val CONTACT_US_END_POINT = "contact"
 
 
 
@@ -122,6 +130,8 @@ object Keys {
     var IMG_RED_CODE = 18
     val PROFILE_RED_CODE = 19
     val PROPERTY_DELETE_REQ_CODE = 20
+    val FAQ_REQ_CODE = 21
+    val CONTACT_US_REQ_CODE = 22
 
     var IMAGE = "image"
     var STEP = "step"

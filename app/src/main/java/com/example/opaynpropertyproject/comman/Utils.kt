@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.util.regex.Pattern
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
@@ -73,6 +74,11 @@ object Utils {
 
 
 
+    fun OnBackPressFragement(fragmentActivity: FragmentActivity){
+
+        val fm: FragmentManager = fragmentActivity.supportFragmentManager
+        fm.popBackStack()
+    }
 
 
     //convert string to json
