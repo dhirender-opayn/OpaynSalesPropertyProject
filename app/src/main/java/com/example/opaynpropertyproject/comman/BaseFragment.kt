@@ -17,6 +17,7 @@ import kotlin.reflect.KClass
 open class BaseFragment : Fragment() {
     val serviceViewModel: ServiceViewModel = ServiceViewModel()
     val gson = Gson()
+    var dummytoken = ""
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

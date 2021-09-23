@@ -124,7 +124,7 @@ class OtpVerifyActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 model = gson.fromJson(response, EmailVerifySuccessfully::class.java)
                 customSnakebar(otp_continue_btn, model.message)
                 bundle.putString(Keys.USER_ID, successSignupModel!!.data.user.id.toString())
-                openA(HomeActivity::class, bundle)
+                openA(LoginActivity::class, bundle)
             }
             Keys.RESET_REQ_CODE->{
                 bundle.putString("code",mOtp)

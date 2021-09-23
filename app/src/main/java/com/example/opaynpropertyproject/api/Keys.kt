@@ -1,11 +1,9 @@
 package com.example.opaynpropertyproject.api
 
 object Keys {
-
     val QUERY_DES: String ="description"
     val QUERY_SUB: String = "subject"
-    const val BASEURL = "http://0e37-180-188-237-118.ngrok.io/realestate-api/public/api/"
-
+    const val BASEURL = "http://cc1e-180-188-237-118.ngrok.io/realestate-api/public/api/"
     val FURNISHING: String = "furnishing"
     val ENTRANCE: String = "entrance"
     val AGE_OF_PROPERTY: String = "age"
@@ -19,9 +17,6 @@ object Keys {
     val UNAUTHRISECODE = 401
     val SERVERERROR = 201
     val BACKENDERROR = 412
-
-
-
 
     //signup End point
     var signupEndPoint = "signup"
@@ -71,6 +66,9 @@ object Keys {
     //FAQ
     val FAQ_END_POINT = "faqs"
 
+    //Property Search
+    val PROPERTY_SEARCH_END_POINT ="properties"
+
 
 
 
@@ -96,6 +94,7 @@ object Keys {
     val GET_DEALER_ADD_END_POINT = "dealer/properties"
     // Contact us
     val CONTACT_US_END_POINT = "contact"
+    val ADD_PROPERTY_FAV_END_POINT = "customer/wishlist"
 
 
 
@@ -132,6 +131,11 @@ object Keys {
     val PROPERTY_DELETE_REQ_CODE = 20
     val FAQ_REQ_CODE = 21
     val CONTACT_US_REQ_CODE = 22
+    val PROPERTY_SEARCH_REQ_CODE = 23
+    val ADD_PROPERTY_FAV_REQ_CODE = 24
+
+    //customer REQ Code
+     val CUSTOMER_HOME_REQ_CODE = 25
 
     var IMAGE = "image"
     var STEP = "step"
@@ -149,6 +153,7 @@ object Keys {
 
 
     var PROPERTY_IMG_ID = "property_id"
+    var FAV_PROPERTY_ID = "property_id"
     var DEALERPEOPERTYDETAIL = "dealer/property/"
      //Delete
 
@@ -168,6 +173,17 @@ object Keys {
 
     //Parcelable model
     var PRACELABLE_KEY = "parcelable_key"
+
+
+    //Customer
+    val CUSTOMER = "Customer"
+    val CUSTOMER_HOME_ADD_END_POINT = "properties"
+    val KEYWORD = "keyword"
+    var isCustomer = false
+
+
+
+
 
 
 

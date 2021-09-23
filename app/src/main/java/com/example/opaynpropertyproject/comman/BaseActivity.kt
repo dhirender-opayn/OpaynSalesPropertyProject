@@ -22,6 +22,7 @@ open class BaseActivity : AppCompatActivity(){
 
 
 
+
    open fun openA(kClass: KClass<out AppCompatActivity>, bundle: Bundle? = Bundle()) {
         val intent = Intent(this, kClass.java)
         intent.putExtras(bundle ?: Bundle())

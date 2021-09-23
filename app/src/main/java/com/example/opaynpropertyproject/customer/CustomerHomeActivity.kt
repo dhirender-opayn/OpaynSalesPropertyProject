@@ -1,48 +1,36 @@
-package com.example.opaynpropertyproject.home_activity
+package com.example.opaynpropertyproject.customer
 
-import android.app.PendingIntent.getActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.opaynpropertyproject.AboutUsActivity
 import com.example.opaynpropertyproject.ContactUsActivity
 import com.example.opaynpropertyproject.FAQActivity
+import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.SearchModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
-import com.example.opaynpropertyproject.comman.Utils
+import com.example.opaynpropertyproject.home_activity.SellerAddedAdsProperty
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.toolbar.*
-import com.example.opaynpropertyproject.R
-import com.example.opaynpropertyproject.`interface`.GetPositionInterface
-import com.example.opaynpropertyproject.api_model.SearchModel
-import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
-import com.example.opaynpropertyproject.seller_home_adapter.SellerPropertyRecyclerViewAdapter
-import com.example.opaynpropertyproject.singleton.SingletonObject
-import kotlinx.android.synthetic.main.fragment_seller.*
-import kotlinx.android.synthetic.main.toolbar.ads
-import kotlinx.android.synthetic.main.toolbar.header_filer
-import kotlinx.android.synthetic.main.toolbar.menu_bar
 
-
-class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
+class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     var searchList = ArrayList<SearchModel.Data>()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_customer_home)
+
         overridePendingTransition(0, 0)
         homeHeader()
         setUpNavigation()
@@ -55,9 +43,9 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
         my_property.setOnClickListener(this)
         faq.setOnClickListener(this)
         about.setOnClickListener(this)
+        searchListner()
 //        searchListner()
 //        bottomNavigationClickListener()
-        searchListner()
 
     }
 
@@ -68,9 +56,6 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
         header_filer.visibility = View.INVISIBLE
 
     }
-
-
-
 
 
     private fun searchListner() {
@@ -92,18 +77,18 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
                 before: Int, count: Int
             ) {
 //                tvSample.setText("Text in EditText : "+s)
-                if (!search_bar.text.toString().isEmpty()) {
+                if (search_bar.text.toString().isNotEmpty()) {
                     val searchHasHmap = HashMap<String, Any>()
                     searchHasHmap.put("keyword", s.toString())
                     serviceViewModel.postservice(
-                        Keys.PROPERTY_SEARCH_END_POINT,
-                        this@HomeActivity,
+                        Keys.CUSTOMER_HOME_ADD_END_POINT,
+                        this@CustomerHomeActivity,
                         searchHasHmap,
-                        Keys.PROPERTY_SEARCH_REQ_CODE,
+                        Keys.CUSTOMER_HOME_REQ_CODE,
                         true,
                         token,
                         false,
-                        this@HomeActivity
+                        this@CustomerHomeActivity
                     )
                 }
             }
@@ -176,7 +161,7 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
-            Keys.PROPERTY_SEARCH_REQ_CODE -> {
+            Keys.CUSTOMER_HOME_REQ_CODE -> {
                 val searchModel = gson.fromJson(response, SearchModel::class.java)
                 searchList.addAll(listOf(searchModel.data))
 
@@ -185,8 +170,6 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
 
         }
     }
-
-
 
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.opaynpropertyproject.comman.BaseFragment
+import kotlinx.android.synthetic.main.toolbar.*
 
 
 class SearchBarFragment : BaseFragment(),View.OnClickListener {
@@ -23,6 +24,11 @@ class SearchBarFragment : BaseFragment(),View.OnClickListener {
         return inflater.inflate(R.layout.fragment_search_bar, container, false)
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+    }
     override fun onClick(v: View?) {
 
     }

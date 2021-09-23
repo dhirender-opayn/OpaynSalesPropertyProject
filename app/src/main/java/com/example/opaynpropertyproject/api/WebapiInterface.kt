@@ -1,9 +1,11 @@
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.RawRes
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import com.example.opaynpropertyproject.comman.Utils
+import kotlinx.android.parcel.RawValue
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okio.IOException
@@ -16,6 +18,7 @@ import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 import retrofit2.http.DELETE
 import okhttp3.RequestBody
+import okhttp3.internal.http.hasBody
 
 import retrofit2.http.Multipart
 
@@ -35,6 +38,11 @@ interface WebapiInterface
     fun mutipartservice(@Url url: String,@Part fields: ArrayList<MultipartBody.Part>): Call<ResponseBody>
     @GET()
     fun getservice(@Url url: String): Call<ResponseBody>
+
+//dummy==================================================================================================================================
+    @GET()
+    fun getserviceWithKeywordBody(@Url url: String,@Query("keyword") keyword:String): Call<ResponseBody>
+
 
     @POST()
     fun commonpostRequestBody(@Url url: String,@Body map: RequestBody): Call<ResponseBody>?

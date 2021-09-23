@@ -18,6 +18,9 @@
         android:theme="@style/Theme.OpaynPropertyProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".customer.CustomerHomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".AccountSettingActivity"
             android:exported="true" />
         <activity
@@ -32,8 +35,6 @@
         <activity
             android:name=".home_activity.SellerAddedAdsProperty"
             android:exported="true" /> <!-- <activity -->
-
-
         <activity
             android:name=".home_activity.SelectedPropertyActivity"
             android:exported="true" />

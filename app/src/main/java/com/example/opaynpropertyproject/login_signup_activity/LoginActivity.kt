@@ -1,21 +1,18 @@
 package com.example.opaynpropertyproject.login_signup_activity
 
 
-import ServiceViewModel
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import com.example.opaynpropertyproject.customer.CustomerHomeActivity
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api.Keys.TOKEN
 import com.example.opaynpropertyproject.api.Keys.USERDATA
 import com.example.opaynpropertyproject.api.Keys.USERID
-import com.example.opaynpropertyproject.api.Keys.USER_EMAIL
-import com.example.opaynpropertyproject.api.Keys.USER_MOBILE
-import com.example.opaynpropertyproject.api.Keys.USER_NAME
 import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseActivity
@@ -23,7 +20,9 @@ import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.comman.Utils.customSnakebar
 import com.example.opaynpropertyproject.home_activity.HomeActivity
+import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
 import kotlinx.android.synthetic.main.activity_login.*
+import java.security.Key
 
 class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var loginHashMap: HashMap<String, Any>
@@ -34,7 +33,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         setContentView(R.layout.activity_login)
         supportActionBar!!.hide()
         loginHashMap = HashMap<String, Any>()
-        getuserdata()
+//        getuserdata()
         login_container.setOnClickListener(this)
         create_account_btn_login.setOnClickListener(this)
         forget_password.setOnClickListener(this)
@@ -109,18 +108,36 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             Keys.login_log ->
             {
                 val model = gson.fromJson(response, LoginSuccessModel::class.java)
-                if (model?.data!=null)
-                {
-                    SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
-                    SharedPreferenceManager(this).saveString(USERDATA,response)
-                    SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
+              val user_type = model.data.user.roles[0].name
+                if (user_type.equals(Keys.CUSTOMER)){
+                    if (model?.data!=null)
+                    {
+                        SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
+                        SharedPreferenceManager(this).saveString(USERDATA,response)
+                        SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
 
+                        token = model.data.token
 
+                        openA(CustomerHomeActivity::class)
+                        finishAffinity()
+                        Keys.isCustomer = true
 
-                    openA(HomeActivity::class)
-                    finishAffinity()
+                    }
+                } else {
+                    if (model?.data!=null)
+                    {
+                        SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
+                        SharedPreferenceManager(this).saveString(USERDATA,response)
+                        SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
 
+                        token = model.data.token
+
+                        openA(HomeActivity::class)
+                        finishAffinity()
+
+                    }
                 }
+
             }
 
             Keys.BACKENDERROR -> {
@@ -131,4 +148,5 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         }
 
     }
+
 }

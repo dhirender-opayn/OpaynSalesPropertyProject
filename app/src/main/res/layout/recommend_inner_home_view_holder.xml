@@ -110,7 +110,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/c_home_head_address"/>
                 <TextView
-                    android:id="@+id/yours_ads_rating_view"
+                    android:id="@+id/c_yours_ads_rating_view"
                     android:text="(3,0000 Rating)"
                     style="@style/textview"
                     android:textSize="@dimen/_10sdp"
@@ -122,7 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/c_home_feature_container"
-                    app:layout_constraintTop_toBottomOf="@+id/yours_ads_rating_view"
+                    app:layout_constraintTop_toBottomOf="@+id/c_yours_ads_rating_view"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent">
