@@ -1,9 +1,10 @@
 package com.example.opaynpropertyproject.api
 
 object Keys {
+
+    const val BASEURL = "http://6c8e-180-188-237-22.ngrok.io/realestate-api/public/api/"
     val QUERY_DES: String ="description"
     val QUERY_SUB: String = "subject"
-    const val BASEURL = "http://cc1e-180-188-237-118.ngrok.io/realestate-api/public/api/"
     val FURNISHING: String = "furnishing"
     val ENTRANCE: String = "entrance"
     val AGE_OF_PROPERTY: String = "age"

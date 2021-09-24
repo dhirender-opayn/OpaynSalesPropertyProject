@@ -11,8 +11,10 @@ import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.adapter.HomeRecommendRecyclerAdapter
 import com.example.opaynpropertyproject.adapter.home_adapter.WidgetHomeAdapter
+import com.example.opaynpropertyproject.adapter.property_setup_adapters.CustomerHomeOuterAdapter
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.CustomerHomeModel
 import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
@@ -31,6 +33,8 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
     val fav_hashMap_List = HashMap<String, Any>()
     var fav_property_position = 0
     var homePropertyRecyclerViewAdapter: HomeRecommendRecyclerAdapter? = null
+    var customer_home_list :ArrayList<CustomerHomeModel.Data>? = ArrayList()
+//    val homeActivity = requireActivity() as HomeActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,10 +62,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
         } else {
             HitHomeApi()
         }
-
-
     }
-
     private fun HitHomeApi() {
         serviceViewModel.getservice(
             Keys.GET_DEALER_ADD_END_POINT,
@@ -92,7 +93,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
 
     fun propertyAdapter() {
         homePropertyRecyclerViewAdapter =
-            HomeRecommendRecyclerAdapter(home_property_list!!, requireActivity(), this)
+            HomeRecommendRecyclerAdapter( home_property_list!!, requireActivity(), this)
         rv_your_ads.adapter = homePropertyRecyclerViewAdapter
     }
 
@@ -104,7 +105,6 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
         } else {
             Log.e("emptProperty", "No Properties")
             home_property_list!!.clear()
-            propertyAdapter()
         }
     }
 
@@ -115,12 +115,11 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                 val home_property_model =
                     gson.fromJson(response, SellerPropertyListingModel::class.java)
                 home_property_list!!.addAll(home_property_model.data)
+
                 if (home_property_list != null) {
+
                     rv_home_widget.adapter = WidgetHomeAdapter()
-
-                    rv_recommended_property_home.adapter =
-                        homePropertyRecyclerViewAdapter  ///CustomerHomeWidgetAdapter()
-
+                    rv_recommended_property_home.adapter = HomeRecommendRecyclerAdapter( home_property_list!!, requireActivity(), this) ///CustomerHomeWidgetAdapter()
                     //  rv_nearby_property.adapter = HomeRecommendRecyclerAdapter()
                 }
 
@@ -128,17 +127,13 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
             }
 
             Keys.CUSTOMER_HOME_REQ_CODE -> {
-//                val home_property_model =
-//                    gson.fromJson(response, SellerPropertyListingModel::class.java)
-//                home_property_list!!.addAll(home_property_model.data)
-//                if (home_property_list != null) {
-//                    rv_home_widget.adapter = WidgetHomeAdapter()
-//
-//                    rv_recommended_property_home.adapter =
-//                        homePropertyRecyclerViewAdapter  ///CustomerHomeWidgetAdapter()
-//
-//                    //  rv_nearby_property.adapter = HomeRecommendRecyclerAdapter()
-//                }
+                val customerHomeModel =
+                    gson.fromJson(response, CustomerHomeModel::class.java)
+                       customer_home_list!!.addAll(listOf(customerHomeModel.data))
+                  if (customer_home_list != null) {
+                    rv_home_widget.adapter = WidgetHomeAdapter()
+                    rv_recommended_property_home.adapter = CustomerHomeOuterAdapter(customer_home_list!! ,requireActivity(), this) ///CustomerHomeWidgetAdapter()
+                }
 
 
             }

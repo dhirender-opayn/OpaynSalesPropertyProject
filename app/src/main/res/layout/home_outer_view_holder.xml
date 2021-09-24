@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/recommended_property_head"
-        tools:listitem="@layout/recommend_inner_home_view_holder"
+        tools:listitem="@layout/seller_home_list_holder"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 

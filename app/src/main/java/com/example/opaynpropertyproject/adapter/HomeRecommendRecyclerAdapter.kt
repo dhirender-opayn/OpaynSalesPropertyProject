@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
+import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.CustomerHomeModel
 import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.home_outer_view_holder.view.*
@@ -28,7 +30,9 @@ class HomeRecommendRecyclerAdapter(val homePropertyList:ArrayList<SellerProperty
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.innner_adapter.adapter = HomeRecommendInnerAdapter(homePropertyList,activity,getfavPosition)
+
+            holder.innner_adapter.adapter = HomeRecommendInnerAdapter(homePropertyList,activity,getfavPosition)
+
 
 
     }

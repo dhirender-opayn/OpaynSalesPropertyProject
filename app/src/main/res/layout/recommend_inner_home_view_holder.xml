@@ -4,8 +4,15 @@
     android:layout_width="@dimen/_280sdp"
     android:layout_height="wrap_content">
 
+
+    <include layout="@layout/seller_home_list_holder"
+        android:id="@+id/dealer_layout"
+
+        android:visibility="invisible"/>
+
     <androidx.cardview.widget.CardView
         style="@style/card_view"
+        android:id="@+id/customer_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,7 +46,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <TextView
-                    android:id="@+id/c_fav"
+                    android:id="@+id/c_fav1"
                     style="@style/widget_button"
                     android:drawableLeft="@drawable/ic_white_heart"
                     app:layout_constraintRight_toRightOf="parent"
@@ -107,6 +114,7 @@
                     android:drawableLeft="@drawable/ic_star"
                     android:text="4.5"
                     android:textColor="@color/black"
+                    android:paddingEnd="@dimen/_4sdp"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/c_home_head_address"/>
                 <TextView

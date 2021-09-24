@@ -9,6 +9,7 @@ import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.opaynpropertyproject.AboutUsActivity
 import com.example.opaynpropertyproject.ContactUsActivity
@@ -37,7 +38,7 @@ import kotlinx.android.synthetic.main.toolbar.menu_bar
 
 
 class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
-    var searchList = ArrayList<SearchModel.Data>()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +58,7 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
         about.setOnClickListener(this)
 //        searchListner()
 //        bottomNavigationClickListener()
-        searchListner()
+
 
     }
 
@@ -73,42 +74,9 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
 
 
 
-    private fun searchListner() {
-
-        search_bar.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
 
 
-            }
 
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-//                tvSample.setText("Text in EditText : "+s)
-                if (!search_bar.text.toString().isEmpty()) {
-                    val searchHasHmap = HashMap<String, Any>()
-                    searchHasHmap.put("keyword", s.toString())
-                    serviceViewModel.postservice(
-                        Keys.PROPERTY_SEARCH_END_POINT,
-                        this@HomeActivity,
-                        searchHasHmap,
-                        Keys.PROPERTY_SEARCH_REQ_CODE,
-                        true,
-                        token,
-                        false,
-                        this@HomeActivity
-                    )
-                }
-            }
-        })
-    }
 
     companion object {
         var token = ""
@@ -119,6 +87,7 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
     private fun setUpNavigation() {
         val navController = Navigation.findNavController(this, R.id.nav_container)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 
@@ -176,11 +145,7 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
-            Keys.PROPERTY_SEARCH_REQ_CODE -> {
-                val searchModel = gson.fromJson(response, SearchModel::class.java)
-                searchList.addAll(listOf(searchModel.data))
 
-            }
 
 
         }

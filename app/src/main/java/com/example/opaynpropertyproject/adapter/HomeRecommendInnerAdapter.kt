@@ -13,14 +13,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
+import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.CustomerHomeModel
 import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.recommend_inner_home_view_holder.view.*
+
 import kotlinx.android.synthetic.main.seller_home_list_holder.view.*
 
 class HomeRecommendInnerAdapter(
+
     val homeInnerPropertyList: ArrayList<SellerPropertyListingModel.Data>,
-    val activity: Activity, val home_fav_position: GetPositionInterface
+    val activity: Activity,
+    val home_fav_position: GetPositionInterface
 ) : RecyclerView.Adapter<HomeRecommendInnerAdapter.HomeRecommendInnerViewHolder>() {
 
 
@@ -30,33 +34,29 @@ class HomeRecommendInnerAdapter(
     ): HomeRecommendInnerViewHolder {
         val view = HomeRecommendInnerViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.recommend_inner_home_view_holder, parent, false)
+                .inflate(R.layout.seller_home_list_holder, parent, false)
         )
         return view
     }
 
     override fun onBindViewHolder(holder: HomeRecommendInnerViewHolder, position: Int) {
 
-        if (homeInnerPropertyList[position].profile != null) {
-            holder.home_head_address.setText(homeInnerPropertyList[position].address)
-            holder.home_sub__address.setText(homeInnerPropertyList[position].description)
-            holder.home_price.setText(homeInnerPropertyList[position].price.toString())
-            holder.home_bed.setText(homeInnerPropertyList[position].profile.bed_rooms.toString())
-            holder.home_bathroom.setText(homeInnerPropertyList[position].profile.bath_rooms.toString())
-            holder.home_area.setText(homeInnerPropertyList[position].profile.area.toString())
-            holder.home_fav.setOnClickListener {
-                holder.home_fav.setBackgroundColor(Color.RED)
-                home_fav_position.getPosition(holder.adapterPosition)
-            }
+  if (homeInnerPropertyList[position].profile != null) {
 
+
+            holder.dealer_home_address.setText(homeInnerPropertyList[position].address)
+            holder.dealer_home_sub_address.setText(homeInnerPropertyList[position].description)
+            holder.dealer_home_price.setText(homeInnerPropertyList[position].price.toString())
+            holder.dealer_home_bed.setText(homeInnerPropertyList[position].profile.bed_rooms.toString())
+            holder.dealer_home_bathroom.setText(homeInnerPropertyList[position].profile.bath_rooms.toString())
+            holder.dealer_home_area.setText(homeInnerPropertyList[position].profile.area.toString())
+            holder.dealer_home_sold_status.visibility = View.INVISIBLE
 
             if (homeInnerPropertyList[position].image != null) {
                 Picasso.get().load(homeInnerPropertyList[position].image.image)
-                    .placeholder(R.drawable.down_arrow).into(holder.home_property_img)
+                    .placeholder(R.drawable.down_arrow).into(holder.dealer_home_property_img)
             }
-
         }
-
 
     }
 
@@ -65,18 +65,25 @@ class HomeRecommendInnerAdapter(
     }
 
     class HomeRecommendInnerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val home_property_img = itemView.c_home_img
-        val home_forward = itemView.c_home_forward
-        val home_fav = itemView.c_fav
-        val home_is_sold = itemView.c_home_is_sold
-        val home_head_address = itemView.c_home_head_address
-        val home_sub__address = itemView.c_home_sub__address
-        val home_price = itemView.c_home_price
-        val home_rating_bar = itemView.c_home_rating_bar
-        val yours_ads_rating_view = itemView.c_yours_ads_rating_view
-        val home_bed = itemView.c_home_bed
-        val home_bathroom = itemView.c_home_bathroom
-        val home_area = itemView.c_home_area
 
+        val dealer_home_property_img = itemView.your_ads_img
+        val diable_home_cancel = itemView.your_ads_cancel_btn
+        val disable_edit = itemView.your_ads_edit
+        val dealer_forward_btn = itemView.customer_your_ads_forward
+        val disable_home_forward = itemView.your_ads_forward
+        val dealer_home_add_fav = itemView.c_fav
+
+        val dealer_home_sold_status = itemView.is_your_ads_sold
+        val disable_make_it_feature = itemView.make_feauture_container
+
+        //
+        val dealer_home_address = itemView.yours_ads_head_address
+        val dealer_home_sub_address = itemView.yours_ads_sub__address
+        val dealer_home_price = itemView.yours_ads_price
+        val dealer_home_rating = itemView.yours_ads_rating_bar
+        val dealer_home_sub_rating = itemView.yours_ads_rating_view
+        val dealer_home_bed = itemView.yours_ads_bed
+        val dealer_home_bathroom = itemView.yours_ads_bathroom
+        val dealer_home_area = itemView.yours_ads_area
     }
 }
