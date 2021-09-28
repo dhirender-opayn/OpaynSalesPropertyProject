@@ -24,17 +24,7 @@ open class BaseFragment : Fragment() {
 
     }
 
-    fun sellTypeAPI(token: String, responseListener: ApiResponse) {
-        serviceViewModel.getservice(
-            Keys.SELL_TYPE_END_POINT,
-            requireContext(),
-            Keys.SELL_REQ_CODE,
-            true,
-            token,
-            true,
-            responseListener
-        )
-    }
+
     open fun openA(kClass: KClass<out AppCompatActivity>, bundle: Bundle? = Bundle()) {
         val intent = Intent(requireActivity(), kClass.java)
         intent.putExtras(bundle ?: Bundle())

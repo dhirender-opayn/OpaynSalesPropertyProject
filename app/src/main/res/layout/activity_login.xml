@@ -38,7 +38,7 @@
                 android:id="@+id/login_password"
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:hint="@string/password_hints"
-                android:text="123"
+                android:text="1234"
                 style="@style/login_signup_field"
                 android:inputType="textPassword"
                 app:layout_constraintTop_toBottomOf="@+id/login_email"

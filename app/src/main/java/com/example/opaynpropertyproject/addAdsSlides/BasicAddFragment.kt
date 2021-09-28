@@ -66,18 +66,26 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dealerAddRequriedActivity = requireActivity() as DealerAddActivity
 
-          if (propertyFilling.sell_type.isNotEmpty())
-          {
+        if (propertyFilling.sell_type.isNotEmpty()) {
             setData()
-        }
-
-        else
-        {
-
+        } else {
             startingFragement()
         }
         setclick()
 
+    }
+
+
+    fun sellTypeAPI(token: String, responseListener: ApiResponse) {
+        serviceViewModel.getservice(
+            Keys.SELL_TYPE_END_POINT,
+            requireContext(),
+            Keys.SELL_REQ_CODE,
+            true,
+            token,
+            true,
+            responseListener
+        )
     }
 
     private fun setclick() {
@@ -154,7 +162,6 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         city_spinner.setSelection(propertyFilling.cityPosition) // set city spinner value after PREV BUTTON Click
 
 
-
     }
 
 
@@ -186,17 +193,17 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
             propertyFilling.sell_property_model_update = sell_property_model
 //            ads_model = gson.fromJson(response, SellPropertyModel::class.java)
 
-            val adsFragment2 = ProfileAddFragment()
-            bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
-            adsFragment2.arguments = bundle
-            Utils.addReplaceFragment(
-                requireContext(),
-                adsFragment2,
-                R.id.nav_container1,
-                true,
-                false,
-                true
-            )
+//            val adsFragment2 = ProfileAddFragment()
+//            bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
+//            adsFragment2.arguments = bundle
+//            Utils.addReplaceFragment(
+//                requireContext(),
+//                adsFragment2,
+//                R.id.nav_container1,
+//                true,
+//                false,
+//                true
+//            )
 
 
         }
@@ -243,9 +250,10 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         }
 
     }
+
     fun propertydetailapi(token: String, responseListener: ApiResponse) {
         serviceViewModel.getservice(
-            Keys.DEALERPEOPERTYDETAIL+ propertyFilling.edit_id,
+            Keys.DEALERPEOPERTYDETAIL + propertyFilling.edit_id,
             requireContext(),
             Keys.REQ_DEALERPEOPERTYDETAIL,
             true,
@@ -265,11 +273,10 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
 
         ads_address.setText(propertyFilling.address)
         city_pinCode.setText(propertyFilling.pinCode)
-        mainstateList=propertyFilling.stateSpinnerModel
+        mainstateList = propertyFilling.stateSpinnerModel
 
         stateList = propertyFilling.stateSpinnerList
         //set value of state after prev button click
-
 
 
         selltypeAdapter()
@@ -278,10 +285,8 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         stateAdapter()
 
 
-
         // when   click on profile fragment previous buttonbutton
-        if (propertyFilling.edit_flag)
-        {
+        if (propertyFilling.edit_flag) {
             startingFragement()
         }
 
@@ -289,15 +294,15 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
     }
 
     fun selltypeAdapter() {
-        if (propertyFilling.sell_type.isNotEmpty()){
+        if (propertyFilling.sell_type.isNotEmpty()) {
             sellType_list = propertyFilling.rv_sell_property_list!!
         }
         recyclerView_sell_type.adapter = SellerTypeRecyclerViewAdapter(sellType_list)
     }
 
     fun propertyTypeAdapter() {
-        if (propertyFilling.sell_type.isNotEmpty()){
-            propertyType_list =  propertyFilling.rv_property_type_list!!
+        if (propertyFilling.sell_type.isNotEmpty()) {
+            propertyType_list = propertyFilling.rv_property_type_list!!
         }
         recyclerView_property_type.adapter =
             PropertyTypeRecyclerViewAdapter(propertyType_list)
@@ -328,8 +333,7 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         addPropertyHasMap.put(Keys.CITY_ID, cityid)
         addPropertyHasMap.put(Keys.ADDRESS, ads_address.text.toString().trim())
         addPropertyHasMap.put(Keys.PINCODE, city_pinCode.text.toString().trim())
-        if (propertyFilling.edit_flag)
-        {
+        if (propertyFilling.edit_flag) {
             addPropertyHasMap.put(Keys.PROPERTY_ID, propertyFilling.editpost?.id.toString())
         }
 
@@ -360,16 +364,16 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
                 stateAdapter()
                 if (propertyFilling.edit_flag) {
                     setEdit()
-                    propertydetailapi(token,this)
+                    propertydetailapi(token, this)
                 }
 
             }
-            Keys.REQ_DEALERPEOPERTYDETAIL ->
-            {
-              val  model = gson.fromJson(response, PropertyDetailModel::class.java)
-              propertyFilling.detailModel = model
+            Keys.REQ_DEALERPEOPERTYDETAIL -> {
+                val model = gson.fromJson(response, PropertyDetailModel::class.java)
+                propertyFilling.detailModel = model
             }
             Keys.SELL_REQ_CODE -> {
+
                 //check index is error or not ???
                 sell_property_model = gson.fromJson(response, SellPropertyModel::class.java)
                 propertyFilling.sell_property_model_update = sell_property_model
@@ -382,14 +386,10 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
                 propertyFilling.rv_property_type_list = propertyType_list
 
                 /* edit property*/
-                if (propertyFilling.edit_flag)
-                {
-                    for (data in sellType_list.indices)
-                    {
+                if (propertyFilling.edit_flag) {
+                    for (data in sellType_list.indices) {
                         if (sellType_list[data].id.toString() == propertyFilling.editpost!!.list_type) {
                             sellType_list[data].flag = true
-
-
                         } else {
                             sellType_list[data].flag = false
                         }
@@ -446,7 +446,14 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
                 val adsFragment2 = ProfileAddFragment()
                 bundle.putParcelable(Keys.ADS_DATA, sell_property_model)
                 adsFragment2.arguments = bundle
-                Utils.addReplaceFragment(requireContext(), adsFragment2, R.id.nav_container1, true, false, true)
+                Utils.addReplaceFragment(
+                    requireContext(),
+                    adsFragment2,
+                    R.id.nav_container1,
+                    true,
+                    false,
+                    true
+                )
 
                 //Utils.customSnakebar(first_next_btn, add_property_model.message.toString())
 

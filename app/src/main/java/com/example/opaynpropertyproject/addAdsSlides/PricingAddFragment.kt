@@ -87,6 +87,7 @@ class PricingAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
                 true,
                 this
             )
+
         }
 
     }
@@ -119,7 +120,9 @@ class PricingAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.finish_btn -> {
+
                 checkValidationPricing()
+                propertyFilling.edit_flag = false
             }
             R.id.pre_btn_finish -> {
 

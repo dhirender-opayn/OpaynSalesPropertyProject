@@ -36,7 +36,7 @@ class SearchBarFragment : BaseFragment(),View.OnClickListener,ApiResponse {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        searchListner()
+//        searchListner()
 
     }
 
@@ -61,7 +61,7 @@ class SearchBarFragment : BaseFragment(),View.OnClickListener,ApiResponse {
                 if (!activity.search_bar.text.toString().isEmpty())
                 {
                     val searchHasHmap = HashMap<String, Any>()
-                    searchHasHmap.put("keyword", s.toString())
+                    searchHasHmap.put(Keys.KEYWORD, s.toString())
                     serviceViewModel.getserviceWithKeyword(
                         Keys.PROPERTY_SEARCH_END_POINT,
                        activity.applicationContext,

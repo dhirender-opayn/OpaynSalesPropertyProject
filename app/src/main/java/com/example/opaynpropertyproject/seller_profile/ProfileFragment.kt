@@ -6,19 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.opaynpropertyproject.*
 import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
+import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.GetProfileSuccess
 import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.example.opaynpropertyproject.comman.Utils
+
+
 import com.example.opaynpropertyproject.home_activity.HomeActivity
+import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
+
 import com.example.opaynpropertyproject.home_activity.SellerAddedAdsProperty
 import com.example.opaynpropertyproject.login_signup_activity.LoginActivity
+import com.greetupp.extensions.isNull
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 
-class ProfileFragment : BaseFragment(), View.OnClickListener {
+class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 
 
     override fun onCreateView(
@@ -31,18 +38,24 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       profileHeader()
-        setData()
+//        profileHeader()
         setclicks()
+        getProfileApi()
 //       getProfileDeatils()
     }
 
-    private fun profileHeader(){
+    private fun profileHeader() {
         val activity = requireContext() as HomeActivity
+
         activity.ads.visibility = View.VISIBLE
         activity.ads.setText(getString(R.string.profile))
         activity.menu_bar.visibility = View.INVISIBLE
         activity.search_bar_container.visibility = View.INVISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setData()
     }
 
     private fun setData() {
@@ -54,14 +67,23 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
 
         profile_name.setText(mUser_name)
         user_email.setText(mUser_email)
-        if (!mUser_mobile.equals(null)) {
+        if (mUser_mobile.equals(null)) {
             seller_phone_number.setText("+91-0000000000")
         } else {
             seller_phone_number.setText(mUser_mobile.toString())
         }
+    }
 
-
-
+    private fun getProfileApi() {
+        serviceViewModel.getservice(
+            Keys.GET_PROFILE_END_POINT,
+            requireContext(),
+            Keys.GET_PROFILE_REQ_CODE,
+            true,
+            token,
+            true,
+            this
+        )
     }
 
     private fun setclicks() {
@@ -89,6 +111,8 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
                 openA(LoginActivity::class)
             }
             R.id.account_setting -> {
+//                val bundle = Bundle()
+//                bundle.putParcelable("key")
                 openA(AccountSettingActivity::class)
             }
             R.id.add_property -> {
@@ -99,13 +123,37 @@ class ProfileFragment : BaseFragment(), View.OnClickListener {
                 openA(SellerAddedAdsProperty::class)
             }
             R.id.faq -> {
-               openA(FAQActivity::class)
+                openA(FAQActivity::class)
             }
             R.id.about -> {
                 openA(AboutUsActivity::class)
             }
             R.id.contact_us -> {
-              openA(ContactUsActivity::class)
+                openA(ContactUsActivity::class)
+            }
+        }
+    }
+
+    override fun onResponse(requestcode: Int, response: String) {
+        when (requestcode) {
+            Keys.GET_PROFILE_REQ_CODE -> {
+                val get_profile_model = gson.fromJson(response, GetProfileSuccess::class.java)
+                val get_profile_list = ArrayList<GetProfileSuccess.Data>()
+                get_profile_list.addAll(listOf(get_profile_model.data))
+
+                val mUser_name = get_profile_model?.data!!.user.name
+                val mUser_email = get_profile_model.data.user.email
+                val mUser_mobile = get_profile_model.data.user.mobile
+                profile_name.setText(mUser_name)
+                user_email.setText(mUser_email)
+              seller_phone_number.setText(mUser_mobile)
+//                if (mUser_mobile.equals(null)) {
+//                    seller_phone_number.setText("+91-0000000000")
+//                } else {
+//                    seller_phone_number.setText(mUser_mobile.toString())
+//                }
+
+
             }
         }
     }

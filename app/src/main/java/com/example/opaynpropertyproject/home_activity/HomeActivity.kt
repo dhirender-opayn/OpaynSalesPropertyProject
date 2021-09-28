@@ -58,8 +58,6 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse  {
         about.setOnClickListener(this)
 //        searchListner()
 //        bottomNavigationClickListener()
-
-
     }
 
     private fun homeHeader() {

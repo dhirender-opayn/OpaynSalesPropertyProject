@@ -13,6 +13,7 @@ import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api.Keys.TOKEN
 import com.example.opaynpropertyproject.api.Keys.USERDATA
 import com.example.opaynpropertyproject.api.Keys.USERID
+import com.example.opaynpropertyproject.api.Keys.USER_MOBILE
 import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseActivity
@@ -68,6 +69,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 {
                     loginHashMap.put(Keys.login_email, login_email.text.toString().trim())
                     loginHashMap.put(Keys.login_password, login_password.text.toString().trim())
+                    Log.e("email",login_email.text.toString().trim())
+                    Log.e("password",login_password.text.toString().trim())
 
                     serviceViewModel.postservice(Keys.loginEndPoint, this, loginHashMap, Keys.login_log, false, "", true, this)
                 }
@@ -127,8 +130,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                     if (model?.data!=null)
                     {
                         SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
-                        SharedPreferenceManager(this).saveString(USERDATA,response)
+                        SharedPreferenceManager(this).saveString(USER_MOBILE,model.data.user.mobile.toString())
                         SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
+                        SharedPreferenceManager(this).saveString(USERDATA,response)
 
                         token = model.data.token
 

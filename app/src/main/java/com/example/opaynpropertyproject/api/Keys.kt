@@ -2,7 +2,7 @@ package com.example.opaynpropertyproject.api
 
 object Keys {
 
-    const val BASEURL = "http://6c8e-180-188-237-22.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = "http://e6fd-180-188-237-238.ngrok.io/realestate-api/public/api/"
     val QUERY_DES: String ="description"
     val QUERY_SUB: String = "subject"
     val FURNISHING: String = "furnishing"
@@ -18,6 +18,8 @@ object Keys {
     val UNAUTHRISECODE = 401
     val SERVERERROR = 201
     val BACKENDERROR = 412
+    val PROFILE_DATA = "profile_data"
+
 
     //signup End point
     var signupEndPoint = "signup"
@@ -71,7 +73,8 @@ object Keys {
     val PROPERTY_SEARCH_END_POINT ="properties"
 
 
-
+    // Search api
+    val KEYWORD = "keyword"
 
 
 
@@ -86,7 +89,7 @@ object Keys {
 
     //END POINT
 
-    val PROFILE_END_POINT = "/dealer/profile"
+    val PROFILE_END_POINT = "dealer/profile"
     var STATEENDPOINT = "states"
     var SELL_TYPE_END_POINT = "dealer/property-attributes"
     var IMG_END_POINT = "dealer/property/image"
@@ -97,11 +100,14 @@ object Keys {
     val CONTACT_US_END_POINT = "contact"
     val ADD_PROPERTY_FAV_END_POINT = "customer/wishlist"
 
+    val GET_PROFILE_END_POINT = "dealer/profile"
+
 
 
     var TOKEN="token"
     var USERDATA="userdata"
     var USERID="user_id"
+    var USERMOBILE = ""
 
     //get STATE
 
@@ -134,6 +140,7 @@ object Keys {
     val CONTACT_US_REQ_CODE = 22
     val PROPERTY_SEARCH_REQ_CODE = 23
     val ADD_PROPERTY_FAV_REQ_CODE = 24
+    val GET_PROFILE_REQ_CODE = 25
 
     //customer REQ Code
      val CUSTOMER_HOME_REQ_CODE = 25
@@ -179,7 +186,6 @@ object Keys {
     //Customer
     val CUSTOMER = "Customer"
     val CUSTOMER_HOME_ADD_END_POINT = "properties"
-    val KEYWORD = "keyword"
     var isCustomer = false
 
 

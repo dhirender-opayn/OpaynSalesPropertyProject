@@ -1,10 +1,8 @@
 package com.example.opaynpropertyproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.HandlerThread
 import android.os.Looper
 import android.view.View
 import com.example.opaynpropertyproject.api.ApiResponse
@@ -15,7 +13,6 @@ import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.home_activity.HomeActivity
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
 import kotlinx.android.synthetic.main.activity_contact_us.*
-import kotlinx.android.synthetic.main.fragment_guest_user_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
@@ -25,7 +22,6 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         setContentView(R.layout.activity_contact_us)
         contactHeader()
         setClick()
-
 
     }
 
@@ -49,8 +45,6 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             contactUsHashMap.put(Keys.QUERY_SUB, contact_us_query_sub.text.toString().trim())
             contactUsHashMap.put(Keys.QUERY_DES, contact_us_query_des.text.toString().trim())
             contactUsApi()
-
-
         }
     }
 
@@ -84,11 +78,11 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         search_bar_container.visibility = View.INVISIBLE
         header_filer.visibility = View.INVISIBLE
     }
-
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.menu_bar -> {
                 onBackPressed()
+
             }
             R.id.contactUs_btn -> {
                 contactUsValidation()
@@ -96,6 +90,7 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             R.id.contactus_form_container -> {
                 Utils.hideKeyboard(this)
             }
+
         }
     }
 
