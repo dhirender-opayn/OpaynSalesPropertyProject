@@ -4,16 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.ContactUsFromModelSuccess
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.Utils
+import com.example.opaynpropertyproject.customer.CustomerHomeActivity.Companion.token
 import com.example.opaynpropertyproject.home_activity.HomeActivity
-import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
 import kotlinx.android.synthetic.main.activity_contact_us.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar2.ads
+import kotlinx.android.synthetic.main.toolbar2.header_filer
+import kotlinx.android.synthetic.main.toolbar2.menu_bar
+
 
 class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     val contactUsHashMap = HashMap<String, Any>()
@@ -63,13 +68,16 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     }
 
     private fun setClick() {
-        menu_bar.setOnClickListener(this)
+
+
         contactUs_btn.setOnClickListener(this)
         contactus_form_container.setOnClickListener(this)
     }
 
     private fun contactHeader() {
         supportActionBar!!.hide()
+
+
         ads.visibility = View.VISIBLE
         menu_bar.visibility = View.VISIBLE
         ads.setText(getString(R.string.contactus))
@@ -77,10 +85,14 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         notification_count.visibility = View.INVISIBLE
         search_bar_container.visibility = View.INVISIBLE
         header_filer.visibility = View.INVISIBLE
+
+
     }
     override fun onClick(v: View?) {
         when (v!!.id) {
+
             R.id.menu_bar -> {
+                Log.e("contact","contact back click")
                 onBackPressed()
 
             }

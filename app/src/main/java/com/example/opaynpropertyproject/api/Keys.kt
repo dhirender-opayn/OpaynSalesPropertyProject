@@ -1,8 +1,11 @@
 package com.example.opaynpropertyproject.api
 
+import com.example.opaynpropertyproject.api_model.CustomerHomeModel
+
 object Keys {
 
-    const val BASEURL = "http://e6fd-180-188-237-238.ngrok.io/realestate-api/public/api/"
+    var customerList: ArrayList<CustomerHomeModel.Data.Data>? = null
+    const val BASEURL = "http://8129-180-188-237-22.ngrok.io/realestate-api/public/api/"
     val QUERY_DES: String ="description"
     val QUERY_SUB: String = "subject"
     val FURNISHING: String = "furnishing"
@@ -19,6 +22,7 @@ object Keys {
     val SERVERERROR = 201
     val BACKENDERROR = 412
     val PROFILE_DATA = "profile_data"
+    val POSITION = "position"
 
 
     //signup End point
@@ -102,6 +106,8 @@ object Keys {
 
     val GET_PROFILE_END_POINT = "dealer/profile"
 
+    val SELECTED_PROPERTY_END_POINT = "property/"
+
 
 
     var TOKEN="token"
@@ -141,6 +147,7 @@ object Keys {
     val PROPERTY_SEARCH_REQ_CODE = 23
     val ADD_PROPERTY_FAV_REQ_CODE = 24
     val GET_PROFILE_REQ_CODE = 25
+    val SELECTED_PROPERTY_REQ_CODE = 26
 
     //customer REQ Code
      val CUSTOMER_HOME_REQ_CODE = 25

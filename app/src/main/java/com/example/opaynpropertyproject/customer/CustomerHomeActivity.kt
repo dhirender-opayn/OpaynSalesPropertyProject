@@ -8,17 +8,18 @@ import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.example.opaynpropertyproject.AboutUsActivity
-import com.example.opaynpropertyproject.ContactUsActivity
-import com.example.opaynpropertyproject.FAQActivity
-import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.*
 import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.SearchModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
+import com.example.opaynpropertyproject.comman.Utils
+import com.example.opaynpropertyproject.home_activity.HomeFragment
 import com.example.opaynpropertyproject.home_activity.SellerAddedAdsProperty
+import com.example.opaynpropertyproject.seller_chat.SellerChatFragment
+import com.example.opaynpropertyproject.seller_profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -33,7 +34,7 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
         overridePendingTransition(0, 0)
         homeHeader()
-        setUpNavigation()
+//        setUpNavigation()
         token = SharedPreferenceManager(this).getString(Keys.TOKEN).toString()
         saved_user_name = SharedPreferenceManager(this).getString(Keys.USER_NAME).toString()
         saved_user_email = SharedPreferenceManager(this).getString(Keys.USER_EMAIL).toString()
@@ -45,21 +46,29 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         about.setOnClickListener(this)
         searchListner()
 //        searchListner()
-//        bottomNavigationClickListener()
 
+
+        bottomNavigationView.menu.getItem(2).setChecked(true)
+        Utils.addReplaceFragment(this, HomeFragment(), R.id.nav_container, false, false, false)
+        bottomNavigationClickListener()
     }
 
     private fun homeHeader() {
         supportActionBar!!.hide()
         notification_count.visibility = View.INVISIBLE
-        ads.visibility = View.INVISIBLE
+        wishlist.visibility = View.VISIBLE
+        my_property.visibility = View.INVISIBLE
+        customer_message.visibility = View.VISIBLE
+        ads.visibility = View.VISIBLE
+        add_property.visibility = View.INVISIBLE
+        ads.setText(getText(R.string.home))
+        search_bar_container.visibility = View.INVISIBLE
         header_filer.visibility = View.INVISIBLE
 
     }
 
 
     private fun searchListner() {
-
         search_bar.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
@@ -79,7 +88,7 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 //                tvSample.setText("Text in EditText : "+s)
                 if (search_bar.text.toString().isNotEmpty()) {
                     val searchHasHmap = HashMap<String, Any>()
-                    searchHasHmap.put("keyword", s.toString())
+                    searchHasHmap.put(Keys.KEYWORD, s.toString())
                     serviceViewModel.postservice(
                         Keys.CUSTOMER_HOME_ADD_END_POINT,
                         this@CustomerHomeActivity,
@@ -109,13 +118,39 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
     private fun bottomNavigationClickListener() {
         bottomNavigationView.setOnItemSelectedListener { item ->
-            Log.e("inn", "inner")
             when (item.itemId) {
                 R.id.fragment_profile -> {
-                    Log.e("profile", "profile")
-                    notification_count.visibility = View.INVISIBLE
-                    ads.setText("Profile")
-                    header_filer.visibility = View.INVISIBLE
+                    Utils.addReplaceFragment(
+                        this,
+                        ProfileFragment(), R.id.nav_container, false, false, false
+                    )
+                }
+                R.id.notificationFragment -> {
+                    Utils.addReplaceFragment(
+                        this,
+                        NotificationFragment(), R.id.nav_container, false, false, false
+                    )
+                }
+                R.id.homeFragment -> {
+                    Utils.addReplaceFragment(
+                        this,
+                        HomeFragment(), R.id.nav_container, false, false, false
+                    )
+
+                }
+                R.id.sellerChatFragment -> {
+                    Utils.addReplaceFragment(
+                        this,
+                        SellerChatFragment(), R.id.nav_container, false, false, false
+                    )
+
+                }
+                R.id.searchBarFragment -> {
+                    Utils.addReplaceFragment(
+                        this,
+                        SearchBarFragment(), R.id.nav_container, false, false, false
+                    )
+
                 }
             }
             true
@@ -128,11 +163,11 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             R.id.menu_bar -> {
                 drawer_layout.openDrawer(GravityCompat.START)
             }
-            R.id.add_property -> {
+            R.id.wishlist -> {
                 drawer_layout.closeDrawers()
                 openA(DealerAddActivity::class)
             }
-            R.id.my_property -> {
+            R.id.customer_message -> {
                 drawer_layout.closeDrawers()
                 openA(SellerAddedAdsProperty::class)
 //                val fragment = SellerAddFragment()

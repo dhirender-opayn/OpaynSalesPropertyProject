@@ -21,14 +21,18 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <androidx.viewpager.widget.ViewPager
                     android:id="@+id/selected_ads_img"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/properties1"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/selected_ads_back_btn"
+                    style="@style/widget_button"
+                    android:drawableLeft="@drawable/ic_back_btn"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -38,6 +42,8 @@
                     android:drawableLeft="@drawable/ic_edit"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+
 
                 <TextView
                     android:id="@+id/selected_ads_forward"

@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.api_model.SearchModel
 import com.example.opaynpropertyproject.api_model.SearchModelSuccess
 import com.greetupp.extensions.isNull
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seller_home_list_holder.view.*
 
-class SearchRecyclerAdapter(val searchList : ArrayList<SearchModelSuccess.Data.Data>): RecyclerView.Adapter<SearchRecyclerAdapter.SearchViewHolder>() {
+class SearchRecyclerAdapter(val searchList : ArrayList<SearchModelSuccess.Data.Data>, val search_selected_position : GetPositionInterface): RecyclerView.Adapter<SearchRecyclerAdapter.SearchViewHolder>()  {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -32,7 +33,6 @@ class SearchRecyclerAdapter(val searchList : ArrayList<SearchModelSuccess.Data.D
             holder.disable_edit.visibility = View.INVISIBLE
             holder.disable_make_it_feature.visibility = View.INVISIBLE
             holder.disable_search_forward.visibility = View.INVISIBLE
-
             holder.search_forward_btn.visibility = View.VISIBLE
             holder.search_add_fav.visibility = View.VISIBLE
             holder.search_sold_status.visibility = View.INVISIBLE
@@ -43,6 +43,9 @@ class SearchRecyclerAdapter(val searchList : ArrayList<SearchModelSuccess.Data.D
             }
 
 
+        holder.property_container.setOnClickListener{
+           search_selected_position.getPosition(holder.adapterPosition)
+        }
 
     }
 
@@ -69,6 +72,9 @@ class SearchRecyclerAdapter(val searchList : ArrayList<SearchModelSuccess.Data.D
         val search_bed = itemView.yours_ads_bed
         val search_bathroom = itemView.yours_ads_bathroom
         val search_area = itemView.yours_ads_area
+        val property_container = itemView.property_container
 
     }
+
+
 }

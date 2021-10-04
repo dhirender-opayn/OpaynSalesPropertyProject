@@ -52,6 +52,7 @@ class HomeRecommendInnerAdapter(
             holder.dealer_home_area.setText(homeInnerPropertyList[position].profile.area.toString())
             holder.dealer_home_sold_status.visibility = View.INVISIBLE
 
+
             if (homeInnerPropertyList[position].image != null) {
                 Picasso.get().load(homeInnerPropertyList[position].image.image)
                     .placeholder(R.drawable.down_arrow).into(holder.dealer_home_property_img)

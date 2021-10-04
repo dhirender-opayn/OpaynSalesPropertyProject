@@ -92,6 +92,9 @@
     <string name="contactus">Contact Us</string>
     <string name="des_query_required">Please enter Description</string>
     <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="notification">Notification</string>
+    <string name="favourite">Favourite</string>
 
 
 </resources>

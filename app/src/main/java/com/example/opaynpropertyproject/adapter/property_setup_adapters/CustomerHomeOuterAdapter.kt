@@ -26,7 +26,8 @@ class CustomerHomeOuterAdapter(val customerHomeProperty:ArrayList<CustomerHomeMo
     }
 
     override fun onBindViewHolder(holder: CustomerHomeOuterViewHolder, position: Int) {
-        holder.innner_adapter.adapter = CustomerHomeInnerAdapter(customerHomeProperty,activity,getfavPosition)
+        //holder.innner_adapter.adapter = CustomerHomeInnerAdapter(customerHomeProperty,activity,getfavPosition)
+
     }
 
     override fun getItemCount(): Int {

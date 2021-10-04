@@ -1,6 +1,7 @@
 package com.example.opaynpropertyproject.adapter.property_setup_adapters
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,13 @@ import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.CustomerHomeModel
+import com.example.opaynpropertyproject.comman.Utils
+import com.greetupp.extensions.isNull
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seller_home_list_holder.view.*
 
-class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHomeModel.Data>, val activity: Activity, val home_fav_position: GetPositionInterface) :
-    RecyclerView.Adapter<CustomerHomeInnerAdapter.CustomerHomeInnerViewHolder>() {
+class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHomeModel.Data.Data>, val activity: Activity, val home_fav_position: GetPositionInterface  ) :
+    RecyclerView.Adapter<CustomerHomeInnerAdapter.CustomerHomeInnerViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerHomeInnerViewHolder {
@@ -25,24 +28,25 @@ class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHome
     }
 
     override fun onBindViewHolder(holder: CustomerHomeInnerViewHolder, position: Int) {
-        if (customerInnerHomeList[position].data.isNotEmpty()) {
-            holder.customer_home_address.setText(customerInnerHomeList[position].data[position].address)
+        holder.customer_home_address.setText(customerInnerHomeList[position].address)
 //            holder.customer_home_sub_address.setText(customerInnerHomeList[position].data[position].description.toString())
-            holder.customer_home_price.setText(customerInnerHomeList[position].data[position].price.toString())
-            holder.disable_home_cancel.visibility = View.INVISIBLE
-            holder.disable_edit.visibility = View.INVISIBLE
-            holder.disable_make_it_feature.visibility = View.INVISIBLE
-            holder.disable_home_forward.visibility = View.INVISIBLE
+        holder.customer_home_price.setText(customerInnerHomeList[position].price.toString())
+        holder.disable_home_cancel.visibility = View.INVISIBLE
+        holder.disable_edit.visibility = View.INVISIBLE
+        holder.disable_make_it_feature.visibility = View.INVISIBLE
+        holder.disable_home_forward.visibility = View.INVISIBLE
 
-            holder.customer_forward_btn.visibility = View.VISIBLE
-            holder.customer_home_add_fav.visibility = View.VISIBLE
-            holder.customer_home_sold_status.visibility = View.INVISIBLE
+        holder.customer_forward_btn.visibility = View.VISIBLE
+        holder.customer_home_add_fav.visibility = View.VISIBLE
+        holder.customer_home_sold_status.visibility = View.INVISIBLE
 
-            if (customerInnerHomeList[position].data[position].image != null) {
-              //  Picasso.get().load((customerInnerHomeList[position].data[position].image.image).placeholder(R.drawable.down_arrow).into(holder.customer_home_property_img)
-                Picasso.get().load(customerInnerHomeList[position].data[position].image.image).placeholder(R.drawable.down_arrow).into(holder.customer_home_property_img)
-            }
+        if (!customerInnerHomeList[position].image.isNull() &&customerInnerHomeList[position].image.image.isNull()) {
+            //  Picasso.get().load((customerInnerHomeList[position].data[position].image.image).placeholder(R.drawable.down_arrow).into(holder.customer_home_property_img)
+            Picasso.get().load(customerInnerHomeList[position].image.image).placeholder(R.drawable.down_arrow).into(holder.customer_home_property_img)
+        }
 
+        holder.property_container.setOnClickListener{
+            home_fav_position.getPosition(holder.adapterPosition)
         }
 
     }
@@ -71,6 +75,7 @@ class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHome
         val customer_home_bed = itemView.yours_ads_bed
         val customer_home_bathroom = itemView.yours_ads_bathroom
         val customer_home_area = itemView.yours_ads_area
+        val property_container = itemView.property_container
 
     }
 }

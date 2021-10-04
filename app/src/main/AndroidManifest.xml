@@ -18,6 +18,9 @@
         android:theme="@style/Theme.OpaynPropertyProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".customer.SavedPropertyActivity"
+            android:exported="true" />
+        <activity
             android:name=".customer.CustomerHomeActivity"
             android:exported="true" />
         <activity

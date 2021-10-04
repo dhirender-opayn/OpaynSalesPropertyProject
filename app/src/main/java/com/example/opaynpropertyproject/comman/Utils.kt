@@ -9,13 +9,17 @@ import java.util.regex.Pattern
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.opaynpropertyproject.R
+import kotlin.reflect.KClass
 
 
 object Utils {
@@ -34,6 +38,9 @@ object Utils {
     open fun customSnakebar(view: View, error_name:String){
         Snackbar.make(view,error_name, Snackbar.LENGTH_LONG).show()
     }
+
+
+
 
 
     //Hide Keyboard

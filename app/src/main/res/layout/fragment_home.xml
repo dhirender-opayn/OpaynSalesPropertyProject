@@ -24,8 +24,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/home_widget_view_holder" />
 
-            <ImageView
-                android:id="@+id/home_img"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/home_img_pager"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
                 android:scaleType="centerCrop"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/home_img"
+                app:layout_constraintTop_toBottomOf="@+id/home_img_pager"
                 tools:listitem="@layout/home_outer_view_holder" />
 
 <!--            <androidx.recyclerview.widget.RecyclerView-->

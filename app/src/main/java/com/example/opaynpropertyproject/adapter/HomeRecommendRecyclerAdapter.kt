@@ -16,9 +16,6 @@ import kotlinx.android.synthetic.main.home_outer_view_holder.view.*
 import kotlinx.android.synthetic.main.seller_home_list_holder.view.*
 
 class HomeRecommendRecyclerAdapter(val homePropertyList:ArrayList<SellerPropertyListingModel.Data>, val activity: Activity,val getfavPosition: GetPositionInterface) :RecyclerView.Adapter<HomeRecommendRecyclerAdapter.HomeViewHolder>(){
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val view = HomeViewHolder(
             LayoutInflater.from(parent.context)
@@ -30,11 +27,7 @@ class HomeRecommendRecyclerAdapter(val homePropertyList:ArrayList<SellerProperty
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-
             holder.innner_adapter.adapter = HomeRecommendInnerAdapter(homePropertyList,activity,getfavPosition)
-
-
-
     }
 
     override fun getItemCount(): Int {

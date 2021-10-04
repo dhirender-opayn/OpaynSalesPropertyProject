@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.opaynpropertyproject.R
+import com.example.opaynpropertyproject.home_activity.HomeActivity
+import kotlinx.android.synthetic.main.toolbar.*
+
 class ChatScreenFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +22,11 @@ class ChatScreenFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat_screen, container, false)
+
     }
+
+
+
 
 
 }

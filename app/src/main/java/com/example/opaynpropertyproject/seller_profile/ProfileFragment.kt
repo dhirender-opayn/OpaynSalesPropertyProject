@@ -1,5 +1,6 @@
 package com.example.opaynpropertyproject.seller_profile
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.example.opaynpropertyproject.comman.Utils
+import com.example.opaynpropertyproject.customer.CustomerHomeActivity
+import com.example.opaynpropertyproject.customer.SavedPropertyActivity
 
 
 import com.example.opaynpropertyproject.home_activity.HomeActivity
@@ -26,6 +29,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 
 class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
+    lateinit var activity :Activity
 
 
     override fun onCreateView(
@@ -38,15 +42,31 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        profileHeader()
+        profileHeader()
         setclicks()
         getProfileApi()
 //       getProfileDeatils()
     }
 
     private fun profileHeader() {
-        val activity = requireContext() as HomeActivity
+        if (Keys.isCustomer){
+           activity = requireContext() as CustomerHomeActivity
 
+            add_property.visibility = View.INVISIBLE
+            wishlist.visibility = View.VISIBLE
+
+            my_property.visibility = View.INVISIBLE
+            customer_message.visibility = View.VISIBLE
+
+        } else{
+            activity = requireContext() as HomeActivity
+
+            add_property.visibility = View.VISIBLE
+            wishlist.visibility = View.INVISIBLE
+
+            my_property.visibility = View.VISIBLE
+            customer_message.visibility = View.INVISIBLE
+        }
         activity.ads.visibility = View.VISIBLE
         activity.ads.setText(getString(R.string.profile))
         activity.menu_bar.visibility = View.INVISIBLE
@@ -94,6 +114,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
         faq.setOnClickListener(this)
         about.setOnClickListener(this)
         contact_us.setOnClickListener(this)
+        wishlist.setOnClickListener(this)
 
     }
 
@@ -130,6 +151,12 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
             }
             R.id.contact_us -> {
                 openA(ContactUsActivity::class)
+            }
+            R.id.wishlist -> {
+                    openA(SavedPropertyActivity::class)
+            }
+            R.id.customer_message -> {
+
             }
         }
     }
