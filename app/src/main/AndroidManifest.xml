@@ -74,6 +74,9 @@
             android:name=".login_signup_activity.SignUpActivity"
             android:exported="true" />
         <activity
+            android:name=".seller_chat.ChatScreenActivity"
+            android:exported="true" />
+        <activity
             android:name=".login_signup_activity.LoginActivity"
             android:exported="true">
             <intent-filter>

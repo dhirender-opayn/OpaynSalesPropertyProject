@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.text.LoginFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
@@ -41,7 +43,7 @@ class HomeRecommendInnerAdapter(
 
     override fun onBindViewHolder(holder: HomeRecommendInnerViewHolder, position: Int) {
 
-  if (homeInnerPropertyList[position].profile != null) {
+        if (homeInnerPropertyList[position].profile != null) {
 
 
             holder.dealer_home_address.setText(homeInnerPropertyList[position].address)
@@ -57,6 +59,7 @@ class HomeRecommendInnerAdapter(
                 Picasso.get().load(homeInnerPropertyList[position].image.image)
                     .placeholder(R.drawable.down_arrow).into(holder.dealer_home_property_img)
             }
+
         }
 
     }
@@ -70,7 +73,7 @@ class HomeRecommendInnerAdapter(
         val dealer_home_property_img = itemView.your_ads_img
         val diable_home_cancel = itemView.your_ads_cancel_btn
         val disable_edit = itemView.your_ads_edit
-        val dealer_forward_btn = itemView.customer_your_ads_forward
+        val customer_forward_btn = itemView.customer_your_ads_forward
         val disable_home_forward = itemView.your_ads_forward
         val dealer_home_add_fav = itemView.c_fav
 

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "771958017542",
+    "project_id": "opaynproperty",
+    "storage_bucket": "opaynproperty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771958017542:android:669ddbe4aa26b62b183d87",
+        "android_client_info": {
+          "package_name": "com.example.opaynpropertyproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771958017542-0rtbejf5rhkjgigkfvmu7leee2nrg1d5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.opaynpropertyproject",
+            "certificate_hash": "ac0a0c7501160b4dd6aad9aacaf5b115b5152424"
+          }
+        },
+        {
+          "client_id": "771958017542-bu8apihnvm0oim64sfd6v3p475d2nr6k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx_FUmsMK2_pP5IlS4YWIVGaYBVBIUnm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771958017542-bu8apihnvm0oim64sfd6v3p475d2nr6k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "771958017542-rfli61o3r9s9ap9mdb2u8di5kd9cfsfm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.opayn.Opayn-Property"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

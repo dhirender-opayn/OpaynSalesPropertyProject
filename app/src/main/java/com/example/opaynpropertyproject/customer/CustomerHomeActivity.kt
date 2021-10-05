@@ -85,7 +85,7 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 s: CharSequence, start: Int,
                 before: Int, count: Int
             ) {
-//                tvSample.setText("Text in EditText : "+s)
+//              tvSample.setText("Text in EditText : "+s)
                 if (search_bar.text.toString().isNotEmpty()) {
                     val searchHasHmap = HashMap<String, Any>()
                     searchHasHmap.put(Keys.KEYWORD, s.toString())

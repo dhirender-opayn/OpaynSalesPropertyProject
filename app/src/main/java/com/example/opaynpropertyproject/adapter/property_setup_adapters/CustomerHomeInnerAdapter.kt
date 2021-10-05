@@ -37,6 +37,9 @@ class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHome
         holder.disable_home_forward.visibility = View.INVISIBLE
 
         holder.customer_forward_btn.visibility = View.VISIBLE
+        holder.customer_forward_btn.setOnClickListener{
+
+        }
         holder.customer_home_add_fav.visibility = View.VISIBLE
         holder.customer_home_sold_status.visibility = View.INVISIBLE
 

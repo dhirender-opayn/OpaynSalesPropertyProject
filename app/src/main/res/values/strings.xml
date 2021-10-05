@@ -95,6 +95,7 @@
     <string name="search">Search</string>
     <string name="notification">Notification</string>
     <string name="favourite">Favourite</string>
+    <string name="enter_message">Type Your message</string>
 
 
 </resources>

@@ -4,8 +4,10 @@ import com.example.opaynpropertyproject.api_model.CustomerHomeModel
 
 object Keys {
 
+
+    var SENDER: Boolean = false
     var customerList: ArrayList<CustomerHomeModel.Data.Data>? = null
-    const val BASEURL = "http://8129-180-188-237-22.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = " http://688b-180-188-237-22.ngrok.io/realestate-api/public/api/"
     val QUERY_DES: String ="description"
     val QUERY_SUB: String = "subject"
     val FURNISHING: String = "furnishing"

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/receive_container"
         style="@style/card_view"
+        android:visibility="gone"
         android:layout_width="@dimen/_280sdp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,7 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rectangel_border">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/receive_person_img"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
@@ -28,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/receive_person_msg"
                 style="@style/textview"
                 android:maxLength="26"
@@ -39,14 +41,12 @@
                 app:layout_constraintRight_toLeftOf="@+id/receive_person_timing"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/receive_person_timing"
                 style="@style/textview"
                 android:layout_marginEnd="@dimen/_6sdp"
                 android:paddingTop="@dimen/_6sdp"
-                android:paddingEnd="@dimen/_6sdp"
-                android:text="02:20Pm"
-                app:layout_constraintRight_toRightOf="parent"
+                  app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -55,50 +55,56 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/sender_contaier"
-        style="@style/card_view"
-        android:layout_width="@dimen/_280sdp"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+          android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_width="wrap_content"
+        android:visibility="visible"
+        android:layout_gravity="end"
+        app:layout_constraintTop_toBottomOf="@id/receive_container"
+         >
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="@dimen/_270sdp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangel_border">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/sender_person_img"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
+                android:visibility="gone"
                 android:scaleType="centerCrop"
                 android:src="@drawable/chat_person"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
+
                 android:id="@+id/sender_person_msg"
                 style="@style/textview"
-                android:maxLength="26"
-                android:paddingStart="@dimen/_6sdp"
-                android:singleLine="true"
-                android:text="How do have any properties"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toStartOf="@id/sender_person_img"
+                 android:layout_width="wrap_content"
+                 android:maxWidth="@dimen/_150sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
 
-            <TextView
+
+                 app:layout_constraintTop_toBottomOf="@id/sender_person_timing"
+                   />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/sender_person_timing"
                 style="@style/textview"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_6sdp"
-                android:paddingStart="@dimen/_6sdp"
-                android:paddingTop="@dimen/_6sdp"
-                android:text="02:20Pm"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                 android:paddingTop="@dimen/_6sdp"
+                 android:textSize="@dimen/_9sdp"
+                app:layout_constraintEnd_toStartOf="@id/sender_person_img"
+                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

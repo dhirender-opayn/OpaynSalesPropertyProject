@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
-}
+    id 'com.google.gms.google-services'
+ }
 
 android {
     compileSdk 30
@@ -72,6 +73,11 @@ dependencies {
 
     // image picker
     implementation 'com.github.CanHub:Android-Image-Cropper:3.2.2'
+
+    //firebase
+    implementation 'com.google.firebase:firebase-firestore:23.0.4'
+
+
 
 
 }

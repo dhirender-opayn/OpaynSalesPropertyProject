@@ -74,7 +74,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
             requireContext() as HomeActivity
         }
         activity.ads.visibility = View.VISIBLE
-        activity.ads.setText("Home")
+        activity.ads.setText(getString(R.string.home))
         activity.menu_bar.visibility = View.VISIBLE
         activity.search_bar_container.visibility = View.INVISIBLE
     }

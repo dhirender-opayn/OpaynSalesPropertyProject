@@ -31,6 +31,8 @@ open class BaseFragment : Fragment() {
         startActivity(intent)
     }
 
+
+
 //    fun openFragemtn(){
 //        val ft = fragmentManager!!.beginTransaction()
 //        ft.replace(R.id.Two, SecondFragment(), "NewFragmentTag")
