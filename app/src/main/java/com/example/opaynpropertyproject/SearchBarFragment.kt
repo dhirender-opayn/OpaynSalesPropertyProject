@@ -72,7 +72,6 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
 
 
             }
-
             override fun onTextChanged(
                 s: CharSequence, start: Int,
                 before: Int, count: Int
@@ -123,7 +122,6 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
                 val searchModel = gson.fromJson(response, SearchModelSuccess::class.java)
                 searchList.addAll(searchModel.data.data)
                 rv_search.adapter = SearchRecyclerAdapter(searchList, this)
-
             }
             Keys.SELECTED_PROPERTY_REQ_CODE -> {
                 openA(SelectedPropertyActivity::class)

@@ -1,6 +1,7 @@
 package com.example.opaynpropertyproject.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,14 @@ import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.ChatFirebaseModel
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.greetupp.extensions.isNull
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.chat_screen_view_holder.view.*
 
 class ChatScreenAdapter(val chatList:ArrayList<ChatFirebaseModel> , val context: Context ):RecyclerView.Adapter<ChatScreenAdapter.ChatScreenViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatScreenViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatScreenViewHolder
+    {
         val view = ChatScreenViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.chat_screen_view_holder, parent, false)
@@ -24,14 +27,24 @@ class ChatScreenAdapter(val chatList:ArrayList<ChatFirebaseModel> , val context:
     }
 
     override fun onBindViewHolder(holder: ChatScreenViewHolder, position: Int) {
-        holder.receive_container.visibility = View.GONE
-        holder.sender_person_msg.setText(chatList[position].last_message)
-        holder.sender_contaier.visibility = View.VISIBLE
 
-//
-//        if (Keys.SENDER){
-//
-//        }
+        if (chatList[position].type.equals("2")){
+            holder.senderImage.visibility = View.VISIBLE
+            Log.e("lastmsg",chatList[position].last_message)
+            Picasso.get().load(chatList[position].last_message)
+                .placeholder(R.drawable.down_arrow).into(holder.senderImage)
+            holder.receive_container.visibility = View.GONE
+            holder.sender_contaier.visibility = View.VISIBLE
+        } else {
+            holder.senderImage.visibility = View.GONE
+            Log.e("check","ddddd")
+            holder.receive_container.visibility = View.GONE
+            holder.sender_person_msg.visibility = View.VISIBLE
+            holder.sender_person_msg.setText(chatList[position].last_message)
+            holder.sender_contaier.visibility = View.VISIBLE
+
+        }
+
 
     }
 
@@ -48,6 +61,8 @@ class ChatScreenAdapter(val chatList:ArrayList<ChatFirebaseModel> , val context:
         val sender_person_img = item.sender_person_img
         val sender_person_msg = item.sender_person_msg
         val sender_person_timing = item.sender_person_timing
+        val receiverImage = item.receiverImage
+        val senderImage = item.senderImage
 
 
     }

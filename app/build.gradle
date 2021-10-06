@@ -76,7 +76,11 @@ dependencies {
 
     //firebase
     implementation 'com.google.firebase:firebase-firestore:23.0.4'
+    //storage
 
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
 
 
 

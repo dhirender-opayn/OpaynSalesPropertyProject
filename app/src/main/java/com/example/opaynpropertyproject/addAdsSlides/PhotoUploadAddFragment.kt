@@ -133,41 +133,41 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
         }
     }
 
-    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
-        if (result.isSuccessful) {
+        private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+            if (result.isSuccessful) {
 
-            // use the returned uri
-            val uriContent = result.uriContent
-            val uriFilePath = result.getUriFilePath(requireActivity()) // optional usage
-            Log.e("rr", uriContent.toString())
-            if (uriContent != null) {
+                // use the returned uri
+                val uriContent = result.uriContent
+                val uriFilePath = result.getUriFilePath(requireActivity()) // optional usage
+                Log.e("rr", uriContent.toString())
+                if (uriContent != null) {
 
 
-                var file = File(uriFilePath)
-                Log.e("file", file.length().toString())
-                serviceViewModel.getMultiPart(Keys.IMAGE, file!!)?.let { fields.add(it) }
-//                val mProperty_id = propertyFilling.propertyID.toString()
+                    var file = File(uriFilePath)
+                    Log.e("file", file.length().toString())
+                    serviceViewModel.getMultiPart(Keys.IMAGE, file!!)?.let { fields.add(it) }
+    //                val mProperty_id = propertyFilling.propertyID.toString()
 
-                serviceViewModel.getMultiPart(Keys.PROPERTY_IMG_ID, propertyFilling.propertyID.toString())
-                    ?.let { fields.add(it) }
-                serviceViewModel.multipartservice(
-                    Keys.IMG_END_POINT, requireContext(), fields,
-                    Keys.IMG_RED_CODE, true, token, true, this
-                )
+                    serviceViewModel.getMultiPart(Keys.PROPERTY_IMG_ID, propertyFilling.propertyID.toString())
+                        ?.let { fields.add(it) }
+                    serviceViewModel.multipartservice(
+                        Keys.IMG_END_POINT, requireContext(), fields,
+                        Keys.IMG_RED_CODE, true, token, true, this
+                    )
+                }
+
+    //            image.setImageURI(uriContent)
+    //            var id = "4" // herer passs the property id
+    //            var file = File(uriFilePath)
+    //            serviceViewModel.getMultiPart(Keys.IMAGE,file!!)?.let { fields.add(it) }
+    //            serviceViewModel.getMultiPart(Keys.PROPERTY_IMG_ID,id!!)?.let { fields.add(it) }
+    //
+    //            serviceViewModel.multipartservice(Keys.IMG_END_POINT,requireContext(),fields,Keys.IMG_RED_CODE,true,token,true)
+            } else {
+                // an error occurred
+                val exception = result.error
             }
-
-//            image.setImageURI(uriContent)
-//            var id = "4" // herer passs the property id
-//            var file = File(uriFilePath)
-//            serviceViewModel.getMultiPart(Keys.IMAGE,file!!)?.let { fields.add(it) }
-//            serviceViewModel.getMultiPart(Keys.PROPERTY_IMG_ID,id!!)?.let { fields.add(it) }
-//
-//            serviceViewModel.multipartservice(Keys.IMG_END_POINT,requireContext(),fields,Keys.IMG_RED_CODE,true,token,true)
-        } else {
-            // an error occurred
-            val exception = result.error
         }
-    }
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {

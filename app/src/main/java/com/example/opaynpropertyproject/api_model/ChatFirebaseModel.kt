@@ -14,7 +14,7 @@ class ChatFirebaseModel{
     var sender_name: String= ""
     var type: String= ""
     @ServerTimestamp
-    val created_at: Date? = null
+    var created_at: Date? = null
 
 }
 
