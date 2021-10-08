@@ -111,12 +111,9 @@ class FilterPropertyActivity : BaseActivity(), View.OnClickListener ,ApiResponse
             }
         }
     }
-
     override fun onResponse(requestcode: Int, response: String) {
         when(requestcode){
-
             Keys.PROPERTY_TYPE_REQ_CODE -> {
-
                 //check index is error or not ???
                 filter_property_model = gson.fromJson(response, FilterModel::class.java)
 
@@ -150,8 +147,6 @@ class FilterPropertyActivity : BaseActivity(), View.OnClickListener ,ApiResponse
 
                 val filter_furnishList = filter_property_model!!.data[6].options
                 rv_filter_furnishing.adapter = FilterFurnishAdapter(filter_furnishList,this)
-
-
             }
             Keys.PROPERTY_SEARCH_REQ_CODE -> {
                 SearchBarFragment.text = "1"

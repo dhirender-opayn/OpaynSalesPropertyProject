@@ -79,6 +79,7 @@
         android:layout_height="@dimen/_20sdp"
         android:src="@drawable/ic_filters"
         android:id="@+id/header_filer"
+        android:visibility="invisible"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/search_bar_container"
         app:layout_constraintBottom_toBottomOf="@+id/search_bar_container"/>

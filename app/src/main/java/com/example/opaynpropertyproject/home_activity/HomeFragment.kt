@@ -81,6 +81,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
         activity.ads.setText(getString(R.string.home))
         activity.menu_bar.visibility = View.VISIBLE
         activity.search_bar_container.visibility = View.INVISIBLE
+        activity.header_filer.visibility = View.INVISIBLE
     }
 
     private fun HitHomeApi() {

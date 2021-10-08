@@ -73,6 +73,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
         activity.ads.setText(getString(R.string.profile))
         activity.menu_bar.visibility = View.INVISIBLE
         activity.search_bar_container.visibility = View.INVISIBLE
+        activity.header_filer.visibility = View.INVISIBLE
     }
 
     override fun onResume() {

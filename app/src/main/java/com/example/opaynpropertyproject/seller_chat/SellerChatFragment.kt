@@ -66,6 +66,7 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
         activity.ads.setText(getString(R.string.chat))
         activity.menu_bar.visibility = View.VISIBLE
         activity.search_bar_container.visibility = View.INVISIBLE
+        activity.header_filer.visibility = View.INVISIBLE
     }
 
     private fun readLastMessage() {

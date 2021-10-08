@@ -32,7 +32,6 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
         super.onCreate(savedInstanceState)
 
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,18 +39,14 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_bar, container, false)
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchListner()
         SearchHeader()
         SearchClick()
-
     }
     private fun SearchClick(){
        activity_search.header_filer.setOnClickListener(this)
     }
-
     private fun SearchHeader() {
         if (Keys.isCustomer){
             activity_search = requireContext() as CustomerHomeActivity
@@ -62,14 +57,13 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
         activity_search.menu_bar.visibility = View.VISIBLE
         activity_search.search_bar_container.visibility = View.VISIBLE
         activity_search.header_filer.visibility = View.VISIBLE
+
     }
 
     private fun searchListner() {
 //    val activity = requireActivity() as HomeActivity
         activity?.search_bar?.addTextChangedListener(object : TextWatcher {
-
             override fun afterTextChanged(s: Editable) {}
-
             override fun beforeTextChanged(
                 s: CharSequence, start: Int,
                 count: Int, after: Int

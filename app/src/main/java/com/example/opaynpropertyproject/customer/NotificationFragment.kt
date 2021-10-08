@@ -44,12 +44,10 @@ class NotificationFragment : Fragment() {
         } else {
               activity = requireContext() as HomeActivity
         }
-
         activity.ads.visibility = View.VISIBLE
         activity.ads.setText(getString(R.string.notification))
         activity.menu_bar.visibility = View.VISIBLE
         activity.search_bar_container.visibility = View.INVISIBLE
+        activity.header_filer.visibility = View.INVISIBLE
     }
-
-
 }
