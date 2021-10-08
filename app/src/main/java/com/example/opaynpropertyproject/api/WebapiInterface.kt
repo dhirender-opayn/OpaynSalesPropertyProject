@@ -42,6 +42,8 @@ interface WebapiInterface
 //dummy==================================================================================================================================
     @GET()
     fun getserviceWithKeywordBody(@Url url: String,@Query("keyword") keyword:String): Call<ResponseBody>
+    @GET()
+    fun getserviceWithKeywordBody(@Url url: String,@Query("keyword") keyword:HashMap<String,Any>): Call<ResponseBody>
 
 
     @POST()

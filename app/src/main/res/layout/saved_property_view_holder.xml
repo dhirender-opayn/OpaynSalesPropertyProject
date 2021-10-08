@@ -39,6 +39,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/saved_property_forward_wishlist"
+                    style="@style/widget_button"
+                    android:visibility="gone"
+                    android:drawableLeft="@drawable/ic_share"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/saved_property_cancel_btn"  />
+
+                <TextView
                     android:id="@+id/saved_property_fav"
                     style="@style/widget_button"
                     android:drawableLeft="@drawable/ic_red_heart"
@@ -94,9 +102,9 @@
                 <TextView
                     android:id="@+id/saved_property_price"
                     style="@style/header"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/_7sdp"
                     android:text="$29,000,00"
                     android:textColor="@color/black"
                     app:layout_constraintLeft_toLeftOf="parent"

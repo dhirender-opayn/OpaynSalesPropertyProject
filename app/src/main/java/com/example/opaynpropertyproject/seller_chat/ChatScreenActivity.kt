@@ -42,7 +42,7 @@ class ChatScreenActivity : BaseActivity(), View.OnClickListener {
     val storage = Firebase.storage
     var chatList = ArrayList<ChatFirebaseModel>()
     var adapter: ChatScreenAdapter? = null
-    private val PICK_IMAGE_REQUEST = 22
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

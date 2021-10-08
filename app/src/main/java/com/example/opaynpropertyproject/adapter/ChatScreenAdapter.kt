@@ -26,7 +26,8 @@ class ChatScreenAdapter(val chatList:ArrayList<ChatFirebaseModel> , val context:
         return view
     }
 
-    override fun onBindViewHolder(holder: ChatScreenViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ChatScreenViewHolder, position: Int)
+    {
 
         if (chatList[position].type.equals("2")){
             holder.senderImage.visibility = View.VISIBLE
@@ -35,23 +36,23 @@ class ChatScreenAdapter(val chatList:ArrayList<ChatFirebaseModel> , val context:
                 .placeholder(R.drawable.down_arrow).into(holder.senderImage)
             holder.receive_container.visibility = View.GONE
             holder.sender_contaier.visibility = View.VISIBLE
-        } else {
+        } else
+        {
             holder.senderImage.visibility = View.GONE
             Log.e("check","ddddd")
             holder.receive_container.visibility = View.GONE
             holder.sender_person_msg.visibility = View.VISIBLE
             holder.sender_person_msg.setText(chatList[position].last_message)
             holder.sender_contaier.visibility = View.VISIBLE
-
         }
-
-
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int
+    {
      return  chatList.size
     }
-    class ChatScreenViewHolder(item: View):RecyclerView.ViewHolder(item){
+    class ChatScreenViewHolder(item: View):RecyclerView.ViewHolder(item)
+    {
         val receive_container = item.receive_container
         val receive_person_img = item.receive_person_img
         val receive_person_msg = item.receive_person_msg
@@ -63,7 +64,5 @@ class ChatScreenAdapter(val chatList:ArrayList<ChatFirebaseModel> , val context:
         val sender_person_timing = item.sender_person_timing
         val receiverImage = item.receiverImage
         val senderImage = item.senderImage
-
-
     }
 }

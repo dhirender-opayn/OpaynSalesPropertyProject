@@ -52,11 +52,11 @@
                     android:drawableLeft="@drawable/ic_edit"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/your_ads_cancel_btn" />
-                <TextView
+                <ImageView
                     android:id="@+id/c_fav"
                     style="@style/widget_button"
                     android:visibility="invisible"
-                    android:drawableLeft="@drawable/ic_white_heart"
+                    android:src="@drawable/ic_white_heart"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/your_ads_cancel_btn"
                     app:layout_constraintBottom_toTopOf="@+id/your_ads_forward"/>
@@ -109,6 +109,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/property_txt_container"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/yours_ads_img_container">

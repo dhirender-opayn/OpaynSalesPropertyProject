@@ -28,6 +28,7 @@ class HomeRecommendRecyclerAdapter(val homePropertyList:ArrayList<SellerProperty
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
             holder.innner_adapter.adapter = HomeRecommendInnerAdapter(homePropertyList,activity,getfavPosition)
+
     }
 
     override fun getItemCount(): Int {

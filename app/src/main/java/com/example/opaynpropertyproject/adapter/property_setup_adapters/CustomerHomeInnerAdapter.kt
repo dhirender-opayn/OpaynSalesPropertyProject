@@ -2,6 +2,7 @@ package com.example.opaynpropertyproject.adapter.property_setup_adapters
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,11 @@ class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHome
             Picasso.get().load(customerInnerHomeList[position].image.image).placeholder(R.drawable.down_arrow).into(holder.customer_home_property_img)
         }
 
-        holder.property_container.setOnClickListener{
+        holder.property_txt_container.setOnClickListener{
+            home_fav_position.getPosition(holder.adapterPosition)
+        }
+        holder.customer_home_add_fav.setOnClickListener {
+            Keys.add_fav_flag = true
             home_fav_position.getPosition(holder.adapterPosition)
         }
 
@@ -79,6 +84,7 @@ class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHome
         val customer_home_bathroom = itemView.yours_ads_bathroom
         val customer_home_area = itemView.yours_ads_area
         val property_container = itemView.property_container
+        val property_txt_container = itemView.property_txt_container
 
     }
 }

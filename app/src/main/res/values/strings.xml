@@ -96,6 +96,7 @@
     <string name="notification">Notification</string>
     <string name="favourite">Favourite</string>
     <string name="enter_message">Type Your message</string>
+    <string name="filter">Filter</string>
 
 
 </resources>

@@ -92,6 +92,7 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
 
         do_later_btn.setOnClickListener(this)
         first_next_btn.setOnClickListener(this)
+        header_filer.setOnClickListener(this)
     }
 
     fun stateAdapter() {
@@ -376,6 +377,7 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
 
                 //check index is error or not ???
                 sell_property_model = gson.fromJson(response, SellPropertyModel::class.java)
+
                 propertyFilling.sell_property_model_update = sell_property_model
 
                 //sell_type_header.text = sell_property_model!!.data[0].name.toString() //To set header by api header

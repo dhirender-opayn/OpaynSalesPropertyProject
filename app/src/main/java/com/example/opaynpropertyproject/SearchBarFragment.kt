@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +12,11 @@ import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.adapter.property_setup_adapters.SearchRecyclerAdapter
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
-import com.example.opaynpropertyproject.api_model.GetProfileSuccess
-import com.example.opaynpropertyproject.api_model.SearchModel
 import com.example.opaynpropertyproject.api_model.SearchModelSuccess
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.customer.CustomerHomeActivity
 import com.example.opaynpropertyproject.customer.CustomerHomeActivity.Companion.token
+import com.example.opaynpropertyproject.customer.FilterPropertyActivity
 import com.example.opaynpropertyproject.home_activity.HomeActivity
 
 import com.example.opaynpropertyproject.home_activity.SelectedPropertyActivity
@@ -46,6 +45,11 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         searchListner()
         SearchHeader()
+        SearchClick()
+
+    }
+    private fun SearchClick(){
+       activity_search.header_filer.setOnClickListener(this)
     }
 
     private fun SearchHeader() {
@@ -57,6 +61,7 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
         activity_search.ads.visibility = View.INVISIBLE
         activity_search.menu_bar.visibility = View.VISIBLE
         activity_search.search_bar_container.visibility = View.VISIBLE
+        activity_search.header_filer.visibility = View.VISIBLE
     }
 
     private fun searchListner() {
@@ -97,6 +102,11 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
     }
 
     override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.header_filer -> {
+                openA(FilterPropertyActivity::class)
+            }
+        }
 
     }
 
@@ -132,6 +142,17 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
 
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!text.isEmpty()){
+            Log.e("search_result","text")
+        }
+    }
+
+    companion object {
+        var text = ""
     }
 
 

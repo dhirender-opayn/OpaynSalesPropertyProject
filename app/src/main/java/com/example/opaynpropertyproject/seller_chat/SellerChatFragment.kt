@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.search_toolbar.*
 import kotlinx.android.synthetic.main.search_toolbar.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import okhttp3.MultipartBody
+import java.lang.Exception
 
 class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickListener {
     lateinit var activity: Activity
@@ -71,6 +72,7 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
         val mMessagesRefchat = db.collection("chatRooms").document("12")
         mMessagesRefchat.get().addOnSuccessListener { documentsnapshot ->
             if (documentsnapshot != null) {
+                //if (documentsnapshot.getString("receiver_id").toString().equals() || documentsnapshot.getString("sender_id").toString().equals() ) //condition when
                 sellerchatmodel.last_message = documentsnapshot.getString("last_message").toString()
                 sellerchatmodel.type = documentsnapshot.getString("type").toString()
                 sellerchatmodel.sender_image = documentsnapshot.getString("sender_image").toString()
@@ -78,7 +80,12 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
                 sellerchatmodel.receiver_id = documentsnapshot.getString("receiver_id").toString()
                 sellerchatmodel.sender_name = documentsnapshot.getString("sender_name").toString()
                 frontchatlist.add(sellerchatmodel)
-                setChatAdapterChat(frontchatlist)
+                try {
+                    setChatAdapterChat(frontchatlist)
+                }catch (e:Exception){
+
+                }
+
              }
         }
     }
@@ -86,17 +93,14 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
     override fun getPosition(position: Int) {
 
     }
-
     private fun setChatAdapterChat( list:ArrayList<ChatFirebaseModel>) {
         adapter = ChatRecyclerAdapter(list, requireActivity(), this)
         rv_seller_chat.adapter = adapter
     }
-
     override fun onClick(v: View?) {
         when (v?.id) {
 
         }
-
     }
 
 
@@ -113,23 +117,17 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
                 count: Int, after: Int
             ) {
 //                Log.e("Check",s.toString()+"text")
-
-
             }
 
             override fun onTextChanged(
                 s: CharSequence, start: Int,
                 before: Int, count: Int
             ) {
-
                 templist.clear()
                 if (!chat_search_bar?.search_toolbar?.text.toString().isEmpty()){
-//
                   templist= frontchatlist.filter { it.sender_name.lowercase().contains(s.toString())|| it.receiver_name.lowercase().contains(s.toString())} as ArrayList<ChatFirebaseModel>
                     setChatAdapterChat(templist)
                     Log.e("reslultsssss",templist.size.toString())
-
-
                 }
                 else{
                     setChatAdapterChat(frontchatlist)

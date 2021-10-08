@@ -59,6 +59,10 @@ class HomeRecommendInnerAdapter(
                 Picasso.get().load(homeInnerPropertyList[position].image.image)
                     .placeholder(R.drawable.down_arrow).into(holder.dealer_home_property_img)
             }
+            holder.dealer_home_add_fav.setOnClickListener {
+                Log.e("click", "Fav click")
+                home_fav_position.getPosition(holder.adapterPosition)
+            }
 
         }
 

@@ -1,13 +1,14 @@
 package com.example.opaynpropertyproject.api
 
 import com.example.opaynpropertyproject.api_model.CustomerHomeModel
+import com.example.opaynpropertyproject.api_model.SellPropertyModel
 
 object Keys {
 
-
+    var add_fav_flag: Boolean = false
     var SENDER: Boolean = false
     var customerList: ArrayList<CustomerHomeModel.Data.Data>? = null
-    const val BASEURL = "http://1297-180-188-237-22.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = "https://12a9-180-188-237-22.ngrok.io/realestate-api/public/api/"
     val QUERY_DES: String ="description"
     val QUERY_SUB: String = "subject"
     val FURNISHING: String = "furnishing"
@@ -25,7 +26,6 @@ object Keys {
     val BACKENDERROR = 412
     val PROFILE_DATA = "profile_data"
     val POSITION = "position"
-
 
     //signup End point
     var signupEndPoint = "signup"
@@ -109,6 +109,7 @@ object Keys {
     val GET_PROFILE_END_POINT = "dealer/profile"
 
     val SELECTED_PROPERTY_END_POINT = "property/"
+    val PROPERTY_TYPE_DETAIL = "property-attributes"
 
 
 
@@ -150,6 +151,9 @@ object Keys {
     val ADD_PROPERTY_FAV_REQ_CODE = 24
     val GET_PROFILE_REQ_CODE = 25
     val SELECTED_PROPERTY_REQ_CODE = 26
+    val GET_FAV_REQ_CODE = 27
+    val DEL_WISHLIST_REQ_CODE = 28
+    val PROPERTY_TYPE_REQ_CODE = 29
 
     //customer REQ Code
      val CUSTOMER_HOME_REQ_CODE = 25
@@ -196,6 +200,11 @@ object Keys {
     val CUSTOMER = "Customer"
     val CUSTOMER_HOME_ADD_END_POINT = "properties"
     var isCustomer = false
+
+    val SELL_Type  = "type"
+    val AGE = "age"
+    val POSSESSION = "possession"
+
 
 
 

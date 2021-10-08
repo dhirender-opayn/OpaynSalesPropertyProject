@@ -23,6 +23,8 @@ import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.tok
 
 import com.example.opaynpropertyproject.home_activity.SellerAddedAdsProperty
 import com.example.opaynpropertyproject.login_signup_activity.LoginActivity
+import com.example.opaynpropertyproject.seller_chat.ChatScreenActivity
+import com.example.opaynpropertyproject.seller_chat.SellerChatFragment
 import com.greetupp.extensions.isNull
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -115,6 +117,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
         about.setOnClickListener(this)
         contact_us.setOnClickListener(this)
         wishlist.setOnClickListener(this)
+        customer_message.setOnClickListener(this)
 
     }
 
@@ -156,7 +159,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
                     openA(SavedPropertyActivity::class)
             }
             R.id.customer_message -> {
-
+//                Utils.addReplaceFragment(requireContext(),SellerChatFragment(),R.id.nav_container,true,true,true)
             }
         }
     }
@@ -179,8 +182,6 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 //                } else {
 //                    seller_phone_number.setText(mUser_mobile.toString())
 //                }
-
-
             }
         }
     }

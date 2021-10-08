@@ -199,7 +199,6 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             Keys.CUSTOMER_HOME_REQ_CODE -> {
                 val searchModel = gson.fromJson(response, SearchModel::class.java)
                 searchList.addAll(listOf(searchModel.data))
-
             }
 
 

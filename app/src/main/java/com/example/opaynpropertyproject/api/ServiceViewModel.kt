@@ -476,6 +476,79 @@ class ServiceViewModel {
     }
 
 
+  fun getserviceWithKeyword2(
+        url: String,
+        context: Context,
+        reuestcode: Int,
+        isheader: Boolean,
+        token: String,
+        keyword:HashMap<String,Any>,
+        isprogress: Boolean,
+        responselistner: ApiResponse
+    ) {
+
+        val apiService = WebapiInterface.create(context, isheader, token)
+
+        val response = apiService.getserviceWithKeywordBody(url,keyword)
+        if (isprogress) {
+            ProgressDialogs.showDialog(context)
+        }
+        response.enqueue(object : retrofit2.Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable?) {
+                ProgressDialogs.dismissProgressDialog()
+                ProgressDialogs.showToast(context, t?.message.toString())
+
+            }
+
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>?) {
+
+                if (response != null) {
+                    ProgressDialogs.dismissProgressDialog()
+                    when (response.code()) {
+                        Keys.SUCESSCODE -> {
+                            if (response.body() != null) {
+                                reuestCode = reuestcode
+                                var jsonObject = JSONObject(response.body()!!.string().toString())
+                                responsestring = jsonObject.toString()
+                                responselistner.onResponse(reuestcode, responsestring)
+
+
+                            }
+
+                        }
+                        Keys.UNAUTHRISECODE -> {
+
+                            ProgressDialogs.showToast(context, response.message())
+
+                        }
+                        Keys.SERVERERROR -> {
+                            reuestCode = Keys.SERVERERROR
+//                            setChanged()
+//                            notifyObservers()
+                            ProgressDialogs.showToast(context, response.message())
+
+
+                        }
+                        Keys.BACKENDERROR -> {
+                            reuestCode = Keys.BACKENDERROR
+                            ProgressDialogs.showToast(context, response.message())
+                            //   ProgressDialogs.showToast(context,"Internal server Error")
+
+                        }
+                    }
+
+
+                } else {
+
+                    ProgressDialogs.dismissProgressDialog()
+                }
+            }
+
+        })
+
+    }
+
+
 
 
 
