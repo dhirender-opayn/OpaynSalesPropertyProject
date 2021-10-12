@@ -87,8 +87,6 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/sender_person_msg"
                 style="@style/textview"
@@ -104,7 +102,6 @@
                 app:layout_constraintEnd_toStartOf="@id/sender_person_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sender_person_timing" />
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/senderImage"
                 android:layout_width="@dimen/_50sdp"
@@ -114,7 +111,6 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/sender_person_timing"
                 style="@style/textview"

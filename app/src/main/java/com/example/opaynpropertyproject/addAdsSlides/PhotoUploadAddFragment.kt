@@ -180,7 +180,7 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
               //  imageUploadRecyclerAdapter!!.notifyItemChanged(delete_position)
                 imageUploadRecyclerAdapter?.notifyDataSetChanged()
 
-                Log.e("E", "done image")
+                Log.e("E121212", "done image")
 
 //                rv_img_upload.adapter =
 //                    ImageUploadRecyclerAdapter(imgList2!! , requireContext())
