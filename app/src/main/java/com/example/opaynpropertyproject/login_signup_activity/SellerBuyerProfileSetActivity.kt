@@ -9,12 +9,11 @@ import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.SuccessSignupModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import kotlinx.android.synthetic.main.activity_seller_buyer_profile_set.*
-import ServiceViewModel
 import com.example.opaynpropertyproject.comman.Utils
 
 class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
-    var getUserId: Int = 0
+    var getUserId: Long = 0
     var successSignupModel: SuccessSignupModel? = null
     lateinit var bundle: Bundle
 
@@ -26,16 +25,20 @@ class SellerBuyerProfileSetActivity : BaseActivity(), View.OnClickListener, ApiR
         profile_set_password_back_btn.setOnClickListener(this)
         buyer_btn.setOnClickListener(this)
         seller_btn.setOnClickListener(this)
+
+
+
+
+
         bundle = Bundle()
-        val bundle = this.intent.extras
-        if (bundle != null) {
-            successSignupModel = bundle.getParcelable(Keys.PRACELABLE_KEY)
-            getUserId = successSignupModel!!.data.user.id
-        }
 
 
 
-
+            val bundle = this.intent.extras
+            if (bundle != null) {
+                successSignupModel = bundle.getParcelable(Keys.PRACELABLE_KEY)
+                getUserId = successSignupModel!!.data.user.id.toLong()
+            }
     }
 
     override fun onClick(v: View?) {

@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.opaynpropertyproject.*
+import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.comman.BaseActivity
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import com.example.opaynpropertyproject.customer.NotificationFragment
-import com.example.opaynpropertyproject.customer.SavedPropertyActivity
+import com.example.opaynpropertyproject.login_signup_activity.LoginActivity
 import com.example.opaynpropertyproject.seller_chat.SellerChatFragment
 import com.example.opaynpropertyproject.seller_profile.ProfileFragment
 import kotlinx.android.synthetic.main.fragment_profile.faq
@@ -49,6 +50,8 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         faq.setOnClickListener(this)
         about.setOnClickListener(this)
         contact_us.setOnClickListener(this)
+        account_setting.setOnClickListener(this)
+        logout.setOnClickListener(this)
 //        navController = setNavigationController()
         bottomNavigationView.menu.getItem(2).setChecked(true)
         Utils.addReplaceFragment(this, HomeFragment(), R.id.nav_container, false, false, false)
@@ -75,13 +78,12 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     private fun homeHeader() {
         supportActionBar!!.hide()
 
-        add_property.visibility = View.INVISIBLE
+        add_property.visibility = View.VISIBLE
         notification_count.visibility = View.INVISIBLE
         search_bar_container.visibility = View.INVISIBLE
         ads.visibility = View.VISIBLE
         ads.setText(getText(R.string.home))
         header_filer.visibility = View.INVISIBLE
-
     }
 
     private fun setNavigationController(): NavController {
@@ -101,7 +103,6 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     private fun setUpNavigation() {
         val navController = Navigation.findNavController(this, R.id.nav_container)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
     }
 
@@ -119,6 +120,7 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                         false
                     )
                 }
+
                 R.id.notificationFragment -> {
                     Utils.addReplaceFragment(
                         this,
@@ -157,14 +159,19 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             R.id.menu_bar -> {
                 drawer_layout.openDrawer(GravityCompat.START)
             }
-            R.id.wishlist -> {
+            R.id.add_property -> {
                 drawer_layout.closeDrawers()
-                openA(SavedPropertyActivity::class)
+                openA(DealerAddActivity::class)
             }
+            R.id.my_property -> {
+                drawer_layout.closeDrawers()
+                openA(SellerAddedAdsProperty::class)
+            }
+
             R.id.customer_message -> {
                 drawer_layout.closeDrawers()
                 val fragment = SellerChatFragment()
-                Utils.addReplaceFragment(this,fragment,R.id.nav_container,false,false,false)
+                Utils.addReplaceFragment(this, fragment, R.id.nav_container, false, false, false)
             }
             R.id.faq -> {
                 drawer_layout.closeDrawers()
@@ -175,17 +182,28 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 openA(AboutUsActivity::class)
             }
             R.id.contact_us -> {
-
                 drawer_layout.closeDrawers()
                 openA(ContactUsActivity::class)
             }
             R.id.account_setting -> {
                 openA(AccountSettingActivity::class)
             }
+            R.id.logout -> {
+                Keys.isCustomer = false
+                SharedPreferenceManager(this).saveString(Keys.USERID, "")
+                SharedPreferenceManager(this).getString(Keys.USERID).let {
+                    if (it == null || it.toString().equals("0")) {
+
+                    } else {
+
+                    }
+                }
+                openA(LoginActivity::class)
+            }
+
 
         }
     }
-
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {

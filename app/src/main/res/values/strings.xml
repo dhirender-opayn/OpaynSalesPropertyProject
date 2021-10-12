@@ -97,6 +97,10 @@
     <string name="favourite">Favourite</string>
     <string name="enter_message">Type Your message</string>
     <string name="filter">Filter</string>
+    <string name="data_updated">User Data Updated</string>
+    <string name="search_best_sales_properties">Search Best Sales Properties</string>
+    <string name="error">Error</string>
+    <string name="web_client_id">771958017542-0rtbejf5rhkjgigkfvmu7leee2nrg1d5.apps.googleusercontent.com</string>
 
 
 </resources>

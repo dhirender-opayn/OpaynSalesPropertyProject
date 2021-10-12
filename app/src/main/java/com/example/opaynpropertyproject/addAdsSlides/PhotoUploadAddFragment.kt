@@ -38,7 +38,6 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -148,8 +147,7 @@ class PhotoUploadAddFragment : BaseFragment(), View.OnClickListener, ApiResponse
                     serviceViewModel.getMultiPart(Keys.IMAGE, file!!)?.let { fields.add(it) }
     //                val mProperty_id = propertyFilling.propertyID.toString()
 
-                    serviceViewModel.getMultiPart(Keys.PROPERTY_IMG_ID, propertyFilling.propertyID.toString())
-                        ?.let { fields.add(it) }
+                    serviceViewModel.getMultiPart(Keys.PROPERTY_IMG_ID, propertyFilling.propertyID.toString())?.let { fields.add(it) }
                     serviceViewModel.multipartservice(
                         Keys.IMG_END_POINT, requireContext(), fields,
                         Keys.IMG_RED_CODE, true, token, true, this

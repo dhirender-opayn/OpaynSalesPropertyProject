@@ -16,10 +16,9 @@
 
                 </shape>
             </item>
+
             <item android:left="@dimen/_5sdp" android:right="@dimen/_5sdp">
-
-
-                <bitmap android:gravity="right" android:src="@drawable/down_arrow"  />
+            <bitmap  android:gravity="right" android:src="@drawable/down_arrow"  />
             </item>
         </layer-list>
     </item>

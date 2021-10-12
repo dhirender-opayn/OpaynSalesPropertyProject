@@ -92,7 +92,7 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
 
         do_later_btn.setOnClickListener(this)
         first_next_btn.setOnClickListener(this)
-        header_filer.setOnClickListener(this)
+       activity?.header_filer?.setOnClickListener(this)
     }
 
     fun stateAdapter() {

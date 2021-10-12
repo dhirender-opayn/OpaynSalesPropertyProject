@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".login_signup_activity.LoginActivity"
     >
 
@@ -28,30 +29,28 @@
                 android:id="@+id/login_email"
                 android:drawableLeft="@drawable/ic_baseline_email_24"
                 android:hint="@string/email_hints"
+                android:backgroundTint="@color/black"
                 style="@style/login_signup_field"
                 android:text="customer@gmail.com"
                 app:layout_constraintTop_toBottomOf="@+id/loginTitle"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
               />
+
             <EditText
                 android:id="@+id/login_password"
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:hint="@string/password_hints"
                 android:text="123"
+                android:backgroundTint="@color/black"
                 style="@style/login_signup_field"
                 android:inputType="textPassword"
                 app:layout_constraintTop_toBottomOf="@+id/login_email"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/login_remember_forget_container"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/login_password"
-                android:padding="@dimen/_4sdp">
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,20 +60,21 @@
                     style="@style/segoe_ui"
                     android:layout_weight="9"
                     android:textAlignment="textEnd"
-                    app:layout_constraintTop_toTopOf="@+id/remember_me"
-                    app:layout_constraintBottom_toBottomOf="@+id/remember_me"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/red"
-                    app:layout_constraintRight_toRightOf="parent"/>
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
-            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_button"
                 android:paddingVertical="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/login_remember_forget_container"
+                app:layout_constraintTop_toBottomOf="@+id/forget_password"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/login"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/white"
                 style="@style/login_signup_submit_btn" />
             <TextView
                 android:layout_width="wrap_content"

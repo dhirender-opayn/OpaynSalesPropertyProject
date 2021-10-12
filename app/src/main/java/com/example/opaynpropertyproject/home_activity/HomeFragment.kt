@@ -1,6 +1,7 @@
 package com.example.opaynpropertyproject.home_activity
 
 import android.app.Activity
+import android.icu.util.UniversalTimeScale
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.opaynpropertyproject.adapter.property_setup_adapters.Customer
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.CustomerHomeModel
+import com.example.opaynpropertyproject.api_model.FilterModel
 import com.example.opaynpropertyproject.api_model.GetWishListModel
 import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
 import com.example.opaynpropertyproject.comman.BaseFragment
@@ -23,6 +25,7 @@ import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.customer.CustomerHomeActivity
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
 import com.opaynkart.ui.adapters.ImageSliderAdapter
+import io.grpc.okhttp.internal.Util
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_seller.*
 import kotlinx.android.synthetic.main.seller_home_list_holder.*
@@ -37,6 +40,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
     var fav_property_position = 0
     var homePropertyRecyclerViewAdapter: HomeRecommendRecyclerAdapter? = null
     var customer_home_list: ArrayList<CustomerHomeModel.Data.Data>? = ArrayList()
+    var widegetlist: ArrayList<FilterModel.Data>? = ArrayList()
 //    val homeActivity = requireActivity() as HomeActivity
 
     override fun onCreateView(
@@ -66,6 +70,18 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                 true,
                 this
             )
+
+            serviceViewModel.getservice(
+                Keys.PROPERTY_TYPE_DETAIL,
+                requireContext(),
+                Keys.PROPERTY_TYPE_REQ_CODE,
+                true,
+                token,
+                true,
+                this
+            )
+
+
         } else {
             HitHomeApi()
         }
@@ -98,6 +114,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
 
     override fun getPosition(position: Int) {
         if (Keys.isCustomer) {
+
             if (Keys.add_fav_flag) {
                 val property_id = customer_home_list?.get(position)!!.id
                 fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
@@ -112,6 +129,22 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                     this
                 )
                 fav_property_position = position
+                Keys.add_fav_flag =false
+
+            } else if (!Keys.add_fav_flag){
+                Log.e("DislikeProperty","Property is Disliked")
+                val property_id = customer_home_list?.get(position)!!.id
+                fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
+                serviceViewModel.deleteserviceBody(
+                    Keys.ADD_PROPERTY_FAV_END_POINT,
+                    requireContext(),
+                    fav_hashMap_List,
+                    Keys.DEL_WISHLIST_REQ_CODE,
+                    true,
+                    HomeActivity.token,
+                    true,
+                    this
+                )
             } else {
                 Keys.customerList = customer_home_list
                 val s_property_id = customer_home_list?.get(position)?.id
@@ -121,7 +154,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                 }
                 openA(SelectedPropertyActivity::class, bundle)
             }
-        }else {
+        } else {
             val property_id = home_property_list?.get(position)!!.id
             fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
             serviceViewModel.postservice(
@@ -140,7 +173,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
 
     }
 
-    private fun favApiHit(){
+    private fun favApiHit() {
     }
 
     fun propertyAdapter() {
@@ -170,7 +203,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
 
                 if (home_property_list != null) {
 
-                    rv_home_widget.adapter = WidgetHomeAdapter()
+//                    rv_home_widget.adapter = WidgetHomeAdapter()
                     rv_recommended_property_home.adapter = HomeRecommendRecyclerAdapter(
                         home_property_list!!,
                         requireActivity(),
@@ -194,8 +227,20 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                 }
             }
             Keys.ADD_PROPERTY_FAV_REQ_CODE -> {
-                val wishListModel = gson.fromJson(response,GetWishListModel::class.java)
-                Toast.makeText(requireContext(),wishListModel.message,Toast.LENGTH_LONG).show()
+                val wishListModel = gson.fromJson(response, GetWishListModel::class.java)
+                Toast.makeText(requireContext(), wishListModel.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Like", Toast.LENGTH_LONG).show()
+            }
+            Keys.DEL_WISHLIST_REQ_CODE -> {
+                Toast.makeText(requireContext(), "Dislike", Toast.LENGTH_LONG).show()
+              Log.e("deleteLike","dislikeDeleteProperty")
+
+            }
+            Keys.PROPERTY_TYPE_REQ_CODE -> {
+                val widgetModel = gson.fromJson(response, FilterModel::class.java)
+                widegetlist?.addAll(widgetModel.data)
+                rv_home_widget.adapter =
+                    widegetlist?.let { WidgetHomeAdapter(it, requireContext()) }
 
             }
         }

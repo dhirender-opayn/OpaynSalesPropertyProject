@@ -22,23 +22,66 @@ import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.comman.Utils.customSnakebar
 import com.example.opaynpropertyproject.home_activity.HomeActivity
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
-import java.security.Key
+
+import com.google.android.gms.auth.api.signin.GoogleSignInResult
+
+import com.google.android.gms.auth.api.Auth
+import android.widget.Toast
+
+
+
+
+
 
 class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     lateinit var loginHashMap: HashMap<String, Any>
 
+
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+    // [START declare_auth]
+    private lateinit var auth: FirebaseAuth
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        overridePendingTransition(0,0)
+        overridePendingTransition(0, 0)
         setContentView(R.layout.activity_login)
         supportActionBar!!.hide()
         loginHashMap = HashMap<String, Any>()
+
+
 //        getuserdata()
         login_container.setOnClickListener(this)
         create_account_btn_login.setOnClickListener(this)
         forget_password.setOnClickListener(this)
         login_button.setOnClickListener(this)
+        google_gmail_icon.setOnClickListener(this)
+
+
+
+
+
+        //================//
+
+        // Configure Google Sign In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("771958017542-bu8apihnvm0oim64sfd6v3p475d2nr6k.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        // [START initialize_auth]
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+        // [END initialize_auth]
 
     }
 
@@ -59,23 +102,28 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         return true
     }
 
-    override fun onClick(v: View?)
-    {
+    override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.login_button ->
-            {
+            R.id.login_button -> {
                 Log.e("button", "click")
-                if (loginUserValue())
-                {
+                if (loginUserValue()) {
                     loginHashMap.put(Keys.login_email, login_email.text.toString().trim())
                     loginHashMap.put(Keys.login_password, login_password.text.toString().trim())
-                    Log.e("email",login_email.text.toString().trim())
-                    Log.e("password",login_password.text.toString().trim())
+                    Log.e("email", login_email.text.toString().trim())
+                    Log.e("password", login_password.text.toString().trim())
 
-                    serviceViewModel.postservice(Keys.loginEndPoint, this, loginHashMap, Keys.login_log, false, "", true, this)
+                    serviceViewModel.postservice(
+                        Keys.loginEndPoint,
+                        this,
+                        loginHashMap,
+                        Keys.login_log,
+                        false,
+                        "",
+                        true,
+                        this
+                    )
                 }
             }
-
             R.id.create_account_btn_login -> {
                 val intent = Intent(this, SignUpActivity::class.java)
                 startActivity(intent)
@@ -84,58 +132,68 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 val intent = Intent(this, ForgetPasswordActivity::class.java)
                 startActivity(intent)
             }
-             R.id.login_container->{
-                 Utils.hideKeyboard(this)
-             }
+            R.id.login_container -> {
+                Utils.hideKeyboard(this)
+            }
+            R.id.google_gmail_icon -> {
+                val intent = googleSignInClient.signInIntent
+                startActivityForResult(intent, RC_SIGN_IN)
+            }
         }
     }
-    private  fun getuserdata()
-    {
+
+    private fun  getuserdata( ) {
         Handler(getMainLooper()).postDelayed({
             SharedPreferenceManager(this).getString(Keys.USERID).let {
-                if (it==null||it.toString().equals(""))
-                {
+                if (it == null || it.toString().equals("")) {
 
-                }
-                else{
-                    openA(HomeActivity::class)
-                    finishAffinity()
+                } else {
+
+//                    openA(CustomerHomeActivity::class.java)
+//                    finishAffinity()
                 }
             }
 
         }, 1000)
 
     }
+
     override fun onResponse(requestcode: Int, response: String) {
+        Log.e("reposneeeeee", response);
         when (requestcode) {
-            Keys.login_log ->
-            {
+
+
+            Keys.login_log -> {
                 val model = gson.fromJson(response, LoginSuccessModel::class.java)
-              val user_type = model.data.user.roles[0].name
-                if (user_type.equals(Keys.CUSTOMER)){
-                    if (model?.data!=null)
-                    {
-                        SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
-                        SharedPreferenceManager(this).saveString(USERDATA,response)
-                        SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
-
+                val user_type = model.data.user.roles[0].name
+                if (user_type.equals(Keys.CUSTOMER)) {
+                    if (model?.data != null) {
+                        SharedPreferenceManager(this).saveString(TOKEN, model.data.token)
+                        SharedPreferenceManager(this).saveString(USERDATA, response)
+                        SharedPreferenceManager(this).saveString(
+                            USERID,
+                            model.data.user.id.toString()
+                        )
                         token = model.data.token
-
                         openA(CustomerHomeActivity::class)
                         finishAffinity()
                         Keys.isCustomer = true
 
                     }
                 } else {
-                    if (model?.data!=null)
-                    {
-                        SharedPreferenceManager(this).saveString(TOKEN,model.data.token)
-                        SharedPreferenceManager(this).saveString(USER_MOBILE,model.data.user.mobile.toString())
-                        SharedPreferenceManager(this).saveString(USERID,model.data.user.id.toString())
-                        SharedPreferenceManager(this).saveString(USERDATA,response)
+                    if (model?.data != null) {
+                        SharedPreferenceManager(this).saveString(TOKEN, model.data.token)
+                        SharedPreferenceManager(this).saveString(
+                            USER_MOBILE,
+                            model.data.user.mobile.toString()
+                        )
+                        SharedPreferenceManager(this).saveString(
+                            USERID,
+                            model.data.user.id.toString()
+                        )
+                        SharedPreferenceManager(this).saveString(USERDATA, response)
 
                         token = model.data.token
-
                         openA(HomeActivity::class)
                         finishAffinity()
 
@@ -152,5 +210,120 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         }
 
     }
+
+
+    //====================================================//
+
+    // [START on_start_check_user]
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
+    }
+
+
+    // [START onactivityresult]
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN)
+        {
+            Log.e("erererrerere","111111")
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val result: GoogleSignInResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+                    handleSignInResult(result)
+
+//                // Google Sign In was successful, authenticate with Firebase
+//                val account = task.getResult(ApiException::class.java)
+//                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+//                firebaseAuthWithGoogle(account.idToken!!)
+//                val idToken = account.idToken
+//                val name = account.displayName
+//                val email = account.email
+//
+//                val credential = GoogleAuthProvider.getCredential(idToken, null)
+//                firebaseAuthWithGoogle(credential.toString())
+
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed" , e  )
+            }
+        }
+        else{
+            Log.e("erererrerere","222222222")
+
+        }
+    }
+
+//    // [START auth_with_google]
+//    private fun firebaseAuthWithGoogle(idToken: String) {
+//        val credential = GoogleAuthProvider.getCredential(idToken, null)
+//        auth.signInWithCredential(credential)
+//            .addOnCompleteListener(this) { task ->
+//                if (task.isSuccessful) {
+//                    // Sign in success, update UI with the signed-in user's information
+//                    Log.d(TAG, "signInWithCredential:success")
+//                    val user = auth.currentUser
+//                    updateUI(user)
+//
+//                } else {
+//                    // If sign in fails, display a message to the user.
+//                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+//                    updateUI(null)
+//                }
+//            }
+//    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user !== null) {
+
+            val bundle = Bundle()
+            bundle.putString(Keys.USER_NAME, user.displayName.toString())
+            bundle.putString(Keys.USERID, user.uid)
+            bundle.putString(Keys.USER_EMAIL, user.email)
+            bundle.putString(Keys.USERMOBILE, user.phoneNumber)
+            openA(HomeActivity::class, bundle)
+            finish()
+        }
+
+
+    }
+    private fun handleSignInResult(result: GoogleSignInResult) {
+        if (result.isSuccess) {
+            Keys.isGoogleAccount = true
+
+            val account = result.signInAccount
+            Log.e("tokiiddddd",account.id)
+
+            Log.e("useridgoogle",account.id.toString())
+            Log.e("tokengoogle",account.idToken.toString())
+            Log.e("userDatagoogle",account.account.toString())
+
+
+            SharedPreferenceManager(this).saveNumber(Keys.USERID,account.id.toLong())
+            openA(SellerBuyerProfileSetActivity::class )
+            finish()
+//            idToken = account.idToken
+//            name = account.displayName
+//            email = account.email
+//            // you can store user data to SharedPreference
+//            val credential = GoogleAuthProvider.getCredential(idToken, null)
+//            firebaseAuthWithGoogle(credential)
+        } else {
+            // Google Sign In failed, update UI appropriately
+            Log.e("ohhhhhhhhh", result.status.toString())
+            Toast.makeText(this, "Login Unsuccessful", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    companion object {
+        private const val TAG = "GoogleActivity"
+        private const val RC_SIGN_IN = 9001
+    }
+
+
 
 }

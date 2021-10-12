@@ -3,13 +3,11 @@ package com.example.opaynpropertyproject.customer
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.opaynpropertyproject.*
-import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.SearchModel
@@ -17,13 +15,15 @@ import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.home_activity.HomeFragment
-import com.example.opaynpropertyproject.home_activity.SellerAddedAdsProperty
+import com.example.opaynpropertyproject.login_signup_activity.LoginActivity
 import com.example.opaynpropertyproject.seller_chat.SellerChatFragment
 import com.example.opaynpropertyproject.seller_profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_customer_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_profile.view.logout
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
@@ -40,13 +40,16 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         saved_user_email = SharedPreferenceManager(this).getString(Keys.USER_EMAIL).toString()
 
         menu_bar.setOnClickListener(this)
-        nav_view.add_property.setOnClickListener(this)
+        nav_view.wishlist.setOnClickListener(this)
+        nav_view.account_setting.setOnClickListener(this)
+        nav_view.customer_message.setOnClickListener(this)
+        contact_us.setOnClickListener(this)
+        nav_view.logout.setOnClickListener(this)
         my_property.setOnClickListener(this)
         faq.setOnClickListener(this)
         about.setOnClickListener(this)
         searchListner()
 //        searchListner()
-
 
         bottomNavigationView.menu.getItem(2).setChecked(true)
         Utils.addReplaceFragment(this, HomeFragment(), R.id.nav_container, false, false, false)
@@ -165,13 +168,13 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             }
             R.id.wishlist -> {
                 drawer_layout.closeDrawers()
-                openA(DealerAddActivity::class)
+                openA(SavedPropertyActivity::class)
             }
             R.id.customer_message -> {
                 drawer_layout.closeDrawers()
-                openA(SellerAddedAdsProperty::class)
-//                val fragment = SellerAddFragment()
-//                Utils.addReplaceFragment(this,fragment,R.id.nav_container,false,false,false)
+//                openA(SellerAddedAdsProperty::class)
+                val fragment = SellerChatFragment()
+                Utils.addReplaceFragment(this,fragment,R.id.nav_container,false,false,false)
             }
             R.id.faq -> {
                 drawer_layout.closeDrawers()
@@ -186,8 +189,26 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                 openA(ContactUsActivity::class)
             }
             R.id.account_setting -> {
-//                val fragment =
-//                Utils.addReplaceFragment(this,fragment,R.id.nav_container,false,false,false)
+                drawer_layout.closeDrawers()
+
+                openA(AccountSettingActivity::class)
+
+            }
+            R.id.customer_message -> {
+                drawer_layout.closeDrawers()
+                Utils.addReplaceFragment(this,SellerChatFragment(),R.id.nav_container,true,true,true)
+            }
+            R.id.logout-> {
+                Keys.isCustomer = false
+                SharedPreferenceManager(this).saveString(Keys.USERID, "")
+                SharedPreferenceManager(this).getString(Keys.USERID).let {
+                    if (it == null || it.toString().equals("0")) {
+
+                    } else {
+
+                    }
+                }
+                openA(LoginActivity::class)
             }
 
         }

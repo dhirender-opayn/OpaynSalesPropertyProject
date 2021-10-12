@@ -28,11 +28,8 @@ class SavedPropertyActivity : BaseActivity(), View.OnClickListener, ApiResponse,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_property)
         supportActionBar?.hide()
-
-
         savedHeader()
         clickListner()
-
         wishlistApiHit()
     }
 
@@ -46,12 +43,9 @@ class SavedPropertyActivity : BaseActivity(), View.OnClickListener, ApiResponse,
             true, this
         )
     }
-
     private fun clickListner() {
         menu_bar.setOnClickListener(this)
     }
-
-
     private fun savedHeader() {
         ads.visibility = View.VISIBLE
         menu_bar.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24)
@@ -75,7 +69,7 @@ class SavedPropertyActivity : BaseActivity(), View.OnClickListener, ApiResponse,
             Keys.GET_FAV_REQ_CODE -> {
                 val wishlistModel = gson.fromJson(response, GetWishListModel::class.java)
                 get_wishlist.addAll(wishlistModel.data)
-                setWishlistAdapter()
+                setWishlistAdapter(get_wishlist)
             }
             Keys.DEL_WISHLIST_REQ_CODE -> {
                 get_wishlist.removeAt(delWishList_property_position)
@@ -87,7 +81,7 @@ class SavedPropertyActivity : BaseActivity(), View.OnClickListener, ApiResponse,
 
     override fun getPosition(position: Int) {
 
-        if (get_wishlist.size > 1) {
+        if (get_wishlist.size > 0) {
             val property_id = get_wishlist.get(position).id
             del_wishlist_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
             serviceViewModel.deleteserviceBody(
@@ -104,12 +98,11 @@ class SavedPropertyActivity : BaseActivity(), View.OnClickListener, ApiResponse,
         } else {
             Log.e("empt", "NoImages")
             get_wishlist.clear()
-            setWishlistAdapter()
+            setWishlistAdapter(get_wishlist)
         }
     }
-
-    private fun setWishlistAdapter() {
-        wishlist_adapter = SavedPropertyRecyclerAdapter(get_wishlist, this, this)
+    private fun setWishlistAdapter(get_wishlist1: ArrayList<GetWishListModel.Data>) {
+        wishlist_adapter = SavedPropertyRecyclerAdapter(get_wishlist1, this, this)
         rv_saved_property.adapter = wishlist_adapter
     }
 

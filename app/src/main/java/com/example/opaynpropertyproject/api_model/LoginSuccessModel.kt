@@ -1,5 +1,7 @@
 package com.example.opaynpropertyproject.api_model
 
+import android.net.Uri
+
 data class LoginSuccessModel(
     val `data`: Data,
     val message: String
@@ -22,7 +24,7 @@ data class LoginSuccessModel(
             data class Profile(
                 val created_at: String,
                 val id: Int,
-                val image: Any,
+                val image: String,
                 val updated_at: String,
                 val user_id: Int
             )

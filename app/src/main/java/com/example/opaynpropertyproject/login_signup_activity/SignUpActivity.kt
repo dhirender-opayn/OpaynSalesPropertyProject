@@ -15,7 +15,6 @@ import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.api_model.SuccessSignupModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.Utils
-import com.example.opaynpropertyproject.home_activity.HomeActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.signup_email
 import kotlin.collections.HashMap

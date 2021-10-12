@@ -1,29 +1,30 @@
 package com.example.opaynpropertyproject
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.os.bundleOf
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
-import com.example.opaynpropertyproject.api_model.GetProfileSuccess
 import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
-import com.example.opaynpropertyproject.home_activity.HomeActivity
+import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
 import com.example.opaynpropertyproject.login_signup_activity.ForgetPasswordActivity
-import com.greetupp.extensions.isNotNull
-import com.greetupp.extensions.isNull
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_account_setting.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
-import kotlin.reflect.KClass
+import okhttp3.MultipartBody
+import java.io.File
 
 class AccountSettingActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     var id = 0
+    val fields = ArrayList<MultipartBody.Part>()
+    var fileImag: File? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_setting)
@@ -56,6 +57,8 @@ class AccountSettingActivity : BaseActivity(), View.OnClickListener, ApiResponse
         profile_setting_user_name.setText(model.data.user.name)
         profile_setting_email.setText(model.data.user.email)
         profile_setting_phone.setText(model.data.user.mobile.toString())
+        Picasso.get().load(model.data.user.profile.image).placeholder(R.drawable.down_arrow).into(account_setting_img_holder)
+
 
     }
 
@@ -63,6 +66,7 @@ class AccountSettingActivity : BaseActivity(), View.OnClickListener, ApiResponse
         menu_bar.setOnClickListener(this)
         profile_save_btn.setOnClickListener(this)
         change_password.setOnClickListener(this)
+        pic_edit_button.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -76,6 +80,15 @@ class AccountSettingActivity : BaseActivity(), View.OnClickListener, ApiResponse
             R.id.change_password -> {
 
                 openA(ForgetPasswordActivity::class)
+            }
+            R.id.pic_edit_button -> {
+                cropImage.launch(
+                    options() {
+                        setGuidelines(CropImageView.Guidelines.ON)
+                        setOutputCompressQuality(50)
+                        setOutputCompressFormat(Bitmap.CompressFormat.PNG)
+                    }
+                )
             }
         }
 
@@ -91,35 +104,72 @@ class AccountSettingActivity : BaseActivity(), View.OnClickListener, ApiResponse
 //    }
 
     private fun profileApi() {
-        val profile_user_name = profile_setting_user_name.text.toString()
-        val profile_setting_email = profile_setting_email.text.toString()
-        val profile_setting_phone = profile_setting_phone.text.toString()
-        val profileHashMap = HashMap<String, Any>()
-        profileHashMap.put(Keys.USERID, id)
-        profileHashMap.put(Keys.USER_NAME, profile_user_name)
-        profileHashMap.put(Keys.USER_EMAIL, profile_setting_email)
-        profileHashMap.put(Keys.USER_MOBILE, profile_setting_phone)
 
-        serviceViewModel.postservice(
-            Keys.PROFILE_END_POINT,
-            this,
-            profileHashMap,
-            Keys.PROFILE_RED_CODE,
-            true,
-            token,
-            true,
-            this
-        )
+
+
+        serviceViewModel.getMultiPart(Keys.USERID, SharedPreferenceManager(this).getString(Keys.USERID).toString())?.let { fields.add(it) }
+        serviceViewModel.getMultiPart(Keys.USER_NAME, profile_setting_user_name.text.toString())?.let { fields.add(it) }
+        serviceViewModel.getMultiPart(Keys.USER_EMAIL, profile_setting_email.text.toString())?.let { fields.add(it) }
+        serviceViewModel.getMultiPart(Keys.USER_MOBILE, profile_setting_phone.text.toString())?.let { fields.add(it) }
+
+
+        if (fileImag!=null)
+        {
+            serviceViewModel.getMultiPart(Keys.IMAGE, fileImag!!)?.let { fields.add(it) }
+        }
+        if (Keys.isCustomer)
+        {
+            serviceViewModel.multipartservice(
+                Keys.PROFILE_CUSTOMER_END_POINT, this, fields,
+                Keys.PROFILE_CUSTOMER_RED_CODE, true, token, true, this
+            )
+        }
+        else {
+            serviceViewModel.multipartservice(
+                Keys.PROFILE_END_POINT, this, fields,
+                Keys.PROFILE_RED_CODE, true, token, true, this
+            )
+
+        }
     }
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
             Keys.PROFILE_RED_CODE -> {
+
                 SharedPreferenceManager(this).saveString(Keys.USERDATA, response)
+                Utils.customSnakebar(profile_save_btn, getString(R.string.data_updated))
+            }
+            Keys.PROFILE_CUSTOMER_RED_CODE -> {
+                SharedPreferenceManager(this).saveString(Keys.USERDATA, response)
+                Utils.customSnakebar(profile_save_btn, getString(R.string.data_updated))
             }
             Keys.BACKENDERROR -> {
-
+                Utils.customSnakebar(profile_save_btn, getString(R.string.error))
             }
         }
     }
+
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful)
+        {
+            // use the returned uri
+            val uriContent = result.uriContent
+            val uriFilePath = result.getUriFilePath(this) // optional usage
+            Log.e("rr", uriContent.toString())
+            if (uriContent != null) {
+                var file = File(uriFilePath.toString())
+                Log.e("file", file.length().toString())
+                Log.e("file2", file.isFile.toString())
+                fileImag = file
+                account_setting_img_holder.setImageURI(uriContent)
+            }
+
+        } else
+        {
+            // an error occurred
+            val exception = result.error
+        }
+    }
+
 }

@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
@@ -53,10 +54,16 @@ class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHome
             home_fav_position.getPosition(holder.adapterPosition)
         }
         holder.customer_home_add_fav.setOnClickListener {
-            Keys.add_fav_flag = true
+//            Keys.add_fav_flag = true
+            if (holder.fav_btn_click.isVisible){
+                holder.fav_btn_click.visibility = View.INVISIBLE
+                Keys.add_fav_flag = false
+            } else {
+                holder.fav_btn_click.visibility = View.VISIBLE
+                Keys.add_fav_flag = true
+            }
             home_fav_position.getPosition(holder.adapterPosition)
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -85,6 +92,7 @@ class CustomerHomeInnerAdapter(var customerInnerHomeList: ArrayList<CustomerHome
         val customer_home_area = itemView.yours_ads_area
         val property_container = itemView.property_container
         val property_txt_container = itemView.property_txt_container
+        val fav_btn_click = itemView.c_fav_click
 
     }
 }

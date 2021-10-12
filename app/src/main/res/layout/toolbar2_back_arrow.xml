@@ -7,6 +7,5 @@
         android:id="@+id/signup_back_btn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        style="@style/back_arrow_button"
-        />
+        style="@style/back_arrow_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

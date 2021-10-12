@@ -100,8 +100,8 @@ class ChatScreenActivity : BaseActivity(), View.OnClickListener {
     private fun sendmessage(type: String, msg2: String) {
         msg.setText("")
         chatsModel = ChatFirebaseModel()
-        chatsModel.sender_id = "1"
-        chatsModel.receiver_id = "2"
+        chatsModel.sender_id = Keys.SENDER_ID.toString()
+        chatsModel.receiver_id = Keys.RECEIVER_ID.toString()
         chatsModel.sender_name = "Alex"
         chatsModel.receiver_name = "confusion"
         chatsModel.sender_image = ""

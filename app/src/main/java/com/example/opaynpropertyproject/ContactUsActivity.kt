@@ -25,8 +25,9 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_us)
-        contactHeader()
         setClick()
+        contactHeader()
+
 
     }
 
@@ -72,6 +73,7 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
         contactUs_btn.setOnClickListener(this)
         contactus_form_container.setOnClickListener(this)
+        menu_bar.setOnClickListener(this)
     }
 
     private fun contactHeader() {
@@ -79,9 +81,9 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
 
         ads.visibility = View.VISIBLE
-        menu_bar.visibility = View.VISIBLE
+      this.menu_bar.visibility = View.VISIBLE
         ads.setText(getString(R.string.contactus))
-        menu_bar.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24)
+       this.menu_bar.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24)
         notification_count.visibility = View.INVISIBLE
         search_bar_container.visibility = View.INVISIBLE
         header_filer.visibility = View.INVISIBLE
@@ -92,7 +94,7 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         when (v!!.id) {
 
             R.id.menu_bar -> {
-                Log.e("contact","contact back click")
+                Log.e("15422","contact back click")
                 onBackPressed()
 
             }

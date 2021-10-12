@@ -16,6 +16,7 @@
         android:drawablePadding="@dimen/_8sdp"
         android:padding="@dimen/_10sdp"
        style="@style/text_header"
+        android:textColorHint="@color/sky_blue_700"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

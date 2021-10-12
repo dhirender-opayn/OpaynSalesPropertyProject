@@ -207,16 +207,13 @@ class ServiceViewModel {
                 if (response != null) {
                     ProgressDialogs.dismissProgressDialog()
                     when (response.code()) {
-
                         Keys.SUCESSCODE -> {
                             if (response.body() != null) {
                                 val jsonObject = JSONObject(response.body()!!.string().toString())
                                 responsestring = jsonObject.toString()
                                 reuestCode = reuestcode
                                 responselistner.onResponse(reuestCode, responsestring)
-
-                                Log.e("signup", "Signup successfully")
-                            }
+                             }
 
                         }
                         Keys.UNAUTHRISECODE -> {

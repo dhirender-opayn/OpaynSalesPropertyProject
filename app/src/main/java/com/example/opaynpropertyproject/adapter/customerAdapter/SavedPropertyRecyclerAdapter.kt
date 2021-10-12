@@ -1,11 +1,13 @@
 package com.example.opaynpropertyproject.adapter.customerAdapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
@@ -52,7 +54,40 @@ class SavedPropertyRecyclerAdapter(val get_wish_list:ArrayList<GetWishListModel.
         holder.sqft.setText(get_wish_list[position].profile.area.toString()+" sqft")
 
         holder.your_ads_cancel.setOnClickListener {
-            getwishlistPostion.getPosition(holder.adapterPosition)
+            val builder = AlertDialog.Builder(context)
+            //set title for alert dialog
+            builder.setTitle("Delete Property")
+            //set message for alert dialog
+            builder.setMessage("Are you sure you want to delete property ? ")
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+            //performing positive action
+            builder.setPositiveButton("Yes") { dialogInterface, which ->
+
+                getwishlistPostion.getPosition(holder.adapterPosition)
+
+            }
+            //performing cancel action
+            builder.setNeutralButton("Cancel") { dialogInterface, which ->
+                Toast.makeText(context, "clicked cancel\n operation cancel", Toast.LENGTH_LONG)
+                    .show()
+            }
+            //performing negative action
+            builder.setNegativeButton("No") { dialogInterface, which ->
+                Toast.makeText(context, "clicked No", Toast.LENGTH_LONG).show()
+            }
+            // Create the AlertDialog
+            val alertDialog: AlertDialog = builder.create()
+            // Set other dialog properties
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+
+
+
+
+
+
+
         }
 
 

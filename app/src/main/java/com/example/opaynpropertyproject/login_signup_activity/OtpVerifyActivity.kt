@@ -1,6 +1,5 @@
 package com.example.opaynpropertyproject.login_signup_activity
 
-import ServiceViewModel
 import `in`.aabhasjindal.otptextview.OTPListener
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +12,6 @@ import com.example.opaynpropertyproject.api_model.SuccessSignupModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.comman.Utils.customSnakebar
-import com.example.opaynpropertyproject.home_activity.HomeActivity
 import kotlinx.android.synthetic.main.activity_otp_verify.*
 
 class OtpVerifyActivity : BaseActivity(), View.OnClickListener, ApiResponse {
