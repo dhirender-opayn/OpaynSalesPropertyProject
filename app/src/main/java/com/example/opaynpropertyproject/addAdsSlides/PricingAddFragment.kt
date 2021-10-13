@@ -3,6 +3,7 @@ package com.example.opaynpropertyproject.addAdsSlides
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper.getMainLooper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import com.example.opaynpropertyproject.api_model.ErrorModel
 import com.example.opaynpropertyproject.comman.BaseFragment
 import com.example.opaynpropertyproject.comman.Utils
 import com.example.opaynpropertyproject.home_activity.HomeActivity.Companion.token
+import com.greetupp.extensions.isNull
+import com.greetupp.extensions.observeTextChange
 import com.kofigyan.stateprogressbar.StateProgressBar
 import kotlinx.android.synthetic.main.activity_add_ads.*
 import kotlinx.android.synthetic.main.pricing_add_fragment.*
@@ -46,9 +49,14 @@ class PricingAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         finish_btn.setOnClickListener(this)
         pre_btn_finish.setOnClickListener(this)
         addPropertyHasMap = HashMap<String, Any>()
-        if (propertyFilling.property_description.isNotEmpty()) {
+        if (propertyFilling.property_description.isNotEmpty() ) {
             price_input.setText(propertyFilling.property_price)
             property_description.setText(propertyFilling.property_description)
+
+            show_des_count.setText(property_description.text.length.toString() +"/200")
+            property_description.observeTextChange {
+                show_des_count.setText(property_description.text.length.toString() +"/200")
+            }
         }
         if (propertyFilling.edit_flag) {
             setdata()
@@ -57,8 +65,17 @@ class PricingAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
 
     //  edit post data
     private fun setdata() {
-        price_input.setText(propertyFilling.detailModel?.data?.get(0)!!.price.toString())
-        property_description.setText(propertyFilling.detailModel?.data?.get(0)!!.description.toString())
+        if (propertyFilling.detailModel?.data?.get(0)?.price.toString().isEmpty() || propertyFilling.detailModel?.data?.get(0)?.description.isNull() ){
+            price_input.setText("")
+            property_description.setText("")
+        } else {
+            price_input.setText(propertyFilling.detailModel?.data?.get(0)!!.price.toString())
+            property_description.setText(propertyFilling.detailModel?.data?.get(0)!!.description.toString())
+            show_des_count.setText(property_description.text.length.toString() +"/200")
+            property_description.observeTextChange {
+                show_des_count.setText(property_description.text.length.toString() +"/200")
+            }
+        }
     }
 
     fun checkValidationPricing() {
@@ -87,7 +104,6 @@ class PricingAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
                 true,
                 this
             )
-
         }
 
     }
@@ -95,18 +111,13 @@ class PricingAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
             Keys.ADD_PROFILE_PROPERTY_PRICING_CODE -> {
-
-
                 //send screen to main activity where all property fragment add
-
-
                 Utils.customSnakebar(finish_btn, "Property is setup is finish")
                 dealerAddRequiredActivityFinish!!.your_state_progress_bar_id.setCurrentStateNumber(
                     StateProgressBar.StateNumber.FOUR
                 )
                 Utils.customSnakebar(finish_btn, "Property Setup is Finish !!")
                 requireActivity().finish()
-
             }
             Keys.BACKENDERROR -> {
                 val errorModel = gson.fromJson(response, ErrorModel::class.java)
@@ -118,14 +129,18 @@ class PricingAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when (v!!.id) {
+        when (v!!.id)
+        {
             R.id.finish_btn -> {
 
                 checkValidationPricing()
+                propertyFilling.sell_type = ""
                 propertyFilling.edit_flag = false
-            }
-            R.id.pre_btn_finish -> {
+                Keys.UPDATE_EDIT = true
 
+            }
+
+            R.id.pre_btn_finish -> {
                 Utils.addReplaceFragment(
                     requireContext(),
                     PhotoUploadAddFragment(),

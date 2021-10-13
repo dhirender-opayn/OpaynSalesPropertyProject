@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.singleton.SingletonObject.propertyFilling
 import com.example.opaynpropertyproject.api.ApiResponse
@@ -82,45 +83,42 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 
     // Edit property //
     fun editProfile() {
+        if (Keys.IS_BACK_BTN_PRESS){
+            setDataAdsFragement2()
+        } else {
+            propertyFilling.AdsAdd2Bundle = bundle
+            bundle = requireArguments()
+            sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
 
-        propertyFilling.AdsAdd2Bundle = bundle
-        bundle = requireArguments()
-        sellPropertyBundle = bundle.getParcelable<SellPropertyModel>(Keys.ADS_DATA)
+            for (item in propertyFilling.fullPropertySetUpModel!!.indices) {
+                if (propertyFilling.edit_id == propertyFilling.fullPropertySetUpModel!![item].id) {
 
+                    if (propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms != null) {
+                        ads_bathroom.value =
+                            propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms.toString()
+                                .toFloat()
+                        show_bathroom.text =
+                            propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms.toString() + "-Bathroom"
+                    }
+                    if (propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms != null) {
+                        ads_beds.value =
+                            propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms.toFloat()
+                        show_bed.text =
+                            propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms.toString() + "-Bed"
 
-        for (item in propertyFilling.fullPropertySetUpModel!!.indices) {
-            if (propertyFilling.edit_id == propertyFilling.fullPropertySetUpModel!![item].id) {
+                    }
+                    if (propertyFilling.fullPropertySetUpModel!![item].profile.area != null) {
 
+                        sqft_input.value =
+                            propertyFilling.fullPropertySetUpModel!![item].profile.area.toFloat()
+                        show_sqft.text =
+                            propertyFilling.fullPropertySetUpModel!![item].profile.area.toString() + "-sqft"
 
-                if (propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms != null) {
-                    ads_bathroom.value =
-                        propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms.toString()
-                            .toFloat()
-                    show_bathroom.text =
-                        propertyFilling.fullPropertySetUpModel!![item].profile.bath_rooms.toString() + "-Bathroom"
+                    }
+                    HitAdsApi()
                 }
-                if (propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms != null) {
-                    ads_beds.value =
-                        propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms.toFloat()
-                    show_bed.text =
-                        propertyFilling.fullPropertySetUpModel!![item].profile.bed_rooms.toString() + "-Bed"
-
-                }
-                if (propertyFilling.fullPropertySetUpModel!![item].profile.area != null) {
-
-                    sqft_input.value =
-                        propertyFilling.fullPropertySetUpModel!![item].profile.area.toFloat()
-                    show_sqft.text =
-                        propertyFilling.fullPropertySetUpModel!![item].profile.area.toString() + "-sqft"
-
-                }
-
-                HitAdsApi()
-
-
             }
         }
-
 
     }
 
@@ -204,105 +202,6 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
         rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
     }
 
-
-    fun possessionAdapter() {
-        if (propertyFilling.edit_flag) {
-            for (i in sell_list.indices) {
-                if (sell_list[i].id.equals(propertyFilling.editpost?.profile?.possession)) {
-                    sell_list[i].flag = true
-                } else {
-                    sell_list[i].flag = false
-                }
-            }
-        }
-
-        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
-    }
-
-    private fun postbyAdapter() {
-        if (propertyFilling.edit_flag) {
-            for (i in postedby_list.indices) {
-                if (postedby_list[i].id.equals(propertyFilling.editpost?.profile?.posted_by)) {
-                    postedby_list[i].flag = true
-                } else {
-                    postedby_list[i].flag = false
-                }
-            }
-        }
-        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
-
-    }
-
-    private fun ammentiesAdapter() {
-        if (propertyFilling.edit_flag) {
-            for (i in amenities_list.indices) {
-                for (j in propertyFilling.detailModel!!.data[0].amenities.indices) {
-                    if (propertyFilling.detailModel!!.data[0].amenities[j].equals(amenities_list[i].id)) {
-                        amenities_list[i].flag = true
-                    }
-                }
-            }
-        }
-        rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
-
-    }
-
-
-    fun areaAdapter() {
-
-        if (propertyFilling.edit_flag) {
-            for (i in area_list.indices) {
-                if (area_list[i].id.equals(propertyFilling.editpost?.profile?.area_type)) {
-                    area_list[i].flag = true
-                } else {
-                    area_list[i].flag = false
-                }
-            }
-        }
-        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
-    }
-
-    fun entranceAdapter() {
-
-        if (propertyFilling.edit_flag) {
-            for (i in entranceList.indices) {
-                if (entranceList[i].id.equals(propertyFilling.editpost?.profile?.entrance)) {
-                    entranceList[i].flag = true
-                } else {
-                    entranceList[i].flag = false
-                }
-            }
-        }
-        rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
-    }
-
-    fun furnishAdapter() {
-
-        if (propertyFilling.edit_flag) {
-            for (i in furnishList.indices) {
-                if (furnishList[i].id.equals(propertyFilling.editpost?.profile?.furnishing)) {
-                    furnishList[i].flag = true
-                } else {
-                    furnishList[i].flag = false
-                }
-            }
-        }
-        rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
-    }
-
-    private fun ageofPropertyAdapter() {
-        if (propertyFilling.edit_flag) {
-            for (i in age_of_property_list.indices) {
-                if (age_of_property_list[i].id.equals(propertyFilling.editpost?.profile?.age)) {
-                    age_of_property_list[i].flag = true
-                } else {
-                    age_of_property_list[i].flag = false
-                }
-            }
-        }
-        rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
-
-    }
 
 
     fun startingFragment2() {
@@ -424,7 +323,7 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 
                 val propertySuccessModelResponse =
                     gson.fromJson(response, PropertyProfileModelSuccessfully::class.java)
-                Utils.addReplaceFragment(
+                    Utils.addReplaceFragment(
                     requireContext(),
                     PhotoUploadAddFragment(),
                     R.id.nav_container1,
@@ -502,5 +401,107 @@ class ProfileAddFragment : BaseFragment(), View.OnClickListener, ApiResponse {
             // Responds to when slider's value is changed
         }
     }
+
+
+
+    fun possessionAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in sell_list.indices) {
+                if (sell_list[i].id.equals(propertyFilling.editpost?.profile?.possession)) {
+                    sell_list[i].flag = true
+                } else {
+                    sell_list[i].flag = false
+                }
+            }
+        }
+
+        rv_possession_list.adapter = PossessionStatusRecyclerAdaper(sell_list, requireContext())
+    }
+
+    private fun postbyAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in postedby_list.indices) {
+                if (postedby_list[i].id.equals(propertyFilling.editpost?.profile?.posted_by)) {
+                    postedby_list[i].flag = true
+                } else {
+                    postedby_list[i].flag = false
+                }
+            }
+        }
+        rv_posted_by.adapter = PostedByRecyclerAdapter(postedby_list, requireContext())
+
+    }
+
+    private fun ammentiesAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in amenities_list.indices) {
+                for (j in propertyFilling.detailModel!!.data[0].amenities.indices) {
+                    if (propertyFilling.detailModel!!.data[0].amenities[j].equals(amenities_list[i].id)) {
+                        amenities_list[i].flag = true
+                    }
+                }
+            }
+        }
+        rv_amenities.adapter = AmenitiesRecyclerAdapter(amenities_list, requireContext())
+
+    }
+
+
+    fun areaAdapter() {
+
+        if (propertyFilling.edit_flag) {
+            for (i in area_list.indices) {
+                if (area_list[i].id.equals(propertyFilling.editpost?.profile?.area_type)) {
+                    area_list[i].flag = true
+                } else {
+                    area_list[i].flag = false
+                }
+            }
+        }
+        rv_area.adapter = AreaRecyclerViewAdapter(area_list, requireContext())
+    }
+
+    fun entranceAdapter() {
+
+        if (propertyFilling.edit_flag) {
+            for (i in entranceList.indices) {
+                if (entranceList[i].id.equals(propertyFilling.editpost?.profile?.entrance)) {
+                    entranceList[i].flag = true
+                } else {
+                    entranceList[i].flag = false
+                }
+            }
+        }
+        rv_entrance.adapter = EntranceRecyclerAdapter(entranceList, requireContext())
+    }
+
+    fun furnishAdapter() {
+
+        if (propertyFilling.edit_flag) {
+            for (i in furnishList.indices) {
+                if (furnishList[i].id.equals(propertyFilling.editpost?.profile?.furnishing)) {
+                    furnishList[i].flag = true
+                } else {
+                    furnishList[i].flag = false
+                }
+            }
+        }
+        rv_furnishing.adapter = FurnishRecyclerAdapter(furnishList, requireContext())
+    }
+
+    private fun ageofPropertyAdapter() {
+        if (propertyFilling.edit_flag) {
+            for (i in age_of_property_list.indices) {
+                if (age_of_property_list[i].id.equals(propertyFilling.editpost?.profile?.age)) {
+                    age_of_property_list[i].flag = true
+                } else {
+                    age_of_property_list[i].flag = false
+                }
+            }
+        }
+        rv_age_of_property.adapter = AgeOfPropertyAdapter(age_of_property_list, requireContext())
+
+    }
+
 
 }

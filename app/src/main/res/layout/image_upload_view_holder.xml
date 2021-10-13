@@ -37,14 +37,16 @@
                 android:layout_height="@dimen/_90sdp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/properties1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/your_ads_cancel_btn"
                 style="@style/widget_button"
-                android:drawableLeft="@drawable/ic_mcancel"
+                android:padding="@dimen/_5sdp"
+                android:drawableLeft="@drawable/ic_cancel_btn"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

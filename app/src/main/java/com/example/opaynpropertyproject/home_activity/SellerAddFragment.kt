@@ -40,6 +40,16 @@ class SellerAddFragment : BaseFragment(), ApiResponse, GetPositionInterface {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        sellerApi()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sellerApi()
+
+    }
+    private fun  sellerApi(){
         serviceViewModel.getservice(
             Keys.GET_DEALER_ADD_END_POINT,
             requireContext(),
@@ -49,8 +59,8 @@ class SellerAddFragment : BaseFragment(), ApiResponse, GetPositionInterface {
             true,
             this
         )
-
     }
+
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
@@ -86,7 +96,6 @@ class SellerAddFragment : BaseFragment(), ApiResponse, GetPositionInterface {
         )
         delete_position = position
     }
-
     fun removeItem(position: Int) {
         if (property_list!!.size > 1) {
             property_list!!.removeAt(position)

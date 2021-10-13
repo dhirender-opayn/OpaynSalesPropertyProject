@@ -44,7 +44,6 @@ class SellerPropertyRecyclerViewAdapter(
     override fun onBindViewHolder(holder: YourAdsViewHolder, position: Int) {
 
         if (seller_property_list[position].profile != null){
-
             holder.property_price.text = "$ "+seller_property_list[position].price.toString()
             holder.property_header.text = seller_property_list[position].name
             holder.property_address.text = seller_property_list[position].address
@@ -82,8 +81,6 @@ class SellerPropertyRecyclerViewAdapter(
                 builder.setPositiveButton("Yes") { dialogInterface, which ->
 
                     getDeletePosition.getPosition(holder.adapterPosition)
-
-
                 }
                 //performing cancel action
                 builder.setNeutralButton("Cancel") { dialogInterface, which ->
@@ -116,10 +113,7 @@ class SellerPropertyRecyclerViewAdapter(
 
             }
             holder.sold_status.visibility = View.INVISIBLE
-
-
         }
-
 
     }
 

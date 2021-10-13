@@ -6,11 +6,12 @@
     android:background="@color/white"
     android:padding="@dimen/_6sdp">
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rv_area_type"
         style="@style/recycler_view_text"
         android:text="Pause Area"
+        app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/rectangel_border"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>

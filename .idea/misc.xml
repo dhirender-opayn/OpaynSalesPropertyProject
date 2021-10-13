@@ -25,6 +25,7 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_bathroom.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_camera.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_cancel.xml" value="0.3828125" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_cancel_btn.xml" value="0.35625" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_cups.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_double_bed.xml" value="0.3828125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/drawable/ic_edit.xml" value="0.3828125" />
@@ -126,7 +127,7 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/home_outer_view_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/home_widget_view_holder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/image_slider_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/image_upload_view_holder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/image_upload_view_holder.xml" value="0.5" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/left_drawer_menu.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/nav_item_color_state.xml" value="0.1453125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/OpaynPropertyProject/app/src/main/res/layout/notification_view_holder.xml" value="0.36666666666666664" />

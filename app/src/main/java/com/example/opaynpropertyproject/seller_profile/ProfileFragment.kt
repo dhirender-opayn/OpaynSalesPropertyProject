@@ -219,6 +219,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
                 val mUser_name = get_profile_model?.data!!.user.name
                 val mUser_email = get_profile_model.data.user.email
                 val mUser_mobile = get_profile_model.data.user.mobile
+
                 Picasso.get().load(get_profile_model.data.user.profile.image).placeholder(R.drawable.down_arrow).into(profile_img)
                 profile_name.setText(mUser_name)
                 user_email.setText(mUser_email)

@@ -7,6 +7,8 @@ import com.example.opaynpropertyproject.api_model.seller_home_model.SellerProper
 object Keys {
 
 
+    var UPDATE_EDIT: Boolean = false
+    var IS_BACK_BTN_PRESS: Boolean = false
     var fav_flag: Boolean = false
     var isGoogleAccount: Boolean= false
     val GOOGLE_ACCOUNT: String = "google_account"

@@ -1,14 +1,11 @@
 package com.example.opaynpropertyproject.addAdsSlides
 
 import android.os.Bundle
-import android.provider.CallLog
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.FragmentManager
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.adapter.property_setup_adapters.PropertyTypeRecyclerViewAdapter
 import com.example.opaynpropertyproject.adapter.property_setup_adapters.SellerTypeRecyclerViewAdapter
@@ -92,7 +89,7 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
 
         do_later_btn.setOnClickListener(this)
         first_next_btn.setOnClickListener(this)
-       activity?.header_filer?.setOnClickListener(this)
+        activity?.header_filer?.setOnClickListener(this)
     }
 
     fun stateAdapter() {
@@ -131,7 +128,6 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         if (!propertyFilling.stateID.equals(0)) { // check property
             state_spinner.setSelection(propertyFilling.statePosition)  // set city spinner value after PREV BUTTON Click
             // or may be there cityAdapter is called
-
         }
 
     }
