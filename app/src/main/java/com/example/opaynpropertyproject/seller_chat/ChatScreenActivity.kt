@@ -28,8 +28,12 @@ import java.util.*
 import kotlin.collections.ArrayList
 import android.app.ProgressDialog
 import android.net.Uri
+import android.view.LayoutInflater
 import com.google.firebase.storage.StorageReference
 import com.google.android.gms.tasks.OnCompleteListener
+import com.vanniktech.emoji.EmojiPopup
+import com.vanniktech.emoji.EmojiTextView
+
 class ChatScreenActivity : BaseActivity(), View.OnClickListener {
 
     val fields = ArrayList<MultipartBody.Part>()
@@ -52,6 +56,14 @@ class ChatScreenActivity : BaseActivity(), View.OnClickListener {
         chatHeader()
         readMessage()
         onClicked()
+
+
+        val popup =EmojiPopup.Builder.fromRootView(rootView).build(msg)
+        emoji.setOnClickListener {
+                popup.toggle()
+        }
+
+
     }
 
     private fun chatHeader() {
@@ -73,9 +85,11 @@ class ChatScreenActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.send -> {
                 if (msg.isNotNull()) {
+                    getEmojiTextView()
                     Keys.SENDER = true
-                    chatList.addAll(chatList)
-                    setChatAdapter()
+//                    chatList.addAll(chatList)
+//                    setChatAdapter()
+                    adapter?.notifyDataSetChanged()
                     sendmessage("1", msg.text.toString())
                 }
             }
@@ -97,6 +111,13 @@ class ChatScreenActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    private fun getEmojiTextView(): EmojiTextView? {
+        val tvEmoji = LayoutInflater
+            .from(applicationContext)
+            .inflate(R.layout.text_view_emoji, rv_chat_screen, false) as EmojiTextView
+        tvEmoji.text = msg.text.toString()
+        return tvEmoji
+    }
     private fun sendmessage(type: String, msg2: String) {
         msg.setText("")
         chatsModel = ChatFirebaseModel()

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rootView"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".seller_chat.ChatScreenActivity">
@@ -47,7 +48,7 @@
                 android:src="@drawable/ic_emoji"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-            <EditText
+            <com.vanniktech.emoji.EmojiEditText
                 android:id="@+id/msg"
                 style="@style/textview"
                 android:background="@color/white"
