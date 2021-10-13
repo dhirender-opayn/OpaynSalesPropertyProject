@@ -2,6 +2,7 @@ package com.example.opaynpropertyproject.login_signup_activity
 
 
 import android.content.Intent
+import android.graphics.ColorSpace
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -34,10 +35,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult
 
 import com.google.android.gms.auth.api.Auth
 import android.widget.Toast
-
-
-
-
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_account_setting.*
 
 
 class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
@@ -58,15 +57,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         loginHashMap = HashMap<String, Any>()
 
 
-//        getuserdata()
+        getuserdata()
         login_container.setOnClickListener(this)
         create_account_btn_login.setOnClickListener(this)
         forget_password.setOnClickListener(this)
         login_button.setOnClickListener(this)
         google_gmail_icon.setOnClickListener(this)
-
-
-
 
 
         //================//
@@ -142,19 +138,43 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         }
     }
 
-    private fun  getuserdata( ) {
+    //check if user already login or Not (Automatic Go HomeScreen) //
+    private fun getuserdata() {
         Handler(getMainLooper()).postDelayed({
             SharedPreferenceManager(this).getString(Keys.USERID).let {
                 if (it == null || it.toString().equals("")) {
+                    Toast.makeText(this,getString(R.string.username_password),Toast.LENGTH_LONG).toString()
 
                 } else {
 
-//                    openA(CustomerHomeActivity::class.java)
-//                    finishAffinity()
+                    val mGon = SharedPreferenceManager(this).getString(Keys.USERDATA)
+                    val model = gson.fromJson(mGon, LoginSuccessModel::class.java)
+                    if (model.data.user.roles[0].name.equals("Customer")) {
+                        token = model.data.token
+                        Keys.isCustomer = true
+                        openA(CustomerHomeActivity::class)
+                        finishAffinity()
+                    } else {
+                        Keys.isCustomer = false
+                        token = model.data.token
+                        openA(HomeActivity::class)
+                        finishAffinity()
+                    }
                 }
             }
 
         }, 1000)
+
+    }
+    private fun setData() {
+        val mGon = SharedPreferenceManager(this).getString(Keys.USERDATA)
+        val model = gson.fromJson(mGon, LoginSuccessModel::class.java)
+        profile_setting_user_name.setText(model.data.user.name)
+        profile_setting_email.setText(model.data.user.email)
+        profile_setting_phone.setText(model.data.user.mobile.toString())
+        Picasso.get().load(model.data.user.profile.image).placeholder(R.drawable.down_arrow)
+            .into(account_setting_img_holder)
+
 
     }
 
@@ -228,13 +248,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN)
-        {
-            Log.e("erererrerere","111111")
+        if (requestCode == RC_SIGN_IN) {
+            Log.e("erererrerere", "111111")
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val result: GoogleSignInResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-                    handleSignInResult(result)
+                val result: GoogleSignInResult =
+                    Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+                handleSignInResult(result)
 
 //                // Google Sign In was successful, authenticate with Firebase
 //                val account = task.getResult(ApiException::class.java)
@@ -249,11 +269,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed" , e  )
+                Log.w(TAG, "Google sign in failed", e)
             }
-        }
-        else{
-            Log.e("erererrerere","222222222")
+        } else {
+            Log.e("erererrerere", "222222222")
 
         }
     }
@@ -291,20 +310,21 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
 
     }
+
     private fun handleSignInResult(result: GoogleSignInResult) {
         if (result.isSuccess) {
             Keys.isGoogleAccount = true
 
             val account = result.signInAccount
-            Log.e("tokiiddddd",account.id)
+            Log.e("tokiiddddd", account.id)
 
-            Log.e("useridgoogle",account.id.toString())
-            Log.e("tokengoogle",account.idToken.toString())
-            Log.e("userDatagoogle",account.account.toString())
+            Log.e("useridgoogle", account.id.toString())
+            Log.e("tokengoogle", account.idToken.toString())
+            Log.e("userDatagoogle", account.account.toString())
 
 
-            SharedPreferenceManager(this).saveNumber(Keys.USERID,account.id.toLong())
-            openA(SellerBuyerProfileSetActivity::class )
+            SharedPreferenceManager(this).saveNumber(Keys.USERID, account.id.toLong())
+            openA(SellerBuyerProfileSetActivity::class)
             finish()
 //            idToken = account.idToken
 //            name = account.displayName
@@ -323,7 +343,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
-
 
 
 }

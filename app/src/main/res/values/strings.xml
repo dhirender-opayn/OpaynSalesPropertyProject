@@ -101,6 +101,7 @@
     <string name="search_best_sales_properties">Search Best Sales Properties</string>
     <string name="error">Error</string>
     <string name="web_client_id">771958017542-0rtbejf5rhkjgigkfvmu7leee2nrg1d5.apps.googleusercontent.com</string>
+    <string name="username_password">Please Enter User name and Password</string>
 
 
 </resources>

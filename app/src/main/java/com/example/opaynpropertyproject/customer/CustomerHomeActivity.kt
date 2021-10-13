@@ -172,7 +172,7 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             }
             R.id.customer_message -> {
                 drawer_layout.closeDrawers()
-//                openA(SellerAddedAdsProperty::class)
+               bottomNavigationView.menu.getItem(3).setChecked(true)
                 val fragment = SellerChatFragment()
                 Utils.addReplaceFragment(this,fragment,R.id.nav_container,false,false,false)
             }
@@ -196,7 +196,10 @@ class CustomerHomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
             }
             R.id.customer_message -> {
                 drawer_layout.closeDrawers()
-                Utils.addReplaceFragment(this,SellerChatFragment(),R.id.nav_container,true,true,true)
+                bottomNavigationView.menu.getItem(3).setChecked(true)
+                Utils.addReplaceFragment(this, SellerChatFragment(), R.id.nav_container, false, false, false)
+                bottomNavigationClickListener()
+//                Utils.addReplaceFragment(this,SellerChatFragment(),R.id.nav_container,true,true,true)
             }
             R.id.logout-> {
                 Keys.isCustomer = false

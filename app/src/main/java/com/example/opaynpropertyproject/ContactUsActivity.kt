@@ -15,9 +15,7 @@ import com.example.opaynpropertyproject.customer.CustomerHomeActivity.Companion.
 import com.example.opaynpropertyproject.home_activity.HomeActivity
 import kotlinx.android.synthetic.main.activity_contact_us.*
 import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.android.synthetic.main.toolbar2.ads
-import kotlinx.android.synthetic.main.toolbar2.header_filer
-import kotlinx.android.synthetic.main.toolbar2.menu_bar
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 
 class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
@@ -73,31 +71,34 @@ class ContactUsActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
         contactUs_btn.setOnClickListener(this)
         contactus_form_container.setOnClickListener(this)
-        menu_bar.setOnClickListener(this)
+
+
     }
 
     private fun contactHeader() {
         supportActionBar!!.hide()
 
 
-        ads.visibility = View.VISIBLE
-      this.menu_bar.visibility = View.VISIBLE
-        ads.setText(getString(R.string.contactus))
-       this.menu_bar.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24)
-        notification_count.visibility = View.INVISIBLE
-        search_bar_container.visibility = View.INVISIBLE
+        contact_toolbar.ads.visibility = View.VISIBLE
+        contact_toolbar.menu_bar.visibility = View.VISIBLE
+        contact_toolbar.ads.setText(getString(R.string.contactus))
+        contact_toolbar.menu_bar.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24)
+        contact_toolbar.notification_count.visibility = View.INVISIBLE
+        contact_toolbar.search_bar_container.visibility = View.INVISIBLE
         header_filer.visibility = View.INVISIBLE
+        contact_toolbar.menu_bar.setOnClickListener {
+            finish()
+            Log.e("teststss","testststss")
+        }
+
+
 
 
     }
     override fun onClick(v: View?) {
         when (v!!.id) {
 
-            R.id.menu_bar -> {
-                Log.e("15422","contact back click")
-                onBackPressed()
 
-            }
             R.id.contactUs_btn -> {
                 contactUsValidation()
             }

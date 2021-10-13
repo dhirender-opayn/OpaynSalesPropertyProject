@@ -18,7 +18,6 @@ import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.api_model.ImageModel
 import com.example.opaynpropertyproject.comman.Utils
 
-
 class ImageUploadRecyclerAdapter(
     val listImageUrl: ArrayList<ImageModel>,
     val imageInterface: GetPositionInterface,
@@ -29,7 +28,6 @@ class ImageUploadRecyclerAdapter(
     val imgHash_list = HashMap<String, Any>()
     val gson = Gson()
     var delete_position = 0
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageUploadViewHolder {
         val view = ImageUploadViewHolder(
             LayoutInflater.from(parent.context)
@@ -38,10 +36,9 @@ class ImageUploadRecyclerAdapter(
         return view
     }
 
-    override fun onBindViewHolder(holder: ImageUploadViewHolder, position: Int)
-    {
+    override fun onBindViewHolder(holder: ImageUploadViewHolder, position: Int) {
         if (listImageUrl.isNotEmpty()) {
-             Picasso.get().load(listImageUrl[position].imageurl)
+            Picasso.get().load(listImageUrl[position].imageurl)
                 .placeholder(R.drawable.down_arrow).into(holder.imageView)
 
             holder.cancel_btn.setOnClickListener {
@@ -57,7 +54,6 @@ class ImageUploadRecyclerAdapter(
     override fun getItemCount(): Int {
         return listImageUrl.size
     }
-
 }
 
 class ImageUploadViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -1,22 +1,13 @@
 package com.example.opaynpropertyproject.adapter
 
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.graphics.Color
-import android.os.Bundle
-import android.text.LoginFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
-import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
-import com.example.opaynpropertyproject.api.Keys
-import com.example.opaynpropertyproject.api_model.CustomerHomeModel
 import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
 import com.squareup.picasso.Picasso
 
