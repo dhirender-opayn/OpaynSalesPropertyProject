@@ -49,13 +49,19 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         searchListner()
         ChatHeader()
-        readLastMessage()
         setChatAdapterChat(frontchatlist)
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+        readLastMessage()
 
     }
+
     private fun ChatHeader() {
         if (Keys.isCustomer) {
             activity = requireActivity() as CustomerHomeActivity
@@ -70,9 +76,11 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
     }
 
     private fun readLastMessage() {
+        frontchatlist.clear()
         val mMessagesRefchat = db.collection("chatRooms").document("12")
         mMessagesRefchat.get().addOnSuccessListener { documentsnapshot ->
             if (documentsnapshot != null) {
+
                 //if (documentsnapshot.getString("receiver_id").toString().equals() || documentsnapshot.getString("sender_id").toString().equals() ) //condition when
                 sellerchatmodel.last_message = documentsnapshot.getString("last_message").toString()
                 sellerchatmodel.type = documentsnapshot.getString("type").toString()
@@ -80,24 +88,31 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
                 sellerchatmodel.sender_id = documentsnapshot.getString("sender_id").toString()
                 sellerchatmodel.receiver_id = documentsnapshot.getString("receiver_id").toString()
                 sellerchatmodel.sender_name = documentsnapshot.getString("sender_name").toString()
+                Log.e("ddeeeeee", sellerchatmodel.sender_name)
                 frontchatlist.add(sellerchatmodel)
                 try {
                     setChatAdapterChat(frontchatlist)
-                }catch (e:Exception){
-
+                } catch (e: Exception) {
                 }
 
-             }
+            }
         }
     }
 
     override fun getPosition(position: Int) {
 
     }
-    private fun setChatAdapterChat( list:ArrayList<ChatFirebaseModel>) {
-        adapter = ChatRecyclerAdapter(list, requireActivity(), this)
-        rv_seller_chat.adapter = adapter
+
+    private fun setChatAdapterChat(list: ArrayList<ChatFirebaseModel>) {
+        if (rv_seller_chat != null) {
+
+            adapter = ChatRecyclerAdapter(list, requireActivity(), this)
+            rv_seller_chat.adapter = adapter
+
+        }
+
     }
+
     override fun onClick(v: View?) {
         when (v?.id) {
 
@@ -125,16 +140,18 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
                 before: Int, count: Int
             ) {
                 templist.clear()
-                if (!chat_search_bar?.search_toolbar?.text.toString().isEmpty()){
-                  templist= frontchatlist.filter { it.sender_name.lowercase().contains(s.toString())|| it.receiver_name.lowercase().contains(s.toString())} as ArrayList<ChatFirebaseModel>
+                if (!chat_search_bar?.search_toolbar?.text.toString().isEmpty()) {
+                    templist = frontchatlist.filter {
+                        it.sender_name.lowercase()
+                            .contains(s.toString()) || it.receiver_name.lowercase()
+                            .contains(s.toString())
+                    } as ArrayList<ChatFirebaseModel>
                     setChatAdapterChat(templist)
-                    Log.e("reslultsssss",templist.size.toString())
-                }
-                else{
+                    Log.e("reslultsssss", templist.size.toString())
+                } else {
                     setChatAdapterChat(frontchatlist)
                 }
             }
         })
     }
-
 }

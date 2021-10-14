@@ -55,6 +55,9 @@ class HomeRecommendInnerAdapter(
                 home_fav_position.getPosition(holder.adapterPosition)
                 it.setBackgroundResource(R.drawable.ic_red_heart)
             }
+            holder.property_des_container.setOnClickListener {
+
+            }
 
         }
 
@@ -85,5 +88,6 @@ class HomeRecommendInnerAdapter(
         val dealer_home_bed = itemView.yours_ads_bed
         val dealer_home_bathroom = itemView.yours_ads_bathroom
         val dealer_home_area = itemView.yours_ads_area
+        val property_des_container = itemView.property_txt_container
     }
 }

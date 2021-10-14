@@ -24,6 +24,10 @@ import kotlinx.android.synthetic.main.activity_seller_buyer_profile_set.*
 import kotlinx.android.synthetic.main.basic_add_fragment.*
 import kotlinx.android.synthetic.main.custom_spinner_item.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import ServiceViewModel
+
+
+
 
 
 class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
@@ -61,14 +65,23 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        dealerAddRequriedActivity = requireActivity() as DealerAddActivity
 
-        if (propertyFilling.sell_type.isNotEmpty()) {
-            setData()
-        } else {
-            startingFragement()
-        }
-        setclick()
+
+
+          dealerAddRequriedActivity = requireActivity() as DealerAddActivity
+
+          if (propertyFilling.sell_type.isNotEmpty()) {
+              setData()
+          } else {
+              startingFragement()
+          }
+          setclick()
+
+
+
+
+
+
 
     }
 
@@ -133,31 +146,33 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
     }
 
     fun cityAdapter(position: Int) {
-        val adapter = ArrayAdapter(
-            requireActivity(),
-            R.layout.custom_spinner_item, R.id.text, cityList
-        )
-        city_spinner.adapter = adapter
-        city_spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View, position: Int, id: Long
-            ) {
-                city_name = cityList[position]
-                propertyFilling.city = city_name
-                cityid = mainCityList[position].id
-                propertyFilling.cityId = cityid
-                propertyFilling.cityPosition = position
+        if (requireActivity() != null && isAdded) {
 
+            val adapter = ArrayAdapter(
+                requireActivity(),
+                R.layout.custom_spinner_item, R.id.text, cityList
+            )
+            city_spinner.adapter = adapter
+            city_spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
+                    city_name = cityList[position]
+                    propertyFilling.city = city_name
+                    cityid = mainCityList[position].id
+                    propertyFilling.cityId = cityid
+                    propertyFilling.cityPosition = position
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code to perform some action
-            }
+            city_spinner.setSelection(propertyFilling.cityPosition) // set city spinner value after PREV BUTTON Click
         }
-        city_spinner.setSelection(propertyFilling.cityPosition) // set city spinner value after PREV BUTTON Click
-
 
     }
 
@@ -408,25 +423,32 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
             Keys.CITY_REQ_CODE -> {
                 cityList.clear()
                 city_model = gson.fromJson(response, CityModel::class.java)
-                mainCityList.addAll(city_model!!.data)
-                propertyFilling.citySpinnerModel = mainCityList
-                city_model!!.data.forEach {
-                    cityList.add(it.name)
 
-                    propertyFilling.citySpinnerList.add(it.name)
-                }
-                var citypos = 0
-                if (propertyFilling.edit_flag) {
-                    for (i in mainCityList.indices) {
-                        if (mainCityList[i].id.equals(propertyFilling.editpost!!.city)) {
+                    mainCityList.addAll(city_model!!.data)
+                    propertyFilling.citySpinnerModel = mainCityList
+                    city_model!!.data.forEach {
+                        cityList.add(it.name)
 
-                            citypos = i
-                        }
-
-
+                        propertyFilling.citySpinnerList.add(it.name)
                     }
+                    var citypos = 0
+                    if (propertyFilling.edit_flag) {
+                        for (i in mainCityList.indices) {
+                            if (mainCityList[i].id.equals(propertyFilling.editpost!!.city)) {
+
+                                citypos = i
+                            }
+
+
+                        }
+                    }
+                if (isAdded)
+                {
+                    cityAdapter(citypos)
                 }
-                cityAdapter(citypos)
+
+
+
             }
             Keys.ADD_PROPERTY_FIRST_REQ_CODE -> {
 

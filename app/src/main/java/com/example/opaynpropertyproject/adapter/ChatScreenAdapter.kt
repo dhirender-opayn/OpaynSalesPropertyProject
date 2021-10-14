@@ -28,23 +28,45 @@ class ChatScreenAdapter(val chatList: ArrayList<ChatFirebaseModel>, val context:
 
     override fun onBindViewHolder(holder: ChatScreenViewHolder, position: Int) {
 
-        if (chatList[position].type.equals("2"))
-        {
-            holder.senderImage.visibility = View.VISIBLE
-            Log.e("lastmsg", chatList[position].last_message)
-            Picasso.get().load(chatList[position].last_message).placeholder(R.drawable.down_arrow)
-                .into(holder.senderImage)
-            holder.receive_container.visibility = View.GONE
-            holder.sender_contaier.visibility = View.VISIBLE
-        } else
-        {
-            holder.senderImage.visibility = View.GONE
-            Log.e("check", "ddddd")
-            holder.receive_container.visibility = View.GONE
-            holder.sender_person_msg.visibility = View.VISIBLE
-            holder.sender_person_msg.setText(chatList[position].last_message)
-            holder.sender_contaier.visibility = View.VISIBLE
-        }
+//        if (chatList[position].sender_id.equals(Keys.SENDER_ID)) {
+
+            if (chatList[position].type.equals("2")) {
+                holder.senderImage.visibility = View.VISIBLE
+                Log.e("lastmsg", chatList[position].last_message)
+                Picasso.get().load(chatList[position].last_message)
+                    .placeholder(R.drawable.down_arrow)
+                    .into(holder.senderImage)
+                holder.receive_container.visibility = View.GONE
+                holder.sender_contaier.visibility = View.VISIBLE
+            } else {
+                holder.senderImage.visibility = View.GONE
+                Log.e("check", "ddddd")
+                holder.receive_container.visibility = View.GONE
+                holder.sender_person_msg.visibility = View.VISIBLE
+                holder.sender_person_msg.setText(chatList[position].last_message)
+                holder.sender_contaier.visibility = View.VISIBLE
+            }
+//        }
+//        else if (chatList[position].receiver_id.equals(Keys.RECEIVER_ID)) {
+//            if (chatList[position].type.equals("2")) {
+//                holder.receiverImage.visibility = View.VISIBLE
+//                Log.e("lastmsg", chatList[position].last_message)
+//                Picasso.get().load(chatList[position].last_message)
+//                    .placeholder(R.drawable.down_arrow)
+//                    .into(holder.receiverImage)
+//                holder.receive_container.visibility = View.VISIBLE
+//                holder.sender_contaier.visibility = View.GONE
+//            } else {
+//                holder.receiverImage.visibility = View.VISIBLE
+//                Log.e("check", "ddddd")
+//                holder.sender_contaier.visibility = View.GONE
+//                holder.receive_person_img.visibility = View.VISIBLE
+//                holder.receive_person_msg.setText(chatList[position].last_message)
+//                holder.receive_container.visibility = View.VISIBLE
+//            }
+//        } else {
+//            Log.e("errrrrrrrrrrr", "checkckckckckckckccfkc")
+//        }
     }
 
     override fun getItemCount(): Int {

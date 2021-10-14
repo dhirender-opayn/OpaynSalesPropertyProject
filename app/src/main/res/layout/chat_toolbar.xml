@@ -27,7 +27,10 @@
         app:layout_constraintLeft_toRightOf="@+id/chat_profile_img"
         style="@style/text_header"
         android:text="Adele Mark"
+        android:paddingVertical="@dimen/_2sdp"
         android:paddingStart="@dimen/_10sdp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/chat_profile_img"
         app:layout_constraintTop_toTopOf="parent"/>
 
 <ImageView

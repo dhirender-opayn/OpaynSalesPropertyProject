@@ -58,6 +58,7 @@ class ChatScreenActivity : BaseActivity(), View.OnClickListener {
         onClicked()
 
 
+
         val popup =EmojiPopup.Builder.fromRootView(rootView).build(msg)
         emoji.setOnClickListener {
                 popup.toggle()
@@ -186,6 +187,10 @@ class ChatScreenActivity : BaseActivity(), View.OnClickListener {
                                 model.receiver_image = ""
                                 model.type = doc.document.data.get("type").toString()
                                 model.last_message = doc.document.data.get("last_message").toString()
+
+                                //set name in chat screen
+                                chat_screen_toolbar.chat_person_name.setText(doc.document.data.get("sender_name").toString())
+
                                 chatList.add(model)
                                 rv_chat_screen.smoothScrollToPosition(chatList.size - 1)
                                 adapter?.notifyDataSetChanged()

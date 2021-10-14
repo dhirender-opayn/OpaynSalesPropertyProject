@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isEmpty
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.adapter.HomeRecommendRecyclerAdapter
@@ -53,38 +54,41 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        HomeHeader()
-
-        home_img_pager.adapter = ImageSliderAdapter(requireContext())
-
-        if (Keys.isCustomer) {
-            val keyword = "pg"
-            //used getserice2 for try ================
-            serviceViewModel.getserviceWithKeyword(
-                Keys.CUSTOMER_HOME_ADD_END_POINT,
-                requireContext(),
-                Keys.CUSTOMER_HOME_REQ_CODE,
-                true,
-                token,
-                keyword,
-                true,
-                this
-            )
-
-            serviceViewModel.getservice(
-                Keys.PROPERTY_TYPE_DETAIL,
-                requireContext(),
-                Keys.PROPERTY_TYPE_REQ_CODE,
-                true,
-                token,
-                true,
-                this
-            )
 
 
-        } else {
-            HitHomeApi()
-        }
+
+            HomeHeader()
+
+            home_img_pager.adapter = ImageSliderAdapter(requireContext())
+
+            if (Keys.isCustomer) {
+                val keyword = "pg"
+                //used getserice2 for try ================
+                serviceViewModel.getserviceWithKeyword(
+                    Keys.CUSTOMER_HOME_ADD_END_POINT,
+                    requireContext(),
+                    Keys.CUSTOMER_HOME_REQ_CODE,
+                    true,
+                    token,
+                    keyword,
+                    true,
+                    this
+                )
+                serviceViewModel.getservice(
+                    Keys.PROPERTY_TYPE_DETAIL,
+                    requireContext(),
+                    Keys.PROPERTY_TYPE_REQ_CODE,
+                    true,
+                    token,
+                    true,
+                    this
+                )
+
+
+            } else {
+                HitHomeApi()
+            }
+
     }
 
     private fun HomeHeader() {
@@ -114,7 +118,15 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
 
     override fun getPosition(position: Int) {
         if (Keys.isCustomer) {
-
+            if (Keys.SELECTED_PROPERTY && !Keys.add_fav_flag) {
+                Keys.customerList = customer_home_list
+                val s_property_id = customer_home_list?.get(position)?.id
+                val bundle = Bundle()
+                if (s_property_id != null) {
+                    bundle.putInt(Keys.POSITION, s_property_id)
+                }
+                openA(SelectedPropertyActivity::class, bundle)
+            }
             if (Keys.add_fav_flag) {
                 val property_id = customer_home_list?.get(position)!!.id
                 fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
@@ -129,10 +141,10 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                     this
                 )
                 fav_property_position = position
-                Keys.add_fav_flag =false
+                Keys.add_fav_flag = false
 
-            } else if (!Keys.add_fav_flag){
-                Log.e("DislikeProperty","Property is Disliked")
+            } else if (!Keys.add_fav_flag && !Keys.SELECTED_PROPERTY) {
+                Log.e("DislikeProperty", "Property is Disliked")
                 val property_id = customer_home_list?.get(position)!!.id
                 fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
                 serviceViewModel.deleteserviceBody(
@@ -145,15 +157,8 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                     true,
                     this
                 )
-            } else {
-                Keys.customerList = customer_home_list
-                val s_property_id = customer_home_list?.get(position)?.id
-                val bundle = Bundle()
-                if (s_property_id != null) {
-                    bundle.putInt(Keys.POSITION, s_property_id)
-                }
-                openA(SelectedPropertyActivity::class, bundle)
             }
+
         } else {
             val property_id = home_property_list?.get(position)!!.id
             fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
@@ -202,14 +207,16 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                 home_property_list!!.addAll(home_property_model.data)
 
                 if (home_property_list != null) {
-
 //                    rv_home_widget.adapter = WidgetHomeAdapter()
-                    rv_recommended_property_home.adapter = HomeRecommendRecyclerAdapter(
-                        home_property_list!!,
-                        requireActivity(),
-                        this
-                    ) ///CustomerHomeWidgetAdapter()
-                    //  rv_nearby_property.adapter = HomeRecommendRecyclerAdapter()
+                    if (rv_recommended_property_home != null) {
+                        rv_recommended_property_home.adapter = HomeRecommendRecyclerAdapter(
+                            home_property_list!!,
+                            requireActivity(),
+                            this
+                        ) ///CustomerHomeWidgetAdapter()
+                        //  rv_nearby_property.adapter = HomeRecommendRecyclerAdapter()
+                    }
+
                 }
             }
 
@@ -219,11 +226,14 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
                 customer_home_list!!.addAll(customerHomeModel.data.data)
                 if (customer_home_list != null) {
 //                    rv_home_widget.adapter = WidgetHomeAdapter()
-                    rv_recommended_property_home.adapter = CustomerHomeInnerAdapter(
-                        customer_home_list!!,
-                        requireActivity(),
-                        this
-                    )
+                    if (rv_recommended_property_home != null) {
+                        rv_recommended_property_home.adapter = CustomerHomeInnerAdapter(
+                            customer_home_list!!,
+                            requireActivity(),
+                            this
+                        )
+                    }
+
                 }
             }
             Keys.ADD_PROPERTY_FAV_REQ_CODE -> {
@@ -233,15 +243,18 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
             }
             Keys.DEL_WISHLIST_REQ_CODE -> {
                 Toast.makeText(requireContext(), "Dislike", Toast.LENGTH_LONG).show()
-              Log.e("deleteLike","dislikeDeleteProperty")
+                Log.e("deleteLike", "dislikeDeleteProperty")
 
             }
             Keys.PROPERTY_TYPE_REQ_CODE -> {
                 val widgetModel = gson.fromJson(response, FilterModel::class.java)
-                widegetlist?.addAll(widgetModel.data)
-                rv_home_widget.adapter =
-                    widegetlist?.let { WidgetHomeAdapter(it, requireContext()) }
-
+                if (widegetlist != null) {
+                    widegetlist?.addAll(widgetModel.data)
+                    if (rv_home_widget != null) {
+                        rv_home_widget.adapter =
+                            widegetlist?.let { WidgetHomeAdapter(it, requireContext()) }
+                    }
+                }
             }
         }
     }

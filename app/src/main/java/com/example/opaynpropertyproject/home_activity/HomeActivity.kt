@@ -11,6 +11,7 @@ import com.example.opaynpropertyproject.*
 import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
+import com.example.opaynpropertyproject.api_model.LoginSuccessModel
 import com.example.opaynpropertyproject.comman.BaseActivity
 import com.example.opaynpropertyproject.comman.SharedPreferenceManager
 import com.example.opaynpropertyproject.comman.Utils
@@ -31,27 +32,24 @@ import kotlinx.android.synthetic.main.toolbar.menu_bar
 
 class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 
-
     lateinit var navController: NavController
+    var model: LoginSuccessModel? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         overridePendingTransition(0, 0)
-        homeHeader()
-//        setUpNavigation()
+
         token = SharedPreferenceManager(this).getString(Keys.TOKEN).toString()
         saved_user_name = SharedPreferenceManager(this).getString(Keys.USER_NAME).toString()
         saved_user_email = SharedPreferenceManager(this).getString(Keys.USER_EMAIL).toString()
+        val gUserModel = SharedPreferenceManager(this).getString(Keys.USERDATA).toString()
+        model = gson.fromJson(gUserModel, LoginSuccessModel::class.java)
 
-        menu_bar.setOnClickListener(this)
-        nav_view.add_property.setOnClickListener(this)
-        my_property.setOnClickListener(this)
-        faq.setOnClickListener(this)
-        about.setOnClickListener(this)
-        contact_us.setOnClickListener(this)
-        account_setting.setOnClickListener(this)
-        logout.setOnClickListener(this)
+        homeHeader()
+        btnOnClicked()
+
 //        navController = setNavigationController()
         bottomNavigationView.menu.getItem(2).setChecked(true)
         Utils.addReplaceFragment(this, HomeFragment(), R.id.nav_container, false, false, false)
@@ -75,6 +73,17 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
 //        fragmentManager.beginTransaction().replace(containerId, fragment, tag)
 //            .addToBackStack("backstack").commit()
 //    }
+    private fun btnOnClicked() {
+        menu_bar.setOnClickListener(this)
+        nav_view.add_property.setOnClickListener(this)
+        my_property.setOnClickListener(this)
+        faq.setOnClickListener(this)
+        about.setOnClickListener(this)
+        contact_us.setOnClickListener(this)
+        account_setting.setOnClickListener(this)
+        logout.setOnClickListener(this)
+    }
+
     private fun homeHeader() {
         supportActionBar!!.hide()
 
@@ -157,7 +166,12 @@ class HomeActivity : BaseActivity(), View.OnClickListener, ApiResponse {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.menu_bar -> {
+                nav_view.profile_name.setText(model?.data?.user?.name)
+                nav_view.seller_phone_number.setText(model?.data?.user?.mobile.toString())
+                nav_view.user_email.setText(model?.data?.user?.email)
+
                 drawer_layout.openDrawer(GravityCompat.START)
+
             }
             R.id.add_property -> {
                 drawer_layout.closeDrawers()

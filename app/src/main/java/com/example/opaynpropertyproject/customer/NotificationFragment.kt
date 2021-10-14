@@ -10,6 +10,7 @@ import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.adapter.customerAdapter.NotificationRecyclerAdapter
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.home_activity.HomeActivity
+import com.greetupp.extensions.isNull
 import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -33,8 +34,13 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        NotificationHeader()
-        rv_notification.adapter = NotificationRecyclerAdapter()
+
+            NotificationHeader()
+            if (rv_notification != null) {
+                rv_notification.adapter = NotificationRecyclerAdapter()
+            }
+
+
     }
 
 

@@ -27,11 +27,13 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, GetPositionInterface {
     lateinit var activity_search: Activity
+    private var searchposition = 0
     var searchList = ArrayList<SearchModelSuccess.Data.Data>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,18 +41,25 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search_bar, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        searchListner()
-        SearchHeader()
-        SearchClick()
+
+
+            searchListner()
+            SearchHeader()
+            SearchClick()
+
+
     }
-    private fun SearchClick(){
-       activity_search.header_filer.setOnClickListener(this)
+
+    private fun SearchClick() {
+        activity_search.header_filer.setOnClickListener(this)
     }
+
     private fun SearchHeader() {
-        if (Keys.isCustomer){
+        if (Keys.isCustomer) {
             activity_search = requireContext() as CustomerHomeActivity
-        } else{
+        } else {
             activity_search = requireContext() as HomeActivity
         }
         activity_search.ads.visibility = View.INVISIBLE
@@ -71,32 +80,36 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
 
 
             }
+
             override fun onTextChanged(
                 s: CharSequence, start: Int,
                 before: Int, count: Int
             ) {
-                if (!activity?.search_bar?.text.toString().isEmpty()) {
-                    val searchHasHmap = HashMap<String, Any>()
-                    searchHasHmap.put(Keys.KEYWORD, s.toString())
-                    serviceViewModel.getserviceWithKeyword(
-                        Keys.PROPERTY_SEARCH_END_POINT,
-                        requireContext(),
-                        Keys.PROPERTY_SEARCH_REQ_CODE,
-                        true,
-                        HomeActivity.token,
-                        s.toString(),
-                        false,
-                        this@SearchBarFragment
-                    )
-                } else {
-                    searchList.clear()
+                if (isAdded){
+                    if (!activity?.search_bar?.text.toString().isEmpty()) {
+                        val searchHasHmap = HashMap<String, Any>()
+                        searchHasHmap.put(Keys.KEYWORD, s.toString())
+                        serviceViewModel.getserviceWithKeyword(
+                            Keys.PROPERTY_SEARCH_END_POINT,
+                            requireContext(),
+                            Keys.PROPERTY_SEARCH_REQ_CODE,
+                            true,
+                            HomeActivity.token,
+                            s.toString(),
+                            false,
+                            this@SearchBarFragment
+                        )
+                    } else {
+                        searchList.clear()
+                    }
                 }
+
             }
         })
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.header_filer -> {
                 openA(FilterPropertyActivity::class)
             }
@@ -107,8 +120,9 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
 
     override fun getPosition(position: Int) {
         val selected_property_id = searchList[position].id
+        Log.e("8555555",selected_property_id.toString())
         serviceViewModel.getservice(
-            Keys.SELECTED_PROPERTY_END_POINT + { selected_property_id },
+            Keys.SELECTED_PROPERTY_END_POINT + selected_property_id ,
             requireContext(),
             Keys.SELECTED_PROPERTY_REQ_CODE,
             true,
@@ -116,6 +130,8 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
             true,
             this
         )
+        searchposition = position
+
 
     }
 
@@ -128,7 +144,14 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
                 rv_search.adapter = SearchRecyclerAdapter(searchList, this)
             }
             Keys.SELECTED_PROPERTY_REQ_CODE -> {
-                openA(SelectedPropertyActivity::class)
+                Keys.searchList = searchList
+                Keys.isSearchClick = true
+                val s_property_id = searchList?.get(searchposition)?.id
+                val bundle = Bundle()
+                if (s_property_id != null) {
+                    bundle.putInt(Keys.POSITION, s_property_id)
+                }
+                openA(SelectedPropertyActivity::class,bundle)
 
             }
             Keys.BACKENDERROR -> {
@@ -140,8 +163,8 @@ class SearchBarFragment : BaseFragment(), View.OnClickListener, ApiResponse, Get
 
     override fun onResume() {
         super.onResume()
-        if (!text.isEmpty()){
-            Log.e("search_result","text")
+        if (!text.isEmpty()) {
+            Log.e("search_result", "text")
         }
     }
 

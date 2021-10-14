@@ -34,6 +34,7 @@ import com.greetupp.extensions.isNull
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
+import ServiceViewModel
 
 
 class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
@@ -55,28 +56,36 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileHeader()
         setclicks()
-        getProfileApi()
+        profileHeader()
+
+            if (ProfileFragment().isAdded){
+
+                getProfileApi()
 //       getProfileDeatils()
+                //==========================//
+                auth = FirebaseAuth.getInstance()
+                // Configure Google Sign In
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.web_client_id))
+                    .requestEmail()
+                    .build()
 
-        //==========================//
-        auth = FirebaseAuth.getInstance()
-        // Configure Google Sign In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id))
-            .requestEmail()
-            .build()
+                googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+            }
 
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-        checkUser()
+
+
+
+
+
     }
 
     private fun checkUser() {
         //get current user
-       val current_user =  auth.currentUser
-        if (current_user != null){
-           val email =  current_user.email
+        val current_user = auth.currentUser
+        if (current_user != null) {
+            val email = current_user.email
 
         }
     }
@@ -116,9 +125,10 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
         val mUser_name = model.data.user.name
         val mUser_email = model.data.user.email
         val mUser_mobile = model.data.user.mobile
-        if (!model.data.user.profile.image.isNull()){
-            Picasso.get().load(model.data.user.profile.image).placeholder(R.drawable.down_arrow).into(profile_img)
-            Log.e("checkimage",model.data.user.profile.image.toString())
+        if (!model.data.user.profile.image.isNull()) {
+            Picasso.get().load(model.data.user.profile.image).placeholder(R.drawable.down_arrow)
+                .into(profile_img)
+            Log.e("checkimage", model.data.user.profile.image.toString())
         }
         profile_name.setText(mUser_name)
         user_email.setText(mUser_email)
@@ -141,7 +151,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
                 this
             )
         } else {
-                serviceViewModel.getservice(
+            serviceViewModel.getservice(
                 Keys.GET_PROFILE_END_POINT,
                 requireContext(),
                 Keys.GET_PROFILE_REQ_CODE,
@@ -205,7 +215,14 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
                 openA(SavedPropertyActivity::class)
             }
             R.id.customer_message -> {
-                Utils.addReplaceFragment(requireContext(),SellerChatFragment(),R.id.nav_container,true,true,true)
+                Utils.addReplaceFragment(
+                    requireContext(),
+                    SellerChatFragment(),
+                    R.id.nav_container,
+                    true,
+                    true,
+                    true
+                )
             }
         }
     }
@@ -219,8 +236,10 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
                 val mUser_name = get_profile_model?.data!!.user.name
                 val mUser_email = get_profile_model.data.user.email
                 val mUser_mobile = get_profile_model.data.user.mobile
-
-                Picasso.get().load(get_profile_model.data.user.profile.image).placeholder(R.drawable.down_arrow).into(profile_img)
+                if (get_profile_model.data.user.profile.image != null) {
+                    Picasso.get().load(get_profile_model.data.user.profile.image)
+                        .placeholder(R.drawable.down_arrow).into(profile_img)
+                }
                 profile_name.setText(mUser_name)
                 user_email.setText(mUser_email)
                 seller_phone_number.setText(mUser_mobile)
@@ -232,29 +251,33 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
             }
             Keys.GET_CUSTOMER_PROFILE_REQ_CODE -> {
                 val get_profile_model = gson.fromJson(response, GetProfileSuccess::class.java)
-                val get_profile_list = ArrayList<GetProfileSuccess.Data>()
-                get_profile_list.addAll(listOf(get_profile_model.data))
-                val mUser_name = get_profile_model?.data!!.user.name
-                val mUser_email = get_profile_model.data.user.email
-                val mUser_mobile = get_profile_model.data.user.mobile
-                Picasso.get().load(get_profile_model.data.user.profile.image).placeholder(R.drawable.down_arrow).into(profile_img)
-                profile_name.setText(mUser_name)
-                user_email.setText(mUser_email)
-                seller_phone_number.setText(mUser_mobile)
+                if (get_profile_model.data != null) {
+                    val get_profile_list = ArrayList<GetProfileSuccess.Data>()
+                    get_profile_list.addAll(listOf(get_profile_model.data))
+                    val mUser_name = get_profile_model?.data!!.user.name
+                    val mUser_email = get_profile_model.data.user.email
+                    val mUser_mobile = get_profile_model.data.user.mobile
+                    if (get_profile_model.data.user.profile.image != null) {
+                        Picasso.get().load(get_profile_model.data.user.profile.image)
+                            .placeholder(R.drawable.down_arrow).into(profile_img)
+                    }
+                    profile_name.setText(mUser_name)
+                    user_email.setText(mUser_email)
+                    seller_phone_number.setText(mUser_mobile)
 //                if (mUser_mobile.equals(null)) {
 //                    seller_phone_number.setText("+91-0000000000")
 //                } else {
 //                    seller_phone_number.setText(mUser_mobile.toString())
 //                }
-
+                }
             }
         }
 
     }
 
     private fun signOut() {
-        auth.signOut()
-        googleSignInClient.signOut()
+        // auth.signOut()
+        // googleSignInClient.signOut()
         openA(LoginActivity::class)
         requireActivity().finish()
 

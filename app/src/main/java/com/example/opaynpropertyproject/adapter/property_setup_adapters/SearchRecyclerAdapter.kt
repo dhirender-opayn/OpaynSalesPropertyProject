@@ -42,7 +42,6 @@ class SearchRecyclerAdapter(val searchList : ArrayList<SearchModelSuccess.Data.D
                 Picasso.get().load(searchList[position].image.image).placeholder(R.drawable.down_arrow).into(holder.search_property_img)
             }
 
-
         holder.property_container.setOnClickListener{
            search_selected_position.getPosition(holder.adapterPosition)
         }
