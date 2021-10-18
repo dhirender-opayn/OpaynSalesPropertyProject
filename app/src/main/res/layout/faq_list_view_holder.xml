@@ -4,24 +4,30 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/rectangel_border"
-    android:layout_margin="@dimen/_16sdp"
-    android:padding="@dimen/_8sdp">
+    android:paddingHorizontal="@dimen/_6sdp"
+    android:layout_margin="@dimen/_16sdp">
 
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/faq_head"
     style="@style/text_header"
+    android:padding="@dimen/_6sdp"
     android:text="What is Lorem lpsum?"
     android:textColor="@color/sky_blue_700"
    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:drawablePadding="@dimen/_10sdp"
+    android:drawableRight="@drawable/down_arrow"
     />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/faq_des"
+        android:visibility="gone"
         style="@style/textview"
+        android:padding="@dimen/_4sdp"
         android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English"
         app:layout_constraintTop_toBottomOf="@+id/faq_head"
         />

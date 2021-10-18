@@ -76,13 +76,6 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
               startingFragement()
           }
           setclick()
-
-
-
-
-
-
-
     }
 
 
@@ -316,10 +309,8 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         if (propertyFilling.sell_type.isNotEmpty()) {
             propertyType_list = propertyFilling.rv_property_type_list!!
         }
-        recyclerView_property_type.adapter =
-            PropertyTypeRecyclerViewAdapter(propertyType_list)
+        recyclerView_property_type.adapter = PropertyTypeRecyclerViewAdapter(propertyType_list)
     }
-
 
     fun startingFragement() {
         sellTypeAPI(token, this)
@@ -361,10 +352,9 @@ class BasicAddFragment : BaseFragment(), ApiResponse, View.OnClickListener {
         )
 
     }
-
-    override fun onResponse(requestcode: Int, response: String) {
+    override fun onResponse(requestcode: Int, response: String)
+    {
         when (requestcode) {
-
             Keys.STATE_REQ_CODE -> {
                 model = gson.fromJson(response, StateModel::class.java)
                 mainstateList.addAll(model!!.data)

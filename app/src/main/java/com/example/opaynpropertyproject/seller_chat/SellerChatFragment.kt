@@ -22,6 +22,7 @@ import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import io.grpc.internal.SharedResourceHolder
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_chat_screen.*
 import kotlinx.android.synthetic.main.fragment_seller_chat.*
 import kotlinx.android.synthetic.main.search_toolbar.*

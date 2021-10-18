@@ -2,35 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/rectangel_border"
+    android:padding="@dimen/_4sdp"
+    android:layout_margin="@dimen/_4sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/selected_card_container"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:cardElevation="@dimen/_5sdp"
-        app:cardMaxElevation="@dimen/_5sdp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="@dimen/_15sdp"
-        >
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:id="@+id/tv_facilites"
+         android:textColor="@color/black"
+         android:text="Children Friendly"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
-            android:background="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/recycler_view_text"
-            android:id="@+id/facility_img"
-            android:src="@drawable/ic_cups"
-            android:paddingVertical="@dimen/_6sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </androidx.cardview.widget.CardView>
 
 
 

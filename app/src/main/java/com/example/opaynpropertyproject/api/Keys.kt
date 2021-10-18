@@ -7,9 +7,11 @@ import com.example.opaynpropertyproject.api_model.seller_home_model.SellerProper
 
 object Keys {
 
+
     const val BASEURL = "http://f9bf-180-188-237-214.ngrok.io/realestate-api/public/api/"
     var isSearchClick: Boolean =false
     var searchList: ArrayList<SearchModelSuccess.Data.Data>? = null
+    var customerList: ArrayList<CustomerHomeModel.Data.Data>? = null
     var SELECTED_PROPERTY: Boolean = false
     var UPDATE_EDIT: Boolean = false
     var IS_BACK_BTN_PRESS: Boolean = false
@@ -21,7 +23,7 @@ object Keys {
     val UPLOAD_PIC = "image"
     var add_fav_flag: Boolean = false
     var SENDER: Boolean = false
-    var customerList: ArrayList<CustomerHomeModel.Data.Data>? = null
+
 
     val QUERY_DES: String ="description"
     val QUERY_SUB: String = "subject"

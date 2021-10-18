@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.opaynpropertyproject.api_model.FAQSuccessModel
 import kotlinx.android.synthetic.main.faq_list_view_holder.view.*
 
-class FaqRecyclerViewAdapter(val faqList :ArrayList<FAQSuccessModel.Data>, val context: Context) :
+class FaqRecyclerViewAdapter(val faqList: ArrayList<FAQSuccessModel.Data>, val context: Context) :
     RecyclerView.Adapter<FaqRecyclerViewAdapter.FaqViewHolder>() {
 
 
@@ -21,23 +21,32 @@ class FaqRecyclerViewAdapter(val faqList :ArrayList<FAQSuccessModel.Data>, val c
                 .inflate(R.layout.faq_list_view_holder, parent, false)
         )
     }
+
     override fun onBindViewHolder(holder: FaqViewHolder, position: Int) {
+        var arrow_flag = false
         holder.faq_title.setText(faqList[position].question)
+        holder.faq_title.setOnClickListener {
+            if (!arrow_flag) {
+                holder.faq_des.visibility = View.VISIBLE
+                arrow_flag = true
+            } else if (arrow_flag) {
+                holder.faq_des.visibility = View.GONE
+                arrow_flag = false
+            }
+        }
         holder.faq_des.setText(faqList[position].answer)
 
     }
 
     override fun getItemCount(): Int {
-          return  faqList.size
+        return faqList.size
     }
 
 
     class FaqViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val faq_title =itemView.faq_head
+        val faq_title = itemView.faq_head
         val faq_des = itemView.faq_des
     }
-
-
 
 
 }

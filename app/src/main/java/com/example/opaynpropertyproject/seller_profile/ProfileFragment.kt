@@ -219,7 +219,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
             }
             R.id.customer_message -> {
 
-
+               requireActivity().bottomNavigationView.menu.getItem(3).setChecked(true)
                 Utils.addReplaceFragment(
                     requireContext(),
                     SellerChatFragment(),

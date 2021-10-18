@@ -14,8 +14,7 @@ import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.`interface`.GetPositionInterface
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.CustomerHomeModel
-import com.example.opaynpropertyproject.comman.Utils
-import com.greetupp.extensions.isNull
+ import com.greetupp.extensions.isNull
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seller_home_list_holder.view.*
 

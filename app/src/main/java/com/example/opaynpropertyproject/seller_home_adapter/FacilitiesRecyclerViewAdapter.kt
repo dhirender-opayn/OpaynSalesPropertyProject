@@ -26,9 +26,9 @@ class FacilitiesRecyclerViewAdapter():RecyclerView.Adapter<FacilitiesRecyclerVie
     }
 
     override fun getItemCount(): Int {
-       return   10
+       return   6
     }
     class  FacilitiesViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-        val facilities_img = itemView.facility_img
+        val facilities_img = itemView.tv_facilites
     }
 }
