@@ -84,7 +84,7 @@
             android:id="@+id/account_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangel_border"
+
             android:padding="@dimen/_6sdp"
             app:layout_constraintTop_toBottomOf="@+id/general_setting">
 
@@ -111,16 +111,17 @@
                 android:text="@string/add_property"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/account_setting" />
+
             <TextView
                 android:id="@+id/wishlist"
                 style="@style/text_header"
-                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
                 android:text="@string/wishlist"
+                android:visibility="invisible"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/account_setting" />
 
@@ -129,22 +130,23 @@
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 android:drawableRight="@drawable/ic_forward"
+                android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
                 android:text="@string/my_property"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_property" />
+
             <TextView
                 android:id="@+id/customer_message"
                 style="@style/text_header"
-                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 android:drawableRight="@drawable/ic_forward"
+                android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
                 android:text="Message"
+                android:visibility="invisible"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_property" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -162,7 +164,6 @@
             android:id="@+id/contact_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangel_border"
             android:padding="@dimen/_6sdp"
             app:layout_constraintTop_toBottomOf="@+id/contact">
 
@@ -183,7 +184,7 @@
                 style="@style/text_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 android:drawableRight="@drawable/ic_forward"
+                android:drawableRight="@drawable/ic_forward"
                 android:drawablePadding="@dimen/_16sdp"
                 android:paddingVertical="@dimen/_4sdp"
                 android:text="@string/about"

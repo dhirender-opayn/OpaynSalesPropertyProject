@@ -63,10 +63,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
         forget_password.setOnClickListener(this)
         login_button.setOnClickListener(this)
         google_gmail_icon.setOnClickListener(this)
-
-
         //================//
-
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("771958017542-bu8apihnvm0oim64sfd6v3p475d2nr6k.apps.googleusercontent.com")
@@ -162,7 +159,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                     }
                 }
             }
-
         }, 1000)
 
     }
@@ -216,7 +212,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener, ApiResponse {
                         token = model.data.token
                         openA(HomeActivity::class)
                         finishAffinity()
-
                     }
                 }
 

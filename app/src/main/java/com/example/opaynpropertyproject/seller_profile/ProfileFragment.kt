@@ -35,6 +35,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
 import ServiceViewModel
+import androidx.core.view.get
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
@@ -193,6 +195,7 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
             R.id.account_setting -> {
 //                val bundle = Bundle()
 //                bundle.putParcelable("key")
+
                 openA(AccountSettingActivity::class)
             }
             R.id.add_property -> {
@@ -215,6 +218,8 @@ class ProfileFragment : BaseFragment(), View.OnClickListener, ApiResponse {
                 openA(SavedPropertyActivity::class)
             }
             R.id.customer_message -> {
+
+
                 Utils.addReplaceFragment(
                     requireContext(),
                     SellerChatFragment(),

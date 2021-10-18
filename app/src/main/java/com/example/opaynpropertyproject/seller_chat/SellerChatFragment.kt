@@ -80,7 +80,6 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
         val mMessagesRefchat = db.collection("chatRooms").document("12")
         mMessagesRefchat.get().addOnSuccessListener { documentsnapshot ->
             if (documentsnapshot != null) {
-
                 //if (documentsnapshot.getString("receiver_id").toString().equals() || documentsnapshot.getString("sender_id").toString().equals() ) //condition when
                 sellerchatmodel.last_message = documentsnapshot.getString("last_message").toString()
                 sellerchatmodel.type = documentsnapshot.getString("type").toString()
@@ -94,7 +93,6 @@ class SellerChatFragment : BaseFragment(), GetPositionInterface, View.OnClickLis
                     setChatAdapterChat(frontchatlist)
                 } catch (e: Exception) {
                 }
-
             }
         }
     }
