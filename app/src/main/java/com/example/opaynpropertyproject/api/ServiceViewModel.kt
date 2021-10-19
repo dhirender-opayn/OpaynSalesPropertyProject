@@ -86,19 +86,16 @@ class ServiceViewModel {
                         }
                         Keys.BACKENDERROR -> {
 //                            ProgressDialogs.showToast(context,response.message())
-
                             var jsonObject = JSONObject(response.errorBody()!!.string().toString())
                             reuestCode = Keys.BACKENDERROR
-
-
+//                            responsestring = jsonObject.toString()
+//                           responselistner.onResponse(reuestcode,responsestring)
 //
                             //   ProgressDialogs.showToast(context,jsonObject.getString("message"))
 
 //                            val message = jsonObject.getString("message")
-
                         }
                     }
-
                 } else {
 
                     ProgressDialogs.dismissProgressDialog()
@@ -213,7 +210,7 @@ class ServiceViewModel {
                                 responsestring = jsonObject.toString()
                                 reuestCode = reuestcode
                                 responselistner.onResponse(reuestCode, responsestring)
-                             }
+                            }
 
                         }
                         Keys.UNAUTHRISECODE -> {
@@ -406,14 +403,14 @@ class ServiceViewModel {
         reuestcode: Int,
         isheader: Boolean,
         token: String,
-        keyword:String,
+        keyword: String,
         isprogress: Boolean,
         responselistner: ApiResponse
     ) {
 
         val apiService = WebapiInterface.create(context, isheader, token)
 
-        val response = apiService.getserviceWithKeywordBody(url,keyword)
+        val response = apiService.getserviceWithKeywordBody(url, keyword)
         if (isprogress) {
             ProgressDialogs.showDialog(context)
         }
@@ -473,20 +470,20 @@ class ServiceViewModel {
     }
 
 
-  fun getserviceWithKeyword2(
+    fun getserviceWithKeyword2(
         url: String,
         context: Context,
         reuestcode: Int,
         isheader: Boolean,
         token: String,
-        keyword:HashMap<String,Any>,
+        keyword: HashMap<String, Any>,
         isprogress: Boolean,
         responselistner: ApiResponse
     ) {
 
         val apiService = WebapiInterface.create(context, isheader, token)
 
-        val response = apiService.getserviceWithKeywordBody(url,keyword)
+        val response = apiService.getserviceWithKeywordBody(url, keyword)
         if (isprogress) {
             ProgressDialogs.showDialog(context)
         }
@@ -544,10 +541,6 @@ class ServiceViewModel {
         })
 
     }
-
-
-
-
 
 
 }

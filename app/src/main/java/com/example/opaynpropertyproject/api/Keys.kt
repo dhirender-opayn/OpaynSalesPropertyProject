@@ -1,13 +1,12 @@
 package com.example.opaynpropertyproject.api
 
 import com.example.opaynpropertyproject.api_model.CustomerHomeModel
+import com.example.opaynpropertyproject.api_model.FilterModel
 import com.example.opaynpropertyproject.api_model.SearchModelSuccess
 import com.example.opaynpropertyproject.api_model.SellPropertyModel
 import com.example.opaynpropertyproject.api_model.seller_home_model.SellerPropertyListingModel
 
 object Keys {
-
-
     const val BASEURL = "http://8b6e-180-188-237-214.ngrok.io/realestate-api/public/api/"
     var isSearchClick: Boolean =false
     var searchList: ArrayList<SearchModelSuccess.Data.Data>? = null

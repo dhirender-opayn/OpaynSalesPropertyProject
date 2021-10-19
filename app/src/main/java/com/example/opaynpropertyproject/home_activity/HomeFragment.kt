@@ -248,6 +248,7 @@ class HomeFragment : BaseFragment(), ApiResponse, GetPositionInterface {
             }
             Keys.PROPERTY_TYPE_REQ_CODE -> {
                 val widgetModel = gson.fromJson(response, FilterModel::class.java)
+
                 if (widegetlist != null) {
                     widegetlist?.addAll(widgetModel.data)
                     if (rv_home_widget != null) {

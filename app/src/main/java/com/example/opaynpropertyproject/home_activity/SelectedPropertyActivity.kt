@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.opaynpropertyproject.R
 import com.example.opaynpropertyproject.VisiterPropertiesAdapter
+import com.example.opaynpropertyproject.addAdsSlides.DealerAddActivity
 import com.example.opaynpropertyproject.api.ApiResponse
 import com.example.opaynpropertyproject.api.Keys
 import com.example.opaynpropertyproject.api_model.*
@@ -29,8 +30,8 @@ import java.io.File
 class SelectedPropertyActivity : BaseActivity(), ApiResponse {
     var selectedPropertyPositionID = 0
     val fav_hashMap_List = HashMap<String, Any>()
-     var property_id = 0
-     var islike = false
+    var property_id = 0
+    var islike = false
     var property_list1: ArrayList<CustomerHomeModel.Data.Data>? = null
     var property_list_search: ArrayList<SearchModelSuccess.Data.Data>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,10 +66,11 @@ class SelectedPropertyActivity : BaseActivity(), ApiResponse {
             }
         }
     }
+    private fun propertyDetails(detailPropertyModel: DetailPropertyModel) {
+        if (Keys.isCustomer) {
 
-    private fun propertyDetails(detailPropertyModel: DetailPropertyModel)
-    {
-        if (Keys.isCustomer){
+
+            selected_ads_sold.visibility = View.INVISIBLE
             selected_ads_edit.visibility = View.INVISIBLE
             selected_customer_ads_forward.visibility = View.VISIBLE
             selected_ads_forward.visibility = View.INVISIBLE
@@ -79,54 +81,77 @@ class SelectedPropertyActivity : BaseActivity(), ApiResponse {
             yours_ads_bathroom.setText(detailPropertyModel.data.profile.bath_rooms.toString() + " Ba")
             yours_ads_area.setText(detailPropertyModel.data.profile.area.toString() + " sqft")
             selected_ads_img.adapter = ImageSliderAdapter(this)
-            property_id=detailPropertyModel.data.id
+            property_id = detailPropertyModel.data.id
+        } else {
+
+
+
+            selected_ads_sold.visibility = View.INVISIBLE
+            single_fav.visibility = View.INVISIBLE
+            single_fav_click.visibility = View.INVISIBLE
+            selected_ads_edit.visibility = View.VISIBLE
+            selected_customer_ads_forward.visibility = View.INVISIBLE
+            selected_ads_forward.visibility = View.VISIBLE
+            yours_ads_head_address.setText(detailPropertyModel.data.name.toString())
+            yours_ads_sub__address.setText(detailPropertyModel.data.address.toString())
+            yours_ads_price.setText("$ " + detailPropertyModel.data.price.toString())
+            yours_ads_bed.setText(detailPropertyModel.data.profile?.bed_rooms.toString() + " Bed")
+            yours_ads_bathroom.setText(detailPropertyModel.data.profile.bath_rooms.toString() + " Ba")
+            yours_ads_area.setText(detailPropertyModel.data.profile.area.toString() + " sqft")
+            selected_ads_img.adapter = ImageSliderAdapter(this)
+            property_id = detailPropertyModel.data.id
+            selected_ads_edit.setOnClickListener {
+                openA(DealerAddActivity::class)
+            }
+            selected_ads_forward.setOnClickListener {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                    type = "text/plain"
+                }
+                val bundle = Bundle()
+                bundle.putString("keys", "http://schemas.android.com/apk/res/android")
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                ContextCompat.startActivity(this, shareIntent, bundle)
+
+            }
         }
+    }
 
-
+    private fun savedProperty() {
+        if (!islike) {
+            fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
+            serviceViewModel.postservice(
+                Keys.ADD_PROPERTY_FAV_END_POINT,
+                this,
+                fav_hashMap_List,
+                Keys.ADD_PROPERTY_FAV_REQ_CODE,
+                true,
+                HomeActivity.token,
+                true,
+                this
+            )
+            islike = true
+        } else {
+            serviceViewModel.deleteserviceBody(
+                Keys.ADD_PROPERTY_FAV_END_POINT,
+                this,
+                fav_hashMap_List,
+                Keys.DEL_WISHLIST_REQ_CODE,
+                true,
+                HomeActivity.token,
+                true,
+                this
+            )
+            islike = false
+        }
     }
 
 
-
-    private fun savedProperty()
-    {
-            if (!islike)
-            {
-                 fav_hashMap_List.put(Keys.FAV_PROPERTY_ID, property_id)
-                serviceViewModel.postservice(
-                    Keys.ADD_PROPERTY_FAV_END_POINT,
-                    this,
-                    fav_hashMap_List,
-                    Keys.ADD_PROPERTY_FAV_REQ_CODE,
-                    true,
-                    HomeActivity.token,
-                    true,
-                    this
-                )
-                islike = true
-            }
-            else
-            {
-                 serviceViewModel.deleteserviceBody(
-                    Keys.ADD_PROPERTY_FAV_END_POINT,
-                    this,
-                    fav_hashMap_List,
-                    Keys.DEL_WISHLIST_REQ_CODE,
-                    true,
-                    HomeActivity.token,
-                    true,
-                    this
-                )
-                islike = false
-            }
-    }
-
-
-
-
-    private  fun detailApi(){
+    private fun detailApi() {
 
         serviceViewModel.getservice(
-            Keys.SELECTED_PROPERTY_END_POINT + selectedPropertyPositionID ,
+            Keys.SELECTED_PROPERTY_END_POINT + selectedPropertyPositionID,
             this,
             Keys.SELECTED_PROPERTY_REQ_CODE,
             true,
@@ -135,7 +160,6 @@ class SelectedPropertyActivity : BaseActivity(), ApiResponse {
             this
         )
     }
-
 
     override fun onResponse(requestcode: Int, response: String) {
         when (requestcode) {
@@ -153,7 +177,6 @@ class SelectedPropertyActivity : BaseActivity(), ApiResponse {
                 propertyDetails(detailModel)
             }
         }
-
     }
 
 }
