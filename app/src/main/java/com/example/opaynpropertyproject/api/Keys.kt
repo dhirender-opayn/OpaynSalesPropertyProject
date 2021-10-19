@@ -8,7 +8,7 @@ import com.example.opaynpropertyproject.api_model.seller_home_model.SellerProper
 object Keys {
 
 
-    const val BASEURL = "http://f9bf-180-188-237-214.ngrok.io/realestate-api/public/api/"
+    const val BASEURL = "http://8b6e-180-188-237-214.ngrok.io/realestate-api/public/api/"
     var isSearchClick: Boolean =false
     var searchList: ArrayList<SearchModelSuccess.Data.Data>? = null
     var customerList: ArrayList<CustomerHomeModel.Data.Data>? = null
